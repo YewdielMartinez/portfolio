@@ -1,0 +1,38 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Smooth Scroll */
+
+html {
+    scroll-behavior: smooth;
+    overflow-y: auto;
+}
+
+body {
+    overflow-y: auto;
+}
+
+
+/* Sections with fixed viewport height */
+
+section#home,
+section#experience,
+section#work,
+section#contact {
+    min-height: 100vh;
+}
+
+
+/* About section - auto height to show all content */
+
+section#about {
+    min-height: auto;
+    /* Changed from 100vh to auto */
+}
+
+
+/* Override for sections that shouldn't have min-height */
+
+section.no-snap {
+    min-height: auto;
+}

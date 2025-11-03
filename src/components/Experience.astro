@@ -1,0 +1,80 @@
+---
+// Experience Timeline Section
+---
+
+<section id="experience" class="min-h-screen py-24 px-4 bg-gray-50 dark:bg-[#0D0D0D] transition-colors duration-300">
+  <div class="max-w-6xl mx-auto">
+    <h2 
+      class="text-4xl md:text-5xl font-bold text-center mb-16"
+      data-i18n="experience.title"
+    >
+      Experience
+    </h2>
+    
+    <div class="relative">
+      <!-- Timeline line -->
+      <div class="absolute left-0 md:left-1/2 top-0 bottom-0 w-0.5 bg-[#F54927]"></div>
+      
+      <!-- Timeline items -->
+      <div id="experience-container" class="space-y-12">
+        <!-- Items will be inserted here by JavaScript -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  @keyframes fade-in-left {
+    from {
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+</style>
+
+<script>
+  async function loadExperience() {
+    const { experience } = await import('../data/experience');
+    const currentLang = (localStorage.getItem('language') || 'en') as 'en' | 'es';
+    const experiences = experience[currentLang];
+    
+    renderExperience(experiences);
+  }
+  
+  function renderExperience(experiences: any[]) {
+    const container = document.getElementById('experience-container');
+    if (!container) return;
+    
+    container.innerHTML = experiences.map((exp, index) => `
+      <div class="relative pl-8 md:pl-0" style="animation: fade-in-left 0.6s ease-out ${index * 0.1}s both">
+        <div class="absolute left-0 md:left-1/2 top-2 w-4 h-4 bg-[#F54927] rounded-full -ml-2 md:-ml-2"></div>
+        <div class="md:w-5/12 bg-white dark:bg-[#2a2a2a] p-6 rounded-lg shadow-sm transition-all duration-300 hover:shadow-lg hover:shadow-[#F54927]/20 hover:-translate-y-1 hover:scale-105 ${index % 2 === 1 ? 'md:ml-auto' : ''}">
+          <span class="text-sm font-semibold text-[#F54927]">${exp.year}</span>
+          <h3 class="text-xl font-bold mt-2 mb-1">${exp.position}</h3>
+          <p class="text-gray-600 dark:text-gray-400 font-medium mb-3">${exp.company}</p>
+          <p class="text-gray-600 dark:text-gray-400">${exp.description}</p>
+        </div>
+      </div>
+    `).join('');
+  }
+  
+  // Update on language change
+  window.addEventListener('languageChange', async (event: any) => {
+    const { translations } = event.detail;
+    const experiences = translations.experience.items;
+    renderExperience(experiences);
+    
+    // Update title
+    const title = document.querySelector('[data-i18n="experience.title"]');
+    if (title) {
+      title.textContent = translations.experience.title;
+    }
+  });
+  
+  // Initial load
+  loadExperience();
+</script>

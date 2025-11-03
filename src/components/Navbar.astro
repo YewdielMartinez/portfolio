@@ -1,0 +1,246 @@
+---
+// Navbar with language and theme toggles
+---
+
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-[#0D0D0D] transition-all duration-300">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      <!-- Logo/Name -->
+      <a href="#home" class="flex items-center group">
+        <!-- Logo claro para modo claro -->
+        <img src="/Yewdiel Medina claro.svg" alt="YM" class="h-12 w-auto dark:hidden transition-all duration-300 group-hover:[filter:brightness(0)_saturate(100%)_invert(45%)_sepia(95%)_saturate(2847%)_hue-rotate(349deg)_brightness(98%)_contrast(95%)]" />
+        <!-- Logo oscuro para modo oscuro -->
+        <img src="/Yewdiel Medina Oscuro.svg" alt="YM" class="h-12 w-auto hidden dark:block transition-all duration-300 group-hover:[filter:brightness(0)_saturate(100%)_invert(45%)_sepia(95%)_saturate(2847%)_hue-rotate(349deg)_brightness(98%)_contrast(95%)]" />
+      </a>
+      
+      <!-- Desktop Navigation -->
+      <div class="hidden md:flex items-center space-x-8">
+        <a href="#home" class="nav-link text-gray-700 dark:text-gray-300 hover:text-[#F54927] transition-colors font-medium relative" data-i18n="nav.home" data-section="home">Home</a>
+        <a href="#experience" class="nav-link text-gray-700 dark:text-gray-300 hover:text-[#F54927] transition-colors font-medium relative" data-i18n="nav.experience" data-section="experience">Experience</a>
+        <a href="#work" class="nav-link text-gray-700 dark:text-gray-300 hover:text-[#F54927] transition-colors font-medium relative" data-i18n="nav.work" data-section="work">Work</a>
+        <a href="#about" class="nav-link text-gray-700 dark:text-gray-300 hover:text-[#F54927] transition-colors font-medium relative" data-i18n="nav.about" data-section="about">About</a>
+        <a href="#contact" class="nav-link text-gray-700 dark:text-gray-300 hover:text-[#F54927] transition-colors font-medium relative" data-i18n="nav.contact" data-section="contact">Contact</a>
+      </div>
+      
+      <!-- Right Side: Theme + Language Toggles -->
+      <div class="flex items-center space-x-4">
+        <!-- Theme Toggle -->
+        <button
+          id="theme-toggle"
+          class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+          aria-label="Toggle theme"
+        >
+          <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+          </svg>
+          <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+          </svg>
+        </button>
+        
+        <!-- Language Toggle -->
+        <button
+          id="lang-toggle"
+          class="px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors font-medium text-sm"
+          aria-label="Toggle language"
+        >
+          <span id="lang-text">EN</span>
+        </button>
+        
+        <!-- Mobile Menu Button -->
+        <button
+          id="mobile-menu-button"
+          class="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+          aria-label="Toggle menu"
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="hidden md:hidden border-t border-gray-200 dark:border-gray-700">
+    <div class="px-4 py-4 space-y-3">
+      <a href="#home" class="nav-link block py-2 text-gray-700 dark:text-gray-300 hover:text-[#F54927] transition-colors font-medium" data-i18n="nav.home" data-section="home">Home</a>
+      <a href="#experience" class="nav-link block py-2 text-gray-700 dark:text-gray-300 hover:text-[#F54927] transition-colors font-medium" data-i18n="nav.experience" data-section="experience">Experience</a>
+      <a href="#work" class="nav-link block py-2 text-gray-700 dark:text-gray-300 hover:text-[#F54927] transition-colors font-medium" data-i18n="nav.work" data-section="work">Work</a>
+      <a href="#about" class="nav-link block py-2 text-gray-700 dark:text-gray-300 hover:text-[#F54927] transition-colors font-medium" data-i18n="nav.about" data-section="about">About</a>
+      <a href="#contact" class="nav-link block py-2 text-gray-700 dark:text-gray-300 hover:text-[#F54927] transition-colors font-medium" data-i18n="nav.contact" data-section="contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<style>
+  #navbar {
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+  }
+  
+  .dark #navbar {
+    box-shadow: 0 1px 3px 0 rgb(255 255 255 / 0.1);
+  }
+
+  /* Active section indicator */
+  .nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: #F54927;
+    border-radius: 2px;
+  }
+
+  .nav-link.active {
+    color: #F54927;
+  }
+
+  .dark .nav-link.active {
+    color: #F54927;
+  }
+</style>
+
+<script>
+  import type { Lang } from '../types';
+  
+  // Theme Toggle - Initialize immediately
+  const themeToggleBtn = document.getElementById('theme-toggle');
+  const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+  const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+  
+  function updateThemeIcon() {
+    const isDark = document.documentElement.classList.contains('dark');
+    if (isDark) {
+      themeToggleLightIcon?.classList.remove('hidden');
+      themeToggleDarkIcon?.classList.add('hidden');
+    } else {
+      themeToggleLightIcon?.classList.add('hidden');
+      themeToggleDarkIcon?.classList.remove('hidden');
+    }
+  }
+  
+  // Initialize icon on load
+  updateThemeIcon();
+  
+  // Toggle theme on click
+  themeToggleBtn?.addEventListener('click', () => {
+    const isDark = document.documentElement.classList.contains('dark');
+    
+    if (isDark) {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    } else {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    }
+    
+    updateThemeIcon();
+  });
+  
+  // Language Toggle
+  const langToggleBtn = document.getElementById('lang-toggle');
+  const langText = document.getElementById('lang-text');
+  
+  let currentLang: Lang = (localStorage.getItem('language') as Lang) || 'en';
+  
+  async function updateLanguage() {
+    const { translations } = await import('../data/translations');
+    const t = translations[currentLang];
+    
+    // Update all elements with data-i18n attribute
+    document.querySelectorAll('[data-i18n]').forEach((element) => {
+      const key = element.getAttribute('data-i18n');
+      if (key) {
+        const keys = key.split('.');
+        let value: any = t;
+        for (const k of keys) {
+          value = value[k];
+        }
+        if (value) {
+          element.textContent = value;
+        }
+      }
+    });
+    
+    // Dispatch custom event for components to update
+    window.dispatchEvent(new CustomEvent('languageChange', { detail: { lang: currentLang, translations: t } }));
+    
+    // Update lang text
+    if (langText) {
+      langText.textContent = currentLang === 'en' ? 'EN' : 'ES';
+    }
+  }
+  
+  langToggleBtn?.addEventListener('click', () => {
+    currentLang = currentLang === 'en' ? 'es' : 'en';
+    localStorage.setItem('language', currentLang);
+    updateLanguage();
+  });
+  
+  // Mobile Menu Toggle
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+  
+  mobileMenuButton?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('hidden');
+  });
+  
+  // Close mobile menu when clicking a link
+  document.querySelectorAll('#mobile-menu a').forEach((link) => {
+    link.addEventListener('click', () => {
+      mobileMenu?.classList.add('hidden');
+    });
+  });
+  
+  // Initialize language on load
+  updateLanguage();
+  
+  // Navbar scroll effect and active section detection
+  let lastScroll = 0;
+  const navbar = document.getElementById('navbar');
+  
+  // Get all sections
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-link');
+  
+  function updateActiveSection() {
+    const currentScroll = window.pageYOffset;
+    
+    // Update shadow
+    if (currentScroll > 100) {
+      navbar?.classList.add('shadow-md');
+    } else {
+      navbar?.classList.remove('shadow-md');
+    }
+    
+    // Find current section
+    let currentSection = '';
+    sections.forEach((section) => {
+      const sectionTop = (section as HTMLElement).offsetTop;
+      const sectionHeight = (section as HTMLElement).offsetHeight;
+      
+      // Check if section is in viewport (with offset for navbar)
+      if (currentScroll >= sectionTop - 100 && currentScroll < sectionTop + sectionHeight - 100) {
+        currentSection = section.getAttribute('id') || '';
+      }
+    });
+    
+    // Update active nav link
+    navLinks.forEach((link) => {
+      link.classList.remove('active');
+      if (link.getAttribute('data-section') === currentSection) {
+        link.classList.add('active');
+      }
+    });
+    
+    lastScroll = currentScroll;
+  }
+  
+  window.addEventListener('scroll', updateActiveSection);
+  
+  // Initial check
+  updateActiveSection();
+</script>

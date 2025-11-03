@@ -1,0 +1,384 @@
+---
+// Hero Section
+---
+
+<section id="home" class="min-h-screen flex items-center px-4 sm:px-8 lg:px-16 pt-16">
+  <div class="max-w-7xl mx-auto w-full">
+    <div class="max-w-4xl">
+      <div class="mb-6">
+        <h1 
+          id="name-line-1"
+          class="text-6xl sm:text-7xl lg:text-8xl font-bold leading-tight transition-colors duration-300 hover:text-[#F54927] cursor-default"
+        >
+          <span class="typing-text"></span>
+          <span class="typing-cursor opacity-0">|</span>
+        </h1>
+        <h1 
+          id="name-line-2"
+          class="text-6xl sm:text-7xl lg:text-8xl font-bold leading-tight transition-colors duration-300 hover:text-[#F54927] cursor-default"
+        >
+          <span class="typing-text"></span>
+          <span class="typing-cursor opacity-0">|</span>
+        </h1>
+      </div>
+      <p 
+        id="hero-role"
+        class="text-2xl sm:text-3xl lg:text-4xl text-gray-600 dark:text-gray-400 mb-6 font-medium opacity-0"
+        data-i18n="home.role"
+      >
+        <span class="typing-text"></span>
+        <span class="typing-cursor opacity-0">|</span>
+      </p>
+      <p 
+        id="hero-tagline"
+        class="text-lg sm:text-xl text-gray-500 dark:text-gray-500 mb-12 max-w-2xl opacity-0"
+        data-i18n="home.tagline"
+      >
+        <span class="typing-text"></span>
+      </p>
+      
+      <div id="hero-buttons" class="opacity-0" style="transition: opacity 0.5s ease-in;">
+        <!-- Action Buttons -->
+        <div class="flex flex-col sm:flex-row gap-4 mb-8">
+          <a 
+            href="#work" 
+            class="px-8 py-4 bg-[#F54927] text-white rounded-lg font-semibold hover:bg-[#d63f1f] transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-[#F54927]/50 animate-pulse-slow inline-block text-center"
+            data-i18n="home.viewWork"
+          >
+            View Work
+          </a>
+          <a 
+            href="#contact" 
+            class="px-8 py-4 bg-gray-900 dark:bg-gray-700 text-white rounded-lg font-semibold hover:bg-gray-800 dark:hover:bg-gray-600 transition-all duration-300 hover:scale-105 inline-block text-center"
+            data-i18n="home.contactMe"
+          >
+            Contact Me
+          </a>
+        </div>
+
+        <!-- Social Links + CV -->
+        <div class="flex gap-4 items-center">
+          <div id="hero-social-links" class="flex gap-4">
+            <!-- Social links will be inserted here by JavaScript -->
+          </div>
+          <a 
+            href="/cv.pdf" 
+            download
+            class="w-12 h-12 flex items-center justify-center bg-gray-900 dark:bg-gray-700 text-white rounded-full hover:bg-[#F54927] transition-all duration-300 hover:-translate-y-2 hover:scale-110 hover:shadow-lg hover:shadow-[#F54927]/50 hover:rotate-6" 
+            aria-label="Download CV"
+            title="Download CV"
+          >
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  @keyframes pulse-slow {
+    0%, 100% {
+      box-shadow: 0 0 0 0 rgba(245, 73, 39, 0.7);
+    }
+    50% {
+      box-shadow: 0 0 0 10px rgba(245, 73, 39, 0);
+    }
+  }
+  
+  @keyframes blink {
+    0%, 49% {
+      opacity: 1;
+    }
+    50%, 100% {
+      opacity: 0;
+    }
+  }
+  
+  .animate-pulse-slow {
+    animation: pulse-slow 3s infinite;
+  }
+
+  .typing-cursor {
+    animation: blink 1s infinite;
+    color: #F54927;
+    font-weight: 300;
+  }
+
+  .typing-cursor.active {
+    opacity: 1;
+  }
+</style>
+
+<script>
+  // Typewriter effect
+  async function typeWriter(element: HTMLElement, text: string, speed: number = 50, showCursor: boolean = true): Promise<void> {
+    return new Promise((resolve) => {
+      const textSpan = element.querySelector('.typing-text');
+      const cursorSpan = element.querySelector('.typing-cursor');
+      
+      if (!textSpan) {
+        resolve();
+        return;
+      }
+
+      // Clear previous text
+      textSpan.textContent = '';
+
+      // Show cursor
+      if (showCursor && cursorSpan) {
+        cursorSpan.classList.add('active');
+      }
+
+      let i = 0;
+      const typing = setInterval(() => {
+        if (i < text.length) {
+          textSpan.textContent += text.charAt(i);
+          i++;
+        } else {
+          clearInterval(typing);
+          // Keep cursor visible for a moment
+          setTimeout(() => {
+            if (showCursor && cursorSpan) {
+              cursorSpan.classList.remove('active');
+            }
+            resolve();
+          }, 300);
+        }
+      }, speed);
+    });
+  }
+
+  // Delete effect (reverse typing)
+  async function deleteText(element: HTMLElement, speed: number = 30): Promise<void> {
+    return new Promise((resolve) => {
+      const textSpan = element.querySelector('.typing-text');
+      const cursorSpan = element.querySelector('.typing-cursor');
+      
+      if (!textSpan) {
+        resolve();
+        return;
+      }
+
+      // Show cursor during deletion
+      if (cursorSpan) {
+        cursorSpan.classList.add('active');
+      }
+
+      const text = textSpan.textContent || '';
+      let i = text.length;
+      
+      const deleting = setInterval(() => {
+        if (i > 0) {
+          textSpan.textContent = text.substring(0, i - 1);
+          i--;
+        } else {
+          clearInterval(deleting);
+          if (cursorSpan) {
+            cursorSpan.classList.remove('active');
+          }
+          resolve();
+        }
+      }, speed);
+    });
+  }
+
+  let isAnimating = false;
+  let shouldStop = false;
+
+  async function animateHero() {
+    if (isAnimating) return;
+    isAnimating = true;
+
+    // Load translations from TypeScript
+    const { translations } = await import('../data/translations');
+    const currentLang = (localStorage.getItem('language') || 'en') as 'en' | 'es';
+    const t = translations[currentLang];
+
+    const nameLine1 = document.getElementById('name-line-1');
+    const nameLine2 = document.getElementById('name-line-2');
+    const roleElement = document.getElementById('hero-role');
+    const taglineElement = document.getElementById('hero-tagline');
+    const buttonsElement = document.getElementById('hero-buttons');
+
+    while (!shouldStop) {
+      // Show all elements
+      if (nameLine1) nameLine1.style.opacity = '1';
+      if (nameLine2) nameLine2.style.opacity = '1';
+      if (roleElement) roleElement.style.opacity = '1';
+      if (taglineElement) taglineElement.style.opacity = '1';
+
+      // Type first name
+      if (nameLine1 && !shouldStop) {
+        await typeWriter(nameLine1, 'Yewdiel', 80, true);
+        await new Promise(resolve => setTimeout(resolve, 100));
+      }
+
+      // Type last name
+      if (nameLine2 && !shouldStop) {
+        await typeWriter(nameLine2, 'Medina', 80, true);
+        await new Promise(resolve => setTimeout(resolve, 150));
+      }
+
+      // Type role
+      if (roleElement && !shouldStop) {
+        await typeWriter(roleElement, t.home.role, 50, true);
+        await new Promise(resolve => setTimeout(resolve, 150));
+      }
+
+      // Type tagline
+      if (taglineElement && !shouldStop) {
+        await typeWriter(taglineElement, t.home.tagline, 25, false);
+      }
+
+      // Show buttons with fade in
+      if (buttonsElement) {
+        buttonsElement.style.opacity = '1';
+      }
+
+      // Wait before deleting (show complete text for 3 seconds)
+      await new Promise(resolve => setTimeout(resolve, 3000));
+
+      if (shouldStop) break;
+
+      // Delete in reverse order
+      if (taglineElement) {
+        await deleteText(taglineElement, 15);
+      }
+
+      if (roleElement) {
+        await deleteText(roleElement, 20);
+      }
+
+      if (nameLine2) {
+        await deleteText(nameLine2, 30);
+      }
+
+      if (nameLine1) {
+        await deleteText(nameLine1, 30);
+      }
+
+      // Wait a bit before restarting
+      await new Promise(resolve => setTimeout(resolve, 500));
+    }
+
+    isAnimating = false;
+  }
+
+  // Start animation when page loads
+  window.addEventListener('DOMContentLoaded', () => {
+    animateHero();
+  });
+
+  // Load social links from TypeScript
+  async function loadSocialLinks() {
+    try {
+      const { social } = await import('../data/translations');
+      renderSocialLinks(social);
+    } catch (error) {
+      console.error('Error loading social links:', error);
+    }
+  }
+  
+  function renderSocialLinks(social: any) {
+    const container = document.getElementById('hero-social-links');
+    if (!container) return;
+    
+    const links = [];
+    
+    if (social.github) {
+      links.push(`
+        <a href="${social.github}" target="_blank" rel="noopener noreferrer" class="w-12 h-12 flex items-center justify-center bg-gray-900 dark:bg-gray-700 text-white rounded-full hover:bg-[#F54927] transition-all duration-300 hover:-translate-y-2 hover:scale-110 hover:shadow-lg hover:shadow-[#F54927]/50 hover:rotate-6" aria-label="GitHub">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+          </svg>
+        </a>
+      `);
+    }
+    
+    if (social.linkedin) {
+      links.push(`
+        <a href="${social.linkedin}" target="_blank" rel="noopener noreferrer" class="w-12 h-12 flex items-center justify-center bg-gray-900 dark:bg-gray-700 text-white rounded-full hover:bg-[#F54927] transition-all duration-300 hover:-translate-y-2 hover:scale-110 hover:shadow-lg hover:shadow-[#F54927]/50 hover:rotate-6" aria-label="LinkedIn">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+          </svg>
+        </a>
+      `);
+    }
+    
+    if (social.twitter) {
+      links.push(`
+        <a href="${social.twitter}" target="_blank" rel="noopener noreferrer" class="w-12 h-12 flex items-center justify-center bg-gray-900 dark:bg-gray-700 text-white rounded-full hover:bg-[#F54927] transition-all duration-300 hover:-translate-y-2 hover:scale-110 hover:shadow-lg hover:shadow-[#F54927]/50 hover:rotate-6" aria-label="Twitter">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+        </a>
+      `);
+    }
+    
+    if (social.email) {
+      links.push(`
+        <a href="mailto:${social.email}" class="w-12 h-12 flex items-center justify-center bg-gray-900 dark:bg-gray-700 text-white rounded-full hover:bg-[#F54927] transition-all duration-300 hover:-translate-y-2 hover:scale-110 hover:shadow-lg hover:shadow-[#F54927]/50 hover:rotate-6" aria-label="Email">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+          </svg>
+        </a>
+      `);
+    }
+    
+    container.innerHTML = links.join('');
+  }
+
+  // Update text on language change and restart animation
+  window.addEventListener('languageChange', async (event: any) => {
+    const { translations } = event.detail;
+    
+    // Stop current animation
+    shouldStop = true;
+    
+    // Wait for animation to stop
+    await new Promise(resolve => setTimeout(resolve, 200));
+    
+    // Reset all elements
+    const nameLine1 = document.getElementById('name-line-1');
+    const nameLine2 = document.getElementById('name-line-2');
+    const roleElement = document.getElementById('hero-role');
+    const taglineElement = document.getElementById('hero-tagline');
+    const buttonsElement = document.getElementById('hero-buttons');
+
+    // Clear text
+    [nameLine1, nameLine2, roleElement, taglineElement].forEach(el => {
+      if (el) {
+        const textSpan = el.querySelector('.typing-text');
+        const cursorSpan = el.querySelector('.typing-cursor');
+        if (textSpan) textSpan.textContent = '';
+        if (cursorSpan) cursorSpan.classList.remove('active');
+      }
+    });
+
+    if (buttonsElement) {
+      buttonsElement.style.opacity = '0';
+    }
+
+    // Update button text
+    const viewWorkBtn = document.querySelector('[data-i18n="home.viewWork"]');
+    const contactBtn = document.querySelector('[data-i18n="home.contactMe"]');
+    const downloadBtn = document.querySelector('[data-i18n="home.downloadCV"]');
+    if (viewWorkBtn) viewWorkBtn.textContent = translations.home.viewWork;
+    if (contactBtn) contactBtn.textContent = translations.home.contactMe;
+    if (downloadBtn) downloadBtn.textContent = translations.home.downloadCV || 'Download CV';
+
+    // Restart animation
+    shouldStop = false;
+    setTimeout(() => {
+      animateHero();
+    }, 100);
+  });
+
+  // Load social links on page load
+  window.addEventListener('DOMContentLoaded', () => {
+    loadSocialLinks();
+  });
+</script>

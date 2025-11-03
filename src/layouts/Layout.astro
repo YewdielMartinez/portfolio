@@ -1,0 +1,46 @@
+---
+import '../styles/global.css';
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+		<title>Yewdiel Medina - Developer Portfolio</title>
+		<script is:inline>
+			// Initialize theme immediately to avoid FOUC (Flash of Unstyled Content)
+			// Default to light mode
+			if (localStorage.getItem('theme') === 'dark') {
+				document.documentElement.classList.add('dark');
+			} else {
+				document.documentElement.classList.remove('dark');
+			}
+		</script>
+	</head>
+	<body class="bg-white dark:bg-[#0D0D0D] text-gray-900 dark:text-white transition-colors duration-300">
+		<slot />
+	</body>
+</html>
+
+<style is:global>
+	body {
+		font-family: 'Inter', sans-serif;
+	}
+	
+	h1, h2, h3, h4, h5, h6 {
+		font-family: 'Space Grotesk', sans-serif;
+	}
+</style>
+
+<script>
+	// Initialize language from localStorage or default to English
+	if (!localStorage.getItem('language')) {
+		localStorage.setItem('language', 'en');
+	}
+</script>
