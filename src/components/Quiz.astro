@@ -229,9 +229,8 @@
   }
 
   quizClose?.addEventListener('click', closeModal);
-  quizModal?.addEventListener('click', (e) => {
-    if (e.target === quizModal) closeModal();
-  });
+  
+  // Removed click outside to close - only close button works now
 
   // Start Quiz
   quizStartBtn?.addEventListener('click', async () => {
@@ -272,7 +271,7 @@
           class="quiz-option w-full text-left p-4 rounded-xl bg-gray-100 dark:bg-[#2a2a2a] text-gray-800 dark:text-white font-medium hover:bg-[#F54927] hover:text-white"
           data-index="${index}"
         >
-          <span class="font-bold text-[#F54927] mr-3">${String.fromCharCode(65 + index)}.</span>
+          <span class="option-letter font-bold text-[#F54927] mr-3">${String.fromCharCode(65 + index)}.</span>
           ${option}
         </button>
       `).join('');
@@ -365,27 +364,27 @@
 
     if (percentage === 100) {
       // Star icon
-      iconSvg = `<svg class="w-24 h-24 text-yellow-400 animate-bounce" fill="currentColor" viewBox="0 0 20 20">
+      iconSvg = `<div class="flex justify-center items-center min-h-[120px]"><div class="animate-bounce inline-block"><svg class="w-24 h-24 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-      </svg>`;
+      </svg></div></div>`;
       message = quizTranslations.perfect;
     } else if (percentage >= 70) {
       // Trophy icon
-      iconSvg = `<svg class="w-24 h-24 text-[#F54927] animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      iconSvg = `<div class="flex justify-center items-center min-h-[120px]"><div class="animate-bounce inline-block"><svg class="w-24 h-24 text-[#F54927]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
-      </svg>`;
+      </svg></div></div>`;
       message = quizTranslations.great;
     } else if (percentage >= 50) {
       // Thumbs up icon
-      iconSvg = `<svg class="w-24 h-24 text-blue-500 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      iconSvg = `<div class="flex justify-center items-center min-h-[120px]"><div class="animate-bounce inline-block"><svg class="w-24 h-24 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"></path>
-      </svg>`;
+      </svg></div></div>`;
       message = quizTranslations.good;
     } else {
       // Target icon
-      iconSvg = `<svg class="w-24 h-24 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      iconSvg = `<div class="flex justify-center items-center min-h-[120px]"><svg class="w-24 h-24 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
-      </svg>`;
+      </svg></div>`;
     }
 
     const resultsIcon = document.getElementById('results-icon');

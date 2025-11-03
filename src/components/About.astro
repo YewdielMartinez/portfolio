@@ -82,7 +82,10 @@ const TMDB_API_KEY = import.meta.env.API_MOVIE_KEY;
 
     <!-- Sección de Presentación de Favoritos -->
     <div class="mt-24 max-w-4xl mx-auto">
-      <h3 class="text-3xl font-bold mb-12 text-center">
+      <h3 
+        class="text-3xl font-bold mb-12 text-center"
+        data-i18n="about.favorites"
+      >
         My Favorites
       </h3>
       
@@ -120,14 +123,8 @@ const TMDB_API_KEY = import.meta.env.API_MOVIE_KEY;
         </button>
 
         <!-- Etiqueta de categoría -->
-        <div class="absolute top-6 left-6 z-10 bg-[#F54927] text-white px-4 py-2 rounded-full font-bold text-sm shadow-lg">
+        <div class="absolute top-2 left-2 z-10 bg-[#F54927] text-white px-4 py-2 rounded-full font-bold text-sm shadow-lg">
           <span id="slideshow-category">Movie</span>
-        </div>
-
-        <!-- Indicador de reproducción automática -->
-        <div class="absolute top-6 right-6 z-10 flex items-center gap-2 bg-black/60 backdrop-blur-sm text-white px-3 py-2 rounded-full text-xs">
-          <div class="w-2 h-2 bg-[#F54927] rounded-full animate-pulse"></div>
-          <span>Auto</span>
         </div>
       </div>
 
@@ -252,7 +249,7 @@ const TMDB_API_KEY = import.meta.env.API_MOVIE_KEY;
     const { translations } = event.detail;
     
     // Actualizar elementos de texto
-    ['about.bio', 'about.cinema', 'about.skillsTitle'].forEach(key => {
+    ['about.bio', 'about.cinema', 'about.skillsTitle', 'about.favorites'].forEach(key => {
       const element = document.querySelector(`[data-i18n="${key}"]`);
       if (element) {
         const keys = key.split('.');

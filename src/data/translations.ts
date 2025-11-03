@@ -25,6 +25,7 @@ export interface Translation {
     title: string;
     bio: string;
     skillsTitle: string;
+    favorites: string;
   };
   contact: {
     title: string;
@@ -33,6 +34,11 @@ export interface Translation {
     emailPlaceholder: string;
     messagePlaceholder: string;
     sendButton: string;
+    sending: string;
+    successTitle: string;
+    successMessage: string;
+    errorTitle: string;
+    errorMessage: string;
   };
   behind: {
     unlocked: string;
@@ -93,7 +99,8 @@ export const translations: Translations = {
     about: {
       title: 'About Me',
       bio: "I'm a software engineer passionate about design, backend development, and mobile applications. I love blending creativity and logic to build meaningful digital experiences. Outside of coding, I'm a big fan of cinema, wrestling, and video games. I enjoy going to the gym, sharing ideas, and have a soft spot for dogs and sharks. Also, meatballs and carne asada are definitely my favorite food.",
-      skillsTitle: 'Skills & Technologies'
+      skillsTitle: 'Skills & Technologies',
+      favorites: 'My Favorites'
     },
     contact: {
       title: "Let's Work Together",
@@ -101,7 +108,12 @@ export const translations: Translations = {
       namePlaceholder: 'Your Name',
       emailPlaceholder: 'Your Email',
       messagePlaceholder: 'Your Message',
-      sendButton: 'Send Message'
+      sendButton: 'Send Message',
+      sending: 'Sending...',
+      successTitle: '✓ Message sent successfully!',
+      successMessage: "I'll get back to you soon.",
+      errorTitle: '✗ Error sending message',
+      errorMessage: 'Please try again later.'
     },
     behind: {
       unlocked: 'Easter Egg Unlocked!',
@@ -155,7 +167,8 @@ export const translations: Translations = {
     about: {
       title: 'Sobre Mí',
       bio: 'Soy un ingeniero de software apasionado por el diseño, el desarrollo backend y las aplicaciones móviles. Me gusta combinar creatividad y lógica para construir experiencias digitales significativas. Fuera del código, soy fan del cine, la lucha libre y los videojuegos. Disfruto ir al gimnasio, ofrecer ideas y tengo un gran cariño por los perros y los tiburones. Además, mis comidas favoritas son las albóndigas y la carne asada.',
-      skillsTitle: 'Habilidades y Tecnologías'
+      skillsTitle: 'Habilidades y Tecnologías',
+      favorites: 'Mis Favoritos'
     },
     contact: {
       title: 'Trabajemos Juntos',
@@ -163,7 +176,12 @@ export const translations: Translations = {
       namePlaceholder: 'Tu Nombre',
       emailPlaceholder: 'Tu Email',
       messagePlaceholder: 'Tu Mensaje',
-      sendButton: 'Enviar Mensaje'
+      sendButton: 'Enviar Mensaje',
+      sending: 'Enviando...',
+      successTitle: '✓ ¡Mensaje enviado con éxito!',
+      successMessage: 'Te responderé pronto.',
+      errorTitle: '✗ Error al enviar mensaje',
+      errorMessage: 'Por favor intenta de nuevo más tarde.'
     },
     behind: {
       unlocked: '¡Easter Egg Desbloqueado!',

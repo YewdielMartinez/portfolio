@@ -28,7 +28,7 @@ export default function SkillIcon({ iconPath, color = '#F54927', name }: SkillIc
       <Icon 
         className="w-12 h-12 transition-all duration-300 hover:scale-125" 
         style={{
-          color: isHovered ? color : '#9CA3AF' // Gray when not hovered, brand color when hovered
+          color: isHovered ? color : '#9CA3AF' 
         }}
       />
       <span className="font-medium text-sm text-gray-700 dark:text-gray-300 transition-colors duration-300">

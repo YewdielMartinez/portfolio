@@ -1,27 +1,10 @@
-/**
- * Skills & Technologies Configuration
- * 
- * Add your skills here with their corresponding react-icons.
- * Icon format: 'LibraryPrefix/IconName' (e.g., 'Si/SiReact', 'Fa/FaPython')
- * 
- * Available libraries:
- * - Si: Simple Icons (brand logos)
- * - Fa: Font Awesome
- * - Ai: Ant Design Icons
- * - Bi: Bootstrap Icons
- * 
- * Instructions:
- * 1. Add new skills to the array below
- * 2. Each skill needs a name and icon path
- * 3. Optional: add a color for the hover effect
- */
 
 import { SiPrisma } from "react-icons/si";
 
 export interface Skill {
   name: string;
-  icon: string;      // react-icons path (e.g., 'Si/SiReact')
-  color?: string;    // Optional: custom hover color (default: #F54927)
+  icon: string;      
+  color?: string;    
 }
 
 export const skills: Skill[] = [

@@ -16,7 +16,7 @@ const TMDB_IMAGE_URL = 'https://image.tmdb.org/t/p/w500';
 export const favoriteMovies: Movie[] = [
   { id: 872585, title: 'Oppenheimer' },
   { id: 546554, title: 'Knives Out' },
-  { id: 1233413, title: 'Sinners' }, // Puede no existir aún, es una película independiente de 2025
+  { id: 1233413, title: 'Sinners' }, 
   { id: 157336, title: 'Interstellar' },
   { id: 10315, title: 'Fantastic Mr. Fox' },
   { id: 324857, title: 'Spider-Man: Into the Spider-Verse' },

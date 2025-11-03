@@ -1,5 +1,3 @@
-// Personal Information Configuration
-// Update your personal information here
 
 export interface PersonalInfo {
   name: string;

@@ -1,5 +1,3 @@
-// Work Experience Configuration
-// Add or modify your work experience here
 
 export interface ExperienceItem {
   year: string;
