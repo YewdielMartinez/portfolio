@@ -16,7 +16,7 @@ export interface PersonalInfo {
 
 export const personalInfo: PersonalInfo = {
   name: 'Yewdiel Medina',
-  role: 'Software Engineer',
+  role: 'Software Developer',
   tagline: 'Building elegant, scalable, and user-focused web experiences',
   bio: "I'm a passionate developer who loves creating beautiful, functional applications. With expertise in modern web technologies, I focus on delivering exceptional user experiences and clean, maintainable code.",
   avatar: '/avatar.jpg',

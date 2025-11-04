@@ -25,7 +25,7 @@ export const experience: Experience = {
       company: 'Freelance Projects',
       position: 'Software Developer',
       description:
-        'Analyzed, designed, and implemented custom systems to automate inventory control, sales, and reporting. Built web apps using PHP, MySQL, HTML, CSS, JavaScript, and Bootstrap, and automated deployments with Bash and PowerShell scripts.'
+        'Analyzed, designed, and implemented custom systems to automate inventory control, sales, and reporting. Built web apps using PHP, React, MySQL, HTML, CSS, JavaScript, and Bootstrap, and automated deployments with Bash and PowerShell scripts.'
     },
     {
       year: '2022 - 2025',
@@ -48,7 +48,7 @@ export const experience: Experience = {
       company: 'Proyectos Freelance',
       position: 'Desarrollador de Software',
       description:
-        'Analicé, diseñé e implementé sistemas personalizados para automatizar procesos como control de inventario, ventas y reportes. Desarrollé aplicaciones web con PHP, MySQL, HTML, CSS, JavaScript y Bootstrap, y automatizaciones con scripts en Bash y PowerShell.'
+        'Analicé, diseñé e implementé sistemas personalizados para automatizar procesos como control de inventario, ventas y reportes. Desarrollé aplicaciones web con PHP, React, MySQL, HTML, CSS, JavaScript y Bootstrap, y automatizaciones con scripts en Bash y PowerShell.'
     },
     {
       year: '2022 - 2025',

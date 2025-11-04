@@ -20,6 +20,11 @@ export interface Translation {
   work: {
     title: string;
     viewProject: string;
+    viewDetails: string;
+    aboutProject: string;
+    keyFeatures: string;
+    viewCode: string;
+    viewDemo: string;
   };
   about: {
     title: string;
@@ -84,7 +89,7 @@ export const translations: Translations = {
     },
     home: {
       name: 'Yewdiel Medina',
-      role: 'Software Engineer',
+      role: 'Software Developer',
       tagline: 'Turning ideas into scalable web and mobile apps',
       viewWork: 'View Work',
       contactMe: 'Contact Me'
@@ -94,11 +99,16 @@ export const translations: Translations = {
     },
     work: {
       title: 'Work',
-      viewProject: 'View Project'
+      viewProject: 'View Project',
+      viewDetails: 'View details',
+      aboutProject: 'About the Project',
+      keyFeatures: 'Key Features',
+      viewCode: 'View Code',
+      viewDemo: 'View Demo'
     },
     about: {
       title: 'About Me',
-      bio: "I'm a software engineer passionate about design, backend development, and mobile applications. I love blending creativity and logic to build meaningful digital experiences. Outside of coding, I'm a big fan of cinema, wrestling, and video games. I enjoy going to the gym, sharing ideas, and have a soft spot for dogs and sharks. Also, meatballs and carne asada are definitely my favorite food.",
+      bio: "I'm a software developer passionate about design, backend development, and mobile applications. I love blending creativity and logic to build meaningful digital experiences. Outside of coding, I'm a big fan of cinema, wrestling, and video games. I enjoy going to the gym, sharing ideas, and have a soft spot for dogs and sharks. Also, meatballs and carne asada are definitely my favorite food.",
       skillsTitle: 'Skills & Technologies',
       favorites: 'My Favorites'
     },
@@ -152,7 +162,7 @@ export const translations: Translations = {
     },
     home: {
       name: 'Yewdiel Medina',
-      role: 'Ingeniero de Software',
+      role: 'Desarrollador de Software',
       tagline: 'Transformando ideas en experiencias web y móviles excepcionales',
       viewWork: 'Ver Proyectos',
       contactMe: 'Contáctame'
@@ -162,11 +172,16 @@ export const translations: Translations = {
     },
     work: {
       title: 'Proyectos',
-      viewProject: 'Ver Proyecto'
+      viewProject: 'Ver Proyecto',
+      viewDetails: 'Ver detalles',
+      aboutProject: 'Sobre el Proyecto',
+      keyFeatures: 'Características Clave',
+      viewCode: 'Ver Código',
+      viewDemo: 'Ver Demo'
     },
     about: {
       title: 'Sobre Mí',
-      bio: 'Soy un ingeniero de software apasionado por el diseño, el desarrollo backend y las aplicaciones móviles. Me gusta combinar creatividad y lógica para construir experiencias digitales significativas. Fuera del código, soy fan del cine, la lucha libre y los videojuegos. Disfruto ir al gimnasio, ofrecer ideas y tengo un gran cariño por los perros y los tiburones. Además, mis comidas favoritas son las albóndigas y la carne asada.',
+      bio: 'Soy un estudiante de ingeniería de software apasionado por el diseño, el desarrollo backend y las aplicaciones móviles. Me gusta combinar creatividad y lógica para construir experiencias digitales significativas. Fuera del código, soy fan del cine, la lucha libre y los videojuegos. Disfruto ir al gimnasio, ofrecer ideas y tengo un gran cariño por los perros y los tiburones. Además, mis comidas favoritas son las albóndigas y la carne asada.',
       skillsTitle: 'Habilidades y Tecnologías',
       favorites: 'Mis Favoritos'
     },

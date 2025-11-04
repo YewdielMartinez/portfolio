@@ -165,8 +165,8 @@
       }
     });
     
-    // Dispatch custom event for components to update
-    window.dispatchEvent(new CustomEvent('languageChange', { detail: { lang: currentLang, translations: t } }));
+    // Dispatch custom event for components to update (with both lang and language for compatibility)
+    window.dispatchEvent(new CustomEvent('languageChange', { detail: { lang: currentLang, language: currentLang, translations: t } }));
     
     // Update lang text
     if (langText) {

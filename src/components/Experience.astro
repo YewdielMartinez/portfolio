@@ -64,8 +64,11 @@
   
   // Update on language change
   window.addEventListener('languageChange', async (event: any) => {
-    const { translations } = event.detail;
-    const experiences = translations.experience.items;
+    const { translations, lang } = event.detail;
+    
+    // Reload experience data with new language
+    const { experience } = await import('../data/experience');
+    const experiences = experience[lang as 'en' | 'es'];
     renderExperience(experiences);
     
     // Update title
