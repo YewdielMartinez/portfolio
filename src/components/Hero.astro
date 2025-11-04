@@ -7,15 +7,9 @@
     <div class="max-w-4xl">
       <div class="mb-6">
         <h1 
-          id="name-line-1"
+          id="name-line"
           class="text-6xl sm:text-7xl lg:text-8xl font-bold leading-tight transition-colors duration-300 hover:text-[#F54927] cursor-default"
-        >
-          <span class="typing-text"></span>
-          <span class="typing-cursor opacity-0">|</span>
-        </h1>
-        <h1 
-          id="name-line-2"
-          class="text-6xl sm:text-7xl lg:text-8xl font-bold leading-tight transition-colors duration-300 hover:text-[#F54927] cursor-default"
+          style="min-height: 180px;"
         >
           <span class="typing-text"></span>
           <span class="typing-cursor opacity-0">|</span>
@@ -62,7 +56,7 @@
             <!-- Social links will be inserted here by JavaScript -->
           </div>
           <a 
-            href="public/CV.pdf" 
+            href="/CV.pdf" 
             download
             class="w-12 h-12 flex items-center justify-center bg-gray-900 dark:bg-gray-700 text-white rounded-full hover:bg-[#F54927] transition-all duration-300 hover:-translate-y-2 hover:scale-110 hover:shadow-lg hover:shadow-[#F54927]/50 hover:rotate-6" 
             aria-label="Download CV"
@@ -113,8 +107,8 @@
 </style>
 
 <script>
-  // Typewriter effect
-  async function typeWriter(element: HTMLElement, text: string, speed: number = 50, showCursor: boolean = true): Promise<void> {
+  // Typewriter effect for appending text (supports HTML)
+  async function typeWriterAppend(element: HTMLElement, text: string, speed: number = 50, showCursor: boolean = true, useHTML: boolean = false): Promise<void> {
     return new Promise((resolve) => {
       const textSpan = element.querySelector('.typing-text');
       const cursorSpan = element.querySelector('.typing-cursor');
@@ -124,9 +118,6 @@
         return;
       }
 
-      // Clear previous text
-      textSpan.textContent = '';
-
       // Show cursor
       if (showCursor && cursorSpan) {
         cursorSpan.classList.add('active');
@@ -135,7 +126,11 @@
       let i = 0;
       const typing = setInterval(() => {
         if (i < text.length) {
-          textSpan.textContent += text.charAt(i);
+          if (useHTML) {
+            textSpan.innerHTML += text.charAt(i);
+          } else {
+            textSpan.textContent += text.charAt(i);
+          }
           i++;
         } else {
           clearInterval(typing);
@@ -151,8 +146,21 @@
     });
   }
 
-  // Delete effect (reverse typing)
-  async function deleteText(element: HTMLElement, speed: number = 30): Promise<void> {
+  // Typewriter effect (clears and types)
+  async function typeWriter(element: HTMLElement, text: string, speed: number = 50, showCursor: boolean = true, useHTML: boolean = false): Promise<void> {
+    const textSpan = element.querySelector('.typing-text');
+    if (textSpan) {
+      if (useHTML) {
+        textSpan.innerHTML = '';
+      } else {
+        textSpan.textContent = '';
+      }
+    }
+    return typeWriterAppend(element, text, speed, showCursor, useHTML);
+  }
+
+  // Delete effect (reverse typing) - deletes specified number of characters (supports HTML)
+  async function deleteChars(element: HTMLElement, count: number, speed: number = 30, useHTML: boolean = false): Promise<void> {
     return new Promise((resolve) => {
       const textSpan = element.querySelector('.typing-text');
       const cursorSpan = element.querySelector('.typing-cursor');
@@ -167,13 +175,20 @@
         cursorSpan.classList.add('active');
       }
 
-      const text = textSpan.textContent || '';
-      let i = text.length;
+      const originalContent = useHTML ? (textSpan.innerHTML || '') : (textSpan.textContent || '');
+      const charsToDelete = Math.min(count, originalContent.length);
+      let deleted = 0;
       
       const deleting = setInterval(() => {
-        if (i > 0) {
-          textSpan.textContent = text.substring(0, i - 1);
-          i--;
+        if (deleted < charsToDelete) {
+          if (useHTML) {
+            const currentHTML = textSpan.innerHTML || '';
+            textSpan.innerHTML = currentHTML.substring(0, currentHTML.length - 1);
+          } else {
+            const currentText = textSpan.textContent || '';
+            textSpan.textContent = currentText.substring(0, currentText.length - 1);
+          }
+          deleted++;
         } else {
           clearInterval(deleting);
           if (cursorSpan) {
@@ -185,8 +200,16 @@
     });
   }
 
+  // Delete all text
+  async function deleteText(element: HTMLElement, speed: number = 30): Promise<void> {
+    const textSpan = element.querySelector('.typing-text');
+    const length = textSpan?.textContent?.length || 0;
+    return deleteChars(element, length, speed);
+  }
+
   let isAnimating = false;
   let shouldStop = false;
+  let buttonsShown = false; // Track if buttons have been shown
 
   async function animateHero() {
     if (isAnimating) return;
@@ -197,45 +220,51 @@
     const currentLang = (localStorage.getItem('language') || 'en') as 'en' | 'es';
     const t = translations[currentLang];
 
-    const nameLine1 = document.getElementById('name-line-1');
-    const nameLine2 = document.getElementById('name-line-2');
+    const nameLine = document.getElementById('name-line');
     const roleElement = document.getElementById('hero-role');
     const taglineElement = document.getElementById('hero-tagline');
     const buttonsElement = document.getElementById('hero-buttons');
 
     while (!shouldStop) {
       // Show all elements
-      if (nameLine1) nameLine1.style.opacity = '1';
-      if (nameLine2) nameLine2.style.opacity = '1';
+      if (nameLine) nameLine.style.opacity = '1';
       if (roleElement) roleElement.style.opacity = '1';
       if (taglineElement) taglineElement.style.opacity = '1';
 
-      // Type first name
-      if (nameLine1 && !shouldStop) {
-        await typeWriter(nameLine1, 'Yewdiel', 80, true);
+      // Type first name "Yewdiel"
+      if (nameLine && !shouldStop) {
+        await typeWriter(nameLine, 'Yewdiel', 60, true, true);
         await new Promise(resolve => setTimeout(resolve, 100));
+        
+        // Add line break
+        const textSpan = nameLine.querySelector('.typing-text');
+        if (textSpan) {
+          textSpan.innerHTML += '<br>';
+        }
+        await new Promise(resolve => setTimeout(resolve, 50));
       }
 
-      // Type last name
-      if (nameLine2 && !shouldStop) {
-        await typeWriter(nameLine2, 'Medina', 80, true);
-        await new Promise(resolve => setTimeout(resolve, 150));
+      // Type last name "Medina" on new line
+      if (nameLine && !shouldStop) {
+        await typeWriterAppend(nameLine, 'Medina', 60, true, true);
+        await new Promise(resolve => setTimeout(resolve, 200));
       }
 
       // Type role
       if (roleElement && !shouldStop) {
-        await typeWriter(roleElement, t.home.role, 50, true);
+        await typeWriter(roleElement, t.home.role, 40, true);
         await new Promise(resolve => setTimeout(resolve, 150));
       }
 
       // Type tagline
       if (taglineElement && !shouldStop) {
-        await typeWriter(taglineElement, t.home.tagline, 25, false);
+        await typeWriter(taglineElement, t.home.tagline, 20, false);
       }
 
-      // Show buttons with fade in
-      if (buttonsElement) {
+      // Show buttons with fade in only on first load
+      if (buttonsElement && !buttonsShown) {
         buttonsElement.style.opacity = '1';
+        buttonsShown = true;
       }
 
       // Wait before deleting (show complete text for 3 seconds)
@@ -243,24 +272,33 @@
 
       if (shouldStop) break;
 
+      // Wait a moment before starting to delete
+      await new Promise(resolve => setTimeout(resolve, 300));
+
       // Delete in reverse order
       if (taglineElement) {
         await deleteText(taglineElement, 15);
       }
 
       if (roleElement) {
-        await deleteText(roleElement, 20);
+        await deleteText(roleElement, 25);
+        await new Promise(resolve => setTimeout(resolve, 100));
       }
 
-      if (nameLine2) {
-        await deleteText(nameLine2, 30);
+      // Delete last name "Medina" first (6 characters)
+      if (nameLine) {
+        await deleteChars(nameLine, 6, 30, true);
+        await new Promise(resolve => setTimeout(resolve, 100));
+        
+        // Remove line break (<br> = 4 characters)
+        await deleteChars(nameLine, 4, 20, true);
+        await new Promise(resolve => setTimeout(resolve, 100));
+        
+        // Then delete first name "Yewdiel" (7 characters)
+        await deleteChars(nameLine, 7, 30, true);
       }
 
-      if (nameLine1) {
-        await deleteText(nameLine1, 30);
-      }
-
-      // Wait a bit before restarting
+      // Wait a bit before restarting the cycle
       await new Promise(resolve => setTimeout(resolve, 500));
     }
 
@@ -342,23 +380,26 @@
     await new Promise(resolve => setTimeout(resolve, 200));
     
     // Reset all elements
-    const nameLine1 = document.getElementById('name-line-1');
-    const nameLine2 = document.getElementById('name-line-2');
+    const nameLine = document.getElementById('name-line');
     const roleElement = document.getElementById('hero-role');
     const taglineElement = document.getElementById('hero-tagline');
     const buttonsElement = document.getElementById('hero-buttons');
 
     // Clear text
-    [nameLine1, nameLine2, roleElement, taglineElement].forEach(el => {
+    [nameLine, roleElement, taglineElement].forEach(el => {
       if (el) {
         const textSpan = el.querySelector('.typing-text');
         const cursorSpan = el.querySelector('.typing-cursor');
-        if (textSpan) textSpan.textContent = '';
+        if (textSpan) {
+          textSpan.innerHTML = '';
+          textSpan.textContent = '';
+        }
         if (cursorSpan) cursorSpan.classList.remove('active');
       }
     });
 
-    if (buttonsElement) {
+    // Keep buttons visible if they were already shown
+    if (buttonsElement && !buttonsShown) {
       buttonsElement.style.opacity = '0';
     }
 
