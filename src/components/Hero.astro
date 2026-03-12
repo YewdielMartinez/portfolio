@@ -11,7 +11,7 @@
         id="name-line"
         class="font-bold leading-[0.9] tracking-tight transition-colors duration-300 hover:text-gray-500 dark:hover:text-gray-400 cursor-default text-left"
         style="font-size: clamp(3rem, 8.5vw, 8rem); opacity: 0;"
-      ><span class="typing-text"></span><span class="typing-cursor">|</span></h1>
+      ><span class="name-l1"></span><br><span class="name-l2"></span><span class="typing-cursor">|</span></h1>
     </div>
 
     <!-- Role -->
@@ -120,76 +120,55 @@
 </style>
 
 <script>
-  // Append text into .typing-text span
-  async function typeWriterAppend(element: HTMLElement, text: string, speed: number = 50, useHTML: boolean = false): Promise<void> {
+  // Type plain text into a span — no innerHTML, no re-parsing issues in production
+  async function typeInto(span: HTMLElement, text: string, speed: number = 50): Promise<void> {
     return new Promise((resolve) => {
-      const textSpan = element.querySelector('.typing-text') as HTMLElement;
-      if (!textSpan) { resolve(); return; }
+      span.textContent = '';
       let i = 0;
-      const typing = setInterval(() => {
+      const timer = setInterval(() => {
         if (i < text.length) {
-          if (useHTML) textSpan.innerHTML += text.charAt(i);
-          else textSpan.textContent += text.charAt(i);
-          i++;
+          span.textContent += text[i++];
         } else {
-          clearInterval(typing);
+          clearInterval(timer);
           resolve();
         }
       }, speed);
     });
   }
 
-  // Clear + type
-  async function typeWriter(element: HTMLElement, text: string, speed: number = 50, useHTML: boolean = false): Promise<void> {
-    const textSpan = element.querySelector('.typing-text') as HTMLElement;
-    if (textSpan) {
-      if (useHTML) textSpan.innerHTML = '';
-      else textSpan.textContent = '';
-    }
-    return typeWriterAppend(element, text, speed, useHTML);
-  }
-
-  let hasAnimated = false;
-
   async function animateHero() {
-    if (hasAnimated) return;
-    hasAnimated = true;
+    // DOM-based guard: survives module re-evaluation (Vercel can re-run modules)
+    const nameLine = document.getElementById('name-line') as HTMLElement;
+    if (!nameLine || nameLine.dataset.animated === '1') return;
+    nameLine.dataset.animated = '1';
 
     const { translations } = await import('../data/translations');
     const currentLang = (localStorage.getItem('language') || 'en') as 'en' | 'es';
     const t = translations[currentLang];
 
-    const nameLine    = document.getElementById('name-line')    as HTMLElement;
     const roleElement = document.getElementById('hero-role')    as HTMLElement;
     const divider     = document.getElementById('hero-divider') as HTMLElement;
     const taglineEl   = document.getElementById('hero-tagline') as HTMLElement;
     const buttonsEl   = document.getElementById('hero-buttons') as HTMLElement;
     const scrollInd   = document.getElementById('scroll-indicator') as HTMLElement;
-    const cursorSpan  = nameLine?.querySelector('.typing-cursor') as HTMLElement;
+    const cursorSpan = nameLine.querySelector('.typing-cursor') as HTMLElement;
+    const l1 = nameLine.querySelector('.name-l1') as HTMLElement;
+    const l2 = nameLine.querySelector('.name-l2') as HTMLElement;
 
     await new Promise(resolve => setTimeout(resolve, 150));
 
     // Reveal name with focus-in blur animation
-    if (nameLine) {
-      nameLine.style.opacity = '';
-      nameLine.classList.add('name-focus-in');
-    }
+    nameLine.style.opacity = '';
+    nameLine.classList.add('name-focus-in');
     if (cursorSpan) cursorSpan.classList.add('active');
 
     // Type first name
-    if (nameLine) {
-      await typeWriter(nameLine, 'Yewdiel', 60, true);
-      await new Promise(resolve => setTimeout(resolve, 80));
-      const textSpan = nameLine.querySelector('.typing-text');
-      if (textSpan) textSpan.innerHTML += '<br>';
-      await new Promise(resolve => setTimeout(resolve, 40));
-    }
+    if (l1) await typeInto(l1, 'Yewdiel', 60);
+    await new Promise(resolve => setTimeout(resolve, 80));
 
     // Type last name
-    if (nameLine) {
-      await typeWriterAppend(nameLine, 'Medina.', 60, true);
-      await new Promise(resolve => setTimeout(resolve, 100));
-    }
+    if (l2) await typeInto(l2, 'Medina.', 60);
+    await new Promise(resolve => setTimeout(resolve, 100));
 
     // Reveal role
     if (roleElement) {
@@ -315,11 +294,15 @@
 
     // Clear name
     if (nameLine) {
-      const textSpan   = nameLine.querySelector('.typing-text');
+      const l1 = nameLine.querySelector('.name-l1') as HTMLElement;
+      const l2 = nameLine.querySelector('.name-l2') as HTMLElement;
       const cursorSpan = nameLine.querySelector('.typing-cursor');
-      if (textSpan) textSpan.innerHTML = '';
+      if (l1) l1.textContent = '';
+      if (l2) l2.textContent = '';
       if (cursorSpan) cursorSpan.classList.remove('active');
       nameLine.style.opacity = '0';
+      // Reset DOM guard so animation re-runs after language change
+      delete nameLine.dataset.animated;
     }
 
     // Update button text

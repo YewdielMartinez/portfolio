@@ -2,258 +2,209 @@
 // Behind the Code - Easter Egg
 ---
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+
 <!-- Behind the Code Modal -->
-<div 
-  id="behind-modal" 
-  class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/90 backdrop-blur-md p-4"
-  style="animation: fade-in 0.3s ease-out;"
+<div
+  id="behind-modal"
+  class="fixed inset-0 z-[100] hidden items-center justify-center p-4 sm:p-6"
 >
-  <div 
-    class="relative bg-gradient-to-br from-[#1a1a1a] to-[#0D0D0D] rounded-3xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden border-2 border-gray-700"
-    style="animation: slideIn 0.5s ease-out;"
+  <!-- Backdrop -->
+  <div id="behind-backdrop" class="absolute inset-0 bg-black/80 backdrop-blur-sm"></div>
+
+  <!-- Panel -->
+  <div
+    id="behind-panel"
+    class="relative bg-[#111] border border-white/10 rounded-2xl max-w-2xl w-full max-h-[88vh] overflow-hidden shadow-2xl"
   >
     <!-- Header -->
-    <div class="relative bg-black dark:bg-[#111111] p-8 text-white overflow-hidden">
-      <div class="absolute inset-0 opacity-10">
-        <div class="absolute inset-0" style="background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,.05) 10px, rgba(255,255,255,.05) 20px);"></div>
+    <div class="flex items-start justify-between px-8 pt-8 pb-6 border-b border-white/8">
+      <div>
+        <p class="text-xs text-white/35 tracking-widest uppercase mb-3 font-normal" data-i18n="behind.unlocked">Easter Egg Unlocked</p>
+        <h2 class="text-3xl font-medium text-white leading-tight" data-i18n="behind.title">Behind the Code</h2>
+        <p class="text-base text-white/45 mt-1.5 font-normal" data-i18n="behind.subtitle">How and why this portfolio was crafted</p>
       </div>
-      <button 
-        id="behind-close" 
-        class="absolute top-4 right-4 text-white hover:rotate-90 transition-transform duration-300 z-10"
+      <button
+        id="behind-close"
+        class="w-8 h-8 flex items-center justify-center rounded-full text-white/35 hover:text-white hover:bg-white/10 transition-all duration-200 shrink-0 mt-1"
+        aria-label="Close"
       >
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
         </svg>
       </button>
-      
-      <div class="relative">
-        <div class="text-sm font-mono mb-2 text-white/80 flex items-center gap-2">
-          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M5 2a1 1 0 011 1v1h1a1 1 0 010 2H6v1a1 1 0 01-2 0V6H3a1 1 0 010-2h1V3a1 1 0 011-1zm0 10a1 1 0 011 1v1h1a1 1 0 110 2H6v1a1 1 0 11-2 0v-1H3a1 1 0 110-2h1v-1a1 1 0 011-1zM12 2a1 1 0 01.967.744L14.146 7.2 17.5 9.134a1 1 0 010 1.732l-3.354 1.935-1.18 4.455a1 1 0 01-1.933 0L9.854 12.8 6.5 10.866a1 1 0 010-1.732l3.354-1.935 1.18-4.455A1 1 0 0112 2z" clip-rule="evenodd"></path>
-          </svg>
-          <span data-i18n="behind.unlocked">Easter Egg Unlocked!</span>
-        </div>
-        <h2 class="text-4xl font-bold mb-2" data-i18n="behind.title">Behind the Code</h2>
-        <p class="text-white/90" data-i18n="behind.subtitle">How this portfolio was crafted</p>
-      </div>
     </div>
 
     <!-- Content -->
-    <div class="p-8 overflow-y-auto max-h-[calc(90vh-180px)] custom-scrollbar">
+    <div class="px-8 py-7 overflow-y-auto max-h-[calc(88vh-130px)] custom-scrollbar space-y-9">
+
       <!-- Tech Stack -->
-      <div class="mb-8">
-        <h3 class="text-2xl font-bold text-white mb-4 flex items-center gap-2">
-          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-          </svg>
-          <span data-i18n="behind.techStack">Tech Stack</span>
-        </h3>
-        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-          <div class="bg-white/5 rounded-xl p-4 hover:bg-white/10 transition-all hover:scale-105">
-            <svg class="w-8 h-8 mb-2 text-[#FF5D01]" fill="currentColor" viewBox="0 0 256 366">
+      <div>
+        <p class="text-sm font-medium text-white/50 mb-4" data-i18n="behind.techStack">Stack</p>
+        <div class="grid grid-cols-3 gap-3">
+          <!-- Astro -->
+          <div class="flex flex-col gap-3 p-4 rounded-xl border border-white/8 hover:border-white/14 bg-white/3 hover:bg-white/5 transition-all duration-200">
+            <svg class="w-6 h-6 text-[#FF5D01]" fill="currentColor" viewBox="0 0 256 366">
               <path d="M182.022 9.147c2.982 3.702 4.502 8.697 7.543 18.687L256 246.074a276.467 276.467 0 0 0-79.426-26.891L133.318 73.008a5.63 5.63 0 0 0-10.802.017L79.784 219.11A276.453 276.453 0 0 0 0 246.04L66.76 27.783c3.051-9.972 4.577-14.959 7.559-18.654a24.541 24.541 0 0 1 9.946-7.358C88.67 0 93.885 0 104.314 0h47.683c10.443 0 15.664 0 20.074 1.774a24.545 24.545 0 0 1 9.95 7.373Z"/>
             </svg>
-            <div class="font-bold text-white">Astro v5.15.3</div>
-            <div class="text-sm text-gray-400">Static Site Generator</div>
+            <div>
+              <div class="text-sm font-medium text-white">Astro</div>
+              <div class="text-xs text-white/35 mt-0.5">v5.15.3</div>
+            </div>
           </div>
-          <div class="bg-white/5 rounded-xl p-4 hover:bg-white/10 transition-all hover:scale-105">
-            <svg class="w-8 h-8 mb-2 text-[#06B6D4]" fill="currentColor" viewBox="0 0 54 33">
+          <!-- Tailwind -->
+          <div class="flex flex-col gap-3 p-4 rounded-xl border border-white/8 hover:border-white/14 bg-white/3 hover:bg-white/5 transition-all duration-200">
+            <svg class="w-6 h-6 text-[#06B6D4]" fill="currentColor" viewBox="0 0 54 33">
               <path fill-rule="evenodd" clip-rule="evenodd" d="M27 0c-7.2 0-11.7 3.6-13.5 10.8 2.7-3.6 5.85-4.95 9.45-4.05 2.054.513 3.522 2.004 5.147 3.653C30.744 13.09 33.808 16.2 40.5 16.2c7.2 0 11.7-3.6 13.5-10.8-2.7 3.6-5.85 4.95-9.45 4.05-2.054-.513-3.522-2.004-5.147-3.653C36.756 3.11 33.692 0 27 0zM13.5 16.2C6.3 16.2 1.8 19.8 0 27c2.7-3.6 5.85-4.95 9.45-4.05 2.054.514 3.522 2.004 5.147 3.653C17.244 29.29 20.308 32.4 27 32.4c7.2 0 11.7-3.6 13.5-10.8-2.7 3.6-5.85 4.95-9.45 4.05-2.054-.513-3.522-2.004-5.147-3.653C23.256 19.31 20.192 16.2 13.5 16.2z"/>
             </svg>
-            <div class="font-bold text-white">Tailwind CSS v4</div>
-            <div class="text-sm text-gray-400">Styling Framework</div>
+            <div>
+              <div class="text-sm font-medium text-white">Tailwind CSS</div>
+              <div class="text-xs text-white/35 mt-0.5">v4</div>
+            </div>
           </div>
-          <div class="bg-white/5 rounded-xl p-4 hover:bg-white/10 transition-all hover:scale-105">
-            <svg class="w-8 h-8 mb-2 text-[#3178C6]" fill="currentColor" viewBox="0 0 256 256">
+          <!-- TypeScript -->
+          <div class="flex flex-col gap-3 p-4 rounded-xl border border-white/8 hover:border-white/14 bg-white/3 hover:bg-white/5 transition-all duration-200">
+            <svg class="w-6 h-6 text-[#3178C6]" fill="currentColor" viewBox="0 0 256 256">
               <path d="M20 0h216c11.046 0 20 8.954 20 20v216c0 11.046-8.954 20-20 20H20c-11.046 0-20-8.954-20-20V20C0 8.954 8.954 0 20 0Z"/>
               <path fill="#fff" d="m150.518 200.475 27.368 15.82v-50.826l-27.368-15.884zm8.89-79.089 27.368 15.82V86.38l-27.368-15.82zm-60.73 0-27.368 15.82V86.38l27.368-15.82zm-8.89 63.205v31.643l27.368 15.884V150.3l-27.368-15.884z"/>
             </svg>
-            <div class="font-bold text-white">TypeScript</div>
-            <div class="text-sm text-gray-400">Type Safety</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Features -->
-      <div class="mb-8">
-        <h3 class="text-2xl font-bold text-white mb-4 flex items-center gap-2">
-          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
-          </svg>
-          <span data-i18n="behind.features">Key Features</span>
-        </h3>
-        <div class="space-y-3">
-          <div class="bg-white/5 rounded-xl p-4 hover:bg-white/10 transition-all border-l-4 border-gray-600 flex items-start gap-3">
-            <svg class="w-6 h-6 text-gray-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
-            </svg>
             <div>
-              <div class="font-bold text-white mb-1" data-i18n="behind.feature1Title">Typewriter Animation</div>
-              <div class="text-sm text-gray-400" data-i18n="behind.feature1Desc">Custom async typewriter effect on hero section with loop and delete animations</div>
-            </div>
-          </div>
-          <div class="bg-white/5 rounded-xl p-4 hover:bg-white/10 transition-all border-l-4 border-gray-600 flex items-start gap-3">
-            <svg class="w-6 h-6 text-gray-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z"></path>
-            </svg>
-            <div>
-              <div class="font-bold text-white mb-1" data-i18n="behind.feature2Title">Auto Slideshow</div>
-              <div class="text-sm text-gray-400" data-i18n="behind.feature2Desc">Integrated TMDB API for movies with random shuffle</div>
-            </div>
-          </div>
-          <div class="bg-white/5 rounded-xl p-4 hover:bg-white/10 transition-all border-l-4 border-gray-600 flex items-start gap-3">
-            <svg class="w-6 h-6 text-gray-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-            </svg>
-            <div>
-              <div class="font-bold text-white mb-1" data-i18n="behind.feature3Title">TypeScript Data Management</div>
-              <div class="text-sm text-gray-400" data-i18n="behind.feature3Desc">All data (skills, movies, photos, projects) managed via TypeScript files</div>
-            </div>
-          </div>
-          <div class="bg-white/5 rounded-xl p-4 hover:bg-white/10 transition-all border-l-4 border-gray-600 flex items-start gap-3">
-            <svg class="w-6 h-6 text-gray-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            <div>
-              <div class="font-bold text-white mb-1" data-i18n="behind.feature4Title">Interactive Quiz</div>
-              <div class="text-sm text-gray-400" data-i18n="behind.feature4Desc">Custom quiz system with scoring and multilingual support</div>
-            </div>
-          </div>
-          <div class="bg-white/5 rounded-xl p-4 hover:bg-white/10 transition-all border-l-4 border-gray-600 flex items-start gap-3">
-            <svg class="w-6 h-6 text-gray-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-            </svg>
-            <div>
-              <div class="font-bold text-white mb-1" data-i18n="behind.feature5Title">Hover Detail Modals</div>
-              <div class="text-sm text-gray-400" data-i18n="behind.feature5Desc">1.5s hover delay to show detailed project information</div>
-            </div>
-          </div>
-          <div class="bg-white/5 rounded-xl p-4 hover:bg-white/10 transition-all border-l-4 border-gray-600 flex items-start gap-3">
-            <svg class="w-6 h-6 text-gray-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"></path>
-            </svg>
-            <div>
-              <div class="font-bold text-white mb-1" data-i18n="behind.feature6Title">Scroll Snapping Navigation</div>
-              <div class="text-sm text-gray-400" data-i18n="behind.feature6Desc">Full-page sections with smooth scroll snap and keyboard navigation</div>
+              <div class="text-sm font-medium text-white">TypeScript</div>
+              <div class="text-xs text-white/35 mt-0.5">Type safety</div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- APIs Used -->
-      <div class="mb-8">
-        <h3 class="text-2xl font-bold text-white mb-4 flex items-center gap-2">
-          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-          </svg>
-          <span data-i18n="behind.apis">APIs & Integrations</span>
-        </h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div class="bg-blue-500/10 rounded-xl p-4 border border-blue-500/20 flex items-start gap-3">
-            <svg class="w-6 h-6 text-blue-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z"></path>
-            </svg>
+      <!-- Why -->
+      <div>
+        <p class="text-sm font-medium text-white/50 mb-5" data-i18n="behind.whyTitle">Why this stack</p>
+        <div class="space-y-4">
+          <div class="flex gap-4">
+            <div class="w-px bg-white/10 shrink-0 mx-1"></div>
             <div>
-              <div class="font-bold text-white mb-2">TMDB API</div>
-              <div class="text-sm text-gray-400 mb-2" data-i18n="behind.tmdbDesc">The Movie Database for movie posters and information</div>
-              <code class="text-xs text-blue-400 font-mono">api.themoviedb.org</code>
+              <p class="text-base font-medium text-white mb-1" data-i18n="behind.why1Title">Zero-JS by default</p>
+              <p class="text-sm text-white/45 leading-relaxed font-normal" data-i18n="behind.why1Desc">Astro ships no JavaScript unless you opt in. Every section is a static component — fast loads, great SEO, and full control over what actually runs in the browser.</p>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <div class="w-px bg-white/10 shrink-0 mx-1"></div>
+            <div>
+              <p class="text-base font-medium text-white mb-1" data-i18n="behind.why2Title">CSS-first styling</p>
+              <p class="text-sm text-white/45 leading-relaxed font-normal" data-i18n="behind.why2Desc">Tailwind v4 drops the JS config file entirely — styles are defined in CSS via @theme. Combined with Astro's scoped styles, every component owns its appearance without conflicts.</p>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <div class="w-px bg-white/10 shrink-0 mx-1"></div>
+            <div>
+              <p class="text-base font-medium text-white mb-1" data-i18n="behind.why3Title">Typed content layer</p>
+              <p class="text-sm text-white/45 leading-relaxed font-normal" data-i18n="behind.why3Desc">All projects, skills and copy live in TypeScript data files. No CMS, no API calls at runtime — just typed objects that get validated at build time.</p>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Color Palette -->
-      <div class="mb-8">
-        <h3 class="text-2xl font-bold text-white mb-4 flex items-center gap-2">
-          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
-          </svg>
-          <span data-i18n="behind.colorPalette">Color Palette</span>
-        </h3>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div class="text-center">
-            <div class="w-full h-20 rounded-lg bg-black dark:bg-white shadow-lg mb-2"></div>
-            <div class="text-sm font-mono text-gray-400">#000000</div>
-            <div class="text-xs text-gray-500">Primary</div>
+      <!-- How -->
+      <div>
+        <p class="text-sm font-medium text-white/50 mb-5" data-i18n="behind.howTitle">How it was built</p>
+        <div class="space-y-4">
+          <div class="flex gap-4">
+            <div class="w-px bg-white/10 shrink-0 mx-1"></div>
+            <div>
+              <p class="text-base font-medium text-white mb-1" data-i18n="behind.how1Title">Liquid glass navbar</p>
+              <p class="text-sm text-white/45 leading-relaxed font-normal" data-i18n="behind.how1Desc">An SVG feDisplacementMap filter creates the lens-distortion on the pill. Layered inset box-shadows simulate the specular highlights of glass in both light and dark modes — without a single image asset.</p>
+            </div>
           </div>
-          <div class="text-center">
-            <div class="w-full h-20 rounded-lg bg-white dark:bg-black shadow-lg mb-2 border border-gray-700"></div>
-            <div class="text-sm font-mono text-gray-400">#FFFFFF</div>
-            <div class="text-xs text-gray-500">Accent</div>
+          <div class="flex gap-4">
+            <div class="w-px bg-white/10 shrink-0 mx-1"></div>
+            <div>
+              <p class="text-base font-medium text-white mb-1" data-i18n="behind.how2Title">Hero entrance</p>
+              <p class="text-sm text-white/45 leading-relaxed font-normal" data-i18n="behind.how2Desc">The name types in with a custom async function while a CSS blur-to-sharp animation runs in parallel — giving the impression of a camera coming into focus as each character appears.</p>
+            </div>
           </div>
-          <div class="text-center">
-            <div class="w-full h-20 rounded-lg bg-[#0D0D0D] shadow-lg mb-2 border border-gray-700"></div>
-            <div class="text-sm font-mono text-gray-400">#0D0D0D</div>
-            <div class="text-xs text-gray-500">Dark BG</div>
+          <div class="flex gap-4">
+            <div class="w-px bg-white/10 shrink-0 mx-1"></div>
+            <div>
+              <p class="text-base font-medium text-white mb-1" data-i18n="behind.how3Title">Dark mode</p>
+              <p class="text-sm text-white/45 leading-relaxed font-normal" data-i18n="behind.how3Desc">A .dark class on &lt;html&gt; drives all theme changes via a Tailwind custom variant. Dark overrides for Astro-scoped components live in is:global blocks to bypass the component hash.</p>
+            </div>
           </div>
-          <div class="text-center">
-            <div class="w-full h-20 rounded-lg bg-[#2a2a2a] shadow-lg mb-2"></div>
-            <div class="text-sm font-mono text-gray-400">#2a2a2a</div>
-            <div class="text-xs text-gray-500">Dark Card</div>
+          <div class="flex gap-4">
+            <div class="w-px bg-white/10 shrink-0 mx-1"></div>
+            <div>
+              <p class="text-base font-medium text-white mb-1" data-i18n="behind.how4Title">i18n without a framework</p>
+              <p class="text-sm text-white/45 leading-relaxed font-normal" data-i18n="behind.how4Desc">Translations are a plain TypeScript object keyed by locale. A custom event dispatcher notifies every component when the language switches, so the whole page re-renders in place.</p>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Easter Egg Info -->
-      <div class="bg-white/5 rounded-xl p-6 border border-gray-700">
-        <div class="text-center">
-          <div class="mb-3 flex justify-center">
-            <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
-            </svg>
+      <!-- Palette + Footer -->
+      <div class="space-y-6">
+        <div>
+          <p class="text-sm font-medium text-white/50 mb-4" data-i18n="behind.colorPalette">Palette</p>
+          <div class="flex gap-2">
+            <div class="flex-1 text-center">
+              <div class="h-9 rounded-lg bg-black border border-white/10 mb-1.5"></div>
+              <div class="text-xs font-mono text-white/25">#000</div>
+            </div>
+            <div class="flex-1 text-center">
+              <div class="h-9 rounded-lg bg-white mb-1.5"></div>
+              <div class="text-xs font-mono text-white/25">#FFF</div>
+            </div>
+            <div class="flex-1 text-center">
+              <div class="h-9 rounded-lg bg-[#0D0D0D] border border-white/10 mb-1.5"></div>
+              <div class="text-xs font-mono text-white/25">#0D0D</div>
+            </div>
+            <div class="flex-1 text-center">
+              <div class="h-9 rounded-lg bg-[#2a2a2a] mb-1.5"></div>
+              <div class="text-xs font-mono text-white/25">#2a2a</div>
+            </div>
           </div>
-          <div class="font-bold text-white mb-2" data-i18n="behind.secretFound">You found the secret!</div>
-          <div class="text-sm text-gray-400 mb-3">
-            <span data-i18n="behind.pressKey">Press</span> <kbd class="px-2 py-1 bg-white/10 rounded text-gray-300 font-mono">Ctrl + Shift + D</kbd> <span data-i18n="behind.togglePanel">anytime to toggle this panel</span>
-          </div>
-          <div class="text-xs text-gray-500" data-i18n="behind.builtWith">
-            Built with passion and precision
+        </div>
+
+        <div class="pt-1 pb-2 flex items-center justify-between border-t border-white/6">
+          <div class="text-xs text-white/22 font-normal" data-i18n="behind.builtWith">Built with passion and precision</div>
+          <div class="text-xs text-white/22 font-normal">
+            <kbd class="px-1.5 py-0.5 bg-white/7 rounded text-white/35 font-mono text-[11px]">Ctrl+Shift+D</kbd>
+            <span class="ml-1" data-i18n="behind.togglePanel">to toggle</span>
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </div>
 
 <style>
-  @keyframes fade-in {
+  #behind-modal {
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  @keyframes modal-backdrop-in {
     from { opacity: 0; }
-    to { opacity: 1; }
+    to   { opacity: 1; }
+  }
+  @keyframes modal-panel-in {
+    from { opacity: 0; transform: translateY(16px) scale(0.98); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
   }
 
-  @keyframes slideIn {
-    from {
-      transform: translateY(100px);
-      opacity: 0;
-    }
-    to {
-      transform: translateY(0);
-      opacity: 1;
-    }
+  #behind-modal.flex #behind-backdrop {
+    animation: modal-backdrop-in 0.2s ease-out both;
+  }
+  #behind-modal.flex #behind-panel {
+    animation: modal-panel-in 0.28s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 
-  kbd {
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-  }
+  .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+  .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+  .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 4px; }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
 
-  .custom-scrollbar::-webkit-scrollbar {
-    width: 8px;
-  }
-
-  .custom-scrollbar::-webkit-scrollbar-track {
-    background: rgba(255,255,255,0.05);
-    border-radius: 10px;
-  }
-
-  .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: #666;
-    border-radius: 10px;
-  }
-
-  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: #888;
-  }
+  kbd { font-family: 'DM Sans', sans-serif; }
 </style>
 
 <script>
