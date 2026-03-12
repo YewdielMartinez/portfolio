@@ -2,36 +2,30 @@
 // Experience Timeline Section
 ---
 
-<section id="experience" class="min-h-screen py-24 px-4 bg-gray-50 dark:bg-[#0D0D0D] transition-colors duration-300">
-  <div class="max-w-6xl mx-auto">
+<section id="experience" class="py-24 px-4 bg-white dark:bg-black transition-colors duration-300">
+  <div class="max-w-4xl mx-auto">
     <h2 
-      class="text-4xl md:text-5xl font-bold text-center mb-16"
+      class="text-4xl md:text-5xl font-bold mb-16"
       data-i18n="experience.title"
     >
       Experience
     </h2>
     
-    <div class="relative">
-      <!-- Timeline line -->
-      <div class="absolute left-0 md:left-1/2 top-0 bottom-0 w-0.5 bg-[#F54927]"></div>
-      
-      <!-- Timeline items -->
-      <div id="experience-container" class="space-y-12">
-        <!-- Items will be inserted here by JavaScript -->
-      </div>
+    <div id="experience-container" class="divide-y divide-gray-100 dark:divide-gray-900">
+      <!-- Items will be inserted here by JavaScript -->
     </div>
   </div>
 </section>
 
 <style>
-  @keyframes fade-in-left {
+  @keyframes fade-in-up {
     from {
       opacity: 0;
-      transform: translateX(-30px);
+      transform: translateY(16px);
     }
     to {
       opacity: 1;
-      transform: translateX(0);
+      transform: translateY(0);
     }
   }
 </style>
@@ -50,13 +44,19 @@
     if (!container) return;
     
     container.innerHTML = experiences.map((exp, index) => `
-      <div class="relative pl-8 md:pl-0" style="animation: fade-in-left 0.6s ease-out ${index * 0.1}s both">
-        <div class="absolute left-0 md:left-1/2 top-2 w-4 h-4 bg-[#F54927] rounded-full -ml-2 md:-ml-2"></div>
-        <div class="md:w-5/12 bg-white dark:bg-[#2a2a2a] p-6 rounded-lg shadow-sm transition-all duration-300 hover:shadow-lg hover:shadow-[#F54927]/20 hover:-translate-y-1 hover:scale-105 ${index % 2 === 1 ? 'md:ml-auto' : ''}">
-          <span class="text-sm font-semibold text-[#F54927]">${exp.year}</span>
-          <h3 class="text-xl font-bold mt-2 mb-1">${exp.position}</h3>
-          <p class="text-gray-600 dark:text-gray-400 font-medium mb-3">${exp.company}</p>
-          <p class="text-gray-600 dark:text-gray-400">${exp.description}</p>
+      <div
+        class="flex flex-col sm:flex-row gap-4 sm:gap-12 py-8"
+        style="animation: fade-in-up 0.5s ease-out ${index * 0.12}s both"
+      >
+        <div class="sm:w-40 shrink-0 pt-0.5">
+          <span class="text-sm text-gray-400 dark:text-gray-500 tabular-nums">${exp.year}</span>
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="flex flex-wrap items-start justify-between gap-x-4 gap-y-1 mb-3">
+            <h3 class="font-semibold text-gray-900 dark:text-white">${exp.position}</h3>
+            <span class="text-sm text-gray-500 dark:text-gray-400 shrink-0">${exp.company}</span>
+          </div>
+          <p class="text-sm text-gray-500 dark:text-gray-500 leading-relaxed">${exp.description}</p>
         </div>
       </div>
     `).join('');

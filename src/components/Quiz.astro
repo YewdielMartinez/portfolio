@@ -5,7 +5,7 @@
 <!-- Floating Quiz Button -->
 <button 
   id="quiz-button" 
-  class="fixed bottom-8 right-8 z-50 bg-[#F54927] text-white rounded-full p-4 shadow-2xl hover:scale-110 hover:rotate-12 transition-all duration-300 hover:shadow-[0_0_30px_rgba(245,73,39,0.6)]"
+  class="fixed bottom-8 right-8 z-50 bg-black dark:bg-white text-white dark:text-black rounded-full p-4 shadow-2xl hover:scale-110 hover:rotate-12 transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,0,0,0.4)] dark:hover:shadow-[0_0_20px_rgba(255,255,255,0.2)]"
   aria-label="Open Quiz"
 >
   <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -21,13 +21,13 @@
 >
   <div 
     id="quiz-container"
-    class="relative bg-white dark:bg-[#1a1a1a] rounded-3xl shadow-2xl max-w-2xl w-full mx-4 overflow-hidden"
+    class="relative bg-white dark:bg-[#111111] rounded-3xl shadow-2xl max-w-2xl w-full mx-4 overflow-hidden"
     style="animation: slideIn 0.4s ease-out;"
   >
     <!-- Close Button -->
     <button 
       id="quiz-close" 
-      class="absolute top-4 right-4 z-10 text-gray-800 dark:text-gray-400 hover:text-[#F54927] hover:rotate-90 transition-all duration-300 p-2"
+      class="absolute top-4 right-4 z-10 text-gray-800 dark:text-gray-400 hover:text-black dark:hover:text-white hover:rotate-90 transition-all duration-300 p-2"
     >
       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -35,7 +35,7 @@
     </button>
 
     <!-- Quiz Header -->
-    <div class="bg-[#F54927] p-8 text-white">
+    <div class="bg-black dark:bg-[#111111] p-8 text-white">
       <h2 id="quiz-title" class="text-3xl font-bold mb-2"></h2>
       <p id="quiz-description" class="text-white/90"></p>
       <div id="quiz-progress" class="mt-4 bg-white/20 rounded-full h-2 overflow-hidden hidden">
@@ -49,7 +49,7 @@
       <div id="quiz-start" class="text-center">
         <div class="mb-6 flex justify-center items-center min-h-[120px]">
           <div class="animate-bounce inline-block">
-            <svg class="w-24 h-24 text-[#F54927]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-24 h-24 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
             </svg>
           </div>
@@ -59,7 +59,7 @@
         </p>
         <button 
           id="quiz-start-btn"
-          class="px-8 py-4 bg-[#F54927] text-white rounded-xl font-semibold hover:scale-105 hover:shadow-xl hover:shadow-[#F54927]/30 transition-all duration-300"
+          class="px-8 py-4 bg-black dark:bg-white text-white dark:text-black rounded-xl font-semibold hover:scale-105 hover:shadow-xl hover:shadow-black/20 dark:hover:shadow-white/20 transition-all duration-300"
         >
           Start Quiz
         </button>
@@ -68,7 +68,7 @@
       <!-- Question Screen -->
       <div id="quiz-question" class="hidden">
         <div class="mb-6">
-          <span class="text-sm font-semibold text-[#F54927]" id="question-number">Question 1 of 8</span>
+          <span class="text-sm font-semibold text-gray-500 dark:text-gray-400" id="question-number">Question 1 of 8</span>
           <h3 class="text-2xl font-bold text-gray-800 dark:text-white mt-2" id="question-text"></h3>
         </div>
 
@@ -83,7 +83,7 @@
 
         <button 
           id="quiz-next-btn"
-          class="hidden mt-6 w-full px-6 py-3 bg-[#F54927] text-white rounded-xl font-semibold hover:scale-105 hover:shadow-xl transition-all duration-300"
+          class="hidden mt-6 w-full px-6 py-3 bg-black dark:bg-white text-white dark:text-black rounded-xl font-semibold hover:scale-105 hover:shadow-xl transition-all duration-300"
         >
           Next Question
         </button>
@@ -95,14 +95,14 @@
           <!-- Icon will be inserted here -->
         </div>
         <h3 class="text-3xl font-bold text-gray-800 dark:text-white mb-4" id="results-message"></h3>
-        <div class="text-6xl font-bold text-[#F54927] mb-8">
+        <div class="text-6xl font-bold text-gray-800 dark:text-white mb-8">
           <span id="results-score">0</span>
           <span class="text-2xl text-gray-400">/</span>
           <span id="results-total">8</span>
         </div>
         <button 
           id="quiz-retry-btn"
-          class="px-8 py-4 bg-[#F54927] text-white rounded-xl font-semibold hover:scale-105 hover:shadow-xl transition-all duration-300"
+          class="px-8 py-4 bg-black dark:bg-white text-white dark:text-black rounded-xl font-semibold hover:scale-105 hover:shadow-xl transition-all duration-300"
         >
           Try Again
         </button>
@@ -203,7 +203,7 @@
   const quizRetryBtn = document.getElementById('quiz-retry-btn');
 
   // Open Modal
-  quizButton?.addEventListener('click', async () => {
+  quizButton?.addEventListener('click', async (event) => {
     const translations = await loadQuizData();
     if (!quizData || !translations) return;
 
@@ -217,14 +217,56 @@
       readyText.textContent = translations.readyText || 'Ready to test your knowledge?';
     }
 
-    quizModal?.classList.remove('hidden');
-    quizModal?.classList.add('flex');
+    const quizContainer = document.getElementById('quiz-container');
+    const originEl = event.currentTarget as HTMLElement;
+
+    if ((document as any).startViewTransition && quizContainer) {
+      (quizContainer as any).style.viewTransitionName = 'vt-shared';
+      (quizContainer as any).style.viewTransitionClass = 'vt-element-animation';
+      (originEl as any).style.viewTransitionName = 'vt-shared';
+      (originEl as any).style.viewTransitionClass = 'vt-element-animation';
+      originEl.setAttribute('origin-element', '');
+
+      const vt = (document as any).startViewTransition(() => {
+        (originEl as any).style.viewTransitionName = '';
+        (originEl as any).style.viewTransitionClass = '';
+        quizModal?.classList.remove('hidden');
+        quizModal?.classList.add('flex');
+      });
+      await vt.finished;
+      (quizContainer as any).style.viewTransitionName = '';
+      (quizContainer as any).style.viewTransitionClass = '';
+    } else {
+      quizModal?.classList.remove('hidden');
+      quizModal?.classList.add('flex');
+    }
   });
 
   // Close Modal
-  function closeModal() {
-    quizModal?.classList.add('hidden');
-    quizModal?.classList.remove('flex');
+  async function closeModal() {
+    const quizContainer = document.getElementById('quiz-container');
+    const originElement = document.querySelector('[origin-element]') as HTMLElement | null;
+
+    if ((document as any).startViewTransition && originElement && quizContainer) {
+      (quizContainer as any).style.viewTransitionName = 'vt-shared';
+      (quizContainer as any).style.viewTransitionClass = 'vt-element-animation-closing';
+
+      const vt = (document as any).startViewTransition(() => {
+        (originElement as any).style.viewTransitionName = 'vt-shared';
+        (originElement as any).style.viewTransitionClass = 'vt-element-animation-closing';
+        (quizContainer as any).style.viewTransitionName = '';
+        (quizContainer as any).style.viewTransitionClass = '';
+        quizModal?.classList.add('hidden');
+        quizModal?.classList.remove('flex');
+      });
+      await vt.finished;
+      (originElement as any).style.viewTransitionName = '';
+      (originElement as any).style.viewTransitionClass = '';
+      originElement.removeAttribute('origin-element');
+    } else {
+      quizModal?.classList.add('hidden');
+      quizModal?.classList.remove('flex');
+    }
     resetQuiz();
   }
 
@@ -268,10 +310,10 @@
     if (optionsContainer) {
       optionsContainer.innerHTML = question.options.map((option: string, index: number) => `
         <button 
-          class="quiz-option w-full text-left p-4 rounded-xl bg-gray-100 dark:bg-[#2a2a2a] text-gray-800 dark:text-white font-medium hover:bg-[#F54927] hover:text-white"
+          class="quiz-option w-full text-left p-4 rounded-xl bg-gray-100 dark:bg-[#1a1a1a] text-gray-800 dark:text-white font-medium hover:bg-gray-900 dark:hover:bg-white hover:text-white dark:hover:text-black"
           data-index="${index}"
         >
-          <span class="option-letter font-bold text-[#F54927] mr-3">${String.fromCharCode(65 + index)}.</span>
+          <span class="option-letter font-bold text-gray-500 dark:text-gray-400 mr-3">${String.fromCharCode(65 + index)}.</span>
           ${option}
         </button>
       `).join('');
@@ -359,7 +401,7 @@
 
     const percentage = (score / quizData.questions.length) * 100;
     let iconSvg = '';
-    let iconColor = '#F54927';
+    let iconColor = '#ffffff';
     let message = quizTranslations.tryAgain;
 
     if (percentage === 100) {
@@ -370,7 +412,7 @@
       message = quizTranslations.perfect;
     } else if (percentage >= 70) {
       // Trophy icon
-      iconSvg = `<div class="flex justify-center items-center min-h-[120px]"><div class="animate-bounce inline-block"><svg class="w-24 h-24 text-[#F54927]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      iconSvg = `<div class="flex justify-center items-center min-h-[120px]"><div class="animate-bounce inline-block"><svg class="w-24 h-24 text-gray-700 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
       </svg></div></div>`;
       message = quizTranslations.great;

@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import * as SimpleIcons from 'react-icons/si';
+import { useState } from "react";
+import * as SimpleIcons from "react-icons/si";
 
 interface SkillIconProps {
   iconPath: string;
@@ -7,11 +7,15 @@ interface SkillIconProps {
   name: string;
 }
 
-export default function SkillIcon({ iconPath, color = '#F54927', name }: SkillIconProps) {
+export default function SkillIcon({
+  iconPath,
+  color = "#F54927",
+  name,
+}: SkillIconProps) {
   const [isHovered, setIsHovered] = useState(false);
-  
+
   // Extract icon name from path
-  const iconName = iconPath.split('/')[1];
+  const iconName = iconPath.split("/")[1];
   const Icon = (SimpleIcons as any)[iconName];
 
   if (!Icon) {
@@ -21,14 +25,14 @@ export default function SkillIcon({ iconPath, color = '#F54927', name }: SkillIc
 
   return (
     <div
-      className="group bg-white dark:bg-[#2a2a2a] rounded-xl p-6 flex flex-col items-center justify-center gap-3 transition-all duration-300 cursor-default"
+      className="group bg-white dark:bg-[#111111] rounded-xl p-6 flex flex-col items-center justify-center gap-3 transition-all duration-300 cursor-default"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <Icon 
-        className="w-12 h-12 transition-all duration-300 hover:scale-125" 
+      <Icon
+        className="w-12 h-12 transition-all duration-300 hover:scale-125"
         style={{
-          color: isHovered ? color : '#9CA3AF' 
+          color: isHovered ? color : "#9CA3AF",
         }}
       />
       <span className="font-medium text-sm text-gray-700 dark:text-gray-300 transition-colors duration-300">

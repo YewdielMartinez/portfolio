@@ -11,11 +11,9 @@ import '../styles/global.css';
 		<meta name="generator" content={Astro.generator} />
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
 		<title>Yewdiel Medina - Developer Portfolio</title>
 		<script is:inline>
-			// Initialize theme immediately to avoid FOUC (Flash of Unstyled Content)
-			// Default to light mode
 			if (localStorage.getItem('theme') === 'dark') {
 				document.documentElement.classList.add('dark');
 			} else {
@@ -23,18 +21,69 @@ import '../styles/global.css';
 			}
 		</script>
 	</head>
-	<body class="bg-white dark:bg-[#0D0D0D] text-gray-900 dark:text-white transition-colors duration-300">
+	<body class="bg-white dark:bg-black text-gray-900 dark:text-white transition-colors duration-300">
 		<slot />
 	</body>
 </html>
 
 <style is:global>
 	body {
-		font-family: 'Inter', sans-serif;
+		font-family: 'DM Sans', sans-serif;
 	}
-	
+
 	h1, h2, h3, h4, h5, h6 {
-		font-family: 'Space Grotesk', sans-serif;
+		font-family: 'DM Sans', sans-serif;
+		font-weight: 500;
+		letter-spacing: -0.02em;
+	}
+
+	/* View Transitions */
+	:root {
+		view-transition-name: none;
+	}
+
+	::view-transition {
+		pointer-events: none;
+	}
+
+	::view-transition-group(vt-element-animation),
+	::view-transition-group(vt-element-animation-closing) {
+		animation-duration: 500ms;
+		animation-timing-function: cubic-bezier(0.38, 0.49, 0, 1);
+	}
+
+	::view-transition-old(vt-element-animation),
+	::view-transition-new(vt-element-animation),
+	::view-transition-old(vt-element-animation-closing),
+	::view-transition-new(vt-element-animation-closing) {
+		height: 100%;
+		min-height: 100%;
+		overflow: clip;
+		object-position: left top;
+	}
+
+	@keyframes vt-fade-in {
+		from { opacity: 0; }
+	}
+
+	@keyframes vt-fade-out {
+		to { opacity: 0; }
+	}
+
+	::view-transition-old(vt-element-animation) {
+		animation: vt-fade-out 200ms both cubic-bezier(0.38, 0.49, 0, 1);
+	}
+
+	::view-transition-new(vt-element-animation) {
+		animation: vt-fade-in 200ms both cubic-bezier(0.38, 0.49, 0, 1);
+	}
+
+	::view-transition-old(vt-element-animation-closing) {
+		animation: vt-fade-in 200ms both cubic-bezier(0.75, 0, 0.41, -0.06);
+	}
+
+	::view-transition-new(vt-element-animation-closing) {
+		animation: vt-fade-out 200ms both cubic-bezier(0.75, 0, 0.41, -0.06);
 	}
 </style>
 
@@ -43,4 +92,77 @@ import '../styles/global.css';
 	if (!localStorage.getItem('language')) {
 		localStorage.setItem('language', 'en');
 	}
+</script>
+
+<script>
+	import gsap from 'gsap';
+	import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+	gsap.registerPlugin(ScrollTrigger);
+
+	document.addEventListener('DOMContentLoaded', () => {
+		// Animate section headings on scroll (skip hero)
+		const headings = document.querySelectorAll('#experience h2, #work h2, #about h2, #contact h2');
+		headings.forEach((heading) => {
+			gsap.fromTo(
+				heading,
+				{ opacity: 0, y: 50 },
+				{
+					opacity: 1,
+					y: 0,
+					duration: 0.9,
+					ease: 'power3.out',
+					scrollTrigger: {
+						trigger: heading,
+						start: 'top 82%',
+						once: true,
+					},
+				}
+			);
+		});
+
+		// Animate section subtitle paragraphs
+		const subtitles = document.querySelectorAll('#contact > div > p, #about > div > .grid p');
+		subtitles.forEach((el) => {
+			gsap.fromTo(
+				el,
+				{ opacity: 0, y: 30 },
+				{
+					opacity: 1,
+					y: 0,
+					duration: 0.7,
+					ease: 'power2.out',
+					scrollTrigger: {
+						trigger: el,
+						start: 'top 85%',
+						once: true,
+					},
+				}
+			);
+		});
+
+		// Stagger animate skill icons when they appear
+		const skillsGrid = document.querySelector('#about .grid.grid-cols-2');
+		if (skillsGrid) {
+			ScrollTrigger.create({
+				trigger: skillsGrid,
+				start: 'top 80%',
+				once: true,
+				onEnter: () => {
+					gsap.fromTo(
+						skillsGrid.children,
+						{ opacity: 0, y: 30, scale: 0.9 },
+						{
+							opacity: 1,
+							y: 0,
+							scale: 1,
+							duration: 0.5,
+							ease: 'back.out(1.4)',
+							stagger: 0.04,
+						}
+					);
+				},
+			});
+		}
+	});
 </script>

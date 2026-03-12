@@ -2,133 +2,283 @@
 // Navbar with language and theme toggles
 ---
 
-<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-[#0D0D0D] transition-all duration-300">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex justify-between items-center h-16">
-      <!-- Logo/Name -->
-      <a href="#home" class="flex items-center group">
-        <!-- Logo claro para modo claro -->
-        <img src="/Yewdiel Medina claro.svg" alt="YM" class="h-12 w-auto dark:hidden transition-all duration-300 group-hover:[filter:brightness(0)_saturate(100%)_invert(45%)_sepia(95%)_saturate(2847%)_hue-rotate(349deg)_brightness(98%)_contrast(95%)]" />
-        <!-- Logo oscuro para modo oscuro -->
-        <img src="/Yewdiel Medina Oscuro.svg" alt="YM" class="h-12 w-auto hidden dark:block transition-all duration-300 group-hover:[filter:brightness(0)_saturate(100%)_invert(45%)_sepia(95%)_saturate(2847%)_hue-rotate(349deg)_brightness(98%)_contrast(95%)]" />
-      </a>
-      
-      <!-- Desktop Navigation -->
-      <div class="hidden md:flex items-center space-x-8">
-        <a href="#home" class="nav-link text-gray-700 dark:text-gray-300 hover:text-[#F54927] transition-colors font-medium relative" data-i18n="nav.home" data-section="home">Home</a>
-        <a href="#experience" class="nav-link text-gray-700 dark:text-gray-300 hover:text-[#F54927] transition-colors font-medium relative" data-i18n="nav.experience" data-section="experience">Experience</a>
-        <a href="#work" class="nav-link text-gray-700 dark:text-gray-300 hover:text-[#F54927] transition-colors font-medium relative" data-i18n="nav.work" data-section="work">Work</a>
-        <a href="#about" class="nav-link text-gray-700 dark:text-gray-300 hover:text-[#F54927] transition-colors font-medium relative" data-i18n="nav.about" data-section="about">About</a>
-        <a href="#contact" class="nav-link text-gray-700 dark:text-gray-300 hover:text-[#F54927] transition-colors font-medium relative" data-i18n="nav.contact" data-section="contact">Contact</a>
-      </div>
-      
-      <!-- Right Side: Theme + Language Toggles -->
-      <div class="flex items-center space-x-4">
-        <!-- Theme Toggle -->
-        <button
-          id="theme-toggle"
-          class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-          aria-label="Toggle theme"
-        >
-          <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
-          </svg>
-          <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
-          </svg>
-        </button>
-        
-        <!-- Language Toggle -->
-        <button
-          id="lang-toggle"
-          class="px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors font-medium text-sm"
-          aria-label="Toggle language"
-        >
-          <span id="lang-text">EN</span>
-        </button>
-        
-        <!-- Mobile Menu Button -->
-        <button
-          id="mobile-menu-button"
-          class="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-          aria-label="Toggle menu"
-        >
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-          </svg>
-        </button>
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50">
+
+  <!-- ===== FULL BAR (shown at top of page) ===== -->
+  <div id="bar-full" class="bg-white dark:bg-black transition-colors duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+
+        <!-- Logo -->
+        <a href="#home" class="flex items-center group shrink-0">
+          <img src="/Yewdiel Medina claro.svg" alt="YM" class="h-12 w-auto dark:hidden transition-opacity duration-300 group-hover:opacity-50" />
+          <img src="/Yewdiel Medina Oscuro.svg" alt="YM" class="h-12 w-auto hidden dark:block transition-opacity duration-300 group-hover:opacity-50" />
+        </a>
+
+        <!-- Desktop nav links -->
+        <div class="hidden md:flex items-center space-x-8">
+          <a href="#home" class="nav-link text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors font-medium relative" data-i18n="nav.home" data-section="home">Home</a>
+          <a href="#experience" class="nav-link text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors font-medium relative" data-i18n="nav.experience" data-section="experience">Experience</a>
+          <a href="#work" class="nav-link text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors font-medium relative" data-i18n="nav.work" data-section="work">Work</a>
+          <a href="#about" class="nav-link text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors font-medium relative" data-i18n="nav.about" data-section="about">About</a>
+          <a href="#contact" class="nav-link text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors font-medium relative" data-i18n="nav.contact" data-section="contact">Contact</a>
+        </div>
+
+        <!-- Controls -->
+        <div class="flex items-center space-x-2">
+          <!-- Theme Toggle -->
+          <button id="theme-toggle" class="p-2 rounded-lg text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/10 transition-all" aria-label="Toggle theme">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+            </svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+            </svg>
+          </button>
+
+          <!-- Language Toggle -->
+          <button id="lang-toggle" class="px-3 py-2 rounded-lg text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/10 transition-all font-medium text-sm" aria-label="Toggle language">
+            <span id="lang-text">EN</span>
+          </button>
+
+          <!-- Mobile Menu Button -->
+          <button id="mobile-menu-button" class="md:hidden p-2 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-white/10 transition-colors" aria-label="Toggle menu">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </button>
+        </div>
+
       </div>
     </div>
   </div>
-  
-  <!-- Mobile Menu -->
-  <div id="mobile-menu" class="hidden md:hidden border-t border-gray-200 dark:border-gray-700">
+
+  <!-- ===== FLOATING PILL (appears on scroll, desktop only) ===== -->
+  <div id="bar-pill" class="fixed top-4 left-1/2 hidden md:flex items-center gap-0 px-1.5 py-1.5 rounded-full nav-pill-glass">
+    <!-- Nav links -->
+    <a href="#home"       class="pill-link nav-link px-3 py-1.5 rounded-full text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-black dark:hover:text-white hover:bg-black/[0.06] dark:hover:bg-white/10 transition-all" data-i18n="nav.home"       data-section="home">Home</a>
+    <a href="#experience" class="pill-link nav-link px-3 py-1.5 rounded-full text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-black dark:hover:text-white hover:bg-black/[0.06] dark:hover:bg-white/10 transition-all" data-i18n="nav.experience" data-section="experience">Experience</a>
+    <a href="#work"       class="pill-link nav-link px-3 py-1.5 rounded-full text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-black dark:hover:text-white hover:bg-black/[0.06] dark:hover:bg-white/10 transition-all" data-i18n="nav.work"       data-section="work">Work</a>
+    <a href="#about"      class="pill-link nav-link px-3 py-1.5 rounded-full text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-black dark:hover:text-white hover:bg-black/[0.06] dark:hover:bg-white/10 transition-all" data-i18n="nav.about"      data-section="about">About</a>
+    <a href="#contact"    class="pill-link nav-link px-3 py-1.5 rounded-full text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-black dark:hover:text-white hover:bg-black/[0.06] dark:hover:bg-white/10 transition-all" data-i18n="nav.contact"    data-section="contact">Contact</a>
+
+    <!-- Divider -->
+    <div class="w-px h-4 bg-gray-300 dark:bg-white/20 mx-1 shrink-0"></div>
+
+    <!-- Theme toggle (pill) -->
+    <button id="theme-toggle-pill" class="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white hover:bg-black/[0.06] dark:hover:bg-white/10 transition-all" aria-label="Toggle theme">
+      <svg id="theme-toggle-dark-icon-pill" class="hidden w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+      </svg>
+      <svg id="theme-toggle-light-icon-pill" class="hidden w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+        <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+      </svg>
+    </button>
+
+    <!-- Language toggle (pill) -->
+    <button id="lang-toggle-pill" class="px-3 py-1.5 rounded-full text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white hover:bg-black/[0.06] dark:hover:bg-white/10 transition-all font-medium text-xs" aria-label="Toggle language">
+      <span id="lang-text-pill">EN</span>
+    </button>
+  </div>
+
+  <!-- ===== MOBILE MENU ===== -->
+  <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-black border-t border-gray-100 dark:border-gray-900">
     <div class="px-4 py-4 space-y-3">
-      <a href="#home" class="nav-link block py-2 text-gray-700 dark:text-gray-300 hover:text-[#F54927] transition-colors font-medium" data-i18n="nav.home" data-section="home">Home</a>
-      <a href="#experience" class="nav-link block py-2 text-gray-700 dark:text-gray-300 hover:text-[#F54927] transition-colors font-medium" data-i18n="nav.experience" data-section="experience">Experience</a>
-      <a href="#work" class="nav-link block py-2 text-gray-700 dark:text-gray-300 hover:text-[#F54927] transition-colors font-medium" data-i18n="nav.work" data-section="work">Work</a>
-      <a href="#about" class="nav-link block py-2 text-gray-700 dark:text-gray-300 hover:text-[#F54927] transition-colors font-medium" data-i18n="nav.about" data-section="about">About</a>
-      <a href="#contact" class="nav-link block py-2 text-gray-700 dark:text-gray-300 hover:text-[#F54927] transition-colors font-medium" data-i18n="nav.contact" data-section="contact">Contact</a>
+      <a href="#home"       class="nav-link block py-2 text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors font-medium" data-i18n="nav.home"       data-section="home">Home</a>
+      <a href="#experience" class="nav-link block py-2 text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors font-medium" data-i18n="nav.experience" data-section="experience">Experience</a>
+      <a href="#work"       class="nav-link block py-2 text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors font-medium" data-i18n="nav.work"       data-section="work">Work</a>
+      <a href="#about"      class="nav-link block py-2 text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors font-medium" data-i18n="nav.about"      data-section="about">About</a>
+      <a href="#contact"    class="nav-link block py-2 text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors font-medium" data-i18n="nav.contact"    data-section="contact">Contact</a>
     </div>
   </div>
+
+  <!-- Inline SVG displacement filter for liquid glass effect -->
+  <svg id="lg-filter-svg" aria-hidden="true" focusable="false"
+    style="position:absolute;width:0;height:0;overflow:hidden;pointer-events:none;">
+    <defs>
+      <filter id="pill-displace" color-interpolation-filters="sRGB" x="0" y="0" width="100%" height="100%">
+        <feImage id="pill-disp-map" x="0" y="0" result="dispMap"/>
+        <feDisplacementMap in="SourceGraphic" in2="dispMap"
+          scale="28" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+    </defs>
+  </svg>
+
 </nav>
 
 <style>
-  #navbar {
-    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+  /* ── Liquid glass pill ── */
+  .nav-pill-glass {
+    /* Frosted glass base — clearly visible in light mode */
+    background: rgba(245, 245, 250, 0.70);
+    backdrop-filter: blur(1px) url(#pill-displace) blur(22px) saturate(2) brightness(1.04);
+    -webkit-backdrop-filter: blur(22px) saturate(2) brightness(1.04);
+    border: 1px solid rgba(255, 255, 255, 0.75);
+    box-shadow:
+      0 2px 16px rgba(0, 0, 0, 0.09),
+      inset 0 1.5px 0 rgba(255, 255, 255, 0.95),
+      inset 0 -1px 0  rgba(0, 0, 0, 0.05);
   }
-  
-  .dark #navbar {
-    box-shadow: 0 1px 3px 0 rgb(255 255 255 / 0.1);
+  /* ── Dark mode: ghost pill — nearly invisible, only a thin white border ── */
+  .dark .nav-pill-glass {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(1px) url(#pill-displace) blur(20px) saturate(1.2) brightness(1.05);
+    -webkit-backdrop-filter: blur(20px) saturate(1.2) brightness(1.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow:
+      0 2px 16px rgba(0, 0, 0, 0.3),
+      inset 0 0.5px 0 rgba(255, 255, 255, 0.18);
+  }
+  /* Specular rim — strong in light, barely visible in dark */
+  .nav-pill-glass::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(
+      174deg,
+      rgba(255, 255, 255, 0.72) 0%,
+      rgba(255, 255, 255, 0.12) 32%,
+      transparent 56%
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+  .dark .nav-pill-glass::before {
+    background: linear-gradient(
+      174deg,
+      rgba(255, 255, 255, 0.07) 0%,
+      transparent 40%
+    );
+  }
+  /* Keep nav items above the specular layer */
+  .nav-pill-glass > * {
+    position: relative;
+    z-index: 1;
   }
 
-  /* Active section indicator */
-  .nav-link.active::after {
+  /* ── Full bar transitions ── */
+  #bar-full {
+    transition: opacity 0.35s ease, transform 0.35s ease, box-shadow 0.3s ease;
+  }
+  .no-transition {
+    transition: none !important;
+  }
+  #bar-full.bar-shadow {
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.07);
+  }
+  .dark #bar-full.bar-shadow {
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+  #bar-full.bar-hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-100%);
+  }
+
+  /* ── Pill transitions ── */
+  #bar-pill {
+    transform: translateX(-50%) translateY(-10px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+                transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  #bar-pill.pill-visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* ── Active nav link — full bar ── */
+  .nav-link:not(.pill-link).active::after {
     content: '';
     position: absolute;
     bottom: -4px;
     left: 0;
     right: 0;
     height: 2px;
-    background-color: #F54927;
+    background: currentColor;
     border-radius: 2px;
   }
+  .nav-link:not(.pill-link).active { color: #111; }
+  .dark .nav-link:not(.pill-link).active { color: #fff; }
 
-  .nav-link.active {
-    color: #F54927;
+  /* ── Active nav link — pill ── */
+  .pill-link.active {
+    background: rgba(0, 0, 0, 0.07);
+    color: #111;
+  }
+  .dark .pill-link.active {
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
   }
 
-  .dark .nav-link.active {
-    color: #F54927;
+</style>
+
+<style is:global>
+  :root { view-transition-name: none; }
+  ::view-transition { pointer-events: none; }
+
+  /* Group containers sized to cover all animation phases */
+  ::view-transition-group(vt-nav-full) {
+    animation-duration: 550ms;
   }
+  ::view-transition-group(vt-nav-pill) {
+    animation-duration: 680ms;
+  }
+
+  /* Full bar: exits quickly upward, re-enters after a delay */
+  ::view-transition-old(vt-nav-full) {
+    animation: vt-nav-full-out 220ms cubic-bezier(0.4, 0, 1, 1) both;
+  }
+  ::view-transition-new(vt-nav-full) {
+    animation: vt-nav-full-in 360ms cubic-bezier(0, 0, 0.2, 1) 180ms both;
+  }
+
+  /* Pill: exits quickly, then drops in with spring AFTER bar has left */
+  ::view-transition-old(vt-nav-pill) {
+    animation: vt-nav-pill-out 200ms cubic-bezier(0.4, 0, 1, 1) both;
+  }
+  ::view-transition-new(vt-nav-pill) {
+    animation: vt-nav-pill-in 500ms cubic-bezier(0.34, 1.56, 0.64, 1) 130ms both;
+  }
+
+  @keyframes vt-nav-full-out  { to   { opacity: 0; transform: translateY(-110%); } }
+  @keyframes vt-nav-full-in   { from { opacity: 0; transform: translateY(-110%); } }
+  /* No translateX(-50%) here — the VT group is already placed at the pill's centered bounding box */
+  @keyframes vt-nav-pill-out  { to   { opacity: 0; transform: translateY(-14px) scale(0.9); } }
+  @keyframes vt-nav-pill-in   { from { opacity: 0; transform: translateY(-22px) scale(0.84); } }
 </style>
 
 <script>
   import type { Lang } from '../types';
-  
-  // Theme Toggle - Initialize immediately
-  const themeToggleBtn = document.getElementById('theme-toggle');
-  const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
-  const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
-  
+
+  // ── Theme ──
+  const themeToggleBtn     = document.getElementById('theme-toggle');
+  const themeTogglePillBtn = document.getElementById('theme-toggle-pill');
+  const themeToggleDarkIcon      = document.getElementById('theme-toggle-dark-icon');
+  const themeToggleLightIcon     = document.getElementById('theme-toggle-light-icon');
+  const themeToggleDarkIconPill  = document.getElementById('theme-toggle-dark-icon-pill');
+  const themeToggleLightIconPill = document.getElementById('theme-toggle-light-icon-pill');
+
   function updateThemeIcon() {
     const isDark = document.documentElement.classList.contains('dark');
     if (isDark) {
       themeToggleLightIcon?.classList.remove('hidden');
       themeToggleDarkIcon?.classList.add('hidden');
+      themeToggleLightIconPill?.classList.remove('hidden');
+      themeToggleDarkIconPill?.classList.add('hidden');
     } else {
       themeToggleLightIcon?.classList.add('hidden');
       themeToggleDarkIcon?.classList.remove('hidden');
+      themeToggleLightIconPill?.classList.add('hidden');
+      themeToggleDarkIconPill?.classList.remove('hidden');
     }
   }
-  
-  // Initialize icon on load
-  updateThemeIcon();
-  
-  // Toggle theme on click
-  themeToggleBtn?.addEventListener('click', () => {
+
+  function toggleTheme() {
     const isDark = document.documentElement.classList.contains('dark');
-    
     if (isDark) {
       document.documentElement.classList.remove('dark');
       localStorage.setItem('theme', 'light');
@@ -136,111 +286,185 @@
       document.documentElement.classList.add('dark');
       localStorage.setItem('theme', 'dark');
     }
-    
     updateThemeIcon();
-  });
-  
-  // Language Toggle
-  const langToggleBtn = document.getElementById('lang-toggle');
-  const langText = document.getElementById('lang-text');
-  
+  }
+
+  updateThemeIcon();
+  themeToggleBtn?.addEventListener('click', toggleTheme);
+  themeTogglePillBtn?.addEventListener('click', toggleTheme);
+
+  // ── Language ──
+  const langToggleBtn     = document.getElementById('lang-toggle');
+  const langTogglePillBtn = document.getElementById('lang-toggle-pill');
+  const langText     = document.getElementById('lang-text');
+  const langTextPill = document.getElementById('lang-text-pill');
+
   let currentLang: Lang = (localStorage.getItem('language') as Lang) || 'en';
-  
+
   async function updateLanguage() {
     const { translations } = await import('../data/translations');
     const t = translations[currentLang];
-    
-    // Update all elements with data-i18n attribute
+
     document.querySelectorAll('[data-i18n]').forEach((element) => {
       const key = element.getAttribute('data-i18n');
       if (key) {
         const keys = key.split('.');
         let value: any = t;
-        for (const k of keys) {
-          value = value[k];
-        }
-        if (value) {
-          element.textContent = value;
-        }
+        for (const k of keys) { value = value[k]; }
+        if (value) element.textContent = value;
       }
     });
-    
-    // Dispatch custom event for components to update (with both lang and language for compatibility)
-    window.dispatchEvent(new CustomEvent('languageChange', { detail: { lang: currentLang, language: currentLang, translations: t } }));
-    
-    // Update lang text
-    if (langText) {
-      langText.textContent = currentLang === 'en' ? 'EN' : 'ES';
-    }
+
+    window.dispatchEvent(new CustomEvent('languageChange', {
+      detail: { lang: currentLang, language: currentLang, translations: t }
+    }));
+
+    const displayLang = currentLang === 'en' ? 'EN' : 'ES';
+    if (langText) langText.textContent = displayLang;
+    if (langTextPill) langTextPill.textContent = displayLang;
   }
-  
-  langToggleBtn?.addEventListener('click', () => {
+
+  function toggleLanguage() {
     currentLang = currentLang === 'en' ? 'es' : 'en';
     localStorage.setItem('language', currentLang);
     updateLanguage();
-  });
-  
-  // Mobile Menu Toggle
+  }
+
+  langToggleBtn?.addEventListener('click', toggleLanguage);
+  langTogglePillBtn?.addEventListener('click', toggleLanguage);
+
+  // ── Mobile menu ──
   const mobileMenuButton = document.getElementById('mobile-menu-button');
   const mobileMenu = document.getElementById('mobile-menu');
-  
+
   mobileMenuButton?.addEventListener('click', () => {
     mobileMenu?.classList.toggle('hidden');
   });
-  
-  // Close mobile menu when clicking a link
   document.querySelectorAll('#mobile-menu a').forEach((link) => {
-    link.addEventListener('click', () => {
-      mobileMenu?.classList.add('hidden');
-    });
+    link.addEventListener('click', () => { mobileMenu?.classList.add('hidden'); });
   });
-  
-  // Initialize language on load
+
   updateLanguage();
-  
-  // Navbar scroll effect and active section detection
-  let lastScroll = 0;
-  const navbar = document.getElementById('navbar');
-  
-  // Get all sections
+
+  // ── Scroll: pill & active section ──
+  const barFull = document.getElementById('bar-full');
+  const barPill = document.getElementById('bar-pill');
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.nav-link');
-  
-  function updateActiveSection() {
-    const currentScroll = window.pageYOffset;
-    
-    // Update shadow
-    if (currentScroll > 100) {
-      navbar?.classList.add('shadow-md');
-    } else {
-      navbar?.classList.remove('shadow-md');
-    }
-    
-    // Find current section
+
+  const PILL_THRESHOLD = 80;
+  let navPillState = false;
+  let vtNavActive = false;
+
+  function updateNav() {
+    const scrollY = window.pageYOffset;
+    const isDesktop = window.innerWidth >= 768;
+
+    barFull?.classList.toggle('bar-shadow', scrollY > 10);
+
+    // Active section highlight — must run on every scroll, before early return
     let currentSection = '';
     sections.forEach((section) => {
-      const sectionTop = (section as HTMLElement).offsetTop;
+      const sectionTop    = (section as HTMLElement).offsetTop;
       const sectionHeight = (section as HTMLElement).offsetHeight;
-      
-      // Check if section is in viewport (with offset for navbar)
-      if (currentScroll >= sectionTop - 100 && currentScroll < sectionTop + sectionHeight - 100) {
+      if (scrollY >= sectionTop - 100 && scrollY < sectionTop + sectionHeight - 100) {
         currentSection = section.getAttribute('id') || '';
       }
     });
-    
-    // Update active nav link
     navLinks.forEach((link) => {
       link.classList.remove('active');
       if (link.getAttribute('data-section') === currentSection) {
         link.classList.add('active');
       }
     });
-    
-    lastScroll = currentScroll;
+
+    const shouldShowPill = isDesktop && scrollY > PILL_THRESHOLD;
+    if (shouldShowPill === navPillState) return;
+    navPillState = shouldShowPill;
+
+    if ((document as any).startViewTransition && !vtNavActive) {
+      vtNavActive = true;
+      // Suppress CSS transitions so they don't fight the VT animation
+      barFull?.classList.add('no-transition');
+      barPill?.classList.add('no-transition');
+      if (barFull) (barFull as HTMLElement).style.viewTransitionName = 'vt-nav-full';
+      if (barPill) (barPill as HTMLElement).style.viewTransitionName = 'vt-nav-pill';
+
+      const vt = (document as any).startViewTransition(() => {
+        barFull?.classList.toggle('bar-hidden', shouldShowPill);
+        barPill?.classList.toggle('pill-visible', shouldShowPill);
+      });
+
+      const cleanup = () => {
+        if (barFull) {
+          (barFull as HTMLElement).style.viewTransitionName = '';
+          barFull.classList.remove('no-transition');
+        }
+        if (barPill) {
+          (barPill as HTMLElement).style.viewTransitionName = '';
+          barPill.classList.remove('no-transition');
+        }
+        vtNavActive = false;
+      };
+      vt.finished.then(cleanup).catch(cleanup);
+    } else {
+      barFull?.classList.toggle('bar-hidden', shouldShowPill);
+      barPill?.classList.toggle('pill-visible', shouldShowPill);
+    }
   }
-  
-  window.addEventListener('scroll', updateActiveSection);
-  
-  // Initial check
-  updateActiveSection();
+
+  window.addEventListener('scroll', updateNav, { passive: true });
+  window.addEventListener('resize', updateNav, { passive: true });
+  updateNav();
+
+  // ── Liquid Glass: build displacement map for the pill ──
+  function buildPillDispMap(w: number, h: number, r: number, d: number): string {
+    const rY = Math.ceil((r / h) * 15);
+    const rX = Math.ceil((r / w) * 15);
+    const svg = `<svg height="${h}" width="${w}" viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg">
+      <style>.mx{mix-blend-mode:screen}</style>
+      <defs>
+        <linearGradient id="gY" x1="0" x2="0" y1="${rY}%" y2="${Math.floor(100 - rY)}%">
+          <stop offset="0%" stop-color="#0F0"/><stop offset="100%" stop-color="#000"/>
+        </linearGradient>
+        <linearGradient id="gX" x1="${rX}%" x2="${Math.floor(100 - rX)}%" y1="0" y2="0">
+          <stop offset="0%" stop-color="#F00"/><stop offset="100%" stop-color="#000"/>
+        </linearGradient>
+      </defs>
+      <rect width="${w}" height="${h}" fill="#808080"/>
+      <g filter="blur(2px)">
+        <rect width="${w}" height="${h}" fill="#000080"/>
+        <rect width="${w}" height="${h}" fill="url(#gY)" class="mx"/>
+        <rect width="${w}" height="${h}" fill="url(#gX)" class="mx"/>
+        <rect x="${d}" y="${d}" width="${w - 2 * d}" height="${h - 2 * d}"
+          fill="#808080" rx="${r}" ry="${r}" filter="blur(${d}px)"/>
+      </g>
+    </svg>`;
+    return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
+  }
+
+  function initLiquidGlass() {
+    const pill      = document.getElementById('bar-pill')      as HTMLElement | null;
+    const dispMapEl = document.getElementById('pill-disp-map') as Element     | null;
+    if (!pill || !dispMapEl) return;
+
+    const w = Math.round(pill.offsetWidth);
+    const h = Math.round(pill.offsetHeight);
+    if (!w || !h) return;
+
+    const r = h / 2;                           // full pill radius
+    const d = Math.max(4, Math.round(h * 0.18)); // depth proportional to height
+
+    dispMapEl.setAttribute('width',  String(w));
+    dispMapEl.setAttribute('height', String(h));
+    dispMapEl.setAttribute('href',   buildPillDispMap(w, h, r, d));
+  }
+
+  // Init after layout is ready, re-run on resize
+  requestAnimationFrame(initLiquidGlass);
+  let _lgResizeTimer: ReturnType<typeof setTimeout>;
+  window.addEventListener('resize', () => {
+    clearTimeout(_lgResizeTimer);
+    _lgResizeTimer = setTimeout(initLiquidGlass, 150);
+  }, { passive: true });
 </script>

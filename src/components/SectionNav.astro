@@ -6,31 +6,31 @@
 <div id="section-nav" class="fixed right-8 top-1/2 -translate-y-1/2 z-40 hidden lg:flex flex-col gap-3">
   <a 
     href="#home" 
-    class="section-dot w-3 h-3 rounded-full bg-gray-400 dark:bg-gray-600 hover:bg-[#F54927] dark:hover:bg-[#F54927] transition-all duration-300 hover:scale-150"
+    class="section-dot w-3 h-3 rounded-full bg-gray-400 dark:bg-gray-600 hover:bg-black dark:hover:bg-white transition-all duration-300 hover:scale-150"
     data-section="home"
     aria-label="Go to Home"
   ></a>
   <a 
     href="#experience" 
-    class="section-dot w-3 h-3 rounded-full bg-gray-400 dark:bg-gray-600 hover:bg-[#F54927] dark:hover:bg-[#F54927] transition-all duration-300 hover:scale-150"
+    class="section-dot w-3 h-3 rounded-full bg-gray-400 dark:bg-gray-600 hover:bg-black dark:hover:bg-white transition-all duration-300 hover:scale-150"
     data-section="experience"
     aria-label="Go to Experience"
   ></a>
   <a 
     href="#work" 
-    class="section-dot w-3 h-3 rounded-full bg-gray-400 dark:bg-gray-600 hover:bg-[#F54927] dark:hover:bg-[#F54927] transition-all duration-300 hover:scale-150"
+    class="section-dot w-3 h-3 rounded-full bg-gray-400 dark:bg-gray-600 hover:bg-black dark:hover:bg-white transition-all duration-300 hover:scale-150"
     data-section="work"
     aria-label="Go to Work"
   ></a>
   <a 
     href="#about" 
-    class="section-dot w-3 h-3 rounded-full bg-gray-400 dark:bg-gray-600 hover:bg-[#F54927] dark:hover:bg-[#F54927] transition-all duration-300 hover:scale-150"
+    class="section-dot w-3 h-3 rounded-full bg-gray-400 dark:bg-gray-600 hover:bg-black dark:hover:bg-white transition-all duration-300 hover:scale-150"
     data-section="about"
     aria-label="Go to About"
   ></a>
   <a 
     href="#contact" 
-    class="section-dot w-3 h-3 rounded-full bg-gray-400 dark:bg-gray-600 hover:bg-[#F54927] dark:hover:bg-[#F54927] transition-all duration-300 hover:scale-150"
+    class="section-dot w-3 h-3 rounded-full bg-gray-400 dark:bg-gray-600 hover:bg-black dark:hover:bg-white transition-all duration-300 hover:scale-150"
     data-section="contact"
     aria-label="Go to Contact"
   ></a>
@@ -38,15 +38,18 @@
 
 <!-- Scroll Hint Arrow (only on home section) -->
 <div id="scroll-hint" class="fixed bottom-8 left-1/2 -translate-x-1/2 z-40 animate-bounce">
-  <svg class="w-8 h-8 text-[#F54927]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <svg class="w-8 h-8 text-gray-400 dark:text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
   </svg>
 </div>
 
 <style>
   .section-dot.active {
-    background-color: #F54927;
+    background-color: #000;
     transform: scale(1.5);
+  }
+  .dark .section-dot.active {
+    background-color: #fff;
   }
 
   @keyframes bounce {
