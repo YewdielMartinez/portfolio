@@ -2,14 +2,14 @@
 // Hero Section
 ---
 
-<section id="home" class="relative min-h-screen flex items-center px-4 sm:px-8 lg:px-16 pt-16">
-  <div class="max-w-7xl mx-auto w-full">
+<section id="home" class="relative min-h-screen flex items-center justify-center px-4 sm:px-8 lg:px-16 pt-16">
+  <div class="max-w-3xl mx-auto w-full text-center">
 
     <!-- Name -->
-    <div class="mb-3">
+    <div class="mb-3 flex justify-center">
       <h1
         id="name-line"
-        class="font-bold leading-[0.9] tracking-tight transition-colors duration-300 hover:text-gray-500 dark:hover:text-gray-400 cursor-default"
+        class="font-bold leading-[0.9] tracking-tight transition-colors duration-300 hover:text-gray-500 dark:hover:text-gray-400 cursor-default text-left"
         style="font-size: clamp(3rem, 8.5vw, 8rem); opacity: 0;"
       ><span class="typing-text"></span><span class="typing-cursor">|</span></h1>
     </div>
@@ -17,25 +17,25 @@
     <!-- Role -->
     <p
       id="hero-role"
-      class="text-xl sm:text-2xl lg:text-3xl text-gray-500 dark:text-gray-400 mb-2 font-normal"
+      class="text-xl sm:text-2xl lg:text-3xl text-gray-500 dark:text-gray-400 mb-2 font-normal text-center"
       data-i18n="home.role"
       style="opacity: 0; transform: translateY(10px); transition: opacity 0.5s ease, transform 0.5s ease;"
     ></p>
 
     <!-- Thin divider -->
-    <div id="hero-divider" class="w-10 h-px bg-gray-200 dark:bg-gray-700 my-6" style="opacity: 0; transition: opacity 0.4s ease;"></div>
+    <div id="hero-divider" class="w-10 h-px bg-gray-200 dark:bg-gray-700 my-6 mx-auto" style="opacity: 0; transition: opacity 0.4s ease;"></div>
 
     <!-- Tagline -->
     <p
       id="hero-tagline"
-      class="text-base sm:text-lg text-gray-400 dark:text-gray-500 mb-10 max-w-lg leading-relaxed"
+      class="text-base sm:text-lg text-gray-400 dark:text-gray-500 mb-10 max-w-lg leading-relaxed mx-auto"
       data-i18n="home.tagline"
       style="opacity: 0; transform: translateY(10px); transition: opacity 0.5s ease 0.06s, transform 0.5s ease 0.06s;"
     ></p>
 
     <!-- Buttons + Social -->
     <div id="hero-buttons" style="opacity: 0; transform: translateY(10px); transition: opacity 0.5s ease, transform 0.5s ease;">
-      <div class="flex flex-col sm:flex-row gap-3 mb-5">
+      <div class="flex flex-col sm:flex-row gap-3 mb-5 justify-center">
         <a
           href="#work"
           class="px-8 py-4 bg-black dark:bg-white text-white dark:text-black rounded-full font-semibold hover:bg-gray-800 dark:hover:bg-gray-100 transition-all duration-300 hover:scale-[1.02] shadow-md shadow-black/10 hover:shadow-lg hover:shadow-black/20 inline-block text-center"
@@ -53,7 +53,7 @@
       </div>
 
       <!-- Social Links + CV -->
-      <div class="flex gap-3 items-center">
+      <div class="flex gap-3 items-center justify-center">
         <div id="hero-social-links" class="flex gap-3">
           <!-- Social links will be inserted here by JavaScript -->
         </div>
@@ -88,6 +88,21 @@
 </section>
 
 <style>
+  @keyframes name-focus-in {
+    from {
+      filter: blur(14px);
+      opacity: 0;
+    }
+    to {
+      filter: blur(0px);
+      opacity: 1;
+    }
+  }
+
+  #name-line.name-focus-in {
+    animation: name-focus-in 1.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  }
+
   @keyframes blink {
     0%, 49% { opacity: 1; }
     50%, 100% { opacity: 0; }
@@ -154,8 +169,11 @@
 
     await new Promise(resolve => setTimeout(resolve, 150));
 
-    // Reveal name container and start cursor
-    if (nameLine) nameLine.style.opacity = '1';
+    // Reveal name with focus-in blur animation
+    if (nameLine) {
+      nameLine.style.opacity = '';
+      nameLine.classList.add('name-focus-in');
+    }
     if (cursorSpan) cursorSpan.classList.add('active');
 
     // Type first name
