@@ -14,6 +14,7 @@ export interface Project {
   demo?: string;
   year?: string;
   role?: string;
+  video?: string;
 }
 
 export interface Projects {
@@ -106,6 +107,48 @@ export const projects: Projects = {
       year: "2024",
       role: "Full-Stack Developer",
     },
+    {
+      title: "TRON",
+      description:
+        "Landing page for a new data compression format, featuring a sleek and futuristic design.",
+      image: "/projects/TRON.png",
+      tags: ["HTML", "CSS", "JavaScript", "Vercel"],
+      link: "https://tron-landing-page.vercel.app/",
+      gridSize: "wide",
+      detailedDescription:
+        "TRON is a landing page built to present a new data compression format. It features a futuristic visual design crafted to communicate the technology's speed and efficiency, deployed on Vercel for fast global delivery.",
+      features: [
+        "Futuristic and immersive UI design",
+        "Responsive layout for all devices",
+        "Fast load times via Vercel CDN",
+        "Clear product value proposition",
+      ],
+      demo: "https://tron-landing-page.vercel.app/",
+      year: "2025",
+      role: "Frontend Developer",
+    },
+    {
+      title: "NewMedicLife",
+      description:
+        "Complete redesign of Medic Life — modernized UI and improved user experience for clinic management.",
+      image: "/projects/NewMedicLife.png",
+      tags: ["React", "TypeScript", "Tailwind", "MySQL"],
+      link: "#",
+      gridSize: "medium",
+      detailedDescription:
+        "NewMedicLife is a full redesign of the original Medic Life clinic management system. The project focuses on a modern, intuitive interface that improves the experience for doctors, receptionists, and administrators while keeping all the core features of the original system.",
+      features: [
+        "Modernized clinic dashboard",
+        "Improved appointment scheduling UX",
+        "Responsive design for desktop and tablet",
+        "Enhanced patient and doctor management",
+        "Clean and accessible UI",
+      ],
+      github: "https://github.com/PricedTuna/newMedicLife",
+      year: "2025",
+      role: "Full-Stack Developer",
+      video: "https://res.cloudinary.com/dp8yf8nxi/video/upload/q_auto,f_mp4/v1773789455/2026-03-17_16-04-07_qrui2b.mp4",
+    },
   ],
 
   es: [
@@ -191,6 +234,48 @@ export const projects: Projects = {
       github: "https://github.com/PricedTuna/newMedicLife",
       year: "2024",
       role: "Desarrollador Full-Stack",
+    },
+    {
+      title: "TRON",
+      description:
+        "Landing page para un nuevo formato de compresión de datos, con un diseño futurista e inmersivo.",
+      image: "/projects/TRON.png",
+      tags: ["HTML", "CSS", "JavaScript", "Vercel"],
+      link: "https://tron-landing-page.vercel.app/",
+      gridSize: "wide",
+      detailedDescription:
+        "TRON es una landing page creada para presentar un nuevo formato de compresión de datos. Su diseño futurista comunica visualmente la velocidad y eficiencia de la tecnología. Está desplegada en Vercel para entrega global ultrarrápida.",
+      features: [
+        "Diseño UI futurista e inmersivo",
+        "Maquetado completamente responsivo",
+        "Carga rápida con Vercel CDN",
+        "Propuesta de valor clara del producto",
+      ],
+      demo: "https://tron-landing-page.vercel.app/",
+      year: "2025",
+      role: "Desarrollador Frontend",
+    },
+    {
+      title: "NewMedicLife",
+      description:
+        "Rediseño completo de Medic Life — interfaz modernizada y mejor experiencia de usuario para clínicas.",
+      image: "/projects/NewMedicLife.png",
+      tags: ["React", "TypeScript", "Tailwind", "MySQL"],
+      link: "#",
+      gridSize: "medium",
+      detailedDescription:
+        "NewMedicLife es un rediseño completo del sistema original Medic Life. El proyecto se centra en una interfaz moderna e intuitiva que mejora la experiencia de médicos, recepcionistas y administradores, manteniendo todas las funciones esenciales del sistema original.",
+      features: [
+        "Dashboard clínico modernizado",
+        "UX mejorada para agendar citas",
+        "Diseño responsivo para escritorio y tablet",
+        "Gestión mejorada de pacientes y médicos",
+        "Interfaz limpia y accesible",
+      ],
+      github: "https://github.com/PricedTuna/newMedicLife",
+      year: "2025",
+      role: "Desarrollador Full-Stack",
+      video: "https://res.cloudinary.com/dp8yf8nxi/video/upload/q_auto,f_mp4/v1773789455/2026-03-17_16-04-07_qrui2b.mp4",
     },
   ],
 };
