@@ -192,7 +192,6 @@
     border-radius: 2px;
   }
   .nav-link:not(.pill-link).active { color: #111; }
-  .dark .nav-link:not(.pill-link).active { color: #fff; }
 
   /* ── Active nav link — pill ── */
   .pill-link.active {
@@ -254,6 +253,10 @@
   }
   .dark .nav-pill-glass::before {
     background: none !important;
+  }
+  /* Dark mode active full-bar link */
+  .dark .nav-link:not(.pill-link).active {
+    color: #fff !important;
   }
   /* Dark mode active pill link — global to avoid Astro hash interference */
   .dark .pill-link.active {

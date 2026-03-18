@@ -311,8 +311,7 @@
     if (viewWorkBtn) viewWorkBtn.textContent = translations.home.viewWork;
     if (contactBtn)  contactBtn.textContent  = translations.home.contactMe;
 
-    // Re-run animation
-    hasAnimated = false;
+    // Re-run animation (DOM guard already cleared above via delete nameLine.dataset.animated)
     await new Promise(resolve => setTimeout(resolve, 100));
     animateHero();
   });

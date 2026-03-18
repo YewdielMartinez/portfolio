@@ -25,6 +25,7 @@ export interface Translation {
     keyFeatures: string;
     viewCode: string;
     viewDemo: string;
+    viewVideoDemo: string;
   };
   about: {
     title: string;
@@ -104,7 +105,8 @@ export const translations: Translations = {
       aboutProject: 'About the Project',
       keyFeatures: 'Key Features',
       viewCode: 'View Code',
-      viewDemo: 'View Demo'
+      viewDemo: 'View Demo',
+      viewVideoDemo: 'Watch Video Demo'
     },
     about: {
       title: 'About Me',
@@ -177,7 +179,8 @@ export const translations: Translations = {
       aboutProject: 'Sobre el Proyecto',
       keyFeatures: 'Características Clave',
       viewCode: 'Ver Código',
-      viewDemo: 'Ver Demo'
+      viewDemo: 'Ver Demo',
+      viewVideoDemo: 'Ver Demo en Video'
     },
     about: {
       title: 'Sobre Mí',
