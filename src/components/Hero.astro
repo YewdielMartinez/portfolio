@@ -120,6 +120,15 @@
 </style>
 
 <script>
+  // Guard against parallel animations
+  let isAnimating = false;
+  let activeTimers: ReturnType<typeof setInterval>[] = [];
+
+  function cancelActiveTimers() {
+    activeTimers.forEach(clearInterval);
+    activeTimers = [];
+  }
+
   // Type plain text into a span — no innerHTML, no re-parsing issues in production
   async function typeInto(span: HTMLElement, text: string, speed: number = 50): Promise<void> {
     return new Promise((resolve) => {
@@ -130,17 +139,25 @@
           span.textContent += text[i++];
         } else {
           clearInterval(timer);
+          activeTimers = activeTimers.filter(t => t !== timer);
           resolve();
         }
       }, speed);
+      activeTimers.push(timer);
     });
   }
 
   async function animateHero() {
-    // DOM-based guard: survives module re-evaluation (Vercel can re-run modules)
+    // Prevent parallel animation runs (e.g. from multiple languageChange events)
+    if (isAnimating) {
+      cancelActiveTimers();
+      isAnimating = false;
+    }
+
     const nameLine = document.getElementById('name-line') as HTMLElement;
-    if (!nameLine || nameLine.dataset.animated === '1') return;
+    if (!nameLine) return;
     nameLine.dataset.animated = '1';
+    isAnimating = true;
 
     const { translations } = await import('../data/translations');
     const currentLang = (localStorage.getItem('language') || 'en') as 'en' | 'es';
@@ -201,6 +218,8 @@
     // Scroll indicator appears last
     await new Promise(resolve => setTimeout(resolve, 700));
     if (scrollInd) scrollInd.style.opacity = '1';
+
+    isAnimating = false;
   }
 
   window.addEventListener('DOMContentLoaded', () => {
@@ -292,7 +311,9 @@
     if (buttonsEl)    { buttonsEl.style.opacity = '0';   buttonsEl.style.transform = 'translateY(10px)'; }
     if (scrollInd)    scrollInd.style.opacity = '0';
 
-    // Clear name
+    // Cancel any in-progress typing and clear name
+    cancelActiveTimers();
+    isAnimating = false;
     if (nameLine) {
       const l1 = nameLine.querySelector('.name-l1') as HTMLElement;
       const l2 = nameLine.querySelector('.name-l2') as HTMLElement;
@@ -301,7 +322,6 @@
       if (l2) l2.textContent = '';
       if (cursorSpan) cursorSpan.classList.remove('active');
       nameLine.style.opacity = '0';
-      // Reset DOM guard so animation re-runs after language change
       delete nameLine.dataset.animated;
     }
 
