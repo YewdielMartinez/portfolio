@@ -1,83 +1,239 @@
 ---
-// Experience Timeline Section
+// Experience — Editorial numbered rows with active badge + expandable descriptions
 ---
 
-<section id="experience" class="py-24 px-4 bg-white dark:bg-black transition-colors duration-300">
-  <div class="max-w-4xl mx-auto">
-    <h2 
-      class="text-4xl md:text-5xl font-bold mb-16"
-      data-i18n="experience.title"
-    >
-      Experience
-    </h2>
-    
-    <div id="experience-container" class="divide-y divide-gray-100 dark:divide-gray-900">
-      <!-- Items will be inserted here by JavaScript -->
+<section id="experience" class="min-h-screen py-24 px-6 sm:px-10 lg:px-20 bg-gray-50 dark:bg-[#050505]">
+  <div class="max-w-6xl mx-auto">
+
+    <!-- Section header — consistent with hero / work -->
+    <div class="mb-16 exp-header" style="opacity:0; transform:translateY(20px);">
+      <div class="flex items-center gap-4 mb-5">
+        <div class="flex-1 h-px bg-gray-200 dark:bg-gray-800"></div>
+        <span class="text-[10px] font-semibold tracking-[0.2em] uppercase text-gray-400 dark:text-gray-500 shrink-0">
+          <span id="exp-count">03</span>&nbsp;positions
+        </span>
+      </div>
+      <h2
+        class="font-bold tracking-tight text-gray-900 dark:text-white"
+        style="font-size: clamp(2.8rem, 6vw, 5rem); letter-spacing: -0.025em;"
+        data-i18n="experience.title"
+      >Experience</h2>
     </div>
+
+    <!-- Experience rows -->
+    <div id="experience-container" class="relative">
+      <!-- Rows inserted by JS -->
+    </div>
+
   </div>
 </section>
 
 <style>
-  @keyframes fade-in-up {
-    from {
-      opacity: 0;
-      transform: translateY(16px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  /* Entrance initial state */
+  .exp-row { opacity: 0; transform: translateY(16px); }
+
+  /* Description expand/collapse */
+  .exp-desc {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   }
+  .exp-desc.open {
+    grid-template-rows: 1fr;
+  }
+  .exp-desc > div { overflow: hidden; }
+
+  /* Chevron rotate */
+  .exp-chevron { transition: transform 0.3s ease; }
+  .exp-row.open .exp-chevron { transform: rotate(180deg); }
+
+  /* Active pulse */
+  @keyframes active-ping {
+    0%, 100% { opacity: 0.6; transform: scale(1); }
+    50%       { opacity: 1;   transform: scale(1.25); }
+  }
+  .active-dot { animation: active-ping 2s ease-in-out infinite; }
 </style>
 
 <script>
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  gsap.registerPlugin(ScrollTrigger);
+
+  let allExperiences: any[] = [];
+
+  // ── Render ──────────────────────────────────────────────────
+  function renderExperience(experiences: any[]) {
+    allExperiences = experiences;
+    const container = document.getElementById('experience-container');
+    const countEl   = document.getElementById('exp-count');
+    if (!container) return;
+
+    if (countEl) countEl.textContent = String(experiences.length).padStart(2, '0');
+
+    const isActive = (year: string) =>
+      year.toLowerCase().includes('present') || year.toLowerCase().includes('presente');
+
+    container.innerHTML = experiences.map((exp, i) => {
+      const num    = String(i + 1).padStart(2, '0');
+      const active = isActive(exp.year);
+
+      return `
+        <div class="exp-row border-t border-gray-200 dark:border-gray-800/60 last:border-b" data-index="${i}">
+          <button
+            class="exp-toggle w-full text-left py-7 sm:py-8 group"
+            aria-expanded="false"
+            aria-label="Toggle ${exp.company} details"
+          >
+            <div class="flex items-start gap-5 sm:gap-8">
+
+              <!-- Ghost index -->
+              <span
+                class="text-[10px] font-bold tracking-[0.1em] text-gray-200 dark:text-gray-800
+                       shrink-0 mt-[3px] tabular-nums w-5 text-right select-none"
+                aria-hidden="true"
+              >${num}</span>
+
+              <!-- Main content -->
+              <div class="flex-1 min-w-0">
+                <div class="flex items-start justify-between gap-4 mb-1.5">
+
+                  <!-- Left: company + role -->
+                  <div class="min-w-0">
+                    <div class="flex items-center gap-2.5 flex-wrap mb-1">
+                      <h3 class="font-semibold text-gray-900 dark:text-white text-base sm:text-lg
+                                 leading-snug group-hover:translate-x-0.5 transition-transform duration-300">
+                        ${exp.company}
+                      </h3>
+                      ${active ? `
+                        <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full
+                                     bg-emerald-50 dark:bg-emerald-950/40
+                                     border border-emerald-200 dark:border-emerald-800/60
+                                     text-emerald-600 dark:text-emerald-400
+                                     text-[10px] font-semibold tracking-wide shrink-0">
+                          <span class="active-dot w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block"></span>
+                          Active
+                        </span>
+                      ` : ''}
+                    </div>
+                    <p class="text-[11px] font-semibold tracking-[0.15em] uppercase
+                               text-gray-400 dark:text-gray-600">
+                      ${exp.position}
+                    </p>
+                  </div>
+
+                  <!-- Right: date + chevron -->
+                  <div class="flex items-center gap-3 shrink-0 mt-0.5">
+                    <span class="text-xs text-gray-400 dark:text-gray-600 tabular-nums hidden sm:block">
+                      ${exp.year}
+                    </span>
+                    <svg class="exp-chevron w-3.5 h-3.5 text-gray-300 dark:text-gray-700
+                                group-hover:text-gray-500 dark:group-hover:text-gray-500 transition-colors"
+                         fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                  </div>
+
+                </div>
+
+                <!-- Year on mobile (below company) -->
+                <p class="text-[10px] text-gray-400 dark:text-gray-600 tabular-nums mt-0.5 sm:hidden">
+                  ${exp.year}
+                </p>
+              </div>
+
+            </div>
+          </button>
+
+          <!-- Expandable description -->
+          <div class="exp-desc ml-10 sm:ml-14" role="region">
+            <div>
+              <p class="text-sm text-gray-500 dark:text-gray-500 leading-relaxed pb-7">
+                ${exp.description}
+              </p>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    // ── Toggle logic ──────────────────────────────────────────
+    container.querySelectorAll<HTMLButtonElement>('.exp-toggle').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const row  = btn.closest('.exp-row') as HTMLElement;
+        const desc = row.querySelector('.exp-desc') as HTMLElement;
+        const isOpen = row.classList.contains('open');
+
+        // Close all others (accordion)
+        container.querySelectorAll<HTMLElement>('.exp-row.open').forEach((r) => {
+          r.classList.remove('open');
+          r.querySelector('.exp-desc')?.classList.remove('open');
+          r.querySelector('.exp-toggle')?.setAttribute('aria-expanded', 'false');
+        });
+
+        if (!isOpen) {
+          row.classList.add('open');
+          desc.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+
+    // Auto-open first (active) entry
+    const firstRow = container.querySelector<HTMLElement>('.exp-row');
+    if (firstRow) {
+      firstRow.classList.add('open');
+      firstRow.querySelector('.exp-desc')?.classList.add('open');
+      firstRow.querySelector('.exp-toggle')?.setAttribute('aria-expanded', 'true');
+    }
+
+    // ── GSAP entrance ─────────────────────────────────────────
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    gsap.to('.exp-row', {
+      opacity: 1,
+      y: 0,
+      duration: reduced ? 0 : 0.55,
+      ease: 'power2.out',
+      stagger: 0.09,
+      scrollTrigger: {
+        trigger: '#experience-container',
+        start: 'top 80%',
+        once: true,
+      },
+    });
+  }
+
+  // ── Load ────────────────────────────────────────────────────
   async function loadExperience() {
     const { experience } = await import('../data/experience');
-    const currentLang = (localStorage.getItem('language') || 'en') as 'en' | 'es';
-    const experiences = experience[currentLang];
-    
-    renderExperience(experiences);
+    const lang = (localStorage.getItem('language') || 'en') as 'en' | 'es';
+    renderExperience(experience[lang]);
   }
-  
-  function renderExperience(experiences: any[]) {
-    const container = document.getElementById('experience-container');
-    if (!container) return;
-    
-    container.innerHTML = experiences.map((exp, index) => `
-      <div
-        class="flex flex-col sm:flex-row gap-4 sm:gap-12 py-8"
-        style="animation: fade-in-up 0.5s ease-out ${index * 0.12}s both"
-      >
-        <div class="sm:w-40 shrink-0 pt-0.5">
-          <span class="text-sm text-gray-400 dark:text-gray-500 tabular-nums">${exp.year}</span>
-        </div>
-        <div class="flex-1 min-w-0">
-          <div class="flex flex-wrap items-start justify-between gap-x-4 gap-y-1 mb-3">
-            <h3 class="font-semibold text-gray-900 dark:text-white">${exp.position}</h3>
-            <span class="text-sm text-gray-500 dark:text-gray-400 shrink-0">${exp.company}</span>
-          </div>
-          <p class="text-sm text-gray-500 dark:text-gray-500 leading-relaxed">${exp.description}</p>
-        </div>
-      </div>
-    `).join('');
+
+  // ── Header entrance ──────────────────────────────────────────
+  function initHeaderAnim() {
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    gsap.to('.exp-header', {
+      opacity: 1, y: 0,
+      duration: reduced ? 0 : 0.65,
+      ease: 'power2.out',
+      scrollTrigger: { trigger: '.exp-header', start: 'top 82%', once: true },
+    });
   }
-  
-  // Update on language change
+
+  // ── Language change ──────────────────────────────────────────
   window.addEventListener('languageChange', async (event: any) => {
     const { translations, lang } = event.detail;
-    
-    // Reload experience data with new language
     const { experience } = await import('../data/experience');
-    const experiences = experience[lang as 'en' | 'es'];
-    renderExperience(experiences);
-    
-    // Update title
-    const title = document.querySelector('[data-i18n="experience.title"]');
-    if (title) {
-      title.textContent = translations.experience.title;
-    }
+    renderExperience(experience[lang as 'en' | 'es']);
+
+    const titleEl = document.querySelector('[data-i18n="experience.title"]');
+    if (titleEl) titleEl.textContent = translations.experience.title;
   });
-  
-  // Initial load
-  loadExperience();
+
+  // ── Init ─────────────────────────────────────────────────────
+  document.addEventListener('DOMContentLoaded', () => {
+    loadExperience();
+    initHeaderAnim();
+  });
 </script>

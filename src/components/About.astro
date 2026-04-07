@@ -1,76 +1,151 @@
 ---
-// Sección "Sobre Mí" 
+// About — Editorial split: identity + skills in categorized chunks
 import SkillIcon from './SkillIcon';
 import { skills } from '../data/skills';
+
+// Group skills by domain (Fragmentación + Ley de Región Común)
+const skillGroups: Record<string, typeof skills> = {
+  Frontend:  skills.filter(s => ['React','React Native','Next.js','Astro','Angular','TypeScript','JavaScript','HTML5','CSS3','Tailwind CSS'].includes(s.name)),
+  Backend:   skills.filter(s => ['Nest.js','PHP','Laravel'].includes(s.name)),
+  Data:      skills.filter(s => ['Firebase','PostgreSQL','MySQL','Prisma'].includes(s.name)),
+  Tooling:   skills.filter(s => ['Git','Docker','Figma'].includes(s.name)),
+};
 ---
 
-<section 
-  id="about" 
-  class="py-24 px-4 bg-gray-50 dark:bg-black transition-colors duration-300"
+<section
+  id="about"
+  class="py-24 px-6 sm:px-10 lg:px-20 bg-white dark:bg-black"
 >
   <div class="max-w-6xl mx-auto">
-    <h2 
-      class="text-4xl md:text-5xl font-bold text-center mb-16"
-      data-i18n="about.title"
-    >
-      About Me
-    </h2>
-    
-    <div class="grid md:grid-cols-2 gap-12 items-center mb-16">
-      <!-- Foto de perfil -->
-      <div class="flex justify-center md:justify-end">
-        <div class="w-64 h-64 rounded-full overflow-hidden bg-gray-300 dark:bg-gray-700 border-4 border-gray-200 dark:border-gray-700 shadow-xl hover:scale-105 hover:rotate-3 transition-all duration-500 hover:shadow-2xl hover:shadow-black/20 animate-fade-in">
-          <img 
-            id="about-avatar"
-            src="/avatar.jpg" 
-            alt="Profile"
-            class="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
-          />
+
+    <!-- Section header — same editorial style as hero + work -->
+    <div class="mb-16 about-header" style="opacity:0; transform:translateY(20px);">
+      <div class="flex items-center gap-4 mb-5">
+        <div class="flex-1 h-px bg-gray-200 dark:bg-gray-800"></div>
+        <span class="text-[10px] font-semibold tracking-[0.2em] uppercase text-gray-400 dark:text-gray-500 shrink-0">
+          Background
+        </span>
+      </div>
+      <h2
+        class="font-bold tracking-tight text-gray-900 dark:text-white"
+        style="font-size: clamp(2.8rem, 6vw, 5rem); letter-spacing: -0.025em;"
+        data-i18n="about.title"
+      >About Me</h2>
+    </div>
+
+    <!-- ── Block 1: Identity — avatar + bio ─────────────────── -->
+    <div class="grid lg:grid-cols-[1fr_2fr] gap-12 mb-20 items-start about-identity" style="opacity:0; transform:translateY(20px);">
+
+      <!-- Avatar: square, not circle (editorial) + Von Restorff stat -->
+      <div class="flex flex-col gap-5">
+        <div class="relative w-full max-w-60 mx-auto lg:mx-0">
+          <!-- Offset decorative rule -->
+          <div class="absolute -top-3 -left-3 w-full h-full border border-gray-200 dark:border-gray-800 rounded-2xl"></div>
+          <div class="relative overflow-hidden rounded-2xl bg-gray-100 dark:bg-[#111]" style="aspect-ratio: 1/1;">
+            <img
+              id="about-avatar"
+              src="/avatar.jpg"
+              alt="Yewdiel Medina"
+              class="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+            />
+          </div>
+        </div>
+
+        <!-- Von Restorff: one standout stat that differs from the rest -->
+        <div class="max-w-60 mx-auto lg:mx-0 w-full">
+          <div class="border border-gray-100 dark:border-gray-800 rounded-xl p-4 bg-gray-50 dark:bg-[#0a0a0a]">
+            <p class="text-[10px] font-semibold tracking-[0.18em] uppercase text-gray-400 dark:text-gray-600 mb-1">Currently</p>
+            <p class="text-sm font-semibold text-gray-900 dark:text-white">Software Engineering</p>
+            <p class="text-xs text-gray-400 dark:text-gray-500 mt-0.5">Student &amp; Developer</p>
+          </div>
         </div>
       </div>
-      
-      <!-- Biografía -->
-      <div class="space-y-6">
-        <p 
-          class="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-6"
+
+      <!-- Bio + Letterboxd -->
+      <div class="space-y-6 lg:pt-1">
+        <!-- Large pull-quote number (Atención Selectiva anchor) -->
+        <p
+          class="text-base sm:text-lg text-gray-600 dark:text-gray-400 leading-relaxed"
           data-i18n="about.bio"
-        >
-          I'm a passionate developer who loves creating beautiful, functional applications. With expertise in modern web technologies, I focus on delivering exceptional user experiences and clean, maintainable code.
-        </p>
-        
-        <!-- Letterboxd Link -->
-        <a 
-          href="https://letterboxd.com" 
+        ></p>
+
+        <!-- Interests row: small labeled pills -->
+        <div class="flex flex-wrap gap-2 pt-2">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-gray-100 dark:border-gray-800 text-xs text-gray-500 dark:text-gray-500">
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z"/>
+            </svg>
+            Cinema
+          </span>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-gray-100 dark:border-gray-800 text-xs text-gray-500 dark:text-gray-500">
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"/>
+            </svg>
+            Video Games
+          </span>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-gray-100 dark:border-gray-800 text-xs text-gray-500 dark:text-gray-500">
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+            </svg>
+            Gym
+          </span>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-gray-100 dark:border-gray-800 text-xs text-gray-500 dark:text-gray-500">
+            🦈 Sharks
+          </span>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-gray-100 dark:border-gray-800 text-xs text-gray-500 dark:text-gray-500">
+            🐕 Dogs
+          </span>
+        </div>
+
+        <!-- Letterboxd CTA (Ley de Fitts: large tap area, distinct) -->
+        <a
+          href="https://boxd.it/47j69"
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center gap-2 px-6 py-3 bg-black dark:bg-white text-white dark:text-black rounded-full transition-all duration-300 hover:scale-105 hover:bg-gray-800 dark:hover:bg-gray-100 hover:shadow-xl hover:shadow-black/20 font-semibold"
+          class="inline-flex items-center gap-2.5 px-5 py-2.5 border border-gray-200 dark:border-gray-800 text-gray-700 dark:text-gray-300 rounded-full text-sm font-semibold transition-all duration-300 hover:bg-gray-900 dark:hover:bg-white hover:text-white dark:hover:text-black hover:border-gray-900 dark:hover:border-white group"
+          aria-label="View my Letterboxd profile"
         >
-          <svg class="w-5 h-5" viewBox="0 0 500 500" fill="currentColor">
-            <circle cx="125" cy="250" r="115" opacity="0.8"/>
-            <circle cx="375" cy="250" r="115" opacity="0.8"/>
+          <!-- Letterboxd overlapping circles logo -->
+          <span class="relative flex items-center w-5 h-3.5" aria-hidden="true">
+            <span class="absolute left-0 w-2.5 h-2.5 rounded-full bg-current opacity-60"></span>
+            <span class="absolute left-1.5 w-2.5 h-2.5 rounded-full bg-current opacity-75"></span>
+            <span class="absolute left-3 w-2.5 h-2.5 rounded-full bg-current opacity-90"></span>
+          </span>
+          My Letterboxd
+          <svg class="w-3 h-3 transition-transform duration-300 group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
           </svg>
-          <span>My Letterboxd</span>
         </a>
       </div>
     </div>
-    
-    <!-- Skills Section -->
-    <div class="mb-20">
-      <h3 
-        class="text-2xl font-bold mb-8 text-center"
-        data-i18n="about.skillsTitle"
-      >
-        Skills & Technologies
-      </h3>
-      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 md:gap-6">
-        {skills.map((skill, index) => (
-          <div style={`animation: fade-in-up 0.5s ease-out ${index * 0.03}s both`}>
-            <SkillIcon 
-              client:load
-              iconPath={skill.icon}
-              color={skill.color}
-              name={skill.name}
-            />
+
+    <!-- ── Block 2: Skills — categorized (Fragmentación + Miller ≤7) ── -->
+    <div class="about-skills" style="opacity:0; transform:translateY(20px);">
+      <div class="flex items-center gap-4 mb-8">
+        <span class="text-[10px] font-semibold tracking-[0.2em] uppercase text-gray-400 dark:text-gray-500" data-i18n="about.skillsTitle">Skills &amp; Technologies</span>
+        <div class="flex-1 h-px bg-gray-100 dark:bg-gray-900"></div>
+      </div>
+
+      <!-- 4 skill category blocks (Ley de Región Común) -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {Object.entries(skillGroups).map(([category, group]) => (
+          <div class="skill-group border border-gray-100 dark:border-gray-900 rounded-xl p-4" style="opacity:0; transform:translateY(12px);">
+            <!-- Category label -->
+            <p class="text-[9px] font-bold tracking-[0.22em] uppercase text-gray-300 dark:text-gray-700 mb-3">
+              {category}
+            </p>
+            <!-- Skills as compact icon+text pills (Ley de Proximidad) -->
+            <div class="flex flex-wrap gap-0.5">
+              {group.map(skill => (
+                <SkillIcon
+                  client:visible
+                  iconPath={skill.icon}
+                  color={skill.color}
+                  name={skill.name}
+                  compact={true}
+                />
+              ))}
+            </div>
           </div>
         ))}
       </div>
@@ -80,128 +155,77 @@ import { skills } from '../data/skills';
 </section>
 
 <style>
-  @keyframes fade-in-up {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  @keyframes float {
-    0%, 100% {
-      transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-      transform: translateY(-20px) rotate(5deg);
-    }
-  }
-  
-  @keyframes float-reverse {
-    0%, 100% {
-      transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-      transform: translateY(20px) rotate(-5deg);
-    }
-  }
-  
-  .animate-float {
-    animation: float 4s ease-in-out infinite;
-  }
-  
-  .animate-float-reverse {
-    animation: float-reverse 5s ease-in-out infinite;
-  }
-  
-  @keyframes fade-in {
-    from {
-      opacity: 0;
-      transform: scale(0.95);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-  
-  .animate-fade-in {
-    animation: fade-in 0.8s ease-out;
-  }
-  
-  /* Efecto de brillo al pasar el mouse sobre la sección de cine */
-  .cinema-glow:hover {
-    box-shadow: 0 0 30px rgba(245, 73, 39, 0.4);
-  }
-
-  /* Animaciones de la presentación */
-  @keyframes slideIn {
-    from {
-      opacity: 0;
-      transform: scale(0.95) translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1) translateY(0);
-    }
-  }
-
-  .slide-in {
-    animation: slideIn 0.6s ease-out;
-  }
-
-  @keyframes pulse-dot {
-    0%, 100% {
-      opacity: 0.5;
-      transform: scale(1);
-    }
-    50% {
-      opacity: 1;
-      transform: scale(1.2);
-    }
-  }
+  /* All entrance state set via JS to avoid FOUC — initial inline styles above */
 </style>
 
 <script>
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  gsap.registerPlugin(ScrollTrigger);
+
+  // ── Populate text via translations ──────────────────────────
   async function loadAbout() {
-    const { avatar } = await import('../data/translations');
-    
-    // Actualizar avatar
-    const avatarImg = document.getElementById('about-avatar') as HTMLImageElement;
-    if (avatarImg) {
-      avatarImg.src = avatar;
-    }
+    const { avatar, translations } = await import('../data/translations');
+
+    const avatarImg = document.getElementById('about-avatar') as HTMLImageElement | null;
+    if (avatarImg) avatarImg.src = avatar;
+
+    const lang = (localStorage.getItem('language') || 'en') as 'en' | 'es';
+    applyTexts(translations[lang]);
   }
-  
-  // Actualizar al cambiar de idioma
-  window.addEventListener('languageChange', (event: any) => {
-    const { translations } = event.detail;
-    
-    // Actualizar elementos de texto
-    ['about.bio', 'about.skillsTitle'].forEach(key => {
-      const element = document.querySelector(`[data-i18n="${key}"]`);
-      if (element) {
-        const keys = key.split('.');
-        let value: any = translations;
-        for (const k of keys) {
-          value = value[k];
-        }
-        if (value) {
-          element.textContent = value;
-        }
-      }
+
+  function applyTexts(t: any) {
+    const bioEl   = document.querySelector('[data-i18n="about.bio"]');
+    const titleEl = document.querySelector('[data-i18n="about.title"]');
+    const skillsEl = document.querySelector('[data-i18n="about.skillsTitle"]');
+
+    if (bioEl)    bioEl.textContent    = t.about.bio;
+    if (titleEl)  titleEl.textContent  = t.about.title;
+    if (skillsEl) skillsEl.textContent = t.about.skillsTitle;
+  }
+
+  // ── GSAP entrance animations ────────────────────────────────
+  function initAnimations() {
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const dur = reduced ? 0 : 0.65;
+    const ease = 'power2.out';
+
+    // Header
+    gsap.to('.about-header', {
+      opacity: 1, y: 0, duration: dur, ease,
+      scrollTrigger: { trigger: '.about-header', start: 'top 82%', once: true },
     });
-    
-    // Actualizar título
-    const title = document.querySelector('[data-i18n="about.title"]');
-    if (title) {
-      title.textContent = translations.about.title;
-    }
+
+    // Identity block
+    gsap.to('.about-identity', {
+      opacity: 1, y: 0, duration: dur, ease,
+      scrollTrigger: { trigger: '.about-identity', start: 'top 80%', once: true },
+    });
+
+    // Skills section title
+    gsap.to('.about-skills', {
+      opacity: 1, y: 0, duration: dur, ease,
+      scrollTrigger: { trigger: '.about-skills', start: 'top 82%', once: true },
+    });
+
+    // Skill group cards — staggered
+    gsap.to('.skill-group', {
+      opacity: 1, y: 0,
+      duration: reduced ? 0 : 0.5,
+      ease: 'power2.out',
+      stagger: 0.08,
+      scrollTrigger: { trigger: '.about-skills', start: 'top 80%', once: true },
+    });
+  }
+
+  // ── Language change ──────────────────────────────────────────
+  window.addEventListener('languageChange', (event: any) => {
+    applyTexts(event.detail.translations);
   });
-  
-  // Carga inicial
-  loadAbout();
+
+  // ── Init ────────────────────────────────────────────────────
+  document.addEventListener('DOMContentLoaded', () => {
+    loadAbout();
+    initAnimations();
+  });
 </script>

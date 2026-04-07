@@ -1,352 +1,427 @@
 ---
-// Hero Section
+// Hero Section — Editorial Modernism with GSAP + Canvas Particles
 ---
 
-<section id="home" class="relative min-h-screen flex items-center justify-center px-4 sm:px-8 lg:px-16 pt-16">
-  <div class="max-w-3xl mx-auto w-full text-center">
+<section id="home" class="relative min-h-screen flex items-center px-6 sm:px-10 lg:px-20 pt-20 pb-16 overflow-hidden">
 
-    <!-- Name -->
-    <div class="mb-3 flex justify-center">
-      <h1
-        id="name-line"
-        class="font-bold leading-[0.9] tracking-tight transition-colors duration-300 hover:text-gray-500 dark:hover:text-gray-400 cursor-default text-left"
-        style="font-size: clamp(3rem, 8.5vw, 8rem); opacity: 0;"
-      ><span class="name-l1"></span><br><span class="name-l2"></span><span class="typing-cursor">|</span></h1>
+  <!-- Dot-grid texture (base layer) -->
+  <div class="hero-grid" aria-hidden="true"></div>
+
+  <!-- Canvas particle system (interactive layer) -->
+  <canvas
+    id="hero-canvas"
+    class="absolute inset-0 w-full h-full"
+    style="z-index: 2; pointer-events: none;"
+    aria-hidden="true"
+  ></canvas>
+
+  <!-- Content (top layer) -->
+  <div class="w-full max-w-6xl relative" style="z-index: 10;">
+
+    <!-- Structural anchor rule -->
+    <div id="hero-rule" class="mb-10 h-px bg-gray-900 dark:bg-white"></div>
+
+    <!-- Status badge -->
+    <div id="hero-status" class="flex items-center gap-2.5 mb-12">
+      <span class="relative flex h-2 w-2" aria-hidden="true">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+        <span class="relative inline-flex h-2 w-2 rounded-full bg-emerald-400"></span>
+      </span>
+      <span
+        id="hero-status-text"
+        class="text-[10px] font-semibold tracking-[0.2em] uppercase text-gray-400 dark:text-gray-500"
+      ></span>
     </div>
 
-    <!-- Role -->
-    <p
-      id="hero-role"
-      class="text-xl sm:text-2xl lg:text-3xl text-gray-500 dark:text-gray-400 mb-2 font-normal text-center"
-      data-i18n="home.role"
-      style="opacity: 0; transform: translateY(10px); transition: opacity 0.5s ease, transform 0.5s ease;"
-    ></p>
+    <!-- Primary hierarchy: Name -->
+    <div class="mb-10">
+      <h1
+        class="font-bold tracking-tight text-gray-900 dark:text-white select-none"
+        style="font-size: clamp(4rem, 11vw, 10rem); line-height: 0.88; letter-spacing: -0.03em;"
+        aria-label="Yewdiel Medina"
+      >
+        <span class="name-clip"><span id="name-l1">Yewdiel</span></span>
+        <span class="name-clip"><span id="name-l2">Medina.</span></span>
+      </h1>
+    </div>
 
-    <!-- Thin divider -->
-    <div id="hero-divider" class="w-10 h-px bg-gray-200 dark:bg-gray-700 my-6 mx-auto" style="opacity: 0; transition: opacity 0.4s ease;"></div>
-
-    <!-- Tagline -->
-    <p
-      id="hero-tagline"
-      class="text-base sm:text-lg text-gray-400 dark:text-gray-500 mb-10 max-w-lg leading-relaxed mx-auto"
-      data-i18n="home.tagline"
-      style="opacity: 0; transform: translateY(10px); transition: opacity 0.5s ease 0.06s, transform 0.5s ease 0.06s;"
-    ></p>
-
-    <!-- Buttons + Social -->
-    <div id="hero-buttons" style="opacity: 0; transform: translateY(10px); transition: opacity 0.5s ease, transform 0.5s ease;">
-      <div class="flex flex-col sm:flex-row gap-3 mb-5 justify-center">
-        <a
-          href="#work"
-          class="px-8 py-4 bg-black dark:bg-white text-white dark:text-black rounded-full font-semibold hover:bg-gray-800 dark:hover:bg-gray-100 transition-all duration-300 hover:scale-[1.02] shadow-md shadow-black/10 hover:shadow-lg hover:shadow-black/20 inline-block text-center"
-          data-i18n="home.viewWork"
-        >
-          View Work
-        </a>
-        <a
-          href="#contact"
-          class="px-8 py-4 bg-transparent border border-gray-200 dark:border-gray-800 text-gray-900 dark:text-white rounded-full font-semibold hover:bg-gray-50 dark:hover:bg-white/5 transition-all duration-300 hover:scale-[1.02] inline-block text-center"
-          data-i18n="home.contactMe"
-        >
-          Contact Me
-        </a>
+    <!-- Secondary hierarchy: Role + Tagline -->
+    <div id="hero-meta" class="flex flex-col sm:flex-row sm:items-start gap-5 sm:gap-24 mb-14">
+      <div class="shrink-0 sm:pt-1">
+        <p
+          id="hero-role"
+          class="text-[10px] font-semibold tracking-[0.22em] uppercase text-gray-400 dark:text-gray-500"
+        ></p>
       </div>
+      <p
+        id="hero-tagline"
+        class="text-base sm:text-lg text-gray-500 dark:text-gray-400 leading-relaxed max-w-xs"
+      ></p>
+    </div>
 
-      <!-- Social Links + CV -->
-      <div class="flex gap-3 items-center justify-center">
-        <div id="hero-social-links" class="flex gap-3">
-          <!-- Social links will be inserted here by JavaScript -->
-        </div>
-        <div class="w-px h-5 bg-gray-200 dark:bg-gray-800 mx-1 shrink-0"></div>
-        <a
-          href="/CV.pdf"
-          download
-          class="w-10 h-10 flex items-center justify-center border border-gray-200 dark:border-gray-800 text-gray-500 dark:text-gray-400 rounded-full hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-black hover:border-black dark:hover:border-white transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
-          aria-label="Download CV"
-          title="Download CV"
-        >
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-          </svg>
-        </a>
-      </div>
+    <!-- Action layer: CTAs -->
+    <div id="hero-buttons" class="flex flex-col sm:flex-row gap-3 mb-12">
+      <a
+        href="#work"
+        class="inline-flex items-center justify-center gap-2.5 px-8 py-4 bg-gray-900 dark:bg-white text-white dark:text-black rounded-full font-semibold text-sm tracking-wide transition-all duration-300 hover:bg-gray-700 dark:hover:bg-gray-100 group"
+        aria-label="View my work"
+      >
+        <span id="btn-view-work">View Work</span>
+        <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+        </svg>
+      </a>
+      <a
+        href="#contact"
+        id="btn-contact"
+        class="inline-flex items-center justify-center px-8 py-4 border border-gray-200 dark:border-gray-800 text-gray-700 dark:text-gray-300 rounded-full font-semibold text-sm tracking-wide transition-all duration-300 hover:border-gray-500 dark:hover:border-gray-500 hover:text-gray-900 dark:hover:text-white"
+      >
+        Contact Me
+      </a>
+    </div>
+
+    <!-- Tertiary layer: Social links -->
+    <div id="hero-social" class="flex items-center gap-3">
+      <div id="hero-social-links" class="flex gap-2"></div>
+      <div class="w-px h-4 bg-gray-200 dark:bg-gray-800 mx-0.5 shrink-0" aria-hidden="true"></div>
+      <a
+        href="/CV.pdf"
+        download
+        class="w-9 h-9 flex items-center justify-center border border-gray-200 dark:border-gray-800 text-gray-500 dark:text-gray-400 rounded-full transition-all duration-300 hover:bg-gray-900 dark:hover:bg-white hover:text-white dark:hover:text-black hover:border-gray-900 dark:hover:border-white"
+        aria-label="Download CV"
+        title="Download CV"
+      >
+        <svg class="w-[15px] h-[15px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+        </svg>
+      </a>
     </div>
 
   </div>
 
-  <!-- Scroll indicator -->
+  <!-- Scroll cue: bottom-right -->
   <div
     id="scroll-indicator"
-    class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 pointer-events-none"
-    style="opacity: 0; transition: opacity 0.6s ease;"
+    class="absolute bottom-8 right-6 sm:right-10 lg:right-20 flex flex-col items-center gap-3 pointer-events-none"
+    style="z-index: 10;"
+    aria-hidden="true"
   >
-    <div class="w-px h-5 bg-gray-300 dark:bg-gray-700"></div>
-    <svg class="w-3.5 h-3.5 text-gray-300 dark:text-gray-700 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-    </svg>
+    <span
+      class="text-[9px] font-semibold tracking-[0.3em] uppercase text-gray-300 dark:text-gray-700"
+      style="writing-mode: vertical-rl; text-orientation: mixed;"
+    >Scroll</span>
+    <div id="scroll-line" class="w-px bg-gradient-to-b from-gray-300 dark:from-gray-700 to-transparent" style="height: 56px;"></div>
   </div>
+
 </section>
 
 <style>
-  @keyframes name-focus-in {
-    from {
-      filter: blur(14px);
-      opacity: 0;
-    }
-    to {
-      filter: blur(0px);
-      opacity: 1;
-    }
+  /* ─── Initial states ─── */
+  #hero-rule         { transform: scaleX(0); transform-origin: left center; }
+  #hero-status       { opacity: 0; transform: translateY(10px); }
+  #hero-meta         { opacity: 0; transform: translateY(18px); }
+  #hero-buttons      { opacity: 0; transform: translateY(18px); }
+  #hero-social       { opacity: 0; }
+  #scroll-indicator  { opacity: 0; }
+  #hero-canvas       { opacity: 0; }
+
+  /* Name reveal */
+  .name-clip          { display: block; overflow: hidden; line-height: 1.05; }
+  #name-l1, #name-l2 { display: block; transform: translateY(108%); }
+
+  /* Dot-grid texture */
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgb(0 0 0 / 0.055) 1px, transparent 1px);
+    background-size: 28px 28px;
+    pointer-events: none;
+  }
+  :global(.dark) .hero-grid {
+    background-image: radial-gradient(circle, rgb(255 255 255 / 0.04) 1px, transparent 1px);
   }
 
-  #name-line.name-focus-in {
-    animation: name-focus-in 1.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  /* Scroll line pulse */
+  @keyframes scroll-pulse {
+    0%, 100% { opacity: 0.4; }
+    50%       { opacity: 1; }
   }
-
-  @keyframes blink {
-    0%, 49% { opacity: 1; }
-    50%, 100% { opacity: 0; }
-  }
-
-  /* Cursor starts hidden; only blinks after .active is added */
-  .typing-cursor {
-    opacity: 0;
-    color: inherit;
-    font-weight: 300;
-  }
-  .typing-cursor.active {
-    animation: blink 1s infinite;
-  }
+  #scroll-line { animation: scroll-pulse 2.4s ease-in-out infinite; }
 </style>
 
 <script>
-  // Generation counter — the only robust fix for async race conditions.
-  // Every call to animateHero() captures a generation ID.
-  // Before every await continuation it checks: am I still the active run?
-  // If a newer call started, the stale run silently aborts.
-  let heroGen = 0;
-  let activeTimers: ReturnType<typeof setInterval>[] = [];
+  import gsap from 'gsap';
+  import { translations, social } from '../data/translations';
 
-  function cancelActiveTimers() {
-    activeTimers.forEach(clearInterval);
-    activeTimers = [];
+  type Lang = 'en' | 'es';
+
+  const SOCIAL_BTN =
+    'w-9 h-9 flex items-center justify-center border border-gray-200 dark:border-gray-800 ' +
+    'text-gray-500 dark:text-gray-400 rounded-full transition-all duration-300 ' +
+    'hover:bg-gray-900 dark:hover:bg-white hover:text-white dark:hover:text-black ' +
+    'hover:border-gray-900 dark:hover:border-white';
+
+  // ─── Helpers ───────────────────────────────────────────────
+  function el(id: string): HTMLElement | null {
+    return document.getElementById(id);
   }
 
-  // Typed delay helper — respects the generation abort
-  function wait(ms: number, gen: number): Promise<boolean> {
-    return new Promise((resolve) => {
-      const t = setTimeout(() => resolve(heroGen === gen), ms);
-      activeTimers.push(t as any);
+  function applyTexts(t: typeof translations['en']) {
+    const role       = el('hero-role');
+    const tagline    = el('hero-tagline');
+    const statusText = el('hero-status-text');
+    const viewWork   = el('btn-view-work');
+    const contact    = el('btn-contact');
+
+    if (role)       role.textContent       = t.home.role;
+    if (tagline)    tagline.textContent    = t.home.tagline;
+    if (statusText) statusText.textContent = t.home.status;
+    if (viewWork)   viewWork.textContent   = t.home.viewWork;
+    if (contact)    contact.textContent    = t.home.contactMe;
+  }
+
+  // ─── GSAP entrance ─────────────────────────────────────────
+  function resetStates() {
+    gsap.set('#hero-rule',         { scaleX: 0 });
+    gsap.set('#hero-status',       { opacity: 0, y: 10 });
+    gsap.set('#name-l1, #name-l2', { y: '108%' });
+    gsap.set('#hero-meta',         { opacity: 0, y: 18 });
+    gsap.set('#hero-buttons',      { opacity: 0, y: 18 });
+    gsap.set('#hero-social',       { opacity: 0 });
+    gsap.set('#scroll-indicator',  { opacity: 0 });
+  }
+
+  let heroTL: gsap.core.Timeline | null = null;
+
+  function buildTimeline() {
+    heroTL = gsap.timeline()
+      .to('#hero-rule',        { scaleX: 1,        duration: 0.85, ease: 'power3.inOut' }, 0.1)
+      .to('#hero-canvas',      { opacity: 1,        duration: 2.0,  ease: 'power2.out'  }, 0.3)
+      .to('#hero-status',      { opacity: 1, y: 0,  duration: 0.5,  ease: 'power2.out'  }, 0.65)
+      .to('#name-l1',          { y: '0%',           duration: 1.0,  ease: 'power4.out'  }, 0.78)
+      .to('#name-l2',          { y: '0%',           duration: 1.0,  ease: 'power4.out'  }, 0.92)
+      .to('#hero-meta',        { opacity: 1, y: 0,  duration: 0.65, ease: 'power2.out'  }, 1.2)
+      .to('#hero-buttons',     { opacity: 1, y: 0,  duration: 0.65, ease: 'power2.out'  }, 1.35)
+      .to('#hero-social',      { opacity: 1,         duration: 0.5,  ease: 'power2.out'  }, 1.5)
+      .to('#scroll-indicator', { opacity: 1,         duration: 0.7,  ease: 'power2.out'  }, 2.2);
+  }
+
+  // ─── Canvas particle system ────────────────────────────────
+  interface Particle {
+    x: number; y: number;
+    originX: number; originY: number;
+    vx: number; vy: number;
+    size: number;
+    opacity: number;
+    phase: number;
+    floatR: number;
+    floatS: number;
+  }
+
+  const PARTICLE_COUNT = 95;
+  const MOUSE_RADIUS   = 130;
+  const REPULSION      = 0.9;
+  const SPRING         = 0.038;
+  const FRICTION       = 0.87;
+
+  let canvas: HTMLCanvasElement;
+  let ctx: CanvasRenderingContext2D;
+  let particles: Particle[] = [];
+  let mouseX = -1000;
+  let mouseY = -1000;
+  let tickerAdded = false;
+
+  function initParticles() {
+    particles = [];
+    const w = canvas.width;
+    const h = canvas.height;
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      const ox = Math.random() * w;
+      const oy = Math.random() * h;
+      particles.push({
+        x: ox, y: oy,
+        originX: ox, originY: oy,
+        vx: 0, vy: 0,
+        // Very small: 0.8 – 2.4 px
+        size: Math.random() * 1.6 + 0.8,
+        // Opacity: layered so some dots are crisp, others are ghosted
+        opacity: Math.random() * 0.38 + 0.08,
+        phase: Math.random() * Math.PI * 2,
+        floatR: Math.random() * 22 + 8,   // float amplitude px
+        floatS: Math.random() * 0.00045 + 0.00018, // float speed (ms-based)
+      });
+    }
+  }
+
+  function resizeCanvas() {
+    const section = document.getElementById('home');
+    if (!section || !canvas) return;
+    canvas.width  = section.offsetWidth;
+    canvas.height = section.offsetHeight;
+    initParticles();
+  }
+
+  function isDark(): boolean {
+    return document.documentElement.classList.contains('dark');
+  }
+
+  function startParticles() {
+    if (tickerAdded) return;
+    tickerAdded = true;
+
+    gsap.ticker.add(() => {
+      if (!ctx) return;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      const dark = isDark();
+      const now  = performance.now();
+
+      for (const p of particles) {
+        // Ambient float target
+        const tx = p.originX + Math.sin(now * p.floatS + p.phase) * p.floatR;
+        const ty = p.originY + Math.cos(now * p.floatS * 0.65 + p.phase) * p.floatR * 0.55;
+
+        // Mouse repulsion
+        const dx   = p.x - mouseX;
+        const dy   = p.y - mouseY;
+        const dist = Math.hypot(dx, dy);
+
+        if (dist < MOUSE_RADIUS && dist > 0) {
+          const force = ((MOUSE_RADIUS - dist) / MOUSE_RADIUS) * REPULSION;
+          p.vx += (dx / dist) * force;
+          p.vy += (dy / dist) * force;
+        }
+
+        // Spring toward float target
+        p.vx += (tx - p.x) * SPRING;
+        p.vy += (ty - p.y) * SPRING;
+
+        // Friction
+        p.vx *= FRICTION;
+        p.vy *= FRICTION;
+
+        // Integrate
+        p.x += p.vx;
+        p.y += p.vy;
+
+        // Draw
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        // Contrast: crisp black on white, soft white on black
+        ctx.fillStyle = dark
+          ? `rgba(255,255,255,${p.opacity * 0.85})`
+          : `rgba(0,0,0,${p.opacity})`;
+        ctx.fill();
+      }
     });
   }
 
-  // Type plain text into a span character by character
-  async function typeInto(
-    span: HTMLElement,
-    text: string,
-    gen: number,
-    speed: number = 50
-  ): Promise<boolean> {
-    span.textContent = '';
-    let i = 0;
-    return new Promise((resolve) => {
-      const timer = setInterval(() => {
-        if (heroGen !== gen) {
-          clearInterval(timer);
-          activeTimers = activeTimers.filter(t => t !== timer);
-          resolve(false);
-          return;
-        }
-        if (i < text.length) {
-          span.textContent += text[i++];
-        } else {
-          clearInterval(timer);
-          activeTimers = activeTimers.filter(t => t !== timer);
-          resolve(true);
-        }
-      }, speed);
-      activeTimers.push(timer);
-    });
+  // ─── Social links ───────────────────────────────────────────
+  function renderSocials() {
+    const container = el('hero-social-links');
+    if (!container) return;
+
+    const items: string[] = [];
+
+    if (social.github) items.push(`
+      <a href="${social.github}" target="_blank" rel="noopener noreferrer" class="${SOCIAL_BTN}" aria-label="GitHub">
+        <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+        </svg>
+      </a>`);
+
+    if (social.linkedin) items.push(`
+      <a href="${social.linkedin}" target="_blank" rel="noopener noreferrer" class="${SOCIAL_BTN}" aria-label="LinkedIn">
+        <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+        </svg>
+      </a>`);
+
+    if (social.twitter) items.push(`
+      <a href="${social.twitter}" target="_blank" rel="noopener noreferrer" class="${SOCIAL_BTN}" aria-label="X (Twitter)">
+        <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+        </svg>
+      </a>`);
+
+    if (social.email) items.push(`
+      <a href="mailto:${social.email}" class="${SOCIAL_BTN}" aria-label="Email">
+        <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+        </svg>
+      </a>`);
+
+    container.innerHTML = items.join('');
   }
 
-  async function animateHero() {
-    // Cancel any in-progress animation and claim a new generation
-    cancelActiveTimers();
-    const myGen = ++heroGen;
+  // ─── Init ───────────────────────────────────────────────────
+  document.addEventListener('DOMContentLoaded', () => {
+    // Texts + socials
+    const lang = (localStorage.getItem('language') || 'en') as Lang;
+    applyTexts(translations[lang]);
+    renderSocials();
 
-    const nameLine = document.getElementById('name-line') as HTMLElement;
-    if (!nameLine) return;
+    // Canvas setup
+    canvas = document.getElementById('hero-canvas') as HTMLCanvasElement;
+    ctx    = canvas.getContext('2d')!;
+    resizeCanvas();
+    startParticles();
 
-    const { translations } = await import('../data/translations');
-    if (heroGen !== myGen) return; // aborted while awaiting module
-    const currentLang = (localStorage.getItem('language') || 'en') as 'en' | 'es';
-    const t = translations[currentLang];
+    // Mouse tracking relative to canvas
+    const section = document.getElementById('home')!;
+    section.addEventListener('mousemove', (e: MouseEvent) => {
+      const rect = canvas.getBoundingClientRect();
+      mouseX = e.clientX - rect.left;
+      mouseY = e.clientY - rect.top;
+    }, { passive: true });
 
-    const roleElement = document.getElementById('hero-role')    as HTMLElement;
-    const divider     = document.getElementById('hero-divider') as HTMLElement;
-    const taglineEl   = document.getElementById('hero-tagline') as HTMLElement;
-    const buttonsEl   = document.getElementById('hero-buttons') as HTMLElement;
-    const scrollInd   = document.getElementById('scroll-indicator') as HTMLElement;
-    const cursorSpan = nameLine.querySelector('.typing-cursor') as HTMLElement;
-    const l1 = nameLine.querySelector('.name-l1') as HTMLElement;
-    const l2 = nameLine.querySelector('.name-l2') as HTMLElement;
+    section.addEventListener('mouseleave', () => {
+      // Push mouse far off-canvas so particles drift back
+      mouseX = -1000;
+      mouseY = -1000;
+    }, { passive: true });
 
-    if (!await wait(150, myGen)) return;
+    // Resize
+    let resizeTimer: ReturnType<typeof setTimeout>;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(resizeCanvas, 150);
+    }, { passive: true });
 
-    // Reveal name with focus-in blur animation
-    nameLine.style.opacity = '';
-    nameLine.classList.add('name-focus-in');
-    if (cursorSpan) cursorSpan.classList.add('active');
+    // Entrance animation
+    resetStates();
+    buildTimeline();
 
-    // Type first name
-    if (l1) { if (!await typeInto(l1, 'Yewdiel', myGen, 60)) return; }
-    if (!await wait(80, myGen)) return;
-
-    // Type last name
-    if (l2) { if (!await typeInto(l2, 'Medina.', myGen, 60)) return; }
-    if (!await wait(100, myGen)) return;
-
-    // Reveal role
-    if (roleElement) {
-      roleElement.textContent = t.home.role;
-      roleElement.style.opacity = '1';
-      roleElement.style.transform = 'translateY(0)';
-      if (!await wait(220, myGen)) return;
-    }
-
-    // Reveal divider
-    if (divider) {
-      divider.style.opacity = '1';
-      if (!await wait(150, myGen)) return;
-    }
-
-    // Reveal tagline
-    if (taglineEl) {
-      taglineEl.textContent = t.home.tagline;
-      taglineEl.style.opacity = '1';
-      taglineEl.style.transform = 'translateY(0)';
-      if (!await wait(250, myGen)) return;
-    }
-
-    // Reveal buttons
-    if (buttonsEl) {
-      buttonsEl.style.opacity = '1';
-      buttonsEl.style.transform = 'translateY(0)';
-    }
-
-    // Scroll indicator appears last
-    if (!await wait(700, myGen)) return;
-    if (scrollInd) scrollInd.style.opacity = '1';
-  }
-
-  window.addEventListener('DOMContentLoaded', () => {
-    animateHero();
-    loadSocialLinks();
-
-    // Hide scroll indicator when user scrolls
-    const scrollInd = document.getElementById('scroll-indicator');
+    // Scroll indicator fade
+    const scrollInd = el('scroll-indicator');
     if (scrollInd) {
       window.addEventListener('scroll', () => {
-        scrollInd.style.opacity = window.scrollY > 60 ? '0' : '1';
+        gsap.to(scrollInd, {
+          opacity: window.scrollY > 60 ? 0 : 1,
+          duration: 0.4,
+          overwrite: true,
+        });
       }, { passive: true });
     }
   });
 
-  async function loadSocialLinks() {
-    try {
-      const { social } = await import('../data/translations');
-      renderSocialLinks(social);
-    } catch (error) {
-      console.error('Error loading social links:', error);
-    }
-  }
-
-  function renderSocialLinks(social: any) {
-    const container = document.getElementById('hero-social-links');
-    if (!container) return;
-
-    const cls = 'w-10 h-10 flex items-center justify-center border border-gray-200 dark:border-gray-800 text-gray-500 dark:text-gray-400 rounded-full hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-black hover:border-black dark:hover:border-white transition-all duration-300 hover:-translate-y-1 hover:shadow-md';
-    const ico = 'w-5 h-5';
-    const links = [];
-
-    if (social.github) {
-      links.push(`
-        <a href="${social.github}" target="_blank" rel="noopener noreferrer" class="${cls}" aria-label="GitHub">
-          <svg class="${ico}" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-          </svg>
-        </a>
-      `);
-    }
-
-    if (social.linkedin) {
-      links.push(`
-        <a href="${social.linkedin}" target="_blank" rel="noopener noreferrer" class="${cls}" aria-label="LinkedIn">
-          <svg class="${ico}" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-          </svg>
-        </a>
-      `);
-    }
-
-    if (social.twitter) {
-      links.push(`
-        <a href="${social.twitter}" target="_blank" rel="noopener noreferrer" class="${cls}" aria-label="Twitter">
-          <svg class="${ico}" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-          </svg>
-        </a>
-      `);
-    }
-
-    if (social.email) {
-      links.push(`
-        <a href="mailto:${social.email}" class="${cls}" aria-label="Email">
-          <svg class="${ico}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-          </svg>
-        </a>
-      `);
-    }
-
-    container.innerHTML = links.join('');
-  }
-
+  // ─── Language change ────────────────────────────────────────
   window.addEventListener('languageChange', async (event: any) => {
-    const { translations } = event.detail;
-    const nameLine    = document.getElementById('name-line')    as HTMLElement;
-    const roleElement = document.getElementById('hero-role')    as HTMLElement;
-    const divider     = document.getElementById('hero-divider') as HTMLElement;
-    const taglineEl   = document.getElementById('hero-tagline') as HTMLElement;
-    const buttonsEl   = document.getElementById('hero-buttons') as HTMLElement;
-    const scrollInd   = document.getElementById('scroll-indicator') as HTMLElement;
+    const t = event.detail.translations as typeof translations['en'];
 
-    // Hide everything
-    if (roleElement)  { roleElement.style.opacity = '0'; roleElement.style.transform = 'translateY(10px)'; }
-    if (taglineEl)    { taglineEl.style.opacity = '0';   taglineEl.style.transform = 'translateY(10px)'; }
-    if (divider)      divider.style.opacity = '0';
-    if (buttonsEl)    { buttonsEl.style.opacity = '0';   buttonsEl.style.transform = 'translateY(10px)'; }
-    if (scrollInd)    scrollInd.style.opacity = '0';
+    const outTL = gsap.timeline();
+    outTL
+      .to(['#name-l2', '#name-l1'],
+          { y: '-108%', duration: 0.4, stagger: 0.07, ease: 'power3.in' }, 0)
+      .to(['#hero-social', '#hero-buttons', '#hero-meta'],
+          { opacity: 0, y: -10, duration: 0.25, stagger: 0.04 }, 0)
+      .to('#hero-status', { opacity: 0, duration: 0.2 }, 0)
+      .to('#hero-rule',   { scaleX: 0, duration: 0.45, ease: 'power2.in' }, 0.1);
 
-    // Clear name spans (animateHero will cancel timers via generation counter)
-    if (nameLine) {
-      const l1 = nameLine.querySelector('.name-l1') as HTMLElement;
-      const l2 = nameLine.querySelector('.name-l2') as HTMLElement;
-      const cursorSpan = nameLine.querySelector('.typing-cursor');
-      if (l1) l1.textContent = '';
-      if (l2) l2.textContent = '';
-      if (cursorSpan) cursorSpan.classList.remove('active');
-      nameLine.style.opacity = '0';
-    }
-
-    // Update button text
-    const viewWorkBtn = document.querySelector('[data-i18n="home.viewWork"]');
-    const contactBtn  = document.querySelector('[data-i18n="home.contactMe"]');
-    if (viewWorkBtn) viewWorkBtn.textContent = translations.home.viewWork;
-    if (contactBtn)  contactBtn.textContent  = translations.home.contactMe;
-
-    // Re-run animation (DOM guard already cleared above via delete nameLine.dataset.animated)
-    await new Promise(resolve => setTimeout(resolve, 100));
-    animateHero();
+    await outTL.then();
+    applyTexts(t);
+    if (heroTL) heroTL.kill();
+    resetStates();
+    buildTimeline();
   });
 </script>

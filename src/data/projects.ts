@@ -25,6 +25,27 @@ export interface Projects {
 export const projects: Projects = {
   en: [
     {
+      title: "MedicLife Landing",
+      description:
+        "Marketing landing page for the NewMedicLife clinic system. UI/UX focused with GSAP animations, React, and Tailwind.",
+      image: "/projects/MEDICLIFELANDING.png",
+      tags: ["React", "Tailwind", "GSAP", "UI/UX"],
+      link: "https://mediclife.vercel.app/",
+      gridSize: "wide",
+      detailedDescription:
+        "A polished marketing landing page built for the NewMedicLife clinic management system. The project focused heavily on UI/UX design principles — clear hierarchy, progressive disclosure, and smooth GSAP-driven scroll animations — to communicate the product's value to medical professionals and clinic administrators.",
+      features: [
+        "GSAP scroll-triggered entrance animations",
+        "Responsive layout optimized for desktop and mobile",
+        "UI/UX-first design with clear visual hierarchy",
+        "Feature sections, pricing, and CTA blocks",
+        "Deployed on Vercel for fast global delivery",
+      ],
+      demo: "https://mediclife.vercel.app/",
+      year: "2025",
+      role: "Frontend Developer",
+    },
+    {
       title: "Watchlt",
       description:
         "Movie comparison app inspired by Apple liquid glass design. Built with React, Firebase, Tailwind, and deployed on Vercel.",
@@ -152,6 +173,27 @@ export const projects: Projects = {
   ],
 
   es: [
+    {
+      title: "MedicLife Landing",
+      description:
+        "Landing page de marketing para el sistema de clínicas NewMedicLife. Enfocada en UI/UX con animaciones GSAP, React y Tailwind.",
+      image: "/projects/MEDICLIFELANDING.png",
+      tags: ["React", "Tailwind", "GSAP", "UI/UX"],
+      link: "https://mediclife.vercel.app/",
+      gridSize: "wide",
+      detailedDescription:
+        "Landing page de marketing construida para el sistema de gestión de clínicas NewMedicLife. El proyecto se enfocó en principios de UI/UX — jerarquía visual clara, divulgación progresiva y animaciones fluidas con GSAP — para comunicar el valor del producto a profesionales médicos y administradores de clínicas.",
+      features: [
+        "Animaciones de entrada con GSAP y ScrollTrigger",
+        "Diseño responsivo para escritorio y móvil",
+        "Diseño UI/UX con jerarquía visual clara",
+        "Secciones de funcionalidades, precios y llamadas a la acción",
+        "Desplegada en Vercel para entrega global rápida",
+      ],
+      demo: "https://mediclife.vercel.app/",
+      year: "2025",
+      role: "Desarrollador Frontend",
+    },
     {
       title: "Watchlt",
       description:

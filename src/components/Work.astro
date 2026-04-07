@@ -1,61 +1,107 @@
 ---
-// Sección de Trabajo/Proyectos con Bento Grid
+// Work Section — Editorial numbered list with sticky preview pane
 ---
 
-<section id="work" class="min-h-screen py-24 px-4 bg-white dark:bg-black">
-  <div class="max-w-7xl mx-auto">
-    <h2 
-      class="text-4xl md:text-5xl font-bold text-center mb-16"
-      data-i18n="work.title"
-    >
-      Work
-    </h2>
-    
-    <div id="projects-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-      <!-- Los proyectos se insertarán aquí mediante JavaScript -->
+<section id="work" class="min-h-screen py-24 px-6 sm:px-10 lg:px-20 bg-white dark:bg-black">
+  <div class="max-w-6xl mx-auto">
+
+    <!-- Header — consistent with hero's editorial style -->
+    <div class="mb-16">
+      <div class="flex items-center gap-4 mb-5">
+        <div class="flex-1 h-px bg-gray-200 dark:bg-gray-800"></div>
+        <span class="text-[10px] font-semibold tracking-[0.2em] uppercase text-gray-400 dark:text-gray-500 shrink-0">
+          <span id="work-count">06</span>&nbsp;projects
+        </span>
+      </div>
+      <h2
+        class="font-bold tracking-tight text-gray-900 dark:text-white"
+        style="font-size: clamp(2.8rem, 6vw, 5rem); letter-spacing: -0.025em;"
+        data-i18n="work.title"
+      >Work</h2>
+    </div>
+
+    <!-- Two-column: list + sticky preview -->
+    <div class="flex gap-12 xl:gap-20 items-start">
+
+      <!-- Project list -->
+      <ul id="projects-list" class="flex-1 min-w-0" role="list">
+        <!-- Rows inserted by JS -->
+      </ul>
+
+      <!-- Sticky preview pane (desktop only) -->
+      <div class="hidden lg:block w-64 xl:w-72 shrink-0">
+        <div class="sticky top-28">
+
+          <!-- Image crossfade container -->
+          <div
+            class="relative w-full overflow-hidden rounded-xl bg-gray-100 dark:bg-[#111]"
+            style="aspect-ratio: 4/3;"
+          >
+            <img
+              id="preview-a"
+              src=""
+              alt=""
+              class="absolute inset-0 w-full h-full object-contain transition-none"
+              style="opacity: 1;"
+            />
+            <img
+              id="preview-b"
+              src=""
+              alt=""
+              class="absolute inset-0 w-full h-full object-contain transition-none"
+              style="opacity: 0;"
+            />
+            <!-- Subtle frame overlay -->
+            <div class="absolute inset-0 ring-1 ring-inset ring-black/5 dark:ring-white/5 rounded-xl pointer-events-none"></div>
+          </div>
+
+          <!-- Preview meta -->
+          <div class="mt-4 space-y-0.5">
+            <p id="preview-title" class="text-sm font-semibold text-gray-900 dark:text-white truncate"></p>
+            <p id="preview-role" class="text-[11px] tracking-wide text-gray-400 dark:text-gray-500"></p>
+          </div>
+
+          <!-- View details hint -->
+          <p class="mt-3 text-[10px] font-medium tracking-[0.15em] uppercase text-gray-300 dark:text-gray-700">
+            Click to explore →
+          </p>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
 
-<!-- Project Detail Modal -->
-<div 
-  id="project-modal" 
+<!-- ─── Project Detail Modal (unchanged) ──────────────────── -->
+<div
+  id="project-modal"
   class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4"
 >
-  <div 
+  <div
     id="modal-content"
     class="relative bg-white dark:bg-[#111111] rounded-3xl shadow-2xl max-w-5xl w-full max-h-[95vh] overflow-hidden flex flex-col"
   >
-    <!-- Modal Header with Image -->
     <div id="modal-header" class="relative h-[55vh] min-h-[420px] overflow-hidden bg-gray-100 dark:bg-[#181818]">
-      <!-- Blurred backdrop (same image, no black bars) -->
       <img id="modal-image-bg" src="" alt="" aria-hidden="true"
         class="absolute inset-0 w-full h-full object-cover scale-110 blur-2xl opacity-50 dark:opacity-30 pointer-events-none select-none" />
-      <!-- Main image: contained, perfectly proportioned -->
       <img id="modal-image" src="" alt="" class="relative w-full h-full object-contain z-10" />
       <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent z-20"></div>
-      
-      <!-- Close Button - Positioned over image -->
-      <button 
-        id="modal-close" 
+      <button
+        id="modal-close"
         class="absolute top-6 right-6 text-white hover:text-gray-300 transition-all p-3 hover:rotate-90 hover:scale-110 duration-300 z-20 bg-black/50 hover:bg-black/70 backdrop-blur-sm rounded-full"
+        aria-label="Close modal"
       >
         <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
           <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
         </svg>
       </button>
-      
       <div class="absolute bottom-6 left-8 right-8 z-30">
         <h3 id="modal-title" class="text-2xl md:text-3xl font-bold text-white mb-3 drop-shadow-lg leading-tight break-words"></h3>
-        <div id="modal-tags" class="flex flex-wrap gap-2">
-          <!-- Tags will be inserted here -->
-        </div>
+        <div id="modal-tags" class="flex flex-wrap gap-2"></div>
       </div>
     </div>
 
-    <!-- Modal Body - Scrollable content -->
     <div class="flex-1 overflow-y-auto p-8">
-      <!-- Year and Role -->
       <div class="flex items-center gap-6 mb-6 text-sm text-gray-600 dark:text-gray-400">
         <div class="flex items-center gap-2">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -70,45 +116,31 @@
           <span id="modal-role"></span>
         </div>
       </div>
-
-      <!-- Description -->
       <div class="mb-8">
         <h4 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white" data-i18n="work.aboutProject">About the Project</h4>
         <p id="modal-description" class="text-gray-600 dark:text-gray-400 leading-relaxed text-lg"></p>
       </div>
-
-      <!-- Features -->
       <div class="mb-8">
         <h4 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white" data-i18n="work.keyFeatures">Key Features</h4>
-        <ul id="modal-features" class="space-y-2">
-          <!-- Features will be inserted here -->
-        </ul>
+        <ul id="modal-features" class="space-y-2"></ul>
       </div>
-
-      <!-- Links -->
-      <div id="modal-links" class="flex flex-wrap gap-4">
-        <!-- Links will be inserted here -->
-      </div>
+      <div id="modal-links" class="flex flex-wrap gap-4"></div>
     </div>
   </div>
 </div>
 
-<!-- Video Lightbox -->
-<div
-  id="video-lightbox"
-  class="fixed inset-0 z-[60] hidden items-center justify-center bg-black/95 backdrop-blur-md"
->
+<!-- ─── Video Lightbox (unchanged) ────────────────────────── -->
+<div id="video-lightbox" class="fixed inset-0 z-60 hidden items-center justify-center bg-black/95 backdrop-blur-md">
   <div class="relative w-full max-w-6xl mx-4">
-    <!-- Close lightbox button -->
     <button
       id="video-lightbox-close"
       class="absolute -top-12 right-0 text-white/80 hover:text-white transition-all p-2 hover:rotate-90 hover:scale-110 duration-300"
+      aria-label="Close video"
     >
       <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
       </svg>
     </button>
-    <!-- Video player -->
     <video
       id="lightbox-video"
       class="w-full rounded-2xl shadow-2xl bg-black"
@@ -121,42 +153,24 @@
 </div>
 
 <style>
-  @keyframes fade-in-up {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
+  /* Row entrance initial state */
+  .project-item { opacity: 0; transform: translateY(16px); }
 
-  /* Modal body: subtle slide-up when modal opens */
-  #project-modal:not(.hidden) #modal-content > .flex-1 {
-    animation: modal-body-in 350ms ease-out 200ms both;
-  }
-  @keyframes modal-body-in {
-    from { opacity: 0; transform: translateY(10px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
+  /* Bottom border on last item */
+  .project-item:last-child { border-bottom: 1px solid; }
+  .project-item:last-child { border-color: rgb(243 244 246); }
+  :global(.dark) .project-item:last-child { border-color: rgb(31 41 55 / 0.7); }
 
-  .line-clamp-2 {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  /* Scrollbar for modal scrollable body */
+  /* Modal scrollbar */
   #modal-content .overflow-y-auto::-webkit-scrollbar { width: 4px; }
   #modal-content .overflow-y-auto::-webkit-scrollbar-track { background: transparent; }
-  #modal-content .overflow-y-auto::-webkit-scrollbar-thumb {
-    background: #e5e7eb;
-    border-radius: 99px;
-  }
-  .dark #modal-content .overflow-y-auto::-webkit-scrollbar-thumb { background: #2d2d2d; }
+  #modal-content .overflow-y-auto::-webkit-scrollbar-thumb { background: #e5e7eb; border-radius: 99px; }
+  :global(.dark) #modal-content .overflow-y-auto::-webkit-scrollbar-thumb { background: #2d2d2d; }
 </style>
 
 <style is:global>
   :root { view-transition-name: none; }
   ::view-transition { pointer-events: none; }
-
-  /* Shared image morph: card thumbnail → modal header image */
   ::view-transition-group(vt-card-img) {
     animation-duration: 450ms;
     animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -170,172 +184,249 @@
 </style>
 
 <script>
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  gsap.registerPlugin(ScrollTrigger);
+
   let projectsFullData: any[] = [];
 
-  async function loadProjects() {
-    try {
-      const { projects } = await import('../data/projects');
-      const currentLang = (localStorage.getItem('language') || 'en') as 'en' | 'es';
-      projectsFullData = projects[currentLang] || [];
-      renderProjects();
-    } catch (error) {
-      console.error('Error loading projects:', error);
-    }
-  }
-  
-  function renderProjects() {
-    const grid = document.getElementById('projects-grid');
-    if (!grid) return;
-    
-    grid.innerHTML = projectsFullData.map((project, index) => `
-      <article 
-        class="project-card group cursor-pointer bg-white dark:bg-[#111111] rounded-2xl overflow-hidden border border-gray-100 dark:border-gray-800/60 hover:border-gray-200 dark:hover:border-gray-700 transition-all duration-200 hover:shadow-lg hover:shadow-black/5 flex flex-col"
-        style="animation: fade-in-up 0.5s ease-out ${index * 0.07}s both"
-        data-project-index="${index}"
-      >
-        <div class="relative h-44 overflow-hidden bg-gray-50 dark:bg-[#161616]">
-          <img 
-            src="${project.image}" 
-            alt="${project.title}"
-            class="w-full h-full object-contain group-hover:scale-[1.04] transition-transform duration-500"
-          />
-        </div>
-        <div class="p-5 flex flex-col flex-1">
-          <div class="flex items-start justify-between gap-3 mb-1.5">
-            <h3 class="font-semibold text-gray-900 dark:text-white leading-snug">${project.title}</h3>
-            ${project.year ? `<span class="text-xs text-gray-400 dark:text-gray-500 shrink-0 mt-0.5 tabular-nums">${project.year}</span>` : ''}
-          </div>
-          <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 leading-relaxed line-clamp-2 flex-1">${project.description}</p>
-          <div class="flex flex-wrap gap-1.5">
-            ${project.tags.slice(0, 3).map((tag: string) => `
-              <span class="px-2 py-0.5 text-xs text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-800/80 rounded-full">${tag}</span>
-            `).join('')}
-          </div>
-        </div>
-      </article>
-    `).join('');
+  // ─── Preview pane crossfade ─────────────────────────────────
+  let activeLayer: 'a' | 'b' = 'a';
 
-    document.querySelectorAll('.project-card').forEach((card) => {
-      const idx = parseInt((card as HTMLElement).dataset.projectIndex || '0');
-      card.addEventListener('click', (e) => openProjectModal(idx, e.currentTarget as Element));
+  function setPreview(project: any) {
+    const imgA  = document.getElementById('preview-a') as HTMLImageElement | null;
+    const imgB  = document.getElementById('preview-b') as HTMLImageElement | null;
+    const title = document.getElementById('preview-title');
+    const role  = document.getElementById('preview-role');
+
+    if (!imgA || !imgB) return;
+
+    if (activeLayer === 'a') {
+      imgB.src = project.image;
+      gsap.to(imgA, { opacity: 0, duration: 0.35, ease: 'power2.out' });
+      gsap.to(imgB, { opacity: 1, duration: 0.35, ease: 'power2.out' });
+      activeLayer = 'b';
+    } else {
+      imgA.src = project.image;
+      gsap.to(imgB, { opacity: 0, duration: 0.35, ease: 'power2.out' });
+      gsap.to(imgA, { opacity: 1, duration: 0.35, ease: 'power2.out' });
+      activeLayer = 'a';
+    }
+
+    if (title) title.textContent = project.title;
+    if (role)  role.textContent  = project.role || '';
+  }
+
+  function initPreview(project: any) {
+    const imgA  = document.getElementById('preview-a') as HTMLImageElement | null;
+    const title = document.getElementById('preview-title');
+    const role  = document.getElementById('preview-role');
+
+    if (imgA)  imgA.src  = project.image;
+    if (title) title.textContent = project.title;
+    if (role)  role.textContent  = project.role || '';
+    activeLayer = 'a';
+  }
+
+  // ─── Render ─────────────────────────────────────────────────
+  function renderProjects() {
+    const list = document.getElementById('projects-list');
+    const countEl = document.getElementById('work-count');
+    if (!list) return;
+
+    if (countEl) {
+      countEl.textContent = String(projectsFullData.length).padStart(2, '0');
+    }
+
+    list.innerHTML = projectsFullData.map((project, index) => {
+      const num  = String(index + 1).padStart(2, '0');
+      const tags = project.tags.slice(0, 4).join(' · ');
+
+      return `
+        <li
+          class="project-item border-t border-gray-100 dark:border-gray-800/70"
+          data-index="${index}"
+        >
+          <button
+            class="project-row w-full text-left group flex items-start gap-5 py-6 sm:py-7
+                   rounded-lg transition-colors duration-200
+                   hover:bg-gray-50/70 dark:hover:bg-white/[0.025]
+                   -mx-3 px-3"
+            data-project-index="${index}"
+            aria-label="View ${project.title} project details"
+          >
+            <!-- Index number -->
+            <span
+              class="text-[10px] font-bold tracking-[0.12em] text-gray-200 dark:text-gray-800
+                     shrink-0 mt-[5px] tabular-nums w-5 text-right select-none"
+              aria-hidden="true"
+            >${num}</span>
+
+            <!-- Main content -->
+            <div class="flex-1 min-w-0">
+              <div class="flex items-baseline justify-between gap-4">
+                <!-- Title -->
+                <h3
+                  class="text-base sm:text-lg font-semibold text-gray-900 dark:text-white
+                         leading-snug group-hover:translate-x-0.5 transition-transform duration-300"
+                >${project.title}</h3>
+
+                <!-- Year + arrow -->
+                <div class="flex items-center gap-2 shrink-0">
+                  ${project.year
+                    ? `<span class="text-xs text-gray-400 dark:text-gray-600 tabular-nums">${project.year}</span>`
+                    : ''}
+                  <svg
+                    class="w-3.5 h-3.5 text-gray-300 dark:text-gray-700
+                           group-hover:text-gray-700 dark:group-hover:text-gray-300
+                           group-hover:translate-x-0.5 transition-all duration-300"
+                    fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"
+                  >
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                  </svg>
+                </div>
+              </div>
+
+              <!-- Tags as dot-separated text -->
+              <p class="mt-1.5 text-[11px] font-medium tracking-wide text-gray-400 dark:text-gray-600 uppercase">
+                ${tags}
+              </p>
+            </div>
+          </button>
+        </li>`;
+    }).join('');
+
+    // ── Preview hover ──────────────────────────────────────────
+    document.querySelectorAll<HTMLButtonElement>('.project-row').forEach((row) => {
+      row.addEventListener('mouseenter', () => {
+        const idx = parseInt(row.dataset.projectIndex || '0');
+        if (projectsFullData[idx]) setPreview(projectsFullData[idx]);
+      });
+      row.addEventListener('click', () => {
+        const idx = parseInt(row.dataset.projectIndex || '0');
+        openProjectModal(idx, row);
+      });
+    });
+
+    // ── Init preview with first project ───────────────────────
+    if (projectsFullData[0]) initPreview(projectsFullData[0]);
+
+    // ── Entrance animation ─────────────────────────────────────
+    const items = document.querySelectorAll('.project-item');
+    gsap.to(items, {
+      opacity: 1,
+      y: 0,
+      duration: 0.55,
+      ease: 'power2.out',
+      stagger: 0.07,
+      scrollTrigger: {
+        trigger: '#projects-list',
+        start: 'top 78%',
+        once: true,
+      },
     });
   }
 
+  // ─── Load projects ──────────────────────────────────────────
+  async function loadProjects() {
+    try {
+      const { projects } = await import('../data/projects');
+      const lang = (localStorage.getItem('language') || 'en') as 'en' | 'es';
+      projectsFullData = projects[lang] || [];
+      renderProjects();
+    } catch (e) {
+      console.error('Error loading projects:', e);
+    }
+  }
+
+  // ─── Modal ──────────────────────────────────────────────────
   async function openProjectModal(index: number, originEl?: Element) {
     const project = projectsFullData[index];
     if (!project) return;
 
-    // Get current translations
     const { translations } = await import('../data/translations');
-    const currentLang = (localStorage.getItem('language') || 'en') as 'en' | 'es';
-    const t = translations[currentLang];
+    const lang = (localStorage.getItem('language') || 'en') as 'en' | 'es';
+    const t = translations[lang];
 
-    // Populate modal
-    const modal = document.getElementById('project-modal');
-    const modalImage = document.getElementById('modal-image') as HTMLImageElement;
-    const modalImageBg = document.getElementById('modal-image-bg') as HTMLImageElement;
-    const modalTitle = document.getElementById('modal-title');
-    const modalTags = document.getElementById('modal-tags');
-    const modalYear = document.getElementById('modal-year');
-    const modalRole = document.getElementById('modal-role');
-    const modalDescription = document.getElementById('modal-description');
-    const modalFeatures = document.getElementById('modal-features');
-    const modalLinks = document.getElementById('modal-links');
+    const modal          = document.getElementById('project-modal');
+    const modalImage     = document.getElementById('modal-image')     as HTMLImageElement;
+    const modalImageBg   = document.getElementById('modal-image-bg')  as HTMLImageElement;
+    const modalTitle     = document.getElementById('modal-title');
+    const modalTags      = document.getElementById('modal-tags');
+    const modalYear      = document.getElementById('modal-year');
+    const modalRole      = document.getElementById('modal-role');
+    const modalDesc      = document.getElementById('modal-description');
+    const modalFeatures  = document.getElementById('modal-features');
+    const modalLinks     = document.getElementById('modal-links');
 
-    if (modalImage) modalImage.src = project.image;
+    if (modalImage)   modalImage.src   = project.image;
     if (modalImageBg) modalImageBg.src = project.image;
-    if (modalTitle) modalTitle.textContent = project.title;
-    
+    if (modalTitle)   modalTitle.textContent = project.title;
+
     if (modalTags) {
       modalTags.innerHTML = project.tags.map((tag: string) => `
-        <span class="px-3 py-1 bg-white/20 backdrop-blur-sm text-white rounded-lg text-sm font-medium">
-          ${tag}
-        </span>
+        <span class="px-3 py-1 bg-white/20 backdrop-blur-sm text-white rounded-lg text-sm font-medium">${tag}</span>
       `).join('');
     }
 
     if (modalYear) modalYear.textContent = project.year || 'N/D';
-    if (modalRole) modalRole.textContent = project.role || 'Desarrollador';
-    if (modalDescription) modalDescription.textContent = project.detailedDescription || project.description;
+    if (modalRole) modalRole.textContent = project.role || 'Developer';
+    if (modalDesc) modalDesc.textContent = project.detailedDescription || project.description;
 
     if (modalFeatures && project.features) {
-      modalFeatures.innerHTML = project.features.map((feature: string) => `
+      modalFeatures.innerHTML = project.features.map((f: string) => `
         <li class="flex items-start gap-3">
-          <svg class="w-5 h-5 text-white mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          <svg class="w-5 h-5 text-emerald-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
           </svg>
-          <span class="text-gray-600 dark:text-gray-400">${feature}</span>
+          <span class="text-gray-600 dark:text-gray-400">${f}</span>
         </li>
       `).join('');
     }
 
     if (modalLinks) {
-      const links = [];
-      if (project.github) {
-        links.push(`
-          <a href="${project.github}" target="_blank" rel="noopener noreferrer"
-             class="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 dark:bg-[#111111] text-white rounded-full font-semibold hover:scale-105 hover:shadow-xl transition-all">
-            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-            </svg>
-            ${t.work.viewCode}
-          </a>
-        `);
-      }
-      if (project.demo) {
-        links.push(`
-          <a href="${project.demo}" target="_blank" rel="noopener noreferrer"
-             class="inline-flex items-center gap-2 px-6 py-3 bg-black text-white rounded-full font-semibold hover:scale-105 hover:shadow-xl hover:shadow-black/30 transition-all">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-            </svg>
-            ${t.work.viewDemo}
-          </a>
-        `);
-      }
-      if (project.link && project.link !== '#') {
-        links.push(`
-          <a href="${project.link}" target="_blank" rel="noopener noreferrer"
-             class="inline-flex items-center gap-2 px-6 py-3 bg-black text-white rounded-full font-semibold hover:scale-105 hover:shadow-xl hover:shadow-black/30 transition-all">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-            </svg>
-            ${t.work.viewDemo}
-          </a>
-        `);
-      }
-      // Video demo button — opens lightbox
-      if (project.video) {
-        links.push(`
-          <button
-            type="button"
-            data-video-url="${project.video}"
-            class="video-demo-btn inline-flex items-center gap-2 px-6 py-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 bg-white dark:bg-[#1a1a1a] rounded-full font-semibold hover:bg-gray-50 dark:hover:bg-[#222] hover:scale-105 hover:shadow-md transition-all duration-200"
-          >
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M8 5v14l11-7z"/>
-            </svg>
-            ${t.work.viewVideoDemo}
-          </button>
-        `);
-      }
+      const links: string[] = [];
+      if (project.github) links.push(`
+        <a href="${project.github}" target="_blank" rel="noopener noreferrer"
+           class="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 dark:bg-[#111] text-white rounded-full font-semibold hover:scale-105 hover:shadow-xl transition-all">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+          </svg>
+          ${t.work.viewCode}
+        </a>`);
+      if (project.demo) links.push(`
+        <a href="${project.demo}" target="_blank" rel="noopener noreferrer"
+           class="inline-flex items-center gap-2 px-6 py-3 bg-black text-white rounded-full font-semibold hover:scale-105 hover:shadow-xl transition-all">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+          </svg>
+          ${t.work.viewDemo}
+        </a>`);
+      if (project.link && project.link !== '#' && project.link !== project.demo) links.push(`
+        <a href="${project.link}" target="_blank" rel="noopener noreferrer"
+           class="inline-flex items-center gap-2 px-6 py-3 bg-black text-white rounded-full font-semibold hover:scale-105 hover:shadow-xl transition-all">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+          </svg>
+          ${t.work.viewDemo}
+        </a>`);
+      if (project.video) links.push(`
+        <button type="button" data-video-url="${project.video}"
+          class="video-demo-btn inline-flex items-center gap-2 px-6 py-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 bg-white dark:bg-[#1a1a1a] rounded-full font-semibold hover:bg-gray-50 dark:hover:bg-[#222] hover:scale-105 transition-all">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          ${t.work.viewVideoDemo}
+        </button>`);
       modalLinks.innerHTML = links.join('');
 
-      // Attach video button listeners after injection
-      modalLinks.querySelectorAll('.video-demo-btn').forEach((btn) => {
-        btn.addEventListener('click', () => {
-          const url = (btn as HTMLElement).dataset.videoUrl || '';
-          openVideoLightbox(url);
-        });
+      modalLinks.querySelectorAll<HTMLButtonElement>('.video-demo-btn').forEach((btn) => {
+        btn.addEventListener('click', () => openVideoLightbox(btn.dataset.videoUrl || ''));
       });
     }
 
-    // Show modal with view transition
-
-    // Image shared-element VT: card thumbnail → modal header image
-    const cardImg = originEl?.querySelector('img') as HTMLElement | null;
+    // View Transition
+    const cardImg  = originEl?.querySelector('img') as HTMLElement | null;
     const modalImg = document.getElementById('modal-image') as HTMLElement | null;
-    (originEl as HTMLElement).setAttribute('origin-element', '');
+    (originEl as HTMLElement)?.setAttribute('origin-element', '');
 
     if ((document as any).startViewTransition && cardImg && modalImg) {
       cardImg.style.viewTransitionName = 'vt-card-img';
@@ -353,10 +444,10 @@
     }
   }
 
-  // ── Video Lightbox ──────────────────────────────────────────
+  // ─── Video Lightbox ─────────────────────────────────────────
   function openVideoLightbox(url: string) {
     const lightbox = document.getElementById('video-lightbox');
-    const video = document.getElementById('lightbox-video') as HTMLVideoElement | null;
+    const video    = document.getElementById('lightbox-video') as HTMLVideoElement | null;
     if (!lightbox || !video) return;
     video.src = url;
     lightbox.classList.remove('hidden');
@@ -366,7 +457,7 @@
 
   function closeVideoLightbox() {
     const lightbox = document.getElementById('video-lightbox');
-    const video = document.getElementById('lightbox-video') as HTMLVideoElement | null;
+    const video    = document.getElementById('lightbox-video') as HTMLVideoElement | null;
     if (!lightbox || !video) return;
     video.pause();
     video.src = '';
@@ -378,20 +469,15 @@
   document.getElementById('video-lightbox')?.addEventListener('click', (e) => {
     if ((e.target as Element).id === 'video-lightbox') closeVideoLightbox();
   });
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeVideoLightbox();
-  });
-  // ─────────────────────────────────────────────────────────────
 
+  // ─── Modal close ────────────────────────────────────────────
   async function closeModal() {
-    const modal = document.getElementById('project-modal');
-    const originElement = document.querySelector('[origin-element]') as HTMLElement | null;
+    const modal       = document.getElementById('project-modal');
+    const originEl    = document.querySelector('[origin-element]') as HTMLElement | null;
+    const originImg   = originEl?.querySelector('img') as HTMLElement | null;
+    const modalImg    = document.getElementById('modal-image') as HTMLElement | null;
 
     if (!modal) return;
-
-    // Image shared-element VT: modal header image → card thumbnail
-    const originImg = document.querySelector('[origin-element] img') as HTMLElement | null;
-    const modalImg = document.getElementById('modal-image') as HTMLElement | null;
 
     if ((document as any).startViewTransition && originImg && modalImg) {
       modalImg.style.viewTransitionName = 'vt-card-img';
@@ -403,56 +489,39 @@
       });
       await vt.finished;
       originImg.style.viewTransitionName = '';
-      originElement?.removeAttribute('origin-element');
+      originEl?.removeAttribute('origin-element');
     } else {
-      modal?.classList.add('hidden');
-      modal?.classList.remove('flex');
-      originElement?.removeAttribute('origin-element');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      originEl?.removeAttribute('origin-element');
     }
   }
 
-  // Modal close handlers
-  const modalClose = document.getElementById('modal-close');
-  const modal = document.getElementById('project-modal');
-  
-  modalClose?.addEventListener('click', closeModal);
-  modal?.addEventListener('click', (e) => {
-    if (e.target === modal) closeModal();
+  document.getElementById('modal-close')?.addEventListener('click', closeModal);
+  document.getElementById('project-modal')?.addEventListener('click', (e) => {
+    if ((e.target as Element).id === 'project-modal') closeModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') { closeModal(); closeVideoLightbox(); }
   });
 
-  // ESC key to close
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeModal();
-  });
-  
-  // Update on language change
+  // ─── Language change ────────────────────────────────────────
   window.addEventListener('languageChange', async (event: any) => {
     const { translations, lang } = event.detail;
-    
-    // Reload projects data with new language
     const { projects } = await import('../data/projects');
     projectsFullData = projects[lang as 'en' | 'es'] || [];
-    
     renderProjects();
-    
-    // Update title
-    const title = document.querySelector('[data-i18n="work.title"]');
-    if (title) {
-      title.textContent = translations.work.title;
-    }
-    
-    // Update modal titles
-    const aboutProjectTitle = document.querySelector('[data-i18n="work.aboutProject"]');
-    if (aboutProjectTitle) {
-      aboutProjectTitle.textContent = translations.work.aboutProject;
-    }
-    
-    const keyFeaturesTitle = document.querySelector('[data-i18n="work.keyFeatures"]');
-    if (keyFeaturesTitle) {
-      keyFeaturesTitle.textContent = translations.work.keyFeatures;
-    }
+
+    const titleEl = document.querySelector('[data-i18n="work.title"]');
+    if (titleEl) titleEl.textContent = translations.work.title;
+
+    const aboutEl = document.querySelector('[data-i18n="work.aboutProject"]');
+    if (aboutEl) aboutEl.textContent = translations.work.aboutProject;
+
+    const featEl = document.querySelector('[data-i18n="work.keyFeatures"]');
+    if (featEl) featEl.textContent = translations.work.keyFeatures;
   });
-  
-  // Initial load
+
+  // ─── Init ───────────────────────────────────────────────────
   loadProjects();
 </script>

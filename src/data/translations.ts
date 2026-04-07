@@ -13,6 +13,7 @@ export interface Translation {
     tagline: string;
     viewWork: string;
     contactMe: string;
+    status: string;
   };
   experience: {
     title: string;
@@ -93,7 +94,8 @@ export const translations: Translations = {
       role: 'Software Developer',
       tagline: 'Turning ideas into scalable web and mobile apps',
       viewWork: 'View Work',
-      contactMe: 'Contact Me'
+      contactMe: 'Contact Me',
+      status: 'Available for work'
     },
     experience: {
       title: 'Experience'
@@ -167,7 +169,8 @@ export const translations: Translations = {
       role: 'Desarrollador de Software',
       tagline: 'Transformando ideas en experiencias web y móviles excepcionales',
       viewWork: 'Ver Proyectos',
-      contactMe: 'Contáctame'
+      contactMe: 'Contáctame',
+      status: 'Disponible para trabajar'
     },
     experience: {
       title: 'Experiencia'
