@@ -71,26 +71,18 @@
         <div id="work-fade-l" class="absolute inset-y-0 left-0 w-28 z-20 pointer-events-none"></div>
 
         <!-- Layer A -->
-        <div id="work-layer-a" class="absolute inset-0">
-          <img id="work-bg-a" src="" alt="" aria-hidden="true"
-            class="absolute inset-0 w-full h-full object-cover scale-110 blur-2xl select-none"
-            style="opacity:0.2; pointer-events:none;"
-          />
+        <div id="work-layer-a" class="absolute inset-0 flex items-center justify-center">
           <img id="work-img-a" src="" alt=""
-            class="relative w-full h-full object-contain z-10"
-            style="padding:3rem;"
+            class="w-full h-full object-contain drop-shadow-2xl"
+            style="padding: 2.5rem 3rem;"
           />
         </div>
 
         <!-- Layer B -->
-        <div id="work-layer-b" class="absolute inset-0" style="opacity:0;">
-          <img id="work-bg-b" src="" alt="" aria-hidden="true"
-            class="absolute inset-0 w-full h-full object-cover scale-110 blur-2xl select-none"
-            style="opacity:0.2; pointer-events:none;"
-          />
+        <div id="work-layer-b" class="absolute inset-0 flex items-center justify-center" style="opacity:0;">
           <img id="work-img-b" src="" alt=""
-            class="relative w-full h-full object-contain z-10"
-            style="padding:3rem;"
+            class="w-full h-full object-contain drop-shadow-2xl"
+            style="padding: 2.5rem 3rem;"
           />
         </div>
 
@@ -357,12 +349,10 @@
     currentIdx = i;
     const p = projects[i];
 
-    const nextL  = activeLayer === 'a' ? 'b' : 'a';
-    const curEl  = document.getElementById(`work-layer-${activeLayer}`)!;
-    const nextEl = document.getElementById(`work-layer-${nextL}`)!;
-    const nextBg  = document.getElementById(`work-bg-${nextL}`)  as HTMLImageElement;
+    const nextL   = activeLayer === 'a' ? 'b' : 'a';
+    const curEl   = document.getElementById(`work-layer-${activeLayer}`)!;
+    const nextEl  = document.getElementById(`work-layer-${nextL}`)!;
     const nextImg = document.getElementById(`work-img-${nextL}`) as HTMLImageElement;
-    nextBg.src = p.image;
     nextImg.src = p.image;
     nextImg.alt = p.title;
 
