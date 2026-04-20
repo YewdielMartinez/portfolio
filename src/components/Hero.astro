@@ -1,43 +1,19 @@
 ---
-// Hero Section — Editorial Modernism with GSAP + Canvas Particles
 ---
 
 <section id="home" class="relative min-h-screen flex items-center px-6 sm:px-10 lg:px-20 pt-20 pb-16 overflow-hidden">
 
-  <!-- Dot-grid texture (base layer) -->
-  <div class="hero-grid" aria-hidden="true"></div>
-
-  <!-- Canvas particle system (interactive layer) -->
-  <canvas
-    id="hero-canvas"
-    class="absolute inset-0 w-full h-full"
-    style="z-index: 2; pointer-events: none;"
-    aria-hidden="true"
-  ></canvas>
-
-  <!-- Content (top layer) -->
+  <!-- Main content -->
   <div class="w-full max-w-6xl relative" style="z-index: 10;">
 
     <!-- Structural anchor rule -->
-    <div id="hero-rule" class="mb-10 h-px bg-gray-900 dark:bg-white"></div>
+    <div id="hero-rule" class="mb-10 h-px bg-gray-900 dark:bg-white opacity-15"></div>
 
-    <!-- Status badge -->
-    <div id="hero-status" class="flex items-center gap-2.5 mb-12">
-      <span class="relative flex h-2 w-2" aria-hidden="true">
-        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-        <span class="relative inline-flex h-2 w-2 rounded-full bg-emerald-400"></span>
-      </span>
-      <span
-        id="hero-status-text"
-        class="text-[10px] font-semibold tracking-[0.2em] uppercase text-gray-400 dark:text-gray-500"
-      ></span>
-    </div>
-
-    <!-- Primary hierarchy: Name -->
-    <div class="mb-10">
+    <!-- Primary: Name -->
+    <div class="mb-8">
       <h1
-        class="font-bold tracking-tight text-gray-900 dark:text-white select-none"
-        style="font-size: clamp(4rem, 11vw, 10rem); line-height: 0.88; letter-spacing: -0.03em;"
+        class="font-normal text-gray-900 dark:text-white select-none"
+        style="font-size: clamp(4rem, 11vw, 10rem); line-height: 0.9; letter-spacing: -0.04em;"
         aria-label="Yewdiel Medina"
       >
         <span class="name-clip"><span id="name-l1">Yewdiel</span></span>
@@ -45,49 +21,48 @@
       </h1>
     </div>
 
-    <!-- Secondary hierarchy: Role + Tagline -->
-    <div id="hero-meta" class="flex flex-col sm:flex-row sm:items-start gap-5 sm:gap-24 mb-14">
-      <div class="shrink-0 sm:pt-1">
-        <p
-          id="hero-role"
-          class="text-[10px] font-semibold tracking-[0.22em] uppercase text-gray-400 dark:text-gray-500"
-        ></p>
-      </div>
+    <!-- Role + extending line -->
+    <div id="hero-meta" class="flex items-center gap-5 mb-14">
       <p
-        id="hero-tagline"
-        class="text-base sm:text-lg text-gray-500 dark:text-gray-400 leading-relaxed max-w-xs"
+        id="hero-role"
+        class="text-[10px] font-medium tracking-[0.25em] uppercase text-gray-400 dark:text-gray-500 shrink-0"
       ></p>
+      <div
+        id="role-line"
+        class="flex-1 h-px bg-gray-200 dark:bg-gray-700/60"
+        aria-hidden="true"
+      ></div>
     </div>
 
-    <!-- Action layer: CTAs -->
+    <!-- CTAs -->
     <div id="hero-buttons" class="flex flex-col sm:flex-row gap-3 mb-12">
       <a
         href="#work"
-        class="inline-flex items-center justify-center gap-2.5 px-8 py-4 bg-gray-900 dark:bg-white text-white dark:text-black rounded-full font-semibold text-sm tracking-wide transition-all duration-300 hover:bg-gray-700 dark:hover:bg-gray-100 group"
+        class="inline-flex items-center justify-center gap-2.5 px-8 py-3.5 bg-gray-900 dark:bg-white text-white dark:text-black rounded-full text-sm tracking-wide transition-all duration-300 hover:bg-gray-700 dark:hover:bg-gray-100 group"
         aria-label="View my work"
       >
         <span id="btn-view-work">View Work</span>
-        <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <svg class="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
         </svg>
       </a>
       <a
         href="#contact"
         id="btn-contact"
-        class="inline-flex items-center justify-center px-8 py-4 border border-gray-200 dark:border-gray-800 text-gray-700 dark:text-gray-300 rounded-full font-semibold text-sm tracking-wide transition-all duration-300 hover:border-gray-500 dark:hover:border-gray-500 hover:text-gray-900 dark:hover:text-white"
+        class="inline-flex items-center justify-center px-8 py-3.5 border border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-300 rounded-full text-sm tracking-wide transition-all duration-300 hover:border-gray-700 dark:hover:border-gray-400 hover:text-gray-900 dark:hover:text-white"
       >
-        Contact Me
+        Contact
       </a>
     </div>
 
-    <!-- Tertiary layer: Social links -->
+    <!-- Social links -->
     <div id="hero-social" class="flex items-center gap-3">
       <div id="hero-social-links" class="flex gap-2"></div>
-      <div class="w-px h-4 bg-gray-200 dark:bg-gray-800 mx-0.5 shrink-0" aria-hidden="true"></div>
+      <div class="w-px h-4 bg-gray-200 dark:bg-gray-700 mx-0.5 shrink-0" aria-hidden="true"></div>
       <a
         href="/CV.pdf"
         download
-        class="w-9 h-9 flex items-center justify-center border border-gray-200 dark:border-gray-800 text-gray-500 dark:text-gray-400 rounded-full transition-all duration-300 hover:bg-gray-900 dark:hover:bg-white hover:text-white dark:hover:text-black hover:border-gray-900 dark:hover:border-white"
+        class="w-10 h-10 flex items-center justify-center border border-gray-300 dark:border-gray-600 text-gray-400 dark:text-gray-500 rounded-full transition-all duration-300 hover:bg-gray-900 dark:hover:bg-white hover:text-white dark:hover:text-black hover:border-gray-900 dark:hover:border-white"
         aria-label="Download CV"
         title="Download CV"
       >
@@ -99,7 +74,24 @@
 
   </div>
 
-  <!-- Scroll cue: bottom-right -->
+  <!-- Right descriptor — desktop only -->
+  <div
+    id="hero-right"
+    class="hidden lg:flex flex-col items-end gap-4 absolute right-6 sm:right-10 lg:right-20 top-1/2 -translate-y-1/2 pointer-events-none"
+    style="z-index: 10;"
+    aria-hidden="true"
+  >
+    <div class="flex flex-col items-end gap-2.5">
+      <span class="right-tag text-[9px] font-medium tracking-[0.22em] uppercase text-gray-300 dark:text-gray-600">Design Systems</span>
+      <span class="right-tag text-[9px] font-medium tracking-[0.22em] uppercase text-gray-300 dark:text-gray-600">UI Design</span>
+      <span class="right-tag text-[9px] font-medium tracking-[0.22em] uppercase text-gray-300 dark:text-gray-600">UX Research</span>
+      <span class="right-tag text-[9px] font-medium tracking-[0.22em] uppercase text-gray-300 dark:text-gray-600">Frontend Dev</span>
+    </div>
+    <div id="right-divider" class="w-px bg-gray-200 dark:bg-gray-700" style="height: 32px;"></div>
+    <span id="right-year" class="text-[9px] font-medium tracking-[0.2em] text-gray-300 dark:text-gray-600">2025</span>
+  </div>
+
+  <!-- Scroll cue -->
   <div
     id="scroll-indicator"
     class="absolute bottom-8 right-6 sm:right-10 lg:right-20 flex flex-col items-center gap-3 pointer-events-none"
@@ -107,216 +99,122 @@
     aria-hidden="true"
   >
     <span
-      class="text-[9px] font-semibold tracking-[0.3em] uppercase text-gray-300 dark:text-gray-700"
+      class="text-[9px] font-medium tracking-[0.3em] uppercase text-gray-400 dark:text-gray-400"
       style="writing-mode: vertical-rl; text-orientation: mixed;"
     >Scroll</span>
-    <div id="scroll-line" class="w-px bg-gradient-to-b from-gray-300 dark:from-gray-700 to-transparent" style="height: 56px;"></div>
+    <div id="scroll-line" class="w-px bg-linear-to-b from-gray-400 dark:from-gray-400 to-transparent" style="height: 48px;"></div>
   </div>
 
 </section>
 
 <style>
-  /* ─── Initial states ─── */
+  /* Initial states */
   #hero-rule         { transform: scaleX(0); transform-origin: left center; }
-  #hero-status       { opacity: 0; transform: translateY(10px); }
-  #hero-meta         { opacity: 0; transform: translateY(18px); }
-  #hero-buttons      { opacity: 0; transform: translateY(18px); }
+  #hero-meta         { opacity: 0; }
+  #role-line         { transform: scaleX(0); transform-origin: left center; }
+  #hero-buttons      { opacity: 0; transform: translateY(16px); }
   #hero-social       { opacity: 0; }
   #scroll-indicator  { opacity: 0; }
-  #hero-canvas       { opacity: 0; }
+  .right-tag         { opacity: 0; transform: translateX(10px); }
+  #right-divider     { opacity: 0; transform: scaleY(0); transform-origin: top center; }
+  #right-year        { opacity: 0; }
 
   /* Name reveal */
-  .name-clip          { display: block; overflow: hidden; line-height: 1.05; }
+  .name-clip          { display: block; overflow: hidden; line-height: 1.0; }
   #name-l1, #name-l2 { display: block; transform: translateY(108%); }
 
-  /* Dot-grid texture */
-  .hero-grid {
-    position: absolute;
-    inset: 0;
-    background-image: radial-gradient(circle, rgb(0 0 0 / 0.055) 1px, transparent 1px);
-    background-size: 28px 28px;
-    pointer-events: none;
-  }
-  :global(.dark) .hero-grid {
-    background-image: radial-gradient(circle, rgb(255 255 255 / 0.04) 1px, transparent 1px);
-  }
-
-  /* Scroll line pulse */
+  /* Scroll line */
   @keyframes scroll-pulse {
-    0%, 100% { opacity: 0.4; }
-    50%       { opacity: 1; }
+    0%, 100% { opacity: 0.25; }
+    50%       { opacity: 0.7; }
   }
-  #scroll-line { animation: scroll-pulse 2.4s ease-in-out infinite; }
+  #scroll-line { animation: scroll-pulse 2.8s ease-in-out infinite; }
 </style>
 
 <script>
   import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
   import { translations, social } from '../data/translations';
+
+  gsap.registerPlugin(ScrollTrigger);
 
   type Lang = 'en' | 'es';
 
   const SOCIAL_BTN =
-    'w-9 h-9 flex items-center justify-center border border-gray-200 dark:border-gray-800 ' +
-    'text-gray-500 dark:text-gray-400 rounded-full transition-all duration-300 ' +
+    'w-10 h-10 flex items-center justify-center border border-gray-300 dark:border-gray-600 ' +
+    'text-gray-400 dark:text-gray-500 rounded-full transition-all duration-300 ' +
     'hover:bg-gray-900 dark:hover:bg-white hover:text-white dark:hover:text-black ' +
     'hover:border-gray-900 dark:hover:border-white';
 
-  // ─── Helpers ───────────────────────────────────────────────
   function el(id: string): HTMLElement | null {
     return document.getElementById(id);
   }
 
   function applyTexts(t: typeof translations['en']) {
-    const role       = el('hero-role');
-    const tagline    = el('hero-tagline');
-    const statusText = el('hero-status-text');
-    const viewWork   = el('btn-view-work');
-    const contact    = el('btn-contact');
-
-    if (role)       role.textContent       = t.home.role;
-    if (tagline)    tagline.textContent    = t.home.tagline;
-    if (statusText) statusText.textContent = t.home.status;
-    if (viewWork)   viewWork.textContent   = t.home.viewWork;
-    if (contact)    contact.textContent    = t.home.contactMe;
+    const role     = el('hero-role');
+    const viewWork = el('btn-view-work');
+    const contact  = el('btn-contact');
+    if (role)     role.textContent     = t.home.role;
+    if (viewWork) viewWork.textContent = t.home.viewWork;
+    if (contact)  contact.textContent  = t.home.contactMe;
   }
 
-  // ─── GSAP entrance ─────────────────────────────────────────
   function resetStates() {
-    gsap.set('#hero-rule',         { scaleX: 0 });
-    gsap.set('#hero-status',       { opacity: 0, y: 10 });
-    gsap.set('#name-l1, #name-l2', { y: '108%' });
-    gsap.set('#hero-meta',         { opacity: 0, y: 18 });
-    gsap.set('#hero-buttons',      { opacity: 0, y: 18 });
-    gsap.set('#hero-social',       { opacity: 0 });
-    gsap.set('#scroll-indicator',  { opacity: 0 });
+    gsap.set('#hero-rule',          { scaleX: 0 });
+    gsap.set('#name-l1, #name-l2',  { y: '108%' });
+    gsap.set('#hero-meta',          { opacity: 0 });
+    gsap.set('#role-line',          { scaleX: 0 });
+    gsap.set('#hero-buttons',       { opacity: 0, y: 16 });
+    gsap.set('#hero-social',        { opacity: 0 });
+    gsap.set('#scroll-indicator',   { opacity: 0 });
+    gsap.set('.right-tag',          { opacity: 0, x: 10 });
+    gsap.set('#right-divider',      { opacity: 0, scaleY: 0 });
+    gsap.set('#right-year',         { opacity: 0 });
   }
 
   let heroTL: gsap.core.Timeline | null = null;
+  let parallaxST: ScrollTrigger | null = null;
 
-  function buildTimeline() {
-    heroTL = gsap.timeline()
-      .to('#hero-rule',        { scaleX: 1,        duration: 0.85, ease: 'power3.inOut' }, 0.1)
-      .to('#hero-canvas',      { opacity: 1,        duration: 2.0,  ease: 'power2.out'  }, 0.3)
-      .to('#hero-status',      { opacity: 1, y: 0,  duration: 0.5,  ease: 'power2.out'  }, 0.65)
-      .to('#name-l1',          { y: '0%',           duration: 1.0,  ease: 'power4.out'  }, 0.78)
-      .to('#name-l2',          { y: '0%',           duration: 1.0,  ease: 'power4.out'  }, 0.92)
-      .to('#hero-meta',        { opacity: 1, y: 0,  duration: 0.65, ease: 'power2.out'  }, 1.2)
-      .to('#hero-buttons',     { opacity: 1, y: 0,  duration: 0.65, ease: 'power2.out'  }, 1.35)
-      .to('#hero-social',      { opacity: 1,         duration: 0.5,  ease: 'power2.out'  }, 1.5)
-      .to('#scroll-indicator', { opacity: 1,         duration: 0.7,  ease: 'power2.out'  }, 2.2);
-  }
-
-  // ─── Canvas particle system ────────────────────────────────
-  interface Particle {
-    x: number; y: number;
-    originX: number; originY: number;
-    vx: number; vy: number;
-    size: number;
-    opacity: number;
-    phase: number;
-    floatR: number;
-    floatS: number;
-  }
-
-  const PARTICLE_COUNT = 95;
-  const MOUSE_RADIUS   = 130;
-  const REPULSION      = 0.9;
-  const SPRING         = 0.038;
-  const FRICTION       = 0.87;
-
-  let canvas: HTMLCanvasElement;
-  let ctx: CanvasRenderingContext2D;
-  let particles: Particle[] = [];
-  let mouseX = -1000;
-  let mouseY = -1000;
-  let tickerAdded = false;
-
-  function initParticles() {
-    particles = [];
-    const w = canvas.width;
-    const h = canvas.height;
-    for (let i = 0; i < PARTICLE_COUNT; i++) {
-      const ox = Math.random() * w;
-      const oy = Math.random() * h;
-      particles.push({
-        x: ox, y: oy,
-        originX: ox, originY: oy,
-        vx: 0, vy: 0,
-        // Very small: 0.8 – 2.4 px
-        size: Math.random() * 1.6 + 0.8,
-        // Opacity: layered so some dots are crisp, others are ghosted
-        opacity: Math.random() * 0.38 + 0.08,
-        phase: Math.random() * Math.PI * 2,
-        floatR: Math.random() * 22 + 8,   // float amplitude px
-        floatS: Math.random() * 0.00045 + 0.00018, // float speed (ms-based)
-      });
-    }
-  }
-
-  function resizeCanvas() {
-    const section = document.getElementById('home');
-    if (!section || !canvas) return;
-    canvas.width  = section.offsetWidth;
-    canvas.height = section.offsetHeight;
-    initParticles();
-  }
-
-  function isDark(): boolean {
-    return document.documentElement.classList.contains('dark');
-  }
-
-  function startParticles() {
-    if (tickerAdded) return;
-    tickerAdded = true;
-
-    gsap.ticker.add(() => {
-      if (!ctx) return;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      const dark = isDark();
-      const now  = performance.now();
-
-      for (const p of particles) {
-        // Ambient float target
-        const tx = p.originX + Math.sin(now * p.floatS + p.phase) * p.floatR;
-        const ty = p.originY + Math.cos(now * p.floatS * 0.65 + p.phase) * p.floatR * 0.55;
-
-        // Mouse repulsion
-        const dx   = p.x - mouseX;
-        const dy   = p.y - mouseY;
-        const dist = Math.hypot(dx, dy);
-
-        if (dist < MOUSE_RADIUS && dist > 0) {
-          const force = ((MOUSE_RADIUS - dist) / MOUSE_RADIUS) * REPULSION;
-          p.vx += (dx / dist) * force;
-          p.vy += (dy / dist) * force;
-        }
-
-        // Spring toward float target
-        p.vx += (tx - p.x) * SPRING;
-        p.vy += (ty - p.y) * SPRING;
-
-        // Friction
-        p.vx *= FRICTION;
-        p.vy *= FRICTION;
-
-        // Integrate
-        p.x += p.vx;
-        p.y += p.vy;
-
-        // Draw
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        // Contrast: crisp black on white, soft white on black
-        ctx.fillStyle = dark
-          ? `rgba(255,255,255,${p.opacity * 0.85})`
-          : `rgba(0,0,0,${p.opacity})`;
-        ctx.fill();
-      }
+  function setupParallax() {
+    if (parallaxST) { parallaxST.kill(); parallaxST = null; }
+    const tl = gsap.timeline({ paused: true })
+      .to(['#name-l1', '#name-l2'], { y: -80,              ease: 'none' }, 0)
+      .to('#hero-rule',             { opacity: 0,           ease: 'none' }, 0)
+      .to('#hero-meta',             { y: -40, opacity: 0,   ease: 'none' }, 0)
+      .to('#hero-buttons',          { y: -25, opacity: 0,   ease: 'none' }, 0)
+      .to('#hero-social',           { opacity: 0,           ease: 'none' }, 0)
+      .to(['.right-tag', '#right-divider', '#right-year'], { x: 20, opacity: 0, ease: 'none' }, 0);
+    parallaxST = ScrollTrigger.create({
+      trigger: '#home',
+      start: 'top top',
+      end: 'bottom top',
+      scrub: 1.2,
+      animation: tl,
     });
   }
 
-  // ─── Social links ───────────────────────────────────────────
+  function buildTimeline() {
+    heroTL = gsap.timeline({ defaults: { ease: 'power3.out' }, onComplete: setupParallax })
+      // Anchor rule draws in
+      .to('#hero-rule',        { scaleX: 1,        duration: 1.0, ease: 'power3.inOut'  }, 0.1)
+      // Name slides up — staggered lines
+      .to('#name-l1',          { y: '0%',           duration: 1.1, ease: 'power4.out'   }, 0.45)
+      .to('#name-l2',          { y: '0%',           duration: 1.1, ease: 'power4.out'   }, 0.58)
+      // Role text fades in
+      .to('#hero-meta',        { opacity: 1,         duration: 0.5                       }, 0.9)
+      // Line extends from role
+      .to('#role-line',        { scaleX: 1,          duration: 0.9, ease: 'power3.inOut' }, 0.95)
+      // Right descriptor staggered from right edge
+      .to('.right-tag',        { opacity: 1, x: 0,   duration: 0.5, stagger: 0.08       }, 1.0)
+      .to('#right-divider',    { opacity: 1, scaleY: 1, duration: 0.5                   }, 1.42)
+      .to('#right-year',       { opacity: 1,           duration: 0.5                     }, 1.6)
+      // CTAs + socials
+      .to('#hero-buttons',     { opacity: 1, y: 0,   duration: 0.55                     }, 1.15)
+      .to('#hero-social',      { opacity: 1,           duration: 0.5                     }, 1.3)
+      // Scroll cue last
+      .to('#scroll-indicator', { opacity: 1,           duration: 0.6                     }, 1.9);
+  }
+
   function renderSocials() {
     const container = el('hero-social-links');
     if (!container) return;
@@ -354,50 +252,19 @@
     container.innerHTML = items.join('');
   }
 
-  // ─── Init ───────────────────────────────────────────────────
   document.addEventListener('DOMContentLoaded', () => {
-    // Texts + socials
     const lang = (localStorage.getItem('language') || 'en') as Lang;
     applyTexts(translations[lang]);
     renderSocials();
 
-    // Canvas setup
-    canvas = document.getElementById('hero-canvas') as HTMLCanvasElement;
-    ctx    = canvas.getContext('2d')!;
-    resizeCanvas();
-    startParticles();
-
-    // Mouse tracking relative to canvas
-    const section = document.getElementById('home')!;
-    section.addEventListener('mousemove', (e: MouseEvent) => {
-      const rect = canvas.getBoundingClientRect();
-      mouseX = e.clientX - rect.left;
-      mouseY = e.clientY - rect.top;
-    }, { passive: true });
-
-    section.addEventListener('mouseleave', () => {
-      // Push mouse far off-canvas so particles drift back
-      mouseX = -1000;
-      mouseY = -1000;
-    }, { passive: true });
-
-    // Resize
-    let resizeTimer: ReturnType<typeof setTimeout>;
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(resizeCanvas, 150);
-    }, { passive: true });
-
-    // Entrance animation
     resetStates();
     buildTimeline();
 
-    // Scroll indicator fade
     const scrollInd = el('scroll-indicator');
     if (scrollInd) {
       window.addEventListener('scroll', () => {
         gsap.to(scrollInd, {
-          opacity: window.scrollY > 60 ? 0 : 1,
+          opacity: window.scrollY > 80 ? 0 : 1,
           duration: 0.4,
           overwrite: true,
         });
@@ -405,7 +272,6 @@
     }
   });
 
-  // ─── Language change ────────────────────────────────────────
   window.addEventListener('languageChange', async (event: any) => {
     const t = event.detail.translations as typeof translations['en'];
 
@@ -414,13 +280,14 @@
       .to(['#name-l2', '#name-l1'],
           { y: '-108%', duration: 0.4, stagger: 0.07, ease: 'power3.in' }, 0)
       .to(['#hero-social', '#hero-buttons', '#hero-meta'],
-          { opacity: 0, y: -10, duration: 0.25, stagger: 0.04 }, 0)
-      .to('#hero-status', { opacity: 0, duration: 0.2 }, 0)
-      .to('#hero-rule',   { scaleX: 0, duration: 0.45, ease: 'power2.in' }, 0.1);
+          { opacity: 0, y: -8, duration: 0.2, stagger: 0.04 }, 0)
+      .to('.right-tag',   { opacity: 0, x: 8, duration: 0.2 }, 0)
+      .to('#hero-rule',   { scaleX: 0, duration: 0.4, ease: 'power2.in' }, 0.1);
 
     await outTL.then();
     applyTexts(t);
     if (heroTL) heroTL.kill();
+    if (parallaxST) { parallaxST.kill(); parallaxST = null; }
     resetStates();
     buildTimeline();
   });

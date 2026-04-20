@@ -44,7 +44,7 @@ export default function SkillIcon({
   // Full card: existing behavior
   return (
     <div
-      className="group bg-white dark:bg-[#111111] rounded-xl p-6 flex flex-col items-center justify-center gap-3 transition-all duration-300 cursor-default"
+      className="group bg-[rgb(232,230,222)] dark:bg-[rgb(50,50,48)] rounded-xl p-6 flex flex-col items-center justify-center gap-3 transition-all duration-300 cursor-default"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >

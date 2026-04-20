@@ -1,186 +1,213 @@
 ---
-// Work Section — Editorial numbered list with sticky preview pane
 ---
 
-<section id="work" class="min-h-screen py-24 px-6 sm:px-10 lg:px-20 bg-white dark:bg-black">
-  <div class="max-w-6xl mx-auto">
+<!--
+  Work — Pinned full-screen showcase (desktop)
+  Section height = projects.length × 100vh (set by JS)
+  On mobile: normal scroll card list
+-->
+<section id="work" class="relative dark:bg-[rgb(38,38,36)]">
 
-    <!-- Header — consistent with hero's editorial style -->
-    <div class="mb-16">
-      <div class="flex items-center gap-4 mb-5">
-        <div class="flex-1 h-px bg-gray-200 dark:bg-gray-800"></div>
-        <span class="text-[10px] font-semibold tracking-[0.2em] uppercase text-gray-400 dark:text-gray-500 shrink-0">
-          <span id="work-count">06</span>&nbsp;projects
-        </span>
+  <!-- ─── Desktop: pinned showcase ─────────────────────── -->
+  <div id="work-sticky" class="h-screen overflow-hidden hidden lg:flex flex-col">
+
+    <!-- Top bar: large counter (left) + step tracker (right) -->
+    <div class="flex items-start justify-between pl-12 xl:pl-16 pr-8 pt-6 pb-0 shrink-0">
+      <div class="flex flex-col">
+        <span class="text-[9px] font-medium tracking-[0.28em] uppercase text-gray-300 dark:text-gray-600 mb-1">Selected Work</span>
+        <div class="flex items-baseline gap-3">
+          <span
+            id="work-num-current"
+            class="font-normal tabular-nums text-gray-900 dark:text-white"
+            style="font-size: clamp(3rem, 6.5vw, 6rem); letter-spacing: -0.05em; line-height: 1;"
+          >01</span>
+          <span class="text-gray-200 dark:text-gray-700" style="font-size: clamp(1rem, 2vw, 1.6rem);" aria-hidden="true">—</span>
+          <span
+            id="work-num-total"
+            class="font-normal tabular-nums text-gray-200 dark:text-gray-700"
+            style="font-size: clamp(1.2rem, 2.5vw, 2rem); letter-spacing: -0.04em; line-height: 1;"
+          >06</span>
+        </div>
       </div>
-      <h2
-        class="font-bold tracking-tight text-gray-900 dark:text-white"
-        style="font-size: clamp(2.8rem, 6vw, 5rem); letter-spacing: -0.025em;"
-        data-i18n="work.title"
-      >Work</h2>
+      <div id="work-step-track" class="flex items-center mt-3"></div>
     </div>
 
-    <!-- Two-column: list + sticky preview -->
-    <div class="flex gap-12 xl:gap-20 items-start">
+    <!-- Ghost background title -->
+    <div
+      class="absolute inset-0 flex items-end pointer-events-none select-none overflow-hidden"
+      aria-hidden="true"
+    >
+      <span
+        id="work-bg-word"
+        class="font-normal text-gray-900 dark:text-white leading-none"
+        style="
+          font-size: clamp(9rem, 22vw, 22rem);
+          letter-spacing: -0.05em;
+          opacity: 0.04;
+          padding-left: 0.5vw;
+          padding-bottom: 0;
+          white-space: nowrap;
+          will-change: transform;
+        "
+      ></span>
+    </div>
 
-      <!-- Project list -->
-      <ul id="projects-list" class="flex-1 min-w-0" role="list">
-        <!-- Rows inserted by JS -->
-      </ul>
+    <!-- Content: info left + image right -->
+    <div class="flex flex-1 overflow-hidden">
 
-      <!-- Sticky preview pane (desktop only) -->
-      <div class="hidden lg:block w-64 xl:w-72 shrink-0">
-        <div class="sticky top-28">
+      <!-- Left: info -->
+      <div class="w-[38%] xl:w-[36%] flex flex-col justify-center pl-12 xl:pl-16 pr-8 pb-10 shrink-0 overflow-hidden">
+        <div id="work-info-panel"><!-- injected by JS --></div>
+        <!-- Progress: dots + keyboard hint -->
+        <div class="mt-12 flex items-center gap-4">
+          <div id="work-dots" class="flex items-center gap-2"></div>
+          <span class="text-[8px] font-medium tracking-[0.15em] uppercase text-gray-200 dark:text-gray-700 hidden xl:block">← → to navigate</span>
+        </div>
+      </div>
 
-          <!-- Image crossfade container -->
-          <div
-            class="relative w-full overflow-hidden rounded-xl bg-gray-100 dark:bg-[#111]"
-            style="aspect-ratio: 4/3;"
-          >
-            <img
-              id="preview-a"
-              src=""
-              alt=""
-              class="absolute inset-0 w-full h-full object-contain transition-none"
-              style="opacity: 1;"
-            />
-            <img
-              id="preview-b"
-              src=""
-              alt=""
-              class="absolute inset-0 w-full h-full object-contain transition-none"
-              style="opacity: 0;"
-            />
-            <!-- Subtle frame overlay -->
-            <div class="absolute inset-0 ring-1 ring-inset ring-black/5 dark:ring-white/5 rounded-xl pointer-events-none"></div>
-          </div>
+      <!-- Right: image -->
+      <div class="flex-1 relative overflow-hidden">
+        <!-- gradient bleed from left panel -->
+        <div id="work-fade-l" class="absolute inset-y-0 left-0 w-28 z-20 pointer-events-none"></div>
 
-          <!-- Preview meta -->
-          <div class="mt-4 space-y-0.5">
-            <p id="preview-title" class="text-sm font-semibold text-gray-900 dark:text-white truncate"></p>
-            <p id="preview-role" class="text-[11px] tracking-wide text-gray-400 dark:text-gray-500"></p>
-          </div>
+        <!-- Layer A -->
+        <div id="work-layer-a" class="absolute inset-0">
+          <img id="work-bg-a" src="" alt="" aria-hidden="true"
+            class="absolute inset-0 w-full h-full object-cover scale-110 blur-2xl select-none"
+            style="opacity:0.2; pointer-events:none;"
+          />
+          <img id="work-img-a" src="" alt=""
+            class="relative w-full h-full object-contain z-10"
+            style="padding:3rem;"
+          />
+        </div>
 
-          <!-- View details hint -->
-          <p class="mt-3 text-[10px] font-medium tracking-[0.15em] uppercase text-gray-300 dark:text-gray-700">
-            Click to explore →
-          </p>
+        <!-- Layer B -->
+        <div id="work-layer-b" class="absolute inset-0" style="opacity:0;">
+          <img id="work-bg-b" src="" alt="" aria-hidden="true"
+            class="absolute inset-0 w-full h-full object-cover scale-110 blur-2xl select-none"
+            style="opacity:0.2; pointer-events:none;"
+          />
+          <img id="work-img-b" src="" alt=""
+            class="relative w-full h-full object-contain z-10"
+            style="padding:3rem;"
+          />
         </div>
       </div>
 
     </div>
   </div>
+
+  <!-- ─── Mobile: card list ─────────────────────────── -->
+  <div class="lg:hidden py-24 px-6 sm:px-10">
+    <div class="mb-16">
+      <div class="flex items-center gap-4 mb-5">
+        <div class="flex-1 h-px bg-gray-200 dark:bg-gray-700/60"></div>
+        <span class="text-[10px] font-medium tracking-[0.2em] uppercase text-gray-400 dark:text-gray-500 shrink-0">
+          <span id="work-count-m">06</span>&nbsp;projects
+        </span>
+      </div>
+      <h2 class="font-normal text-gray-900 dark:text-white"
+        style="font-size: clamp(2.8rem,8vw,5rem); letter-spacing: -0.03em;"
+        data-i18n="work.title">Work</h2>
+    </div>
+    <div id="work-mobile-list" class="space-y-0"><!-- injected by JS --></div>
+  </div>
+
 </section>
 
-<!-- ─── Project Detail Modal (unchanged) ──────────────────── -->
+<!-- ─── Modal ──────────────────────────────────────── -->
 <div
   id="project-modal"
-  class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+  class="fixed inset-0 z-50 hidden items-center justify-center bg-black/70 backdrop-blur-sm p-4"
 >
   <div
     id="modal-content"
-    class="relative bg-white dark:bg-[#111111] rounded-3xl shadow-2xl max-w-5xl w-full max-h-[95vh] overflow-hidden flex flex-col"
+    class="relative bg-[rgb(240,238,230)] dark:bg-[rgb(46,46,44)] rounded-2xl shadow-2xl max-w-4xl w-full max-h-[92vh] overflow-hidden flex flex-col"
   >
-    <div id="modal-header" class="relative h-[55vh] min-h-[420px] overflow-hidden bg-gray-100 dark:bg-[#181818]">
+    <div id="modal-header" class="relative h-[48vh] min-h-80 overflow-hidden bg-[rgb(224,222,214)] dark:bg-[rgb(30,30,28)]">
       <img id="modal-image-bg" src="" alt="" aria-hidden="true"
-        class="absolute inset-0 w-full h-full object-cover scale-110 blur-2xl opacity-50 dark:opacity-30 pointer-events-none select-none" />
+        class="absolute inset-0 w-full h-full object-cover scale-110 blur-2xl opacity-40 dark:opacity-25 pointer-events-none select-none" />
       <img id="modal-image" src="" alt="" class="relative w-full h-full object-contain z-10" />
-      <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent z-20"></div>
-      <button
-        id="modal-close"
-        class="absolute top-6 right-6 text-white hover:text-gray-300 transition-all p-3 hover:rotate-90 hover:scale-110 duration-300 z-20 bg-black/50 hover:bg-black/70 backdrop-blur-sm rounded-full"
-        aria-label="Close modal"
-      >
-        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+      <div class="absolute inset-0 bg-linear-to-t from-black/70 via-black/10 to-transparent z-20"></div>
+      <button id="modal-close"
+        class="absolute top-5 right-5 text-white/70 hover:text-white transition-all duration-200 z-30 p-2 rounded-full bg-black/30 hover:bg-black/50 backdrop-blur-sm"
+        aria-label="Close modal">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
         </svg>
       </button>
-      <div class="absolute bottom-6 left-8 right-8 z-30">
-        <h3 id="modal-title" class="text-2xl md:text-3xl font-bold text-white mb-3 drop-shadow-lg leading-tight break-words"></h3>
-        <div id="modal-tags" class="flex flex-wrap gap-2"></div>
+      <div class="absolute bottom-5 left-6 right-6 z-30">
+        <h3 id="modal-title" class="text-xl md:text-2xl font-normal text-white mb-3 leading-tight"></h3>
+        <div id="modal-tags" class="flex flex-wrap gap-1.5"></div>
       </div>
     </div>
-
-    <div class="flex-1 overflow-y-auto p-8">
-      <div class="flex items-center gap-6 mb-6 text-sm text-gray-600 dark:text-gray-400">
-        <div class="flex items-center gap-2">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+    <div class="flex-1 overflow-y-auto p-6 sm:p-8">
+      <div class="flex items-center gap-5 mb-7 text-xs text-gray-500 dark:text-gray-400">
+        <div class="flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
           </svg>
           <span id="modal-year"></span>
         </div>
-        <div class="flex items-center gap-2">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+        <div class="w-px h-3 bg-gray-300 dark:bg-gray-600"></div>
+        <div class="flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
           </svg>
           <span id="modal-role"></span>
         </div>
       </div>
-      <div class="mb-8">
-        <h4 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white" data-i18n="work.aboutProject">About the Project</h4>
-        <p id="modal-description" class="text-gray-600 dark:text-gray-400 leading-relaxed text-lg"></p>
+      <div class="mb-7">
+        <h4 class="text-[10px] font-medium tracking-[0.2em] uppercase text-gray-400 dark:text-gray-500 mb-3" data-i18n="work.aboutProject">About the Project</h4>
+        <p id="modal-description" class="text-gray-700 dark:text-gray-300 leading-relaxed text-base"></p>
       </div>
-      <div class="mb-8">
-        <h4 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white" data-i18n="work.keyFeatures">Key Features</h4>
+      <div class="mb-7">
+        <h4 class="text-[10px] font-medium tracking-[0.2em] uppercase text-gray-400 dark:text-gray-500 mb-3" data-i18n="work.keyFeatures">Key Features</h4>
         <ul id="modal-features" class="space-y-2"></ul>
       </div>
-      <div id="modal-links" class="flex flex-wrap gap-4"></div>
+      <div id="modal-links" class="flex flex-wrap gap-3"></div>
     </div>
   </div>
 </div>
 
-<!-- ─── Video Lightbox (unchanged) ────────────────────────── -->
+<!-- ─── Video Lightbox ──────────────────────────── -->
 <div id="video-lightbox" class="fixed inset-0 z-60 hidden items-center justify-center bg-black/95 backdrop-blur-md">
   <div class="relative w-full max-w-6xl mx-4">
-    <button
-      id="video-lightbox-close"
-      class="absolute -top-12 right-0 text-white/80 hover:text-white transition-all p-2 hover:rotate-90 hover:scale-110 duration-300"
-      aria-label="Close video"
-    >
-      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+    <button id="video-lightbox-close"
+      class="absolute -top-10 right-0 text-white/60 hover:text-white transition-all duration-200 p-2"
+      aria-label="Close video">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
       </svg>
     </button>
-    <video
-      id="lightbox-video"
-      class="w-full rounded-2xl shadow-2xl bg-black"
-      controls
-      playsinline
-      preload="metadata"
-      style="max-height: 80vh;"
-    ></video>
+    <video id="lightbox-video" class="w-full rounded-xl shadow-2xl bg-black" controls playsinline preload="metadata" style="max-height:80vh;"></video>
   </div>
 </div>
 
 <style>
-  /* Row entrance initial state */
-  .project-item { opacity: 0; transform: translateY(16px); }
-
-  /* Bottom border on last item */
-  .project-item:last-child { border-bottom: 1px solid; }
-  .project-item:last-child { border-color: rgb(243 244 246); }
-  :global(.dark) .project-item:last-child { border-color: rgb(31 41 55 / 0.7); }
+  /* Mobile card entrance */
+  .mobile-card { opacity: 0; transform: translateY(20px); }
 
   /* Modal scrollbar */
-  #modal-content .overflow-y-auto::-webkit-scrollbar { width: 4px; }
+  #modal-content .overflow-y-auto::-webkit-scrollbar { width: 3px; }
   #modal-content .overflow-y-auto::-webkit-scrollbar-track { background: transparent; }
-  #modal-content .overflow-y-auto::-webkit-scrollbar-thumb { background: #e5e7eb; border-radius: 99px; }
-  :global(.dark) #modal-content .overflow-y-auto::-webkit-scrollbar-thumb { background: #2d2d2d; }
+  #modal-content .overflow-y-auto::-webkit-scrollbar-thumb { background: rgb(200,198,190); border-radius: 99px; }
+  :global(.dark) #modal-content .overflow-y-auto::-webkit-scrollbar-thumb { background: rgb(60,60,58); }
+
+  /* Dot expand animation */
+  .work-dot { transition: width 0.35s cubic-bezier(0.4,0,0.2,1), background 0.3s ease; }
 </style>
 
 <style is:global>
   :root { view-transition-name: none; }
   ::view-transition { pointer-events: none; }
   ::view-transition-group(vt-card-img) {
-    animation-duration: 450ms;
-    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    animation-duration: 420ms;
+    animation-timing-function: cubic-bezier(0.4,0,0.2,1);
   }
   ::view-transition-old(vt-card-img),
-  ::view-transition-new(vt-card-img) {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-  }
+  ::view-transition-new(vt-card-img) { object-fit: cover; width: 100%; height: 100%; }
 </style>
 
 <script>
@@ -188,340 +215,388 @@
   import { ScrollTrigger } from 'gsap/ScrollTrigger';
   gsap.registerPlugin(ScrollTrigger);
 
-  let projectsFullData: any[] = [];
-
-  // ─── Preview pane crossfade ─────────────────────────────────
+  let projects: any[]  = [];
+  let currentIdx       = -1;
   let activeLayer: 'a' | 'b' = 'a';
 
-  function setPreview(project: any) {
-    const imgA  = document.getElementById('preview-a') as HTMLImageElement | null;
-    const imgB  = document.getElementById('preview-b') as HTMLImageElement | null;
-    const title = document.getElementById('preview-title');
-    const role  = document.getElementById('preview-role');
+  // ── Gradient fade (adapts to theme) ────────────────────────
+  function syncFade() {
+    const fade = document.getElementById('work-fade-l');
+    if (!fade) return;
+    const isDark = document.documentElement.classList.contains('dark');
+    fade.style.background = isDark
+      ? 'linear-gradient(to right, rgb(38,38,36) 0%, transparent 100%)'
+      : 'linear-gradient(to right, rgb(240,238,230) 0%, transparent 100%)';
+  }
 
-    if (!imgA || !imgB) return;
+  // ── Step tracker (top bar) ──────────────────────────────────
+  function buildStepTrack() {
+    const container = document.getElementById('work-step-track');
+    if (!container) return;
+    container.innerHTML = projects.map((p, i) => `
+      <button class="work-step flex items-center group cursor-pointer" data-idx="${i}">
+        ${i > 0 ? `<div class="step-line h-px w-5 mx-1.5 flex-shrink-0 transition-colors duration-400" style="background:rgb(229 231 235);"></div>` : ''}
+        <div class="flex items-center gap-1.5">
+          <div class="step-ring w-[18px] h-[18px] rounded-full border flex items-center justify-center shrink-0 transition-all duration-300"
+            style="border-color:rgb(209 213 219);">
+            <span class="text-[7px] font-medium tabular-nums transition-colors duration-300"
+              style="color:rgb(209 213 219);">${String(i+1).padStart(2,'0')}</span>
+          </div>
+          <span class="step-title text-[8px] font-medium transition-colors duration-300 hidden sm:block truncate"
+            style="max-width:75px; color:rgb(209 213 219);">${p.title}</span>
+        </div>
+      </button>
+    `).join('');
 
-    if (activeLayer === 'a') {
-      imgB.src = project.image;
-      gsap.to(imgA, { opacity: 0, duration: 0.35, ease: 'power2.out' });
-      gsap.to(imgB, { opacity: 1, duration: 0.35, ease: 'power2.out' });
-      activeLayer = 'b';
-    } else {
-      imgA.src = project.image;
-      gsap.to(imgB, { opacity: 0, duration: 0.35, ease: 'power2.out' });
-      gsap.to(imgA, { opacity: 1, duration: 0.35, ease: 'power2.out' });
-      activeLayer = 'a';
+    container.querySelectorAll<HTMLButtonElement>('.work-step').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const idx = parseInt(btn.dataset.idx || '0');
+        const section = document.getElementById('work')!;
+        const top     = section.getBoundingClientRect().top + window.scrollY;
+        const h       = section.offsetHeight;
+        window.scrollTo({ top: top + (idx / projects.length) * h, behavior: 'smooth' });
+      });
+    });
+  }
+
+  function updateStepTrack(active: number) {
+    const isDark = document.documentElement.classList.contains('dark');
+    const activeC  = isDark ? '#ffffff' : '#111827';
+    const pastC    = '#9ca3af';
+    const futureC  = isDark ? 'rgb(70 70 68)' : 'rgb(209 213 219)';
+
+    document.querySelectorAll<HTMLElement>('.work-step').forEach((btn, i) => {
+      const ring  = btn.querySelector<HTMLElement>('.step-ring');
+      const num   = ring?.querySelector('span');
+      const title = btn.querySelector<HTMLElement>('.step-title');
+      const line  = btn.querySelector<HTMLElement>('.step-line');
+      const isAct = i === active;
+      const isPas = i < active;
+      const c = isAct ? activeC : isPas ? pastC : futureC;
+
+      if (ring)  { ring.style.borderColor = c; ring.style.background = isAct ? activeC : 'transparent'; }
+      if (num)   num.style.color = isAct ? (isDark ? '#111827' : '#fff') : c;
+      if (title) title.style.color = isAct ? (isDark ? '#d1d5db' : '#6b7280') : futureC;
+      if (line)  line.style.background = isPas ? pastC : futureC;
+    });
+  }
+
+  // ── Info panel template ─────────────────────────────────────
+  function infoHTML(p: any, i: number): string {
+    return `
+      <h3 class="font-normal text-gray-900 dark:text-white mb-5"
+        style="font-size:clamp(2.6rem,4.2vw,4.5rem);letter-spacing:-0.04em;line-height:1.0;">
+        ${p.title}
+      </h3>
+      <p class="text-xs font-medium tracking-[0.18em] text-gray-400 dark:text-gray-500 uppercase mb-6">
+        ${p.tags.slice(0,3).join(' · ')}
+      </p>
+      <div class="h-px bg-gray-200 dark:bg-gray-700/40 mb-6"></div>
+      <p class="text-[18px] text-gray-500 dark:text-gray-400 leading-relaxed mb-8 line-clamp-4">${p.description}</p>
+      <button class="open-modal-btn inline-flex items-center gap-2 text-sm font-medium text-gray-900 dark:text-white group cursor-pointer"
+        data-index="${i}">
+        <span>View Project</span>
+        <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
+          fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+        </svg>
+      </button>
+    `;
+  }
+
+  function wirePanel(panel: HTMLElement) {
+    panel.querySelector<HTMLButtonElement>('.open-modal-btn')?.addEventListener('click', e => {
+      const idx = parseInt((e.currentTarget as HTMLButtonElement).dataset.index || '0');
+      openProjectModal(idx);
+    });
+  }
+
+  // ── Dots ───────────────────────────────────────────────────
+  function buildDots() {
+    const c = document.getElementById('work-dots');
+    if (!c) return;
+    c.innerHTML = projects.map((_, i) => `
+      <button class="work-dot rounded-full cursor-pointer" data-idx="${i}"
+        style="height:5px;width:5px;background:rgb(209 213 219);"></button>
+    `).join('');
+    c.querySelectorAll<HTMLButtonElement>('.work-dot').forEach(b => {
+      b.addEventListener('click', () => showProject(parseInt(b.dataset.idx || '0')));
+    });
+  }
+
+  function updateDots(active: number) {
+    document.querySelectorAll<HTMLButtonElement>('.work-dot').forEach((b, i) => {
+      const isAct = i === active;
+      b.style.background = isAct ? 'rgb(17 24 39)' : 'rgb(209 213 219)';
+      b.style.width = isAct ? '20px' : '5px';
+    });
+  }
+
+  // ── Show project ───────────────────────────────────────────
+  function showProject(i: number, instant = false) {
+    if (i === currentIdx && !instant) return;
+    const prev = currentIdx;
+    currentIdx = i;
+    const p = projects[i];
+
+    const nextL  = activeLayer === 'a' ? 'b' : 'a';
+    const curEl  = document.getElementById(`work-layer-${activeLayer}`)!;
+    const nextEl = document.getElementById(`work-layer-${nextL}`)!;
+    const nextBg  = document.getElementById(`work-bg-${nextL}`)  as HTMLImageElement;
+    const nextImg = document.getElementById(`work-img-${nextL}`) as HTMLImageElement;
+    nextBg.src = p.image;
+    nextImg.src = p.image;
+    nextImg.alt = p.title;
+
+    const panel      = document.getElementById('work-info-panel')!;
+    const bgWord     = document.getElementById('work-bg-word');
+    const numCurrent = document.getElementById('work-num-current');
+
+    if (instant) {
+      gsap.set(nextEl, { opacity: 1 });
+      gsap.set(curEl,  { opacity: 0 });
+      activeLayer = nextL;
+      panel.innerHTML = infoHTML(p, i);
+      wirePanel(panel);
+      buildDots();
+      buildStepTrack();
+      updateDots(i);
+      updateStepTrack(i);
+      if (numCurrent) numCurrent.textContent = String(i + 1).padStart(2, '0');
+      if (bgWord) bgWord.textContent = p.title.split(' ')[0];
+      return;
     }
 
-    if (title) title.textContent = project.title;
-    if (role)  role.textContent  = project.role || '';
+    const dir = i > prev ? 1 : -1;
+
+    // Animate counter
+    if (numCurrent) {
+      gsap.to(numCurrent, {
+        opacity: 0, y: -8 * dir, duration: 0.18, ease: 'power2.in',
+        onComplete: () => {
+          numCurrent.textContent = String(i + 1).padStart(2, '0');
+          gsap.fromTo(numCurrent, { y: 8 * dir }, { opacity: 1, y: 0, duration: 0.3, ease: 'power3.out' });
+        },
+      });
+    }
+
+    if (bgWord) {
+      gsap.to(bgWord, { opacity: 0, duration: 0.18, ease: 'power2.in',
+        onComplete: () => {
+          bgWord.textContent = p.title.split(' ')[0];
+          gsap.to(bgWord, { opacity: 0.04, duration: 0.4, ease: 'power2.out' });
+        }
+      });
+    }
+
+    gsap.to(panel, {
+      opacity: 0, y: -10 * dir, duration: 0.2, ease: 'power2.in',
+      onComplete: () => {
+        panel.innerHTML = infoHTML(p, i);
+        wirePanel(panel);
+        gsap.fromTo(panel, { opacity: 0, y: 10 * dir }, { opacity: 1, y: 0, duration: 0.4, ease: 'power3.out' });
+      }
+    });
+
+    gsap.to(nextEl, { opacity: 1, duration: 0.55, ease: 'power2.inOut' });
+    gsap.to(curEl,  { opacity: 0, duration: 0.55, ease: 'power2.inOut' });
+    activeLayer = nextL;
+
+    updateDots(i);
+    updateStepTrack(i);
   }
 
-  function initPreview(project: any) {
-    const imgA  = document.getElementById('preview-a') as HTMLImageElement | null;
-    const title = document.getElementById('preview-title');
-    const role  = document.getElementById('preview-role');
-
-    if (imgA)  imgA.src  = project.image;
-    if (title) title.textContent = project.title;
-    if (role)  role.textContent  = project.role || '';
-    activeLayer = 'a';
-  }
-
-  // ─── Render ─────────────────────────────────────────────────
-  function renderProjects() {
-    const list = document.getElementById('projects-list');
-    const countEl = document.getElementById('work-count');
+  // ── Mobile card list ──────────────────────────────────────
+  function renderMobile() {
+    const countEl = document.getElementById('work-count-m');
+    if (countEl) countEl.textContent = String(projects.length).padStart(2,'0');
+    const list = document.getElementById('work-mobile-list');
     if (!list) return;
 
-    if (countEl) {
-      countEl.textContent = String(projectsFullData.length).padStart(2, '0');
-    }
+    list.innerHTML = projects.map((p, i) => `
+      <article class="mobile-card border-t border-gray-200/80 dark:border-[rgb(55,55,53)] pt-8 pb-8 cursor-pointer group" data-idx="${i}">
+        <div class="flex items-start justify-between gap-4 mb-2">
+          <span class="text-[9px] font-medium tracking-[0.2em] text-gray-300 dark:text-gray-600 tabular-nums">${String(i+1).padStart(2,'0')}</span>
+          <svg class="w-3.5 h-3.5 text-gray-300 dark:text-gray-600 shrink-0 group-hover:text-gray-700 dark:group-hover:text-gray-300 group-hover:translate-x-0.5 transition-all duration-200 mt-0.5"
+            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+          </svg>
+        </div>
+        <h3 class="font-normal text-gray-900 dark:text-white mb-2 group-hover:translate-x-0.5 transition-transform duration-300"
+          style="font-size:clamp(1.4rem,4vw,1.8rem);letter-spacing:-0.025em;">${p.title}</h3>
+        <p class="text-[10px] font-medium tracking-[0.15em] text-gray-400 dark:text-gray-500 uppercase mb-5">${p.tags.slice(0,3).join(' · ')}</p>
+        <div class="rounded-xl overflow-hidden bg-[rgb(228,226,218)] dark:bg-[rgb(46,46,44)]" style="aspect-ratio:16/9;">
+          <img src="${p.image}" alt="${p.title}" class="w-full h-full object-contain p-4" loading="lazy">
+        </div>
+      </article>
+    `).join('');
 
-    list.innerHTML = projectsFullData.map((project, index) => {
-      const num  = String(index + 1).padStart(2, '0');
-      const tags = project.tags.slice(0, 4).join(' · ');
-
-      return `
-        <li
-          class="project-item border-t border-gray-100 dark:border-gray-800/70"
-          data-index="${index}"
-        >
-          <button
-            class="project-row w-full text-left group flex items-start gap-5 py-6 sm:py-7
-                   rounded-lg transition-colors duration-200
-                   hover:bg-gray-50/70 dark:hover:bg-white/[0.025]
-                   -mx-3 px-3"
-            data-project-index="${index}"
-            aria-label="View ${project.title} project details"
-          >
-            <!-- Index number -->
-            <span
-              class="text-[10px] font-bold tracking-[0.12em] text-gray-200 dark:text-gray-800
-                     shrink-0 mt-[5px] tabular-nums w-5 text-right select-none"
-              aria-hidden="true"
-            >${num}</span>
-
-            <!-- Main content -->
-            <div class="flex-1 min-w-0">
-              <div class="flex items-baseline justify-between gap-4">
-                <!-- Title -->
-                <h3
-                  class="text-base sm:text-lg font-semibold text-gray-900 dark:text-white
-                         leading-snug group-hover:translate-x-0.5 transition-transform duration-300"
-                >${project.title}</h3>
-
-                <!-- Year + arrow -->
-                <div class="flex items-center gap-2 shrink-0">
-                  ${project.year
-                    ? `<span class="text-xs text-gray-400 dark:text-gray-600 tabular-nums">${project.year}</span>`
-                    : ''}
-                  <svg
-                    class="w-3.5 h-3.5 text-gray-300 dark:text-gray-700
-                           group-hover:text-gray-700 dark:group-hover:text-gray-300
-                           group-hover:translate-x-0.5 transition-all duration-300"
-                    fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"
-                  >
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                  </svg>
-                </div>
-              </div>
-
-              <!-- Tags as dot-separated text -->
-              <p class="mt-1.5 text-[11px] font-medium tracking-wide text-gray-400 dark:text-gray-600 uppercase">
-                ${tags}
-              </p>
-            </div>
-          </button>
-        </li>`;
-    }).join('');
-
-    // ── Preview hover ──────────────────────────────────────────
-    document.querySelectorAll<HTMLButtonElement>('.project-row').forEach((row) => {
-      row.addEventListener('mouseenter', () => {
-        const idx = parseInt(row.dataset.projectIndex || '0');
-        if (projectsFullData[idx]) setPreview(projectsFullData[idx]);
-      });
-      row.addEventListener('click', () => {
-        const idx = parseInt(row.dataset.projectIndex || '0');
-        openProjectModal(idx, row);
+    list.querySelectorAll<HTMLElement>('.mobile-card').forEach(card => {
+      card.addEventListener('click', () => openProjectModal(parseInt(card.dataset.idx || '0')));
+      gsap.to(card, {
+        opacity: 1, y: 0, duration: 0.5, ease: 'power2.out',
+        scrollTrigger: { trigger: card, start: 'top 88%', once: true }
       });
     });
+  }
 
-    // ── Init preview with first project ───────────────────────
-    if (projectsFullData[0]) initPreview(projectsFullData[0]);
+  // ── Scroll setup ──────────────────────────────────────────
+  function setupDesktopScroll() {
+    const sticky = document.getElementById('work-sticky')!;
+    const count = projects.length;
 
-    // ── Entrance animation ─────────────────────────────────────
-    const items = document.querySelectorAll('.project-item');
-    gsap.to(items, {
-      opacity: 1,
-      y: 0,
-      duration: 0.55,
-      ease: 'power2.out',
-      stagger: 0.07,
-      scrollTrigger: {
-        trigger: '#projects-list',
-        start: 'top 78%',
-        once: true,
+    const numTotal = document.getElementById('work-num-total');
+    if (numTotal) numTotal.textContent = String(count).padStart(2, '0');
+
+    showProject(0, true);
+    syncFade();
+    new MutationObserver(syncFade).observe(document.documentElement, { attributeFilter: ['class'] });
+
+    ScrollTrigger.create({
+      id: 'work-scroll',
+      trigger: '#work-sticky',
+      start: 'top top',
+      end: () => `+=${count * window.innerHeight}`,
+      pin: true,
+      pinSpacing: true,
+      invalidateOnRefresh: true,
+      onLeaveBack: () => showProject(0),
+      onUpdate: (self) => {
+        const idx = Math.min(Math.floor(self.progress * count), count - 1);
+        if (idx !== currentIdx) showProject(idx);
       },
     });
+
+    ScrollTrigger.refresh();
+
+    // Keyboard navigation
+    window.addEventListener('keydown', e => {
+      const s = document.getElementById('work')!;
+      const rect = s.getBoundingClientRect();
+      if (rect.top > 0 || rect.bottom < 0) return; // not in view
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+        e.preventDefault();
+        showProject(Math.min(currentIdx + 1, projects.length - 1));
+      }
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+        e.preventDefault();
+        showProject(Math.max(currentIdx - 1, 0));
+      }
+    });
   }
 
-  // ─── Load projects ──────────────────────────────────────────
+  // ── Load ─────────────────────────────────────────────────
   async function loadProjects() {
-    try {
-      const { projects } = await import('../data/projects');
-      const lang = (localStorage.getItem('language') || 'en') as 'en' | 'es';
-      projectsFullData = projects[lang] || [];
-      renderProjects();
-    } catch (e) {
-      console.error('Error loading projects:', e);
-    }
+    const { projects: data } = await import('../data/projects');
+    const lang = (localStorage.getItem('language') || 'en') as 'en' | 'es';
+    projects = data[lang] || [];
+
+    const isDesktop = window.innerWidth >= 1024;
+    if (isDesktop) setupDesktopScroll();
+    else renderMobile();
   }
 
-  // ─── Modal ──────────────────────────────────────────────────
-  async function openProjectModal(index: number, originEl?: Element) {
-    const project = projectsFullData[index];
-    if (!project) return;
-
+  // ── Modal ─────────────────────────────────────────────────
+  async function openProjectModal(index: number) {
+    const p = projects[index];
+    if (!p) return;
     const { translations } = await import('../data/translations');
     const lang = (localStorage.getItem('language') || 'en') as 'en' | 'es';
     const t = translations[lang];
 
-    const modal          = document.getElementById('project-modal');
-    const modalImage     = document.getElementById('modal-image')     as HTMLImageElement;
-    const modalImageBg   = document.getElementById('modal-image-bg')  as HTMLImageElement;
-    const modalTitle     = document.getElementById('modal-title');
-    const modalTags      = document.getElementById('modal-tags');
-    const modalYear      = document.getElementById('modal-year');
-    const modalRole      = document.getElementById('modal-role');
-    const modalDesc      = document.getElementById('modal-description');
-    const modalFeatures  = document.getElementById('modal-features');
-    const modalLinks     = document.getElementById('modal-links');
+    const modal     = document.getElementById('project-modal')!;
+    const mImg      = document.getElementById('modal-image')    as HTMLImageElement;
+    const mImgBg    = document.getElementById('modal-image-bg') as HTMLImageElement;
+    const mTitle    = document.getElementById('modal-title');
+    const mTags     = document.getElementById('modal-tags');
+    const mYear     = document.getElementById('modal-year');
+    const mRole     = document.getElementById('modal-role');
+    const mDesc     = document.getElementById('modal-description');
+    const mFeatures = document.getElementById('modal-features');
+    const mLinks    = document.getElementById('modal-links');
 
-    if (modalImage)   modalImage.src   = project.image;
-    if (modalImageBg) modalImageBg.src = project.image;
-    if (modalTitle)   modalTitle.textContent = project.title;
-
-    if (modalTags) {
-      modalTags.innerHTML = project.tags.map((tag: string) => `
-        <span class="px-3 py-1 bg-white/20 backdrop-blur-sm text-white rounded-lg text-sm font-medium">${tag}</span>
-      `).join('');
+    mImg.src  = p.image;
+    mImgBg.src = p.image;
+    if (mTitle) mTitle.textContent = p.title;
+    if (mTags)  mTags.innerHTML = p.tags.map((tag: string) =>
+      `<span class="px-2.5 py-1 bg-white/15 backdrop-blur-sm text-white/90 rounded-md text-[10px] font-medium tracking-wide">${tag}</span>`
+    ).join('');
+    if (mYear) mYear.textContent = p.year || '';
+    if (mRole) mRole.textContent = p.role || 'Developer';
+    if (mDesc) mDesc.textContent = p.detailedDescription || p.description;
+    if (mFeatures && p.features) {
+      mFeatures.innerHTML = p.features.map((f: string) => `
+        <li class="flex items-start gap-2.5">
+          <span class="mt-1.5 w-1 h-1 rounded-full bg-gray-400 dark:bg-gray-500 shrink-0"></span>
+          <span class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">${f}</span>
+        </li>`).join('');
     }
-
-    if (modalYear) modalYear.textContent = project.year || 'N/D';
-    if (modalRole) modalRole.textContent = project.role || 'Developer';
-    if (modalDesc) modalDesc.textContent = project.detailedDescription || project.description;
-
-    if (modalFeatures && project.features) {
-      modalFeatures.innerHTML = project.features.map((f: string) => `
-        <li class="flex items-start gap-3">
-          <svg class="w-5 h-5 text-emerald-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-          </svg>
-          <span class="text-gray-600 dark:text-gray-400">${f}</span>
-        </li>
-      `).join('');
-    }
-
-    if (modalLinks) {
+    if (mLinks) {
+      const pb = 'inline-flex items-center gap-2 px-5 py-2.5 bg-gray-900 dark:bg-white text-white dark:text-black rounded-full text-sm font-medium hover:bg-gray-700 dark:hover:bg-gray-100 transition-all duration-200';
+      const sb = 'inline-flex items-center gap-2 px-5 py-2.5 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-full text-sm font-medium bg-[rgb(240,238,230)] dark:bg-[rgb(50,50,48)] hover:border-gray-600 dark:hover:border-gray-400 transition-all duration-200';
       const links: string[] = [];
-      if (project.github) links.push(`
-        <a href="${project.github}" target="_blank" rel="noopener noreferrer"
-           class="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 dark:bg-[#111] text-white rounded-full font-semibold hover:scale-105 hover:shadow-xl transition-all">
-          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-          </svg>
-          ${t.work.viewCode}
-        </a>`);
-      if (project.demo) links.push(`
-        <a href="${project.demo}" target="_blank" rel="noopener noreferrer"
-           class="inline-flex items-center gap-2 px-6 py-3 bg-black text-white rounded-full font-semibold hover:scale-105 hover:shadow-xl transition-all">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
-          </svg>
-          ${t.work.viewDemo}
-        </a>`);
-      if (project.link && project.link !== '#' && project.link !== project.demo) links.push(`
-        <a href="${project.link}" target="_blank" rel="noopener noreferrer"
-           class="inline-flex items-center gap-2 px-6 py-3 bg-black text-white rounded-full font-semibold hover:scale-105 hover:shadow-xl transition-all">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
-          </svg>
-          ${t.work.viewDemo}
-        </a>`);
-      if (project.video) links.push(`
-        <button type="button" data-video-url="${project.video}"
-          class="video-demo-btn inline-flex items-center gap-2 px-6 py-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 bg-white dark:bg-[#1a1a1a] rounded-full font-semibold hover:bg-gray-50 dark:hover:bg-[#222] hover:scale-105 transition-all">
-          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-          ${t.work.viewVideoDemo}
-        </button>`);
-      modalLinks.innerHTML = links.join('');
-
-      modalLinks.querySelectorAll<HTMLButtonElement>('.video-demo-btn').forEach((btn) => {
-        btn.addEventListener('click', () => openVideoLightbox(btn.dataset.videoUrl || ''));
+      if (p.github) links.push(`<a href="${p.github}" target="_blank" rel="noopener noreferrer" class="${pb}"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>${t.work.viewCode}</a>`);
+      if (p.demo) links.push(`<a href="${p.demo}" target="_blank" rel="noopener noreferrer" class="${sb}"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>${t.work.viewDemo}</a>`);
+      if (p.link && p.link !== '#' && p.link !== p.demo) links.push(`<a href="${p.link}" target="_blank" rel="noopener noreferrer" class="${sb}"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>${t.work.viewDemo}</a>`);
+      if (p.video) links.push(`<button type="button" data-video-url="${p.video}" class="video-demo-btn ${sb}"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>${t.work.viewVideoDemo}</button>`);
+      mLinks.innerHTML = links.join('');
+      mLinks.querySelectorAll<HTMLButtonElement>('.video-demo-btn').forEach(b => {
+        b.addEventListener('click', () => openVideoLightbox(b.dataset.videoUrl || ''));
       });
     }
 
-    // View Transition
-    const cardImg  = originEl?.querySelector('img') as HTMLElement | null;
-    const modalImg = document.getElementById('modal-image') as HTMLElement | null;
-    (originEl as HTMLElement)?.setAttribute('origin-element', '');
-
-    if ((document as any).startViewTransition && cardImg && modalImg) {
-      cardImg.style.viewTransitionName = 'vt-card-img';
-      modalImg.style.viewTransitionName = 'vt-card-img';
-      const vt = (document as any).startViewTransition(() => {
-        cardImg.style.viewTransitionName = '';
-        modal?.classList.remove('hidden');
-        modal?.classList.add('flex');
-      });
-      await vt.finished;
-      modalImg.style.viewTransitionName = '';
-    } else {
-      modal?.classList.remove('hidden');
-      modal?.classList.add('flex');
-    }
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
   }
 
-  // ─── Video Lightbox ─────────────────────────────────────────
+  function closeModal() {
+    const modal = document.getElementById('project-modal');
+    modal?.classList.add('hidden');
+    modal?.classList.remove('flex');
+  }
+
+  // ── Video lightbox ─────────────────────────────────────────
   function openVideoLightbox(url: string) {
-    const lightbox = document.getElementById('video-lightbox');
-    const video    = document.getElementById('lightbox-video') as HTMLVideoElement | null;
-    if (!lightbox || !video) return;
-    video.src = url;
-    lightbox.classList.remove('hidden');
-    lightbox.classList.add('flex');
-    video.play().catch(() => {});
+    const lb  = document.getElementById('video-lightbox');
+    const vid = document.getElementById('lightbox-video') as HTMLVideoElement;
+    if (!lb || !vid) return;
+    vid.src = url;
+    lb.classList.remove('hidden'); lb.classList.add('flex');
+    vid.play().catch(() => {});
   }
 
   function closeVideoLightbox() {
-    const lightbox = document.getElementById('video-lightbox');
-    const video    = document.getElementById('lightbox-video') as HTMLVideoElement | null;
-    if (!lightbox || !video) return;
-    video.pause();
-    video.src = '';
-    lightbox.classList.add('hidden');
-    lightbox.classList.remove('flex');
-  }
-
-  document.getElementById('video-lightbox-close')?.addEventListener('click', closeVideoLightbox);
-  document.getElementById('video-lightbox')?.addEventListener('click', (e) => {
-    if ((e.target as Element).id === 'video-lightbox') closeVideoLightbox();
-  });
-
-  // ─── Modal close ────────────────────────────────────────────
-  async function closeModal() {
-    const modal       = document.getElementById('project-modal');
-    const originEl    = document.querySelector('[origin-element]') as HTMLElement | null;
-    const originImg   = originEl?.querySelector('img') as HTMLElement | null;
-    const modalImg    = document.getElementById('modal-image') as HTMLElement | null;
-
-    if (!modal) return;
-
-    if ((document as any).startViewTransition && originImg && modalImg) {
-      modalImg.style.viewTransitionName = 'vt-card-img';
-      const vt = (document as any).startViewTransition(() => {
-        originImg.style.viewTransitionName = 'vt-card-img';
-        modalImg.style.viewTransitionName = '';
-        modal.classList.add('hidden');
-        modal.classList.remove('flex');
-      });
-      await vt.finished;
-      originImg.style.viewTransitionName = '';
-      originEl?.removeAttribute('origin-element');
-    } else {
-      modal.classList.add('hidden');
-      modal.classList.remove('flex');
-      originEl?.removeAttribute('origin-element');
-    }
+    const lb  = document.getElementById('video-lightbox');
+    const vid = document.getElementById('lightbox-video') as HTMLVideoElement;
+    if (!lb || !vid) return;
+    vid.pause(); vid.src = '';
+    lb.classList.add('hidden'); lb.classList.remove('flex');
   }
 
   document.getElementById('modal-close')?.addEventListener('click', closeModal);
-  document.getElementById('project-modal')?.addEventListener('click', (e) => {
+  document.getElementById('project-modal')?.addEventListener('click', e => {
     if ((e.target as Element).id === 'project-modal') closeModal();
   });
-  document.addEventListener('keydown', (e) => {
+  document.getElementById('video-lightbox-close')?.addEventListener('click', closeVideoLightbox);
+  document.getElementById('video-lightbox')?.addEventListener('click', e => {
+    if ((e.target as Element).id === 'video-lightbox') closeVideoLightbox();
+  });
+  document.addEventListener('keydown', e => {
     if (e.key === 'Escape') { closeModal(); closeVideoLightbox(); }
   });
 
-  // ─── Language change ────────────────────────────────────────
+  // ── Language ──────────────────────────────────────────────
   window.addEventListener('languageChange', async (event: any) => {
     const { translations, lang } = event.detail;
-    const { projects } = await import('../data/projects');
-    projectsFullData = projects[lang as 'en' | 'es'] || [];
-    renderProjects();
-
+    const { projects: data } = await import('../data/projects');
+    projects = data[lang as 'en' | 'es'] || [];
+    ScrollTrigger.getById('work-scroll')?.kill();
+    currentIdx = -1; activeLayer = 'a';
+    if (window.innerWidth >= 1024) setupDesktopScroll();
+    else renderMobile();
     const titleEl = document.querySelector('[data-i18n="work.title"]');
     if (titleEl) titleEl.textContent = translations.work.title;
-
-    const aboutEl = document.querySelector('[data-i18n="work.aboutProject"]');
-    if (aboutEl) aboutEl.textContent = translations.work.aboutProject;
-
-    const featEl = document.querySelector('[data-i18n="work.keyFeatures"]');
-    if (featEl) featEl.textContent = translations.work.keyFeatures;
   });
 
-  // ─── Init ───────────────────────────────────────────────────
-  loadProjects();
+  document.addEventListener('DOMContentLoaded', loadProjects);
 </script>

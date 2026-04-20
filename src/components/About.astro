@@ -14,7 +14,7 @@ const skillGroups: Record<string, typeof skills> = {
 
 <section
   id="about"
-  class="py-24 px-6 sm:px-10 lg:px-20 bg-white dark:bg-black"
+  class="py-24 px-6 sm:px-10 lg:px-20 dark:bg-[rgb(38,38,36)]"
 >
   <div class="max-w-6xl mx-auto">
 
@@ -65,7 +65,7 @@ const skillGroups: Record<string, typeof skills> = {
       <div class="space-y-6 lg:pt-1">
         <!-- Large pull-quote number (Atención Selectiva anchor) -->
         <p
-          class="text-base sm:text-lg text-gray-600 dark:text-gray-400 leading-relaxed"
+          class="text-lg sm:text-xl text-gray-600 dark:text-gray-400 leading-relaxed"
           data-i18n="about.bio"
         ></p>
 
@@ -122,16 +122,16 @@ const skillGroups: Record<string, typeof skills> = {
     <!-- ── Block 2: Skills — categorized (Fragmentación + Miller ≤7) ── -->
     <div class="about-skills" style="opacity:0; transform:translateY(20px);">
       <div class="flex items-center gap-4 mb-8">
-        <span class="text-[10px] font-semibold tracking-[0.2em] uppercase text-gray-400 dark:text-gray-500" data-i18n="about.skillsTitle">Skills &amp; Technologies</span>
-        <div class="flex-1 h-px bg-gray-100 dark:bg-gray-900"></div>
+        <span class="text-xs font-semibold tracking-[0.2em] uppercase text-gray-500 dark:text-gray-400" data-i18n="about.skillsTitle">Skills &amp; Technologies</span>
+        <div class="flex-1 h-px bg-gray-200 dark:bg-gray-700/40"></div>
       </div>
 
       <!-- 4 skill category blocks (Ley de Región Común) -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {Object.entries(skillGroups).map(([category, group]) => (
-          <div class="skill-group border border-gray-100 dark:border-gray-900 rounded-xl p-4" style="opacity:0; transform:translateY(12px);">
+          <div class="skill-group border border-gray-200 dark:border-gray-700/50 rounded-xl p-4" style="opacity:0; transform:translateY(12px);">
             <!-- Category label -->
-            <p class="text-[9px] font-bold tracking-[0.22em] uppercase text-gray-300 dark:text-gray-700 mb-3">
+            <p class="text-[10px] font-bold tracking-[0.22em] uppercase text-gray-400 dark:text-gray-500 mb-3">
               {category}
             </p>
             <!-- Skills as compact icon+text pills (Ley de Proximidad) -->

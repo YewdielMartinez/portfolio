@@ -1,6 +1,19 @@
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
 
+@font-face {
+  font-family: 'NB International';
+  src: url('../assets/fonts/NB International Regular/NB International Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --bg-light: rgb(240, 238, 230);
+  --bg-dark: rgb(10, 10, 10);
+}
+
 /* Smooth Scroll */
 
 html {

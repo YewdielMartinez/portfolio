@@ -9,9 +9,6 @@ import '../styles/global.css';
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
 		<title>Yewdiel Medina - Developer Portfolio</title>
 		<script is:inline>
 			if (localStorage.getItem('theme') === 'dark') {
@@ -21,19 +18,24 @@ import '../styles/global.css';
 			}
 		</script>
 	</head>
-	<body class="bg-white dark:bg-black text-gray-900 dark:text-white transition-colors duration-300">
+	<body class="text-gray-900 dark:text-white transition-colors duration-300">
 		<slot />
 	</body>
 </html>
 
 <style is:global>
 	body {
-		font-family: 'DM Sans', sans-serif;
+		font-family: 'NB International', sans-serif;
+		background-color: rgb(240, 238, 230);
+	}
+
+	.dark body {
+		background-color: rgb(38, 38, 36);
 	}
 
 	h1, h2, h3, h4, h5, h6 {
-		font-family: 'DM Sans', sans-serif;
-		font-weight: 500;
+		font-family: 'NB International', sans-serif;
+		font-weight: 400;
 		letter-spacing: -0.02em;
 	}
 
@@ -101,67 +103,52 @@ import '../styles/global.css';
 	gsap.registerPlugin(ScrollTrigger);
 
 	document.addEventListener('DOMContentLoaded', () => {
-		// Animate section headings on scroll (skip hero)
-		const headings = document.querySelectorAll('#experience h2, #work h2, #about h2, #contact h2');
-		headings.forEach((heading) => {
+		// ── Contact section reveals ──────────────────────────────
+		const contactHeading = document.querySelector<HTMLElement>('#contact h2');
+		if (contactHeading) {
 			gsap.fromTo(
-				heading,
-				{ opacity: 0, y: 50 },
+				contactHeading,
+				{ opacity: 0, y: 40, filter: 'blur(8px)' },
 				{
-					opacity: 1,
-					y: 0,
-					duration: 0.9,
-					ease: 'power3.out',
-					scrollTrigger: {
-						trigger: heading,
-						start: 'top 82%',
-						once: true,
-					},
+					opacity: 1, y: 0, filter: 'blur(0px)',
+					duration: 0.9, ease: 'power3.out',
+					scrollTrigger: { trigger: contactHeading, start: 'top 82%', once: true },
 				}
 			);
-		});
+		}
 
-		// Animate section subtitle paragraphs
-		const subtitles = document.querySelectorAll('#contact > div > p, #about > div > .grid p');
-		subtitles.forEach((el) => {
+		const contactSubtitle = document.querySelector<HTMLElement>('#contact > div > p');
+		if (contactSubtitle) {
 			gsap.fromTo(
-				el,
-				{ opacity: 0, y: 30 },
+				contactSubtitle,
+				{ opacity: 0, y: 20 },
 				{
-					opacity: 1,
-					y: 0,
-					duration: 0.7,
-					ease: 'power2.out',
-					scrollTrigger: {
-						trigger: el,
-						start: 'top 85%',
-						once: true,
-					},
+					opacity: 1, y: 0,
+					duration: 0.65, ease: 'power2.out',
+					scrollTrigger: { trigger: contactSubtitle, start: 'top 84%', once: true },
 				}
 			);
-		});
+		}
 
-		// Stagger animate skill icons when they appear
-		const skillsGrid = document.querySelector('#about .grid.grid-cols-2');
-		if (skillsGrid) {
-			ScrollTrigger.create({
-				trigger: skillsGrid,
-				start: 'top 80%',
-				once: true,
-				onEnter: () => {
-					gsap.fromTo(
-						skillsGrid.children,
-						{ opacity: 0, y: 30, scale: 0.9 },
-						{
-							opacity: 1,
-							y: 0,
-							scale: 1,
-							duration: 0.5,
-							ease: 'back.out(1.4)',
-							stagger: 0.04,
-						}
-					);
-				},
+		// Stagger form fields in
+		const formFields = document.querySelectorAll('#contact-form .mb-6');
+		if (formFields.length) {
+			gsap.set(formFields, { opacity: 0, y: 20 });
+			gsap.to(formFields, {
+				opacity: 1, y: 0,
+				duration: 0.55, ease: 'power2.out',
+				stagger: 0.1,
+				scrollTrigger: { trigger: '#contact-form', start: 'top 80%', once: true },
+			});
+		}
+
+		const submitBtn = document.getElementById('submit-button');
+		if (submitBtn) {
+			gsap.set(submitBtn, { opacity: 0, y: 12 });
+			gsap.to(submitBtn, {
+				opacity: 1, y: 0,
+				duration: 0.5, ease: 'back.out(1.2)',
+				scrollTrigger: { trigger: '#contact-form', start: 'top 72%', once: true },
 			});
 		}
 	});
