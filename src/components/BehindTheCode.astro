@@ -17,13 +17,16 @@
   <!-- Panel -->
   <div
     id="behind-panel"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="behind-title"
     class="relative bg-[#111] border border-white/10 rounded-2xl max-w-2xl w-full max-h-[88vh] overflow-hidden shadow-2xl"
   >
     <!-- Header -->
     <div class="flex items-start justify-between px-8 pt-8 pb-6 border-b border-white/8">
       <div>
         <p class="text-xs text-white/35 tracking-widest uppercase mb-3 font-normal" data-i18n="behind.unlocked">Easter Egg Unlocked</p>
-        <h2 class="text-3xl font-medium text-white leading-tight" data-i18n="behind.title">Behind the Code</h2>
+        <h2 id="behind-title" class="text-3xl font-medium text-white leading-tight" data-i18n="behind.title">Behind the Code</h2>
         <p class="text-base text-white/45 mt-1.5 font-normal" data-i18n="behind.subtitle">How and why this portfolio was crafted</p>
       </div>
       <button
@@ -238,13 +241,17 @@
     }
   });
 
+  let _behindTriggerEl: HTMLElement | null = null;
+
   function openModal() {
     if (behindModal) {
+      _behindTriggerEl = document.activeElement as HTMLElement;
       behindModal.classList.remove('hidden');
       behindModal.classList.add('flex');
       document.body.style.overflow = 'hidden';
-      
-      // Play a subtle notification sound (optional)
+      requestAnimationFrame(() => {
+        (document.getElementById('behind-close') as HTMLElement)?.focus();
+      });
       playNotification();
     }
   }
@@ -254,6 +261,8 @@
       behindModal.classList.add('hidden');
       behindModal.classList.remove('flex');
       document.body.style.overflow = '';
+      _behindTriggerEl?.focus();
+      _behindTriggerEl = null;
     }
   }
 

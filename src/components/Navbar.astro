@@ -42,8 +42,8 @@
           </button>
 
           <!-- Mobile Menu Button -->
-          <button id="mobile-menu-button" class="md:hidden p-2 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-white/10 transition-colors" aria-label="Toggle menu">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <button id="mobile-menu-button" class="md:hidden p-2 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-white/10 transition-colors" aria-label="Toggle menu" aria-controls="mobile-menu" aria-expanded="false">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
             </svg>
           </button>
@@ -267,8 +267,69 @@
 
 <script>
   import type { Lang } from '../types';
+  import gsap from 'gsap';
 
-  // ── Theme ──
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ── Theme transition helpers ─────────────────────────────────
+  function applyTheme(toDark: boolean) {
+    document.documentElement.classList.toggle('dark', toDark);
+    localStorage.setItem('theme', toDark ? 'dark' : 'light');
+    updateThemeIcon();
+  }
+
+  function animateThemeTransition(btn: HTMLElement, toDark: boolean) {
+    const rect = btn.getBoundingClientRect();
+    const x = rect.left + rect.width / 2;
+    const y = rect.top + rect.height / 2;
+    const maxR = Math.hypot(
+      Math.max(x, window.innerWidth  - x),
+      Math.max(y, window.innerHeight - y)
+    ) * 1.05;
+
+    const overlay = document.createElement('div');
+    overlay.style.cssText = `
+      position:fixed; inset:0; z-index:9998; pointer-events:none;
+      background:${toDark ? 'rgb(38,38,36)' : 'rgb(240,238,230)'};
+      clip-path:circle(0px at ${x}px ${y}px);
+    `;
+    document.body.appendChild(overlay);
+
+    gsap.to(overlay, {
+      clipPath: `circle(${maxR}px at ${x}px ${y}px)`,
+      duration: 0.72,
+      ease: 'power3.inOut',
+      onComplete: () => overlay.remove(),
+    });
+
+    // Apply the real theme switch while the overlay covers everything
+    gsap.delayedCall(0.3, () => applyTheme(toDark));
+  }
+
+  // ── Language transition helper ───────────────────────────────
+  async function animateLangTransition(callback: () => Promise<void>) {
+    const isDark = document.documentElement.classList.contains('dark');
+    const bg = isDark ? 'rgb(38,38,36)' : 'rgb(240,238,230)';
+
+    const overlay = document.createElement('div');
+    overlay.style.cssText = `
+      position:fixed; inset:0; z-index:9997; pointer-events:none;
+      background:${bg}; opacity:0;
+    `;
+    document.body.appendChild(overlay);
+
+    // 1. Fade in — cover everything
+    await gsap.to(overlay, { opacity: 1, duration: 0.2, ease: 'power2.in' });
+
+    // 2. Update all content while fully hidden — await so DOM is ready
+    await callback();
+
+    // 3. Fade out only after content is updated
+    await gsap.to(overlay, { opacity: 0, duration: 0.4, ease: 'power2.out', delay: 0.04 });
+    overlay.remove();
+  }
+
+  // ── Theme ────────────────────────────────────────────────────
   const themeToggleBtn     = document.getElementById('theme-toggle');
   const themeTogglePillBtn = document.getElementById('theme-toggle-pill');
   const themeToggleDarkIcon      = document.getElementById('theme-toggle-dark-icon');
@@ -291,23 +352,17 @@
     }
   }
 
-  function toggleTheme() {
-    const isDark = document.documentElement.classList.contains('dark');
-    if (isDark) {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-    } else {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-    }
-    updateThemeIcon();
+  function toggleTheme(btn: HTMLElement) {
+    const toDark = !document.documentElement.classList.contains('dark');
+    if (reducedMotion) { applyTheme(toDark); return; }
+    animateThemeTransition(btn, toDark);
   }
 
   updateThemeIcon();
-  themeToggleBtn?.addEventListener('click', toggleTheme);
-  themeTogglePillBtn?.addEventListener('click', toggleTheme);
+  themeToggleBtn?.addEventListener('click',     (e) => toggleTheme(e.currentTarget as HTMLElement));
+  themeTogglePillBtn?.addEventListener('click', (e) => toggleTheme(e.currentTarget as HTMLElement));
 
-  // ── Language ──
+  // ── Language ─────────────────────────────────────────────────
   const langToggleBtn     = document.getElementById('lang-toggle');
   const langTogglePillBtn = document.getElementById('lang-toggle-pill');
   const langText     = document.getElementById('lang-text');
@@ -341,7 +396,8 @@
   function toggleLanguage() {
     currentLang = currentLang === 'en' ? 'es' : 'en';
     localStorage.setItem('language', currentLang);
-    updateLanguage();
+    if (reducedMotion) { updateLanguage(); return; }
+    animateLangTransition(() => updateLanguage());
   }
 
   langToggleBtn?.addEventListener('click', toggleLanguage);
@@ -352,10 +408,15 @@
   const mobileMenu = document.getElementById('mobile-menu');
 
   mobileMenuButton?.addEventListener('click', () => {
+    const isOpen = !mobileMenu?.classList.contains('hidden');
     mobileMenu?.classList.toggle('hidden');
+    mobileMenuButton.setAttribute('aria-expanded', String(!isOpen));
   });
   document.querySelectorAll('#mobile-menu a').forEach((link) => {
-    link.addEventListener('click', () => { mobileMenu?.classList.add('hidden'); });
+    link.addEventListener('click', () => {
+      mobileMenu?.classList.add('hidden');
+      mobileMenuButton?.setAttribute('aria-expanded', 'false');
+    });
   });
 
   updateLanguage();
@@ -386,10 +447,9 @@
       }
     });
     navLinks.forEach((link) => {
-      link.classList.remove('active');
-      if (link.getAttribute('data-section') === currentSection) {
-        link.classList.add('active');
-      }
+      const isActive = link.getAttribute('data-section') === currentSection;
+      link.classList.toggle('active', isActive);
+      link.setAttribute('aria-current', isActive ? 'true' : 'false');
     });
 
     const shouldShowPill = isDesktop && scrollY > PILL_THRESHOLD;

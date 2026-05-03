@@ -43,6 +43,7 @@
     >
       <span
         id="exp-bg-word"
+        aria-hidden="true"
         class="font-normal text-gray-900 dark:text-white leading-none"
         style="
           font-size: clamp(9rem, 22vw, 22rem);
@@ -279,7 +280,9 @@
       pin: true,
       pinSpacing: true,
       invalidateOnRefresh: true,
-      onLeaveBack: () => showExp(0),
+      // Experience is earlier in the DOM — must refresh before Work (refreshPriority: 10)
+      refreshPriority: 0,
+      onLeaveBack: () => showExp(0, true),
       onUpdate: (self) => {
         const idx = Math.min(Math.floor(self.progress * count), count - 1);
         if (idx !== currentIdx) showExp(idx);

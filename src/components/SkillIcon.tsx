@@ -29,6 +29,7 @@ export default function SkillIcon({
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         title={name}
+        suppressHydrationWarning
       >
         <Icon
           className="w-3.5 h-3.5 shrink-0 transition-colors duration-200"

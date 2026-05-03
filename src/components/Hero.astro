@@ -3,6 +3,9 @@
 
 <section id="home" class="relative min-h-screen flex items-center px-6 sm:px-10 lg:px-20 pt-20 pb-16 overflow-hidden">
 
+  <!-- Ambient depth layer -->
+  <div class="hero-ambient" aria-hidden="true"></div>
+
   <!-- Main content -->
   <div class="w-full max-w-6xl relative" style="z-index: 10;">
 
@@ -38,7 +41,7 @@
     <div id="hero-buttons" class="flex flex-col sm:flex-row gap-3 mb-12">
       <a
         href="#work"
-        class="inline-flex items-center justify-center gap-2.5 px-8 py-3.5 bg-gray-900 dark:bg-white text-white dark:text-black rounded-full text-sm tracking-wide transition-all duration-300 hover:bg-gray-700 dark:hover:bg-gray-100 group"
+        class="inline-flex items-center justify-center gap-2.5 px-8 py-3.5 bg-gray-900 dark:bg-white text-white dark:text-black rounded-[5px] text-sm tracking-wide transition-all duration-300 hover:bg-gray-700 dark:hover:bg-gray-100 active:scale-[0.98] group"
         aria-label="View my work"
       >
         <span id="btn-view-work">View Work</span>
@@ -49,7 +52,7 @@
       <a
         href="#contact"
         id="btn-contact"
-        class="inline-flex items-center justify-center px-8 py-3.5 border border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-300 rounded-full text-sm tracking-wide transition-all duration-300 hover:border-gray-700 dark:hover:border-gray-400 hover:text-gray-900 dark:hover:text-white"
+        class="inline-flex items-center justify-center px-8 py-3.5 border border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-300 rounded-[5px] text-sm tracking-wide transition-all duration-300 hover:border-gray-700 dark:hover:border-gray-400 hover:text-gray-900 dark:hover:text-white active:scale-[0.98]"
       >
         Contact
       </a>
@@ -62,7 +65,7 @@
       <a
         href="/CV.pdf"
         download
-        class="w-10 h-10 flex items-center justify-center border border-gray-300 dark:border-gray-600 text-gray-400 dark:text-gray-500 rounded-full transition-all duration-300 hover:bg-gray-900 dark:hover:bg-white hover:text-white dark:hover:text-black hover:border-gray-900 dark:hover:border-white"
+        class="w-10 h-10 flex items-center justify-center border border-gray-300 dark:border-gray-600 text-gray-400 dark:text-gray-500 rounded-[5px] transition-all duration-300 hover:bg-gray-900 dark:hover:bg-white hover:text-white dark:hover:text-black hover:border-gray-900 dark:hover:border-white active:scale-[0.98]"
         aria-label="Download CV"
         title="Download CV"
       >
@@ -108,6 +111,30 @@
 </section>
 
 <style>
+  /* Ambient depth layer */
+  .hero-ambient {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background:
+      radial-gradient(ellipse 55% 55% at 78% 20%, rgba(220,210,190,0.38) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 15% 85%, rgba(200,195,182,0.2) 0%, transparent 65%);
+    animation: ambient-shift 28s ease-in-out infinite alternate;
+  }
+  :global(.dark) .hero-ambient {
+    background:
+      radial-gradient(ellipse 55% 55% at 78% 20%, rgba(80,75,65,0.35) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 15% 85%, rgba(60,58,52,0.25) 0%, transparent 65%);
+  }
+  @keyframes ambient-shift {
+    from { opacity: 0.7; transform: scale(1)    translateX(0px);  }
+    to   { opacity: 1.0; transform: scale(1.06) translateX(18px); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-ambient { animation: none; }
+  }
+
   /* Initial states */
   #hero-rule         { transform: scaleX(0); transform-origin: left center; }
   #hero-meta         { opacity: 0; }
@@ -142,9 +169,9 @@
 
   const SOCIAL_BTN =
     'w-10 h-10 flex items-center justify-center border border-gray-300 dark:border-gray-600 ' +
-    'text-gray-400 dark:text-gray-500 rounded-full transition-all duration-300 ' +
+    'text-gray-400 dark:text-gray-500 rounded-[5px] transition-all duration-300 ' +
     'hover:bg-gray-900 dark:hover:bg-white hover:text-white dark:hover:text-black ' +
-    'hover:border-gray-900 dark:hover:border-white';
+    'hover:border-gray-900 dark:hover:border-white active:scale-[0.98]';
 
   function el(id: string): HTMLElement | null {
     return document.getElementById(id);
@@ -194,7 +221,8 @@
   }
 
   function buildTimeline() {
-    heroTL = gsap.timeline({ defaults: { ease: 'power3.out' }, onComplete: setupParallax })
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    heroTL = gsap.timeline({ defaults: { ease: 'power3.out' }, onComplete: setupParallax, timeScale: reduced ? 20 : 1 })
       // Anchor rule draws in
       .to('#hero-rule',        { scaleX: 1,        duration: 1.0, ease: 'power3.inOut'  }, 0.1)
       // Name slides up — staggered lines
@@ -256,6 +284,9 @@
     const lang = (localStorage.getItem('language') || 'en') as Lang;
     applyTexts(translations[lang]);
     renderSocials();
+
+    const rightYear = el('right-year');
+    if (rightYear) rightYear.textContent = String(new Date().getFullYear());
 
     resetStates();
     buildTimeline();

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://yewdielmedina.dev/sitemap.xml
