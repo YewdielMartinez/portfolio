@@ -2,326 +2,139 @@
 ---
 
 <!--
-  Experience — Pinned scroll narrative
-  Section height = N × 100vh (set by JS after data loads)
-  Sticky inner stays fixed while user scrolls through each "chapter"
+  Experience — Static editorial list (no pin, no ScrollTrigger pin)
+  Each role rendered as a row. Subtle scroll-fade entrance only.
 -->
 <section
   id="experience"
-  class="relative dark:bg-[rgb(38,38,36)]"
+  class="relative dark:bg-[rgb(38,38,36)] py-24 lg:py-32 overflow-hidden"
 >
-  <div
-    id="exp-sticky"
-    class="h-screen flex flex-col overflow-hidden px-6 sm:px-10 lg:px-20"
-  >
+  <div class="px-6 sm:px-10 lg:px-20 relative z-10">
 
-    <!-- ── Top bar: large counter (left) + step tracker (right) ── -->
-    <div class="pt-8 pb-0 flex items-start justify-between shrink-0">
+    <!-- ── Section header ───────────────────────────────────── -->
+    <div class="mb-16 lg:mb-24 flex items-end justify-between gap-6 flex-wrap">
       <div class="flex flex-col">
-        <span class="text-[9px] font-medium tracking-[0.28em] uppercase text-gray-300 dark:text-gray-600 mb-1">Experience</span>
-        <div class="flex items-baseline gap-3">
-          <span
-            id="exp-num-current"
-            class="font-normal tabular-nums text-gray-900 dark:text-white"
-            style="font-size: clamp(3rem, 6.5vw, 6rem); letter-spacing: -0.05em; line-height: 1;"
-          >01</span>
-          <span class="text-gray-200 dark:text-gray-700" style="font-size: clamp(1rem, 2vw, 1.6rem);" aria-hidden="true">—</span>
-          <span
-            id="exp-num-total"
-            class="font-normal tabular-nums text-gray-200 dark:text-gray-700"
-            style="font-size: clamp(1.2rem, 2.5vw, 2rem); letter-spacing: -0.04em; line-height: 1;"
-          >03</span>
-        </div>
+        <span class="text-[9px] font-medium tracking-[0.28em] uppercase text-gray-300 dark:text-gray-600 mb-3">Experience</span>
+        <h2
+          class="font-normal text-gray-900 dark:text-white"
+          style="font-size: clamp(2.6rem, 6vw, 5.5rem); letter-spacing: -0.04em; line-height: 1;"
+        >
+          Selected roles
+        </h2>
       </div>
-      <div id="exp-steps" class="flex items-center gap-5 sm:gap-8 mt-3"></div>
+      <p
+        id="exp-total-meta"
+        class="text-xs font-medium tracking-[0.2em] uppercase text-gray-300 dark:text-gray-600 tabular-nums"
+      ></p>
     </div>
 
-    <!-- ── Ghost background text ── -->
-    <div
-      class="absolute inset-0 flex items-end pointer-events-none select-none overflow-hidden"
-      aria-hidden="true"
-    >
-      <span
-        id="exp-bg-word"
-        aria-hidden="true"
-        class="font-normal text-gray-900 dark:text-white leading-none"
-        style="
-          font-size: clamp(9rem, 22vw, 22rem);
-          letter-spacing: -0.05em;
-          opacity: 0.04;
-          padding-left: 0.5vw;
-          padding-bottom: 0;
-          white-space: nowrap;
-          will-change: transform;
-        "
-      ></span>
-    </div>
-
-    <!-- ── Progress line ── -->
-    <div class="relative shrink-0 mt-auto" style="height: 1px; margin-bottom: 0;">
-      <div class="absolute inset-0 bg-gray-100 dark:bg-gray-700/40"></div>
-      <div
-        id="exp-progress-line"
-        class="absolute inset-y-0 left-0 bg-gray-400 dark:bg-gray-500"
-        style="width: 0%; transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);"
-      ></div>
-    </div>
-
-    <!-- ── Main panel ── -->
-    <div id="exp-panel" class="relative z-10 pb-14 pt-10 flex-1 flex flex-col justify-center">
-      <div class="max-w-6xl w-full">
-
-        <!-- Two-column grid -->
-        <div class="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-6 lg:gap-20">
-
-          <!-- Left: company + role + year -->
-          <div>
-            <h3
-              id="exp-company-name"
-              class="font-normal text-gray-900 dark:text-white mb-6"
-              style="font-size: clamp(2.8rem, 5.5vw, 5.5rem); letter-spacing: -0.04em; line-height: 1.0;"
-            ></h3>
-            <div class="flex items-center gap-3">
-              <p id="exp-role-label"
-                class="text-xs font-medium tracking-[0.2em] uppercase text-gray-400 dark:text-gray-500"
-              ></p>
-              <span class="text-gray-200 dark:text-gray-700 text-sm" aria-hidden="true">·</span>
-              <p id="exp-year-label"
-                class="text-xs text-gray-300 dark:text-gray-600 tabular-nums"
-              ></p>
-            </div>
-          </div>
-
-          <!-- Right: description -->
-          <div class="lg:border-l lg:border-gray-100 dark:lg:border-gray-700/40 lg:pl-10 flex items-start">
-            <p id="exp-desc-text"
-              class="text-lg text-gray-500 dark:text-gray-400 leading-relaxed"
-            ></p>
-          </div>
-
-        </div>
-      </div>
-    </div>
-
-    <!-- ── Scroll hint (first experience only) ── -->
-    <div
-      id="exp-scroll-hint"
-      class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-      aria-hidden="true"
-    >
-      <span class="text-[9px] tracking-[0.2em] uppercase text-gray-300 dark:text-gray-600">Scroll</span>
-      <div class="w-px h-8 bg-linear-to-b from-gray-300 dark:from-gray-600 to-transparent"></div>
-    </div>
+    <!-- ── List ─────────────────────────────────────────────── -->
+    <ol id="exp-list" class="flex flex-col">
+      <!-- rows injected by JS -->
+    </ol>
 
   </div>
 </section>
 
 <style>
-  /* Panel initial state — JS sets via gsap.set */
-  #exp-panel { will-change: opacity, transform; }
-  #exp-bg-word { will-change: opacity, transform; }
-
-  /* Step items */
-  .exp-step {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    cursor: default;
-    transition: opacity 0.4s ease;
+  .exp-row {
+    opacity: 0;
+    transform: translateY(20px);
+    will-change: opacity, transform;
   }
-  .exp-step .step-num {
-    font-size: 9px;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    font-variant-numeric: tabular-nums;
-    transition: color 0.4s ease;
+  .exp-row.is-in {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
   }
-  .exp-step .step-company {
-    display: none;
-    font-size: 9px;
-    letter-spacing: 0.08em;
-    transition: color 0.4s ease;
-    max-width: 90px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  @media (min-width: 640px) {
-    .exp-step .step-company { display: block; }
+  @media (prefers-reduced-motion: reduce) {
+    .exp-row { opacity: 1; transform: none; transition: none; }
   }
 </style>
 
 <script>
-  import gsap from 'gsap';
-  import { ScrollTrigger } from 'gsap/ScrollTrigger';
-  gsap.registerPlugin(ScrollTrigger);
+  let observer: IntersectionObserver | null = null;
 
-  let allExp: any[] = [];
-  let currentIdx = -1;
+  function rowHTML(exp: any, i: number, total: number): string {
+    const num = String(i + 1).padStart(2, '0');
+    const tot = String(total).padStart(2, '0');
+    const isLast = i === total - 1;
+    return `
+      <li class="exp-row group" style="transition-delay: ${i * 80}ms;">
+        <div class="grid grid-cols-12 gap-4 lg:gap-10 py-10 lg:py-14 ${isLast ? '' : 'border-b border-gray-200 dark:border-gray-700/40'}">
 
-  // ── Build step tracker ──────────────────────────────────────
-  function buildSteps(experiences: any[]) {
-    const container = document.getElementById('exp-steps');
-    if (!container) return;
+          <!-- index -->
+          <div class="col-span-12 lg:col-span-1 flex lg:block items-baseline gap-3 mb-4 lg:mb-0">
+            <span class="font-normal tabular-nums text-gray-900 dark:text-white"
+              style="font-size: clamp(1.8rem, 3vw, 2.6rem); letter-spacing: -0.04em; line-height: 1;">${num}</span>
+            <span class="text-[10px] tracking-[0.2em] uppercase text-gray-300 dark:text-gray-600 tabular-nums hidden lg:block mt-2">/ ${tot}</span>
+          </div>
 
-    container.innerHTML = experiences.map((exp, i) => `
-      <div class="exp-step" data-idx="${i}">
-        <span class="step-num" style="color: rgb(209 213 219)">
-          ${String(i + 1).padStart(2, '0')}
-        </span>
-        <span class="step-company" style="color: rgb(209 213 219)">
-          ${exp.company}
-        </span>
-      </div>
-    `).join('');
+          <!-- company + role + year -->
+          <div class="col-span-12 lg:col-span-6">
+            <h3 class="font-normal text-gray-900 dark:text-white mb-3"
+              style="font-size: clamp(1.8rem, 3.6vw, 3rem); letter-spacing: -0.03em; line-height: 1.05;">
+              ${exp.company}
+            </h3>
+            <div class="flex items-center gap-3 flex-wrap">
+              <p class="text-xs font-medium tracking-[0.2em] uppercase text-gray-500 dark:text-gray-400">
+                ${exp.position}
+              </p>
+              <span class="text-gray-200 dark:text-gray-700 text-sm" aria-hidden="true">·</span>
+              <p class="text-xs text-gray-400 dark:text-gray-500 tabular-nums">${exp.year}</p>
+            </div>
+          </div>
+
+          <!-- description -->
+          <div class="col-span-12 lg:col-span-5 lg:border-l lg:border-gray-100 dark:lg:border-gray-700/40 lg:pl-10">
+            <p class="text-base lg:text-[17px] text-gray-500 dark:text-gray-400 leading-relaxed">
+              ${exp.description}
+            </p>
+          </div>
+
+        </div>
+      </li>
+    `;
   }
 
-  function updateSteps(active: number) {
-    document.querySelectorAll<HTMLElement>('.exp-step').forEach((el, i) => {
-      const num = el.querySelector<HTMLElement>('.step-num');
-      const label = el.querySelector<HTMLElement>('.step-company');
-      const isActive = i === active;
-      const isPast   = i < active;
+  function render(experiences: any[]) {
+    const list = document.getElementById('exp-list');
+    const totalMeta = document.getElementById('exp-total-meta');
+    if (!list) return;
 
-      const activeColor = document.documentElement.classList.contains('dark')
-        ? 'rgb(255 255 255)'
-        : 'rgb(17 24 39)';
-      const pastColor   = document.documentElement.classList.contains('dark')
-        ? 'rgb(100 100 98)'
-        : 'rgb(156 163 175)';
-      const futureColor = document.documentElement.classList.contains('dark')
-        ? 'rgb(70 70 68)'
-        : 'rgb(229 231 235)';
+    const total = experiences.length;
+    list.innerHTML = experiences.map((exp, i) => rowHTML(exp, i, total)).join('');
+    if (totalMeta) totalMeta.textContent = `${String(total).padStart(2, '0')} roles`;
 
-      const color = isActive ? activeColor : isPast ? pastColor : futureColor;
-      if (num)   num.style.color   = color;
-      if (label) label.style.color = color;
-    });
-
-    const line = document.getElementById('exp-progress-line');
-    if (line && allExp.length > 1) {
-      const pct = ((active + 1) / allExp.length) * 100;
-      line.style.width = `${pct}%`;
-    }
-  }
-
-  // ── Show an experience ──────────────────────────────────────
-  function showExp(i: number, instant = false) {
-    if (i === currentIdx) return;
-    const prev = currentIdx;
-    currentIdx = i;
-    const exp = allExp[i];
-
-    const panel   = document.getElementById('exp-panel');
-    const bgWord  = document.getElementById('exp-bg-word');
-    const hint    = document.getElementById('exp-scroll-hint');
-
-    const updateDOM = () => {
-      const name = document.getElementById('exp-company-name');
-      const role = document.getElementById('exp-role-label');
-      const year = document.getElementById('exp-year-label');
-      const desc = document.getElementById('exp-desc-text');
-      const numCurrent = document.getElementById('exp-num-current');
-
-      if (numCurrent) numCurrent.textContent = String(i + 1).padStart(2, '0');
-      if (name) name.textContent = exp.company;
-      if (role) role.textContent = exp.position;
-      if (year) year.textContent = exp.year;
-      if (desc) desc.textContent = exp.description;
-      if (bgWord) bgWord.textContent = exp.company.split(' ')[0];
-      updateSteps(i);
-    };
-
-    if (hint) {
-      gsap.to(hint, { opacity: i === 0 ? 1 : 0, duration: 0.3, overwrite: 'auto' });
-    }
-
-    if (instant) {
-      updateDOM();
-      if (panel)  gsap.set(panel,  { opacity: 1, y: 0 });
-      if (bgWord) gsap.set(bgWord, { opacity: 1 });
-      return;
-    }
-
-    const direction = i > prev ? 1 : -1;
-
-    gsap.timeline({ defaults: { overwrite: 'auto' } })
-      .to(panel!,             { opacity: 0, y: -14 * direction, duration: 0.22, ease: 'power2.in' }, 0)
-      .to(bgWord!,            { opacity: 0, duration: 0.18 }, 0)
-      .to('#exp-num-current', { opacity: 0, y: -8 * direction, duration: 0.18, ease: 'power2.in' }, 0)
-      .call(updateDOM)
-      .set(panel!,             { y: 14 * direction })
-      .set('#exp-num-current', { y: 8 * direction })
-      .to(panel!,              { opacity: 1, y: 0, duration: 0.45, ease: 'power3.out' })
-      .to(bgWord!,             { opacity: 1, duration: 0.4, ease: 'power2.out' }, '-=0.3')
-      .to('#exp-num-current',  { opacity: 1, y: 0, duration: 0.35, ease: 'power3.out' }, '-=0.35');
-  }
-
-  // ── Setup scroll (GSAP pin on #exp-sticky) ─────────────────
-  function setupScroll(experiences: any[]) {
-    allExp = experiences;
-    if (!experiences.length) return;
-
-    const count = experiences.length;
-    const numTotal = document.getElementById('exp-num-total');
-    if (numTotal) numTotal.textContent = String(count).padStart(2, '0');
-
-    buildSteps(experiences);
-    showExp(0, true);
-
-    // Kill previous pin trigger on language switch
-    ScrollTrigger.getById('exp-scroll')?.kill();
-
-    ScrollTrigger.create({
-      id: 'exp-scroll',
-      trigger: '#exp-sticky',
-      start: 'top top',
-      end: () => `+=${count * window.innerHeight}`,
-      pin: true,
-      pinSpacing: true,
-      invalidateOnRefresh: true,
-      // Experience is earlier in the DOM — must refresh before Work (refreshPriority: 10)
-      refreshPriority: 0,
-      onLeaveBack: () => showExp(0, true),
-      onUpdate: (self) => {
-        const idx = Math.min(Math.floor(self.progress * count), count - 1);
-        if (idx !== currentIdx) showExp(idx);
+    // Reset and observe rows for fade-in
+    if (observer) observer.disconnect();
+    observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-in');
+            observer?.unobserve(entry.target);
+          }
+        });
       },
-    });
-
-    ScrollTrigger.refresh();
-  }
-
-  // ── Entrance animation for the header bar ──────────────────
-  function initHeaderEntrance() {
-    gsap.from('#exp-steps, #experience > div > div:first-child', {
-      opacity: 0,
-      y: -10,
-      duration: 0.6,
-      ease: 'power2.out',
-      overwrite: 'auto',
-      scrollTrigger: {
-        trigger: '#experience',
-        start: 'top 75%',
-        once: true,
-      },
+      { rootMargin: '0px 0px -10% 0px', threshold: 0.15 }
+    );
+    document.querySelectorAll<HTMLElement>('.exp-row').forEach(el => {
+      observer!.observe(el);
     });
   }
 
-  // ── Load data ───────────────────────────────────────────────
   async function loadExperience() {
     const { experience } = await import('../data/experience');
     const lang = (localStorage.getItem('language') || 'en') as 'en' | 'es';
-    setupScroll(experience[lang]);
-    initHeaderEntrance();
+    render(experience[lang]);
   }
 
-  // ── Language change ─────────────────────────────────────────
   window.addEventListener('languageChange', async (event: any) => {
     const { lang } = event.detail;
     const { experience } = await import('../data/experience');
-    currentIdx = -1;
-    setupScroll(experience[lang as 'en' | 'es']);
+    render(experience[lang as 'en' | 'es']);
   });
 
   document.addEventListener('DOMContentLoaded', loadExperience);

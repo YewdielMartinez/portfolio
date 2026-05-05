@@ -5,9 +5,9 @@
   Work — Pinned full-screen showcase (all screen sizes)
   Same scroll-narrative pattern as Experience
 -->
-<section id="work" class="relative dark:bg-[rgb(38,38,36)]">
+<section id="work" class="relative dark:bg-[rgb(38,38,36)]" style="height: 100vh;">
 
-  <div id="work-sticky" class="h-screen overflow-hidden flex flex-col">
+  <div id="work-sticky" class="sticky top-0 h-screen overflow-hidden flex flex-col">
 
     <!-- Top bar: large counter (left) + step tracker (right, desktop only) -->
     <div class="flex items-start justify-between px-6 lg:pl-12 xl:pl-16 lg:pr-8 pt-4 lg:pt-6 pb-0 shrink-0">
@@ -308,50 +308,45 @@
     const dir = i > prev ? 1 : -1;
     const d = reducedMotion ? 0 : 1;
 
-    // Animate counter
-    if (numCurrent) {
-      gsap.to(numCurrent, {
-        opacity: 0, y: -8 * dir * d, duration: 0.18 * d, ease: 'power2.in',
-        overwrite: true,
-        onComplete: () => {
-          numCurrent.textContent = String(i + 1).padStart(2, '0');
-          gsap.fromTo(numCurrent, { y: 8 * dir * d }, { opacity: 1, y: 0, duration: 0.3 * d, ease: 'power3.out' });
-        },
-      });
-    }
-
-    if (bgWord) {
-      gsap.to(bgWord, {
-        opacity: 0, duration: 0.18 * d, ease: 'power2.in',
-        overwrite: true,
-        onComplete: () => {
-          bgWord.textContent = p.title.split(' ')[0];
-          gsap.to(bgWord, { opacity: 0.04, duration: 0.4 * d, ease: 'power2.out' });
-        },
-      });
-    }
-
-    gsap.to(panel, {
-      opacity: 0, y: -10 * dir * d, duration: 0.2 * d, ease: 'power2.in',
-      overwrite: true,
-      onComplete: () => {
-        panel.innerHTML = infoHTML(p, i);
-        wirePanel(panel);
-        gsap.fromTo(panel, { opacity: 0, y: 10 * dir * d }, { opacity: 1, y: 0, duration: 0.4 * d, ease: 'power3.out' });
-      },
-    });
-
-    gsap.to(nextEl, { opacity: 1, duration: 0.55 * d, ease: 'power2.inOut' });
-    gsap.to(curEl,  { opacity: 0, duration: 0.55 * d, ease: 'power2.inOut' });
-    activeLayer = nextL;
-
+    // Synchronous content updates — always visible even if tween killed mid-flight
+    if (numCurrent) numCurrent.textContent = String(i + 1).padStart(2, '0');
+    if (bgWord) bgWord.textContent = p.title.split(' ')[0];
+    panel.innerHTML = infoHTML(p, i);
+    wirePanel(panel);
     updateDots(i);
     updateStepTrack(i);
+
+    // Animate y only — opacity stays at 1 so killed tweens don't leave content invisible
+    if (numCurrent) {
+      gsap.fromTo(numCurrent,
+        { y: 8 * dir * d },
+        { y: 0, duration: 0.3 * d, ease: 'power3.out', overwrite: true }
+      );
+    }
+    gsap.fromTo(panel,
+      { y: 10 * dir * d },
+      { y: 0, duration: 0.4 * d, ease: 'power3.out', overwrite: true }
+    );
+
+    // Cross-fade image layers (separate elements, safe to animate opacity)
+    gsap.to(nextEl, { opacity: 1, duration: 0.55 * d, ease: 'power2.inOut', overwrite: true });
+    gsap.to(curEl,  { opacity: 0, duration: 0.55 * d, ease: 'power2.inOut', overwrite: true });
+    activeLayer = nextL;
   }
 
   // ── Scroll setup ──────────────────────────────────────────
+  // CSS position:sticky pins #work-sticky natively. Native scroll listener
+  // reads section bounding rect to compute progress and swap project. Avoids
+  // any GSAP/ScrollTrigger race with async data load.
+  let workScrollHandler: (() => void) | null = null;
+
   function setupDesktopScroll() {
     const count = projects.length;
+    if (!count) return;
+
+    const section = document.getElementById('work');
+    if (!section) return;
+    section.style.height = `${(count + 1) * 100}vh`;
 
     const numTotal = document.getElementById('work-num-total');
     if (numTotal) numTotal.textContent = String(count).padStart(2, '0');
@@ -364,24 +359,22 @@
     workObserver = new MutationObserver(syncFade);
     workObserver.observe(document.documentElement, { attributeFilter: ['class'] });
 
-    ScrollTrigger.create({
-      id: 'work-scroll',
-      trigger: '#work-sticky',
-      start: 'top top',
-      end: () => `+=${count * window.innerHeight}`,
-      pin: true,
-      pinSpacing: true,
-      invalidateOnRefresh: true,
-      // Ensure Work refreshes AFTER Experience (lower number = refreshed first)
-      refreshPriority: 10,
-      onLeaveBack: () => showProject(0, true),
-      onUpdate: (self) => {
-        const idx = Math.min(Math.floor(self.progress * count), count - 1);
-        if (idx !== currentIdx) showProject(idx);
-      },
-    });
+    // Remove previous listener (e.g. on language change re-setup)
+    if (workScrollHandler) window.removeEventListener('scroll', workScrollHandler);
 
-    ScrollTrigger.refresh();
+    workScrollHandler = () => {
+      const rect = section.getBoundingClientRect();
+      const scrollDistance = section.offsetHeight - window.innerHeight;
+      if (scrollDistance <= 0) return;
+      const progress = Math.max(0, Math.min(1, -rect.top / scrollDistance));
+      const idx = Math.min(Math.floor(progress * count), count - 1);
+      if (idx !== currentIdx) showProject(idx);
+    };
+
+    window.addEventListener('scroll', workScrollHandler, { passive: true });
+
+    // Sync once on setup (in case user already scrolled into section)
+    workScrollHandler();
   }
 
   // ── Load ─────────────────────────────────────────────────
@@ -517,7 +510,6 @@
     const { translations, lang } = event.detail;
     const { projects: data } = await import('../data/projects');
     projects = data[lang as 'en' | 'es'] || [];
-    ScrollTrigger.getById('work-scroll')?.kill();
     currentIdx = -1; activeLayer = 'a';
     setupDesktopScroll();
     const titleEl = document.querySelector('[data-i18n="work.title"]');
