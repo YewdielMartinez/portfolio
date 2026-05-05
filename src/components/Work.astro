@@ -5,9 +5,9 @@
   Work — Pinned full-screen showcase (all screen sizes)
   Same scroll-narrative pattern as Experience
 -->
-<section id="work" class="relative dark:bg-[rgb(38,38,36)]" style="height: 100vh;">
+<section id="work" class="relative dark:bg-[rgb(38,38,36)]">
 
-  <div id="work-sticky" class="sticky top-0 h-screen overflow-hidden flex flex-col">
+  <div id="work-sticky" class="h-screen overflow-hidden flex flex-col">
 
     <!-- Top bar: large counter (left) + step tracker (right, desktop only) -->
     <div class="flex items-start justify-between px-6 lg:pl-12 xl:pl-16 lg:pr-8 pt-4 lg:pt-6 pb-0 shrink-0">
@@ -335,18 +335,10 @@
   }
 
   // ── Scroll setup ──────────────────────────────────────────
-  // CSS position:sticky pins #work-sticky natively. Native scroll listener
-  // reads section bounding rect to compute progress and swap project. Avoids
-  // any GSAP/ScrollTrigger race with async data load.
-  let workScrollHandler: (() => void) | null = null;
-
+  // GSAP pin pattern (same as Experience originally used).
   function setupDesktopScroll() {
     const count = projects.length;
     if (!count) return;
-
-    const section = document.getElementById('work');
-    if (!section) return;
-    section.style.height = `${(count + 1) * 100}vh`;
 
     const numTotal = document.getElementById('work-num-total');
     if (numTotal) numTotal.textContent = String(count).padStart(2, '0');
@@ -359,22 +351,24 @@
     workObserver = new MutationObserver(syncFade);
     workObserver.observe(document.documentElement, { attributeFilter: ['class'] });
 
-    // Remove previous listener (e.g. on language change re-setup)
-    if (workScrollHandler) window.removeEventListener('scroll', workScrollHandler);
+    ScrollTrigger.getById('work-scroll')?.kill(true);
 
-    workScrollHandler = () => {
-      const rect = section.getBoundingClientRect();
-      const scrollDistance = section.offsetHeight - window.innerHeight;
-      if (scrollDistance <= 0) return;
-      const progress = Math.max(0, Math.min(1, -rect.top / scrollDistance));
-      const idx = Math.min(Math.floor(progress * count), count - 1);
-      if (idx !== currentIdx) showProject(idx);
-    };
+    ScrollTrigger.create({
+      id: 'work-scroll',
+      trigger: '#work-sticky',
+      start: 'top top',
+      end: () => `+=${count * window.innerHeight}`,
+      pin: true,
+      pinSpacing: true,
+      invalidateOnRefresh: true,
+      onLeaveBack: () => showProject(0, true),
+      onUpdate: (self) => {
+        const idx = Math.min(Math.floor(self.progress * count), count - 1);
+        if (idx !== currentIdx) showProject(idx);
+      },
+    });
 
-    window.addEventListener('scroll', workScrollHandler, { passive: true });
-
-    // Sync once on setup (in case user already scrolled into section)
-    workScrollHandler();
+    ScrollTrigger.refresh();
   }
 
   // ── Load ─────────────────────────────────────────────────
