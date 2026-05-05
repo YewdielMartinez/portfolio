@@ -6,9 +6,9 @@ import { skills } from '../data/skills';
 // Group skills by domain (Fragmentación + Ley de Región Común)
 const skillGroups: Record<string, typeof skills> = {
   Frontend:  skills.filter(s => ['React','React Native','Next.js','Astro','Angular','TypeScript','JavaScript','HTML5','CSS3','Tailwind CSS'].includes(s.name)),
-  Backend:   skills.filter(s => ['Nest.js','PHP','Laravel'].includes(s.name)),
-  Data:      skills.filter(s => ['Firebase','PostgreSQL','MySQL','Prisma'].includes(s.name)),
-  Tooling:   skills.filter(s => ['Git','Docker','Figma'].includes(s.name)),
+  Backend:   skills.filter(s => ['Nest.js','.NET','C#','PHP','Laravel'].includes(s.name)),
+  Data:      skills.filter(s => ['Firebase','Supabase','PostgreSQL','MySQL','Prisma'].includes(s.name)),
+  Tooling:   skills.filter(s => ['Git','Docker','AWS','Figma'].includes(s.name)),
 };
 ---
 

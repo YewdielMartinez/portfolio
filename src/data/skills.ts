@@ -67,6 +67,16 @@ export const skills: Skill[] = [
     color: '#E0234E'
   },
   {
+    name: '.NET',
+    icon: 'Si/SiDotnet',
+    color: '#512BD4'
+  },
+  {
+    name: 'C#',
+    icon: 'Si/SiSharp',
+    color: '#239120'
+  },
+  {
     name: 'PHP',
     icon: 'Si/SiPhp',
     color: '#777BB4'
@@ -84,6 +94,11 @@ export const skills: Skill[] = [
     color: '#FFCA28'
   },
   {
+    name: 'Supabase',
+    icon: 'Si/SiSupabase',
+    color: '#3FCF8E'
+  },
+  {
     name: 'PostgreSQL',
     icon: 'Si/SiPostgresql',
     color: '#4169E1'
@@ -98,7 +113,7 @@ export const skills: Skill[] = [
     icon: 'Si/SiPrisma',
     color: '#2D3748'
   },
-  
+
   // Tools & Others
   {
     name: 'Git',
@@ -109,6 +124,11 @@ export const skills: Skill[] = [
     name: 'Docker',
     icon: 'Si/SiDocker',
     color: '#2496ED'
+  },
+  {
+    name: 'AWS',
+    icon: 'Si/SiAmazonwebservices',
+    color: '#FF9900'
   },
   {
     name: 'Figma',
