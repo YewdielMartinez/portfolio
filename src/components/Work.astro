@@ -12,7 +12,7 @@
     <!-- Top bar: large counter (left) + step tracker (right, desktop only) -->
     <div class="flex items-start justify-between px-6 lg:pl-12 xl:pl-16 lg:pr-8 pt-4 lg:pt-6 pb-0 shrink-0">
       <div class="flex flex-col">
-        <span class="text-[9px] font-medium tracking-[0.28em] uppercase text-gray-300 dark:text-gray-600 mb-1">Selected Work</span>
+        <span class="text-[9px] font-medium tracking-[0.28em] uppercase text-gray-300 dark:text-gray-600 mb-1" data-i18n="work.selectedWork">Selected Work</span>
         <div class="flex items-baseline gap-3">
           <span
             id="work-num-current"
@@ -60,7 +60,7 @@
         <!-- Progress dots -->
         <div class="mt-3 lg:mt-12 flex items-center gap-4">
           <div id="work-dots" class="flex items-center gap-2"></div>
-          <span class="text-[8px] font-medium tracking-[0.15em] uppercase text-gray-200 dark:text-gray-700 hidden xl:block">← → to navigate</span>
+          <span class="text-[8px] font-medium tracking-[0.15em] uppercase text-gray-200 dark:text-gray-700 hidden xl:block" data-i18n="work.navigate">← → to navigate</span>
         </div>
       </div>
 
@@ -83,6 +83,21 @@
             class="w-full h-full object-contain drop-shadow-2xl"
             style="padding: 1.5rem;"
           />
+        </div>
+
+        <!-- No-image placeholder (private/work projects) -->
+        <div
+          id="work-no-img"
+          class="absolute inset-0 flex-col items-center justify-center gap-3 text-center px-10 pointer-events-none"
+          style="display:none; opacity:0;"
+        >
+          <div class="w-12 h-12 rounded-xl border border-gray-200 dark:border-gray-700 flex items-center justify-center mb-2">
+            <svg class="w-5 h-5 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+            </svg>
+          </div>
+          <p class="text-[10px] font-semibold tracking-[0.2em] uppercase text-gray-400 dark:text-gray-500">Private Project</p>
+          <p class="text-xs text-gray-300 dark:text-gray-600 mt-0.5">Screenshot unavailable</p>
         </div>
 
         <!-- Detail panel — replaces image on "View Project" -->
@@ -136,6 +151,7 @@
   gsap.registerPlugin(ScrollTrigger);
 
   let projects: any[]  = [];
+  let cachedT: any     = null;
   let currentIdx       = -1;
   let activeLayer: 'a' | 'b' = 'a';
   let detailOpen       = false;
@@ -205,6 +221,7 @@
 
   // ── Info panel template ─────────────────────────────────────
   function infoHTML(p: any, i: number): string {
+    const label = cachedT?.work?.viewProject ?? 'View Project';
     return `
       <h3 class="font-normal text-gray-900 dark:text-white mb-2 lg:mb-5"
         style="font-size:clamp(1.6rem,5.5vw,4.5rem);letter-spacing:-0.04em;line-height:1.0;">
@@ -217,7 +234,7 @@
       <p class="text-[15px] lg:text-[18px] text-gray-500 dark:text-gray-400 leading-relaxed mb-4 lg:mb-8 line-clamp-2 lg:line-clamp-4">${p.description}</p>
       <button class="open-modal-btn inline-flex items-center gap-2 text-sm font-medium text-gray-900 dark:text-white group cursor-pointer"
         data-index="${i}">
-        <span>View Project</span>
+        <span>${label}</span>
         <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
           fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
@@ -275,8 +292,10 @@
     const curEl   = document.getElementById(`work-layer-${activeLayer}`)!;
     const nextEl  = document.getElementById(`work-layer-${nextL}`)!;
     const nextImg = document.getElementById(`work-img-${nextL}`) as HTMLImageElement;
-    nextImg.src = p.image;
-    nextImg.alt = p.title;
+    const noImg   = document.getElementById('work-no-img') as HTMLElement | null;
+    const hasImg  = !!p.image;
+
+    if (hasImg) { nextImg.src = p.image; nextImg.alt = p.title; }
 
     const panel      = document.getElementById('work-info-panel')!;
     const bgWord     = document.getElementById('work-bg-word');
@@ -288,8 +307,15 @@
       if (numCurrent) gsap.killTweensOf(numCurrent);
       if (bgWord) gsap.killTweensOf(bgWord);
 
-      gsap.set(nextEl, { opacity: 1 });
-      gsap.set(curEl,  { opacity: 0 });
+      if (hasImg) {
+        gsap.set(nextEl, { opacity: 1 });
+        gsap.set(curEl,  { opacity: 0 });
+        if (noImg) gsap.set(noImg, { display: 'none', opacity: 0 });
+      } else {
+        gsap.set(nextEl, { opacity: 0 });
+        gsap.set(curEl,  { opacity: 0 });
+        if (noImg) gsap.set(noImg, { display: 'flex', opacity: 1 });
+      }
       gsap.set(panel,  { opacity: 1, y: 0 });
       if (numCurrent) gsap.set(numCurrent, { opacity: 1, y: 0 });
       if (bgWord)     gsap.set(bgWord,     { opacity: 0.04 });
@@ -328,9 +354,15 @@
       { y: 0, duration: 0.4 * d, ease: 'power3.out', overwrite: true }
     );
 
-    // Cross-fade image layers (separate elements, safe to animate opacity)
-    gsap.to(nextEl, { opacity: 1, duration: 0.55 * d, ease: 'power2.inOut', overwrite: true });
-    gsap.to(curEl,  { opacity: 0, duration: 0.55 * d, ease: 'power2.inOut', overwrite: true });
+    // Cross-fade image layers or show placeholder
+    if (hasImg) {
+      gsap.to(nextEl, { opacity: 1, duration: 0.55 * d, ease: 'power2.inOut', overwrite: true });
+      gsap.to(curEl,  { opacity: 0, duration: 0.55 * d, ease: 'power2.inOut', overwrite: true });
+      if (noImg) gsap.to(noImg, { opacity: 0, duration: 0.2, overwrite: true, onComplete: () => { if (noImg) noImg.style.display = 'none'; } });
+    } else {
+      gsap.to([nextEl, curEl], { opacity: 0, duration: 0.3, ease: 'power2.in', overwrite: true });
+      if (noImg) { gsap.set(noImg, { display: 'flex' }); gsap.to(noImg, { opacity: 1, duration: 0.4, delay: 0.2 * d, ease: 'power2.out', overwrite: true }); }
+    }
     activeLayer = nextL;
   }
 
@@ -373,8 +405,12 @@
 
   // ── Load ─────────────────────────────────────────────────
   async function loadProjects() {
-    const { projects: data } = await import('../data/projects');
+    const [{ projects: data }, { translations }] = await Promise.all([
+      import('../data/projects'),
+      import('../data/translations'),
+    ]);
     const lang = (localStorage.getItem('language') || 'en') as 'en' | 'es';
+    cachedT = translations[lang];
     projects = data[lang] || [];
     setupDesktopScroll();
   }
@@ -398,7 +434,7 @@
             <svg class="w-4 h-4 transition-transform duration-200 group-hover:-translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 16l-4-4m0 0l4-4m-4 4h18"/>
             </svg>
-            Back
+            ${t.work.back}
           </button>
           <div class="flex items-center gap-3 text-[10px] text-gray-400 dark:text-gray-500 tabular-nums">
             <span>${p.year || ''}</span>
@@ -410,13 +446,13 @@
         <!-- Scrollable content -->
         <div class="flex-1 overflow-y-auto px-10 xl:px-14 py-8 detail-scroll">
           <div class="mb-8">
-            <p class="text-[9px] font-semibold tracking-[0.22em] uppercase text-gray-400 dark:text-gray-500 mb-4">About the Project</p>
+            <p class="text-[9px] font-semibold tracking-[0.22em] uppercase text-gray-400 dark:text-gray-500 mb-4">${t.work.aboutProject}</p>
             <p class="text-base text-gray-600 dark:text-gray-300 leading-relaxed">${p.detailedDescription || p.description}</p>
           </div>
 
           ${p.features?.length ? `
           <div class="mb-8">
-            <p class="text-[9px] font-semibold tracking-[0.22em] uppercase text-gray-400 dark:text-gray-500 mb-4">Key Features</p>
+            <p class="text-[9px] font-semibold tracking-[0.22em] uppercase text-gray-400 dark:text-gray-500 mb-4">${t.work.keyFeatures}</p>
             <ul class="space-y-3">
               ${p.features.map((f: string) => `
                 <li class="flex items-start gap-3">
@@ -446,6 +482,7 @@
     const layerA   = document.getElementById('work-layer-a')!;
     const layerB   = document.getElementById('work-layer-b')!;
     const fadeL    = document.getElementById('work-fade-l');
+    const noImg    = document.getElementById('work-no-img');
 
     panel.innerHTML = buildDetailHTML(p, t);
     panel.querySelector('.detail-close-btn')?.addEventListener('click', closeDetail);
@@ -453,7 +490,7 @@
       b.addEventListener('click', () => openVideoLightbox(b.dataset.videoUrl || ''));
     });
 
-    gsap.to([layerA, layerB, fadeL], { opacity: 0, duration: 0.25, ease: 'power2.in' });
+    gsap.to([layerA, layerB, fadeL, noImg].filter(Boolean), { opacity: 0, duration: 0.25, ease: 'power2.in' });
     gsap.to(panel, {
       opacity: 1, duration: 0.35, ease: 'power2.out', delay: 0.2,
       onStart: () => { panel.style.pointerEvents = 'auto'; },
@@ -465,12 +502,19 @@
     const panel  = document.getElementById('work-detail-panel')!;
     const active = document.getElementById(`work-layer-${activeLayer}`)!;
     const fadeL  = document.getElementById('work-fade-l');
+    const noImg  = document.getElementById('work-no-img') as HTMLElement | null;
+    const hasImg = !!(projects[currentIdx]?.image);
 
     gsap.to(panel, {
       opacity: 0, duration: 0.25, ease: 'power2.in',
       onComplete: () => { panel.style.pointerEvents = 'none'; panel.innerHTML = ''; },
     });
-    gsap.to([active, fadeL], { opacity: 1, duration: 0.35, ease: 'power2.out', delay: 0.15 });
+    if (hasImg) {
+      gsap.to([active, fadeL], { opacity: 1, duration: 0.35, ease: 'power2.out', delay: 0.15 });
+    } else if (noImg) {
+      gsap.set(noImg, { display: 'flex' });
+      gsap.to(noImg, { opacity: 1, duration: 0.35, ease: 'power2.out', delay: 0.15 });
+    }
   }
 
   // ── Video lightbox ─────────────────────────────────────────
@@ -502,12 +546,11 @@
   // ── Language ──────────────────────────────────────────────
   window.addEventListener('languageChange', async (event: any) => {
     const { translations, lang } = event.detail;
+    cachedT = translations;
     const { projects: data } = await import('../data/projects');
     projects = data[lang as 'en' | 'es'] || [];
     currentIdx = -1; activeLayer = 'a';
     setupDesktopScroll();
-    const titleEl = document.querySelector('[data-i18n="work.title"]');
-    if (titleEl) titleEl.textContent = translations.work.title;
   });
 
   // Keyboard navigation — registered once, not on every setupDesktopScroll call

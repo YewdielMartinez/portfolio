@@ -206,6 +206,13 @@
   :root { view-transition-name: none; }
   ::view-transition { pointer-events: none; }
 
+  /* Theme toggle: suppress default cross-fade, let JS circle-expand animate new(root) */
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+  }
+
   /* Group containers sized to cover all animation phases */
   ::view-transition-group(vt-nav-full) {
     animation-duration: 550ms;
@@ -278,32 +285,36 @@
     updateThemeIcon();
   }
 
-  function animateThemeTransition(btn: HTMLElement, toDark: boolean) {
+  async function animateThemeTransition(btn: HTMLElement, toDark: boolean) {
+    if (!(document as any).startViewTransition) {
+      applyTheme(toDark);
+      return;
+    }
+
     const rect = btn.getBoundingClientRect();
-    const x = rect.left + rect.width / 2;
-    const y = rect.top + rect.height / 2;
+    const x = Math.round(rect.left + rect.width / 2);
+    const y = Math.round(rect.top + rect.height / 2);
     const maxR = Math.hypot(
       Math.max(x, window.innerWidth  - x),
       Math.max(y, window.innerHeight - y)
-    ) * 1.05;
+    );
 
-    const overlay = document.createElement('div');
-    overlay.style.cssText = `
-      position:fixed; inset:0; z-index:9998; pointer-events:none;
-      background:${toDark ? 'rgb(38,38,36)' : 'rgb(240,238,230)'};
-      clip-path:circle(0px at ${x}px ${y}px);
-    `;
-    document.body.appendChild(overlay);
+    // Temporarily enable root capture (CSS sets view-transition-name: none)
+    document.documentElement.style.viewTransitionName = 'root';
 
-    gsap.to(overlay, {
-      clipPath: `circle(${maxR}px at ${x}px ${y}px)`,
-      duration: 0.72,
-      ease: 'power3.inOut',
-      onComplete: () => overlay.remove(),
-    });
+    const vt = (document as any).startViewTransition(() => applyTheme(toDark));
 
-    // Apply the real theme switch while the overlay covers everything
-    gsap.delayedCall(0.3, () => applyTheme(toDark));
+    try {
+      await vt.ready;
+      document.documentElement.animate(
+        { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${maxR}px at ${x}px ${y}px)`] },
+        { duration: 450, easing: 'ease-out', pseudoElement: '::view-transition-new(root)' }
+      );
+    } finally {
+      vt.finished.then(() => {
+        document.documentElement.style.viewTransitionName = '';
+      });
+    }
   }
 
   // ── Language transition helper ───────────────────────────────
@@ -402,6 +413,49 @@
 
   langToggleBtn?.addEventListener('click', toggleLanguage);
   langTogglePillBtn?.addEventListener('click', toggleLanguage);
+
+  // ── Section navigation (smart jump past pinned sections) ─────
+  async function navigateToSection(id: string) {
+    const target = document.getElementById(id);
+    if (!target) return;
+
+    const targetY = target.getBoundingClientRect().top + window.scrollY;
+    const distance = Math.abs(targetY - window.scrollY);
+
+    // Short distance — let smooth scroll handle it naturally
+    if (distance < window.innerHeight * 2) {
+      window.scrollTo({ top: targetY, behavior: 'smooth' });
+      return;
+    }
+
+    // Long distance (crossing Work's pinned section) — instant jump with fade
+    const isDark = document.documentElement.classList.contains('dark');
+    const bg = isDark ? 'rgb(38,38,36)' : 'rgb(240,238,230)';
+
+    const overlay = document.createElement('div');
+    overlay.style.cssText = `
+      position:fixed; inset:0; z-index:9997; pointer-events:none;
+      background:${bg}; opacity:0;
+    `;
+    document.body.appendChild(overlay);
+
+    await gsap.to(overlay, { opacity: 1, duration: 0.18, ease: 'power2.in' });
+    window.scrollTo({ top: targetY, behavior: 'instant' });
+    // Two rAF frames so layout settles before fade-out
+    await new Promise<void>(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+    await gsap.to(overlay, { opacity: 0, duration: 0.3, ease: 'power2.out' });
+    overlay.remove();
+  }
+
+  // Intercept all anchor links that point to page sections
+  document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const href = link.getAttribute('href');
+      if (!href) return;
+      e.preventDefault();
+      navigateToSection(href.slice(1));
+    });
+  });
 
   // ── Mobile menu ──
   const mobileMenuButton = document.getElementById('mobile-menu-button');

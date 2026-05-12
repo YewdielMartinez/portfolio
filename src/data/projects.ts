@@ -177,6 +177,111 @@ export const projects: Projects = {
       year: "2025",
       role: "Mobile Developer",
     },
+    // 08 — Foodapp
+    {
+      title: "Foodapp",
+      description:
+        "React Native app for restaurants: table management, home delivery, product catalog, reports, cash drawer, Mercado Pago subscriptions, and printer integration.",
+      image: "/projects/FOODAPP.png",
+      tags: ["React Native", "C#", "PostgreSQL", "Docker", "Tailwind CSS"],
+      link: "#",
+      gridSize: "wide",
+      detailedDescription:
+        "Foodapp is a full-featured restaurant management app built with React Native. I contributed to the UI implementation based on an existing design. The app covers the full operational lifecycle of a restaurant: table management, in-house and delivery sales, product and add-on registration, end-of-day cash drawer closing, subscription billing via Mercado Pago, user role management, and thermal printer integration for receipts.",
+      features: [
+        "Table management and order tracking",
+        "Home delivery and in-house sales flow",
+        "Product, complement, and add-on registration",
+        "Sales reports and cash drawer closing",
+        "Subscription sales with Mercado Pago integration",
+        "User management with role-based access",
+        "Thermal printer integration for receipts",
+      ],
+      year: "2024",
+      role: "Mobile Developer (UI Implementation)",
+    },
+    // 09 — PuntoZeroweb POS
+    {
+      title: "PuntoZeroweb POS",
+      description:
+        "Full-featured web point-of-sale system built at PuntoZeroweb. Handles sales, inventory, and reporting across multiple branches.",
+      image: "",
+      tags: ["PHP", "MySQL", "Docker", "HTML", "CSS"],
+      link: "#",
+      gridSize: "wide",
+      detailedDescription:
+        "A comprehensive web-based point-of-sale system developed internally at PuntoZeroweb. Built with PHP and MySQL for the backend and containerized with Docker for consistent deployment across environments. Handles real-time sales transactions, inventory tracking, and reporting across multiple store branches.",
+      features: [
+        "Real-time sales and transaction processing",
+        "Inventory tracking with low-stock alerts",
+        "Multi-branch reporting and analytics dashboard",
+        "Docker-containerized for consistent deployments",
+        "Role-based access for cashiers and administrators",
+      ],
+      year: "2024",
+      role: "Full-Stack Developer",
+    },
+    // 09 — Hotel Tool Tracker
+    {
+      title: "Hotel Tool Tracker",
+      description:
+        "Internal system for hotels to register check-ins and check-outs of tools and equipment across departments.",
+      image: "",
+      tags: ["React", "C#", "Tailwind CSS"],
+      link: "#",
+      gridSize: "medium",
+      detailedDescription:
+        "An internal management system developed for hotel operations, tracking the check-in and check-out of tools and equipment across departments. Built with a React frontend, a C# backend, and a clean Tailwind CSS interface designed for daily use by hotel staff.",
+      features: [
+        "Tool and equipment check-in / check-out tracking",
+        "Department-level inventory overview",
+        "Staff assignment and activity log",
+        "Search and filter by tool, department, or date",
+        "Fast, clean interface optimized for daily use",
+      ],
+      year: "2024",
+      role: "Full-Stack Developer",
+    },
+    // 10 — PuntoZeroweb Landing
+    {
+      title: "PuntoZeroweb Landing",
+      description:
+        "Marketing landing page for the PuntoZeroweb POS system, presenting its features to potential clients.",
+      image: "",
+      tags: ["HTML", "CSS", "JavaScript"],
+      link: "#",
+      gridSize: "small",
+      detailedDescription:
+        "A marketing landing page designed and built for the PuntoZeroweb point-of-sale system. The goal was to communicate the system's value to potential business clients through a professional, responsive layout with clear feature sections and a strong call-to-action flow.",
+      features: [
+        "Feature and benefit sections with visual hierarchy",
+        "Responsive layout for all screen sizes",
+        "Optimized for fast static delivery",
+        "Clear call-to-action flow for lead generation",
+      ],
+      year: "2024",
+      role: "Frontend Developer",
+    },
+    // 11 — Online Billing Platform
+    {
+      title: "Online Billing",
+      description:
+        "Collaborative online invoicing platform — contributed frontend development and UI implementation for digital invoice management.",
+      image: "",
+      tags: ["React", "TypeScript", "MySQL"],
+      link: "#",
+      gridSize: "medium",
+      detailedDescription:
+        "A collaborative project for an online billing and invoicing platform. I contributed to the frontend development and UI implementation, building the interface for generating, managing, and tracking invoices digitally for businesses.",
+      features: [
+        "Digital invoice generation and management",
+        "Client and product catalog",
+        "Invoice status tracking and history",
+        "Clean and intuitive billing interface",
+      ],
+      year: "2024",
+      role: "Frontend Developer (Collaborative)",
+    },
   ],
 
   es: [
@@ -332,6 +437,111 @@ export const projects: Projects = {
       ],
       year: "2025",
       role: "Desarrollador Móvil",
+    },
+    // 08 — Foodapp
+    {
+      title: "Foodapp",
+      description:
+        "App de gestión para restaurantes: mesas, domicilios, catálogo de productos, reportes, corte de caja, suscripciones con Mercado Pago e impresora.",
+      image: "/projects/FOODAPP.png",
+      tags: ["React Native", "C#", "PostgreSQL", "Docker", "Tailwind CSS"],
+      link: "#",
+      gridSize: "wide",
+      detailedDescription:
+        "Foodapp es una app completa de gestión para restaurantes construida con React Native. Contribuí en la implementación del diseño. Cubre el ciclo operativo completo: manejo de mesas, ventas en local y a domicilio, registro de productos, complementos y adicionales, corte de caja, facturación de suscripciones con Mercado Pago, gestión de usuarios por rol e integración con impresora térmica para recibos.",
+      features: [
+        "Manejo de mesas y seguimiento de pedidos",
+        "Flujo de ventas en local y a domicilio",
+        "Registro de productos, complementos y adicionales",
+        "Reportes de ventas y corte de caja",
+        "Venta de suscripciones con Mercado Pago",
+        "Gestión de usuarios con control de acceso por rol",
+        "Integración con impresora térmica para recibos",
+      ],
+      year: "2024",
+      role: "Desarrollador Móvil (Implementación UI)",
+    },
+    // 09 — PuntoZeroweb POS
+    {
+      title: "PuntoZeroweb POS",
+      description:
+        "Sistema de punto de venta web desarrollado en PuntoZeroweb. Maneja ventas, inventario y reportes en múltiples sucursales.",
+      image: "",
+      tags: ["PHP", "MySQL", "Docker", "HTML", "CSS"],
+      link: "#",
+      gridSize: "wide",
+      detailedDescription:
+        "Sistema integral de punto de venta web desarrollado internamente en PuntoZeroweb. Construido con PHP y MySQL en el backend y contenerizado con Docker para despliegues consistentes. Gestiona transacciones de venta en tiempo real, control de inventario y reportes por sucursal.",
+      features: [
+        "Procesamiento de ventas y transacciones en tiempo real",
+        "Control de inventario con alertas de stock bajo",
+        "Panel de reportes por sucursal",
+        "Contenerizado con Docker para despliegues uniformes",
+        "Acceso por roles: cajeros y administradores",
+      ],
+      year: "2024",
+      role: "Desarrollador Full-Stack",
+    },
+    // 09 — Hotel Tool Tracker
+    {
+      title: "Hotel Tool Tracker",
+      description:
+        "Sistema interno para hoteles que registra entradas y salidas de herramientas y equipos por departamento.",
+      image: "",
+      tags: ["React", "C#", "Tailwind CSS"],
+      link: "#",
+      gridSize: "medium",
+      detailedDescription:
+        "Sistema de gestión interna desarrollado para operaciones hoteleras, que permite registrar la entrada y salida de herramientas y equipos entre departamentos. Construido con React en el frontend, C# en el backend y una interfaz limpia en Tailwind CSS optimizada para el uso diario del personal.",
+      features: [
+        "Registro de entrada y salida de herramientas por departamento",
+        "Vista general del inventario por área",
+        "Bitácora de asignaciones y actividad del personal",
+        "Búsqueda y filtrado por herramienta, departamento o fecha",
+        "Interfaz rápida y clara para uso diario",
+      ],
+      year: "2024",
+      role: "Desarrollador Full-Stack",
+    },
+    // 10 — PuntoZeroweb Landing
+    {
+      title: "PuntoZeroweb Landing",
+      description:
+        "Landing page de marketing para el sistema POS de PuntoZeroweb, presentando sus funcionalidades a clientes potenciales.",
+      image: "",
+      tags: ["HTML", "CSS", "JavaScript"],
+      link: "#",
+      gridSize: "small",
+      detailedDescription:
+        "Landing page de marketing diseñada y desarrollada para el sistema de punto de venta de PuntoZeroweb. El objetivo fue comunicar el valor del sistema a clientes empresariales potenciales mediante un diseño profesional y responsivo con secciones de características y un flujo de llamada a la acción claro.",
+      features: [
+        "Secciones de funcionalidades y beneficios con jerarquía visual",
+        "Diseño responsivo para todos los dispositivos",
+        "Optimizada para carga rápida",
+        "Flujo de llamada a la acción para captación de clientes",
+      ],
+      year: "2024",
+      role: "Desarrollador Frontend",
+    },
+    // 11 — Online Billing Platform
+    {
+      title: "Facturación en Línea",
+      description:
+        "Plataforma colaborativa de facturación online — aporté en el desarrollo frontend e implementación de la interfaz para gestión de facturas digitales.",
+      image: "",
+      tags: ["React", "TypeScript", "MySQL"],
+      link: "#",
+      gridSize: "medium",
+      detailedDescription:
+        "Proyecto colaborativo de una plataforma de facturación en línea. Contribuí en el desarrollo frontend e implementación de la interfaz, construyendo el sistema para generar, gestionar y dar seguimiento a facturas digitales para empresas.",
+      features: [
+        "Generación y gestión de facturas digitales",
+        "Catálogo de clientes y productos",
+        "Seguimiento del estado de facturas e historial",
+        "Interfaz de facturación limpia e intuitiva",
+      ],
+      year: "2024",
+      role: "Desarrollador Frontend (Colaborativo)",
     },
   ],
 };

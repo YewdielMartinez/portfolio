@@ -17,13 +17,18 @@ export interface Translation {
   };
   experience: {
     title: string;
+    selectedRoles: string;
+    roles: string;
   };
   work: {
     title: string;
+    selectedWork: string;
+    navigate: string;
     viewProject: string;
     viewDetails: string;
     aboutProject: string;
     keyFeatures: string;
+    back: string;
     viewCode: string;
     viewDemo: string;
     viewVideoDemo: string;
@@ -98,21 +103,26 @@ export const translations: Translations = {
       status: 'Available for work'
     },
     experience: {
-      title: 'Experience'
+      title: 'Experience',
+      selectedRoles: 'Selected roles',
+      roles: 'roles'
     },
     work: {
       title: 'Work',
+      selectedWork: 'Selected Work',
+      navigate: '← → to navigate',
       viewProject: 'View Project',
       viewDetails: 'View details',
       aboutProject: 'About the Project',
       keyFeatures: 'Key Features',
+      back: 'Back',
       viewCode: 'View Code',
       viewDemo: 'View Demo',
       viewVideoDemo: 'Watch Video Demo'
     },
     about: {
       title: 'About Me',
-      bio: "I'm a software developer passionate about design, backend development, and mobile applications. I love blending creativity and logic to build meaningful digital experiences. Outside of coding, I'm a big fan of cinema, wrestling, and video games. I enjoy going to the gym, sharing ideas, and have a soft spot for dogs and sharks. Also, meatballs and carne asada are definitely my favorite food.",
+      bio: "I'm a frontend-focused software developer based in Los Mochis, Sinaloa — specializing in React, JavaScript, and TypeScript. I build polished, performant web interfaces and intuitive user experiences. When the project calls for it, I extend into React Native for mobile, .NET for backend services, Docker for deployment, and databases like PostgreSQL and Supabase. Currently studying Software Engineering while shipping real-world products.",
       skillsTitle: 'Skills & Technologies',
       favorites: 'My Favorites'
     },
@@ -173,21 +183,26 @@ export const translations: Translations = {
       status: 'Disponible para trabajar'
     },
     experience: {
-      title: 'Experiencia'
+      title: 'Experiencia',
+      selectedRoles: 'Roles destacados',
+      roles: 'roles'
     },
     work: {
       title: 'Proyectos',
+      selectedWork: 'Trabajo Destacado',
+      navigate: '← → para navegar',
       viewProject: 'Ver Proyecto',
       viewDetails: 'Ver detalles',
       aboutProject: 'Sobre el Proyecto',
       keyFeatures: 'Características Clave',
+      back: 'Volver',
       viewCode: 'Ver Código',
       viewDemo: 'Ver Demo',
       viewVideoDemo: 'Ver Demo en Video'
     },
     about: {
       title: 'Sobre Mí',
-      bio: 'Soy un estudiante de ingeniería de software apasionado por el diseño, el desarrollo backend y las aplicaciones móviles. Me gusta combinar creatividad y lógica para construir experiencias digitales significativas. Fuera del código, soy fan del cine, la lucha libre y los videojuegos. Disfruto ir al gimnasio, ofrecer ideas y tengo un gran cariño por los perros y los tiburones. Además, mis comidas favoritas son las albóndigas y la carne asada.',
+      bio: 'Soy un desarrollador de software enfocado en frontend, radicado en Los Mochis, Sinaloa — especializado en React, JavaScript y TypeScript. Construyo interfaces web pulidas, performantes y experiencias de usuario intuitivas. Cuando el proyecto lo requiere, me extiendo a React Native para móvil, .NET para servicios backend, Docker para despliegue y bases de datos como PostgreSQL y Supabase. Actualmente estudio Ingeniería de Software mientras desarrollo productos reales.',
       skillsTitle: 'Habilidades y Tecnologías',
       favorites: 'Mis Favoritos'
     },

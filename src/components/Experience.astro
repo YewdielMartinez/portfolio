@@ -14,10 +14,11 @@
     <!-- ── Section header ───────────────────────────────────── -->
     <div class="mb-16 lg:mb-24 flex items-end justify-between gap-6 flex-wrap">
       <div class="flex flex-col">
-        <span class="text-[9px] font-medium tracking-[0.28em] uppercase text-gray-300 dark:text-gray-600 mb-3">Experience</span>
+        <span class="text-[9px] font-medium tracking-[0.28em] uppercase text-gray-300 dark:text-gray-600 mb-3" data-i18n="experience.title">Experience</span>
         <h2
           class="font-normal text-gray-900 dark:text-white"
           style="font-size: clamp(2.6rem, 6vw, 5.5rem); letter-spacing: -0.04em; line-height: 1;"
+          data-i18n="experience.selectedRoles"
         >
           Selected roles
         </h2>
@@ -98,14 +99,14 @@
     `;
   }
 
-  function render(experiences: any[]) {
+  function render(experiences: any[], rolesLabel = 'roles') {
     const list = document.getElementById('exp-list');
     const totalMeta = document.getElementById('exp-total-meta');
     if (!list) return;
 
     const total = experiences.length;
     list.innerHTML = experiences.map((exp, i) => rowHTML(exp, i, total)).join('');
-    if (totalMeta) totalMeta.textContent = `${String(total).padStart(2, '0')} roles`;
+    if (totalMeta) totalMeta.textContent = `${String(total).padStart(2, '0')} ${rolesLabel}`;
 
     // Reset and observe rows for fade-in
     if (observer) observer.disconnect();
@@ -127,14 +128,15 @@
 
   async function loadExperience() {
     const { experience } = await import('../data/experience');
+    const { translations } = await import('../data/translations');
     const lang = (localStorage.getItem('language') || 'en') as 'en' | 'es';
-    render(experience[lang]);
+    render(experience[lang], translations[lang].experience.roles);
   }
 
   window.addEventListener('languageChange', async (event: any) => {
-    const { lang } = event.detail;
+    const { lang, translations } = event.detail;
     const { experience } = await import('../data/experience');
-    render(experience[lang as 'en' | 'es']);
+    render(experience[lang as 'en' | 'es'], translations.experience.roles);
   });
 
   document.addEventListener('DOMContentLoaded', loadExperience);
