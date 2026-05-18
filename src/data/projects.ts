@@ -31,7 +31,7 @@ export const projects: Projects = {
         "An open-source workspace combining Notion and Obsidian. Create notes, markdown, canvas, kanban, and calendar with bidirectional linking for collaborative work. (In Progress)",
       image: "/projects/Home Kayro.png",
       tags: ["Open Source", "Workspace", "Markdown", "In Progress"],
-      link: "#",
+      link: "https://kayro-omega.vercel.app/",
       gridSize: "wide",
       detailedDescription:
         "Kayro is an open-source collaborative workspace that merges the best of Notion and Obsidian. It allows you to create notes, write in Markdown, build interactive canvases, insert files, and organize with Kanban boards and calendars. Everything is interconnected using bidirectional linking like Obsidian, providing a powerful, relation-driven environment focused on seamless collaborative work. Currently in development.",
@@ -42,6 +42,7 @@ export const projects: Projects = {
         "Bidirectional linking between notes",
         "Open-source and collaborative-focused",
       ],
+      demo: "https://kayro-omega.vercel.app/",
       year: "2026",
       role: "Full-Stack Developer",
     },
@@ -313,7 +314,7 @@ export const projects: Projects = {
         "Un espacio de trabajo open-source que combina Notion y Obsidian. Permite crear notas, markdown, canvas, kanban y calendarios enfocados en el trabajo colaborativo. (En proceso)",
       image: "/projects/Home Kayro.png",
       tags: ["Open Source", "Workspace", "Markdown", "En proceso"],
-      link: "#",
+      link: "https://kayro-omega.vercel.app/",
       gridSize: "wide",
       detailedDescription:
         "Kayro es un espacio de trabajo colaborativo open-source que combina lo mejor de Notion y Obsidian. Permite crear notas, escribir en markdown, usar canvas interactivos, insertar archivos y organizar tareas con tableros Kanban y calendarios. Todo está interconectado mediante relaciones bidireccionales tipo Obsidian, ofreciendo un entorno potente enfocado en el trabajo colaborativo. Actualmente en desarrollo.",
@@ -324,6 +325,7 @@ export const projects: Projects = {
         "Relaciones bidireccionales entre notas",
         "Enfoque colaborativo y de código abierto",
       ],
+      demo: "https://kayro-omega.vercel.app/",
       year: "2026",
       role: "Desarrollador Full-Stack",
     },
