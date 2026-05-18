@@ -24,7 +24,28 @@ export interface Projects {
 
 export const projects: Projects = {
   en: [
-    // 01 — MedicLife Landing
+    // 01 — Kayro
+    {
+      title: "Kayro",
+      description:
+        "An open-source workspace combining Notion and Obsidian. Create notes, markdown, canvas, kanban, and calendar with bidirectional linking for collaborative work. (In Progress)",
+      image: "/projects/Home Kayro.png",
+      tags: ["Open Source", "Workspace", "Markdown", "In Progress"],
+      link: "#",
+      gridSize: "wide",
+      detailedDescription:
+        "Kayro is an open-source collaborative workspace that merges the best of Notion and Obsidian. It allows you to create notes, write in Markdown, build interactive canvases, insert files, and organize with Kanban boards and calendars. Everything is interconnected using bidirectional linking like Obsidian, providing a powerful, relation-driven environment focused on seamless collaborative work. Currently in development.",
+      features: [
+        "Markdown-based note taking",
+        "Interactive canvas and file attachments",
+        "Kanban boards and calendar integration",
+        "Bidirectional linking between notes",
+        "Open-source and collaborative-focused",
+      ],
+      year: "2026",
+      role: "Full-Stack Developer",
+    },
+    // 02 — MedicLife Landing
     {
       title: "MedicLife Landing",
       description:
@@ -285,7 +306,28 @@ export const projects: Projects = {
   ],
 
   es: [
-    // 01 — MedicLife Landing
+    // 01 — Kayro
+    {
+      title: "Kayro",
+      description:
+        "Un espacio de trabajo open-source que combina Notion y Obsidian. Permite crear notas, markdown, canvas, kanban y calendarios enfocados en el trabajo colaborativo. (En proceso)",
+      image: "/projects/Home Kayro.png",
+      tags: ["Open Source", "Workspace", "Markdown", "En proceso"],
+      link: "#",
+      gridSize: "wide",
+      detailedDescription:
+        "Kayro es un espacio de trabajo colaborativo open-source que combina lo mejor de Notion y Obsidian. Permite crear notas, escribir en markdown, usar canvas interactivos, insertar archivos y organizar tareas con tableros Kanban y calendarios. Todo está interconectado mediante relaciones bidireccionales tipo Obsidian, ofreciendo un entorno potente enfocado en el trabajo colaborativo. Actualmente en desarrollo.",
+      features: [
+        "Creación de notas con soporte Markdown",
+        "Canvas interactivos e inserción de archivos",
+        "Integración de tableros Kanban y calendario",
+        "Relaciones bidireccionales entre notas",
+        "Enfoque colaborativo y de código abierto",
+      ],
+      year: "2026",
+      role: "Desarrollador Full-Stack",
+    },
+    // 02 — MedicLife Landing
     {
       title: "MedicLife Landing",
       description:
