@@ -1,26 +1,32 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Navbar from '../components/Navbar.astro';
-import Hero from '../components/Hero.astro';
+import Header from '../components/Header.astro';
+import SectionMenu from '../components/SectionMenu.astro';
+import Cover from '../components/Cover.astro';
+import About from '../components/About.astro';
+import Services from '../components/Services.astro';
+import Tools from '../components/Tools.astro';
 import Experience from '../components/Experience.astro';
 import Work from '../components/Work.astro';
-import About from '../components/About.astro';
 import Contact from '../components/Contact.astro';
+import ProjectDialog from '../components/ProjectDialog.astro';
 import Footer from '../components/Footer.astro';
-import SectionNav from '../components/SectionNav.astro';
-import BehindTheCode from '../components/BehindTheCode.astro';
+import Settings from '../components/Settings.astro';
 ---
 
 <Layout>
-	<Navbar />
-	<SectionNav />
+	<Header />
 	<main id="main-content">
-		<Hero />
+		<Cover />
+		<About />
+		<Services />
+		<Tools />
 		<Experience />
 		<Work />
-		<About />
 		<Contact />
 	</main>
 	<Footer />
-	<BehindTheCode />
+	<Settings />
+	<SectionMenu />
+	<ProjectDialog />
 </Layout>

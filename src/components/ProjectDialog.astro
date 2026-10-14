@@ -1,0 +1,138 @@
+---
+import ProjectDetail from './ProjectDetail.astro';
+import { t } from '../lib/t';
+import { projects } from '../data/projects';
+---
+
+<dialog class="morph morph--project" data-project-dialog aria-labelledby="pd-title">
+  <div class="morph__backdrop" data-close></div>
+  <div class="morph__panel">
+    <button
+      type="button"
+      class="pd__close"
+      data-close
+      aria-label={t('dialog.close')}
+      data-i18n-attr="aria-label:dialog.close"
+    >
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+        <path d="M5 5l14 14M19 5L5 19" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" />
+      </svg>
+    </button>
+    <div class="morph__content" data-dialog-content></div>
+  </div>
+</dialog>
+
+{projects.en.map((project, i) => (
+  <template data-project-template={i}>
+    <ProjectDetail project={project} index={i} />
+  </template>
+))}
+
+<style is:global>
+  .morph--project .morph__panel {
+    width: min(960px, 100vw - 2 * var(--gutter));
+  }
+
+  .pd__close {
+    position: absolute;
+    top: clamp(0.75rem, 2vw, 1.25rem);
+    right: clamp(0.75rem, 2vw, 1.25rem);
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 50%;
+    background: var(--bg);
+    color: var(--fg);
+    box-shadow: var(--shadow-soft);
+    transition: scale 0.8s var(--ease-out-elastic);
+  }
+
+  .pd__close:active {
+    scale: 0.9;
+  }
+
+  .pd {
+    display: grid;
+    gap: clamp(1.5rem, 3vw, 2.25rem);
+  }
+
+  .pd__media {
+    border-radius: 1.75rem;
+    overflow: hidden;
+    aspect-ratio: 16 / 10;
+    background: var(--surface);
+  }
+
+  .pd__media .pd__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+  }
+
+  .pd__head {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .pd__title {
+    outline: none;
+  }
+
+  .pd__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 3rem;
+  }
+
+  .pd__meta dt {
+    margin-bottom: 0.25rem;
+  }
+
+  .pd__desc {
+    max-width: 52ch;
+  }
+
+  .pd__features ul {
+    display: grid;
+    margin-top: 0.75rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .pd__features li {
+    padding-block: 0.7rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .pd__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .pd__tags li {
+    padding: 0.35rem 0.8rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+  }
+
+  .pd__video {
+    width: 100%;
+    border-radius: 1.25rem;
+    background: #000;
+  }
+
+  .pd__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .pill--ghost {
+    background: transparent;
+    color: var(--fg);
+    box-shadow: inset 0 0 0 1px var(--line);
+  }
+</style>

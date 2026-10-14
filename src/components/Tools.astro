@@ -1,0 +1,32 @@
+---
+import SheetTitle from './SheetTitle.astro';
+import { t } from '../lib/t';
+import { skills } from '../data/skills';
+
+const names = skills.map((skill) => skill.name).join(', ');
+---
+
+<section id="tools" class="sheet gutter" data-section-label="nav.tools" tabindex="-1">
+  <SheetTitle line1="tools.title1" line2="tools.title2" muted={false} />
+  <div class="tools__copy" data-flow>
+    <p class="tools__text">
+      {names} <span class="text-muted" data-i18n="tools.outro">{t('tools.outro')}</span>
+    </p>
+  </div>
+</section>
+
+<style>
+  .tools__copy {
+    margin-top: clamp(1.5rem, 3vh, 2.5rem);
+  }
+
+  .tools__text {
+    max-width: 30ch;
+    font-size: clamp(1.25rem, 1.9vw, 2rem);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    text-align: justify;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+  }
+</style>

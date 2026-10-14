@@ -1,0 +1,79 @@
+---
+import ProjectImage from './ProjectImage.astro';
+import { t } from '../lib/t';
+import type { Project } from '../data/projects';
+
+interface Props {
+  project: Project;
+  index: number;
+}
+
+const { project, index: i } = Astro.props;
+const demo = project.demo ?? (project.link && project.link !== '#' ? project.link : undefined);
+---
+
+<article class="pd">
+  {project.image && (
+    <div class="pd__media">
+      <ProjectImage
+        src={project.image}
+        widths={[640, 960, 1400]}
+        sizes="(min-width: 1000px) 900px, 100vw"
+        class="pd__img"
+      />
+    </div>
+  )}
+  <header class="pd__head">
+    <h2 id="pd-title" class="pd__title t-h2" tabindex="-1" data-words data-i18n={`projects.${i}.title`}>
+      {project.title}
+    </h2>
+    <dl class="pd__meta t-label">
+      <div>
+        <dt class="text-muted" data-i18n="dialog.year">{t('dialog.year')}</dt>
+        <dd data-i18n={`projects.${i}.year`}>{project.year}</dd>
+      </div>
+      <div>
+        <dt class="text-muted" data-i18n="dialog.role">{t('dialog.role')}</dt>
+        <dd data-i18n={`projects.${i}.role`}>{project.role}</dd>
+      </div>
+    </dl>
+  </header>
+
+  <p class="pd__desc t-body" data-i18n={`projects.${i}.${project.detailedDescription ? 'detailedDescription' : 'description'}`}>
+    {project.detailedDescription ?? project.description}
+  </p>
+
+  {project.features && (
+    <section class="pd__features">
+      <h3 class="t-label text-muted" data-i18n="dialog.features">{t('dialog.features')}</h3>
+      <ul>
+        {project.features.map((feature, j) => (
+          <li class="t-label" data-i18n={`projects.${i}.features.${j}`}>{feature}</li>
+        ))}
+      </ul>
+    </section>
+  )}
+
+  <ul class="pd__tags t-small">
+    {project.tags.map((tag, j) => <li data-i18n={`projects.${i}.tags.${j}`}>{tag}</li>)}
+  </ul>
+
+  {project.video && (
+    <video class="pd__video" src={project.video} controls preload="none" playsinline></video>
+  )}
+
+  {(demo || project.github) && (
+    <div class="pd__links">
+      {demo && (
+        <a class="pill" href={demo} target="_blank" rel="noopener noreferrer">
+          <span data-i18n="dialog.demo">{t('dialog.demo')}</span> ↗
+        </a>
+      )}
+      {project.github && (
+        <a class="pill pill--ghost" href={project.github} target="_blank" rel="noopener noreferrer">
+          <span data-i18n="dialog.code">{t('dialog.code')}</span> ↗
+        </a>
+      )}
+    </div>
+  )}
+</article>

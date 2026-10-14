@@ -1,0 +1,134 @@
+---
+import ProjectImage from './ProjectImage.astro';
+import { t } from '../lib/t';
+import { personalInfo } from '../data/personal';
+
+// Four screenshots fanned like spencergabor.com's hero images.
+const cards = [
+  '/projects/Home Kayro.png',
+  '/projects/MEDICLIFELANDING.png',
+  '/projects/Watchlt.png',
+  '/projects/TRON.png',
+];
+
+const buildDate = new Intl.DateTimeFormat('en', { month: 'long', year: 'numeric' }).format(new Date());
+---
+
+<section id="home" class="cover gutter" data-section-label="nav.home" tabindex="-1">
+  <div class="cover__row t-label" data-flow>
+    <p data-i18n="cover.presentedBy">{t('cover.presentedBy')}</p>
+    <p data-i18n-date>{buildDate}</p>
+  </div>
+
+  <div class="cover__cards" data-hero-cards aria-hidden="true">
+    {cards.map((src, i) => (
+      <div class="hero-card" data-hero-card>
+        <div class="hero-card__shadow"></div>
+        <ProjectImage
+          src={src}
+          widths={[200, 320, 480]}
+          sizes="(min-width: 768px) 16vw, 22vw"
+          class="hero-card__img"
+          loading="eager"
+          fetchpriority={i === 0 ? 'high' : undefined}
+        />
+      </div>
+    ))}
+  </div>
+
+  <div class="cover__row cover__meta t-label" data-flow>
+    <p data-i18n="cover.role">{t('cover.role')}</p>
+    <p class="cover__contact">
+      <a class="link" href={`mailto:${personalInfo.email}`}>{personalInfo.email}</a>
+      <span data-i18n="cover.location">{t('cover.location')}</span>
+    </p>
+  </div>
+
+  <h1 class="cover__title t-display">
+    <span class="sr-only">Yewdiel Medina — Portfolio</span>
+    <span class="cover__word" aria-hidden="true" data-fit data-words="letters" data-i18n="cover.portfolio">{t('cover.portfolio')}</span>
+  </h1>
+</section>
+
+<style>
+  .cover {
+    min-height: 100svh;
+    display: grid;
+    grid-template-rows: auto 1fr auto auto;
+    padding-top: 1.1rem;
+    container-type: inline-size;
+    outline: none;
+  }
+
+  .cover__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+  }
+
+  .cover__meta {
+    padding-bottom: clamp(0.5rem, 1.5vw, 1.25rem);
+  }
+
+  .cover__contact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem clamp(1rem, 4vw, 4rem);
+  }
+
+  .cover__cards {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-block: clamp(2rem, 6vh, 4rem);
+    pointer-events: none;
+  }
+
+  /* Card geometry and per-card tilt from spencergabor.com (Hero, data-v-a1f66af5) */
+  .hero-card {
+    display: grid;
+    width: clamp(5.25rem, 17cqi, 15rem);
+    aspect-ratio: 1;
+    border-radius: 1rem;
+  }
+
+  .hero-card:not(:last-child) {
+    margin-right: -6%;
+  }
+
+  .hero-card > :global(*) {
+    grid-area: 1 / 1;
+    border-radius: inherit;
+    translate: calc(var(--offsetX, 0) * 1px) calc(var(--offsetY, 0) * 1px + var(--ty));
+    rotate: calc(var(--r) - var(--velocity, 0) * 0.25deg);
+  }
+
+  .hero-card:nth-child(1) { --r: 2deg; --ty: 5%; }
+  .hero-card:nth-child(2) { --r: -3deg; --ty: -6%; }
+  .hero-card:nth-child(3) { --r: 6deg; --ty: 5%; }
+  .hero-card:nth-child(4) { --r: -2deg; --ty: -4%; }
+
+  .hero-card__shadow {
+    box-shadow: var(--shadow);
+  }
+
+  .hero-card :global(.hero-card__img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    background: var(--surface);
+  }
+
+  .cover__title {
+    margin-bottom: -0.02em;
+    font-weight: 400;
+  }
+
+  .cover__word {
+    letter-spacing: -0.06em;
+    margin-left: -0.04em;
+  }
+</style>

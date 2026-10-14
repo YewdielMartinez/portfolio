@@ -1,0 +1,22 @@
+---
+import { t } from '../lib/t';
+
+interface Props {
+  /** i18n key of the first line */
+  line1: string;
+  /** i18n key of the second line */
+  line2: string;
+  /** Second line in grey, as on spencergabor.com */
+  muted?: boolean;
+  as?: 'h2' | 'h3';
+  id?: string;
+  class?: string;
+}
+
+const { line1, line2, muted = true, as: Tag = 'h2', id, class: className } = Astro.props;
+---
+
+<Tag id={id} class:list={['t-h2', className]} data-words>
+  <span class="block" data-i18n={line1}>{t(line1)}</span>
+  <span class:list={['block', muted && 'text-muted']} data-i18n={line2}>{t(line2)}</span>
+</Tag>

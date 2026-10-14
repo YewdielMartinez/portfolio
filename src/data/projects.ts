@@ -5,6 +5,8 @@ export interface Project {
   title: string;
   description: string;
   image: string;
+  /** Extra screenshots shown in the archive pile; `image` stays the cover. */
+  images?: string[];
   tags: string[];
   link: string;
   gridSize: "small" | "medium" | "large" | "wide";
@@ -30,6 +32,7 @@ export const projects: Projects = {
       description:
         "An open-source workspace combining Notion and Obsidian. Create notes, markdown, canvas, kanban, and calendar with bidirectional linking for collaborative work. (In Progress)",
       image: "/projects/Home Kayro.png",
+      images: ["/projects/Sign In Kayro (1).png", "/projects/Register Kayro (2).png"],
       tags: ["Open Source", "Workspace", "Markdown", "In Progress"],
       link: "https://kayro-omega.vercel.app/",
       gridSize: "wide",
@@ -313,6 +316,7 @@ export const projects: Projects = {
       description:
         "Un espacio de trabajo open-source que combina Notion y Obsidian. Permite crear notas, markdown, canvas, kanban y calendarios enfocados en el trabajo colaborativo. (En proceso)",
       image: "/projects/Home Kayro.png",
+      images: ["/projects/Sign In Kayro (1).png", "/projects/Register Kayro (2).png"],
       tags: ["Open Source", "Workspace", "Markdown", "En proceso"],
       link: "https://kayro-omega.vercel.app/",
       gridSize: "wide",

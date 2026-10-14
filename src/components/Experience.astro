@@ -1,143 +1,45 @@
 ---
+import SheetTitle from './SheetTitle.astro';
+import { experience } from '../data/experience';
 ---
 
-<!--
-  Experience — Static editorial list (no pin, no ScrollTrigger pin)
-  Each role rendered as a row. Subtle scroll-fade entrance only.
--->
-<section
-  id="experience"
-  class="relative dark:bg-[rgb(38,38,36)] py-24 lg:py-32 overflow-hidden"
->
-  <div class="px-6 sm:px-10 lg:px-20 relative z-10">
-
-    <!-- ── Section header ───────────────────────────────────── -->
-    <div class="mb-16 lg:mb-24 flex items-end justify-between gap-6 flex-wrap">
-      <div class="flex flex-col">
-        <span class="text-[9px] font-medium tracking-[0.28em] uppercase text-gray-300 dark:text-gray-600 mb-3" data-i18n="experience.title">Experience</span>
-        <h2
-          class="font-normal text-gray-900 dark:text-white"
-          style="font-size: clamp(2.6rem, 6vw, 5.5rem); letter-spacing: -0.04em; line-height: 1;"
-          data-i18n="experience.selectedRoles"
-        >
-          Selected roles
-        </h2>
-      </div>
-      <p
-        id="exp-total-meta"
-        class="text-xs font-medium tracking-[0.2em] uppercase text-gray-300 dark:text-gray-600 tabular-nums"
-      ></p>
-    </div>
-
-    <!-- ── List ─────────────────────────────────────────────── -->
-    <ol id="exp-list" class="flex flex-col">
-      <!-- rows injected by JS -->
-    </ol>
-
-  </div>
+<section id="experience" class="sheet gutter" data-section-label="nav.experience" tabindex="-1">
+  <SheetTitle line1="experience.title1" line2="experience.title2" />
+  <ol class="xp" data-flow>
+    {experience.en.map((item, i) => (
+      <li class="xp__row">
+        <p class="t-label text-muted" data-i18n={`experience.${i}.year`}>{item.year}</p>
+        <div class="xp__role">
+          <p class="t-lead">{item.company}</p>
+          <p class="t-label text-muted" data-i18n={`experience.${i}.position`}>{item.position}</p>
+        </div>
+        <p class="t-body" data-i18n={`experience.${i}.description`}>{item.description}</p>
+      </li>
+    ))}
+  </ol>
 </section>
 
 <style>
-  .exp-row {
-    opacity: 0;
-    transform: translateY(20px);
-    will-change: opacity, transform;
+  .xp {
+    margin-top: clamp(3rem, 9vh, 6rem);
+    border-bottom: 1px solid var(--line);
   }
-  .exp-row.is-in {
-    opacity: 1;
-    transform: translateY(0);
-    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+
+  .xp__row {
+    display: grid;
+    gap: 0.75rem 2rem;
+    padding-block: clamp(1.5rem, 3.5vh, 2.5rem);
+    border-top: 1px solid var(--line);
   }
-  @media (prefers-reduced-motion: reduce) {
-    .exp-row { opacity: 1; transform: none; transition: none; }
+
+  .xp__role {
+    display: grid;
+    gap: 0.4rem;
+  }
+
+  @media (min-width: 768px) {
+    .xp__row {
+      grid-template-columns: 3fr 4fr 5fr;
+    }
   }
 </style>
-
-<script>
-  let observer: IntersectionObserver | null = null;
-
-  function rowHTML(exp: any, i: number, total: number): string {
-    const num = String(i + 1).padStart(2, '0');
-    const tot = String(total).padStart(2, '0');
-    const isLast = i === total - 1;
-    return `
-      <li class="exp-row group" style="transition-delay: ${i * 80}ms;">
-        <div class="grid grid-cols-12 gap-4 lg:gap-10 py-10 lg:py-14 ${isLast ? '' : 'border-b border-gray-200 dark:border-gray-700/40'}">
-
-          <!-- index -->
-          <div class="col-span-12 lg:col-span-1 flex lg:block items-baseline gap-3 mb-4 lg:mb-0">
-            <span class="font-normal tabular-nums text-gray-900 dark:text-white"
-              style="font-size: clamp(1.8rem, 3vw, 2.6rem); letter-spacing: -0.04em; line-height: 1;">${num}</span>
-            <span class="text-[10px] tracking-[0.2em] uppercase text-gray-300 dark:text-gray-600 tabular-nums hidden lg:block mt-2">/ ${tot}</span>
-          </div>
-
-          <!-- company + role + year -->
-          <div class="col-span-12 lg:col-span-6">
-            <h3 class="font-normal text-gray-900 dark:text-white mb-3"
-              style="font-size: clamp(1.8rem, 3.6vw, 3rem); letter-spacing: -0.03em; line-height: 1.05;">
-              ${exp.company}
-            </h3>
-            <div class="flex items-center gap-3 flex-wrap">
-              <p class="text-xs font-medium tracking-[0.2em] uppercase text-gray-500 dark:text-gray-400">
-                ${exp.position}
-              </p>
-              <span class="text-gray-200 dark:text-gray-700 text-sm" aria-hidden="true">·</span>
-              <p class="text-xs text-gray-400 dark:text-gray-500 tabular-nums">${exp.year}</p>
-            </div>
-          </div>
-
-          <!-- description -->
-          <div class="col-span-12 lg:col-span-5 lg:border-l lg:border-gray-100 dark:lg:border-gray-700/40 lg:pl-10">
-            <p class="text-base lg:text-[17px] text-gray-500 dark:text-gray-400 leading-relaxed">
-              ${exp.description}
-            </p>
-          </div>
-
-        </div>
-      </li>
-    `;
-  }
-
-  function render(experiences: any[], rolesLabel = 'roles') {
-    const list = document.getElementById('exp-list');
-    const totalMeta = document.getElementById('exp-total-meta');
-    if (!list) return;
-
-    const total = experiences.length;
-    list.innerHTML = experiences.map((exp, i) => rowHTML(exp, i, total)).join('');
-    if (totalMeta) totalMeta.textContent = `${String(total).padStart(2, '0')} ${rolesLabel}`;
-
-    // Reset and observe rows for fade-in
-    if (observer) observer.disconnect();
-    observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-in');
-            observer?.unobserve(entry.target);
-          }
-        });
-      },
-      { rootMargin: '0px 0px -10% 0px', threshold: 0.15 }
-    );
-    document.querySelectorAll<HTMLElement>('.exp-row').forEach(el => {
-      observer!.observe(el);
-    });
-  }
-
-  async function loadExperience() {
-    const { experience } = await import('../data/experience');
-    const { translations } = await import('../data/translations');
-    const lang = (localStorage.getItem('language') || 'en') as 'en' | 'es';
-    render(experience[lang], translations[lang].experience.roles);
-  }
-
-  window.addEventListener('languageChange', async (event: any) => {
-    const { lang, translations } = event.detail;
-    const { experience } = await import('../data/experience');
-    render(experience[lang as 'en' | 'es'], translations.experience.roles);
-  });
-
-  document.addEventListener('DOMContentLoaded', loadExperience);
-</script>

@@ -1,0 +1,63 @@
+---
+import { t } from '../lib/t';
+---
+
+<header class="site-header" data-header>
+  <a href="#home" class="t-label">Yewdiel Medina <span aria-hidden="true">|</span> Portfolio</a>
+  <button
+    type="button"
+    class="site-header__trigger t-label"
+    data-menu-trigger
+    aria-haspopup="dialog"
+    aria-expanded="false"
+    aria-controls="section-menu"
+  >
+    <span data-section-label-text data-words data-i18n="nav.home">{t('nav.home')}</span>
+    <span class="site-header__plus" aria-hidden="true">+</span>
+  </button>
+</header>
+
+<style>
+  .site-header {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 40;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 1.1rem var(--gutter);
+    color: #fff;
+    mix-blend-mode: difference;
+    pointer-events: none;
+    transition:
+      opacity 0.4s,
+      translate 0.8s var(--ease-out-elastic),
+      visibility 0.4s;
+  }
+
+  .site-header > * {
+    pointer-events: auto;
+  }
+
+  :global(.js) .site-header:not([data-visible]) {
+    opacity: 0;
+    translate: 0 -100%;
+    visibility: hidden;
+  }
+
+  .site-header__trigger {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.4em;
+  }
+
+  .site-header__plus {
+    display: inline-block;
+    transition: rotate 0.6s var(--ease-out-elastic);
+  }
+
+  .site-header__trigger[aria-expanded='true'] .site-header__plus {
+    rotate: 45deg;
+  }
+</style>

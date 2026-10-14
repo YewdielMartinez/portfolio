@@ -1,261 +1,239 @@
+export type Lang = 'en' | 'es';
 
 export interface Translation {
   nav: {
     home: string;
+    about: string;
+    services: string;
+    tools: string;
     experience: string;
     work: string;
-    about: string;
     contact: string;
+    menu: string;
+    close: string;
   };
-  home: {
-    name: string;
+  cover: {
+    presentedBy: string;
     role: string;
-    tagline: string;
-    viewWork: string;
-    contactMe: string;
-    status: string;
-  };
-  experience: {
-    title: string;
-    selectedRoles: string;
-    roles: string;
-  };
-  work: {
-    title: string;
-    selectedWork: string;
-    navigate: string;
-    viewProject: string;
-    viewDetails: string;
-    aboutProject: string;
-    keyFeatures: string;
-    back: string;
-    viewCode: string;
-    viewDemo: string;
-    viewVideoDemo: string;
+    location: string;
+    portfolio: string;
   };
   about: {
-    title: string;
+    hello: string;
+    name: string;
     bio: string;
-    skillsTitle: string;
-    favorites: string;
+    bio2: string;
+  };
+  services: {
+    title1: string;
+    title2: string;
+    body: string;
+    items: string[];
+  };
+  tools: {
+    title1: string;
+    title2: string;
+    outro: string;
+  };
+  experience: {
+    title1: string;
+    title2: string;
+  };
+  work: {
+    title1: string;
+    title2: string;
+    archive: string;
+    drag: string;
+    open: string;
+    carousel: string;
+  };
+  dialog: {
+    year: string;
+    role: string;
+    features: string;
+    demo: string;
+    code: string;
+    video: string;
+    close: string;
   };
   contact: {
-    title: string;
-    subtitle: string;
-    namePlaceholder: string;
-    emailPlaceholder: string;
-    messagePlaceholder: string;
-    sendButton: string;
+    title1: string;
+    title2: string;
+    name: string;
+    email: string;
+    message: string;
+    send: string;
     sending: string;
-    successTitle: string;
-    successMessage: string;
-    errorTitle: string;
-    errorMessage: string;
+    success: string;
+    error: string;
   };
-  behind: {
-    unlocked: string;
+  footer: {
     title: string;
-    subtitle: string;
-    techStack: string;
-    features: string;
-    feature1Title: string;
-    feature1Desc: string;
-    feature2Title: string;
-    feature2Desc: string;
-    feature3Title: string;
-    feature3Desc: string;
-    feature4Title: string;
-    feature4Desc: string;
-    feature5Title: string;
-    feature5Desc: string;
-    feature6Title: string;
-    feature6Desc: string;
-    apis: string;
-    tmdbDesc: string;
-    colorPalette: string;
-    secretFound: string;
-    pressKey: string;
-    togglePanel: string;
-    builtWith: string;
+    rights: string;
+  };
+  settings: {
+    open: string;
+    theme: string;
+    switchLang: string;
+    langCode: string;
   };
 }
 
-export interface Translations {
-  en: Translation;
-  es: Translation;
-}
-
-export const translations: Translations = {
+export const translations: Record<Lang, Translation> = {
   en: {
     nav: {
       home: 'Home',
+      about: 'About me',
+      services: 'What I do',
+      tools: 'Tools',
       experience: 'Experience',
       work: 'Work',
-      about: 'About',
-      contact: 'Contact'
+      contact: 'Contact',
+      menu: 'Sections',
+      close: 'Close',
     },
-    home: {
-      name: 'Yewdiel Medina',
+    cover: {
+      presentedBy: 'Presented by: Yewdiel Medina',
       role: 'Software Developer',
-      tagline: 'Turning ideas into scalable web and mobile apps',
-      viewWork: 'View Work',
-      contactMe: 'Contact Me',
-      status: 'Available for work'
-    },
-    experience: {
-      title: 'Experience',
-      selectedRoles: 'Selected roles',
-      roles: 'roles'
-    },
-    work: {
-      title: 'Work',
-      selectedWork: 'Selected Work',
-      navigate: '← → to navigate',
-      viewProject: 'View Project',
-      viewDetails: 'View details',
-      aboutProject: 'About the Project',
-      keyFeatures: 'Key Features',
-      back: 'Back',
-      viewCode: 'View Code',
-      viewDemo: 'View Demo',
-      viewVideoDemo: 'Watch Video Demo'
+      location: 'Los Mochis, Mexico',
+      portfolio: 'Portfolio',
     },
     about: {
-      title: 'About Me',
-      bio: "I'm a frontend-focused software developer based in Los Mochis, Sinaloa — specializing in React, JavaScript, and TypeScript. I build polished, performant web interfaces and intuitive user experiences. When the project calls for it, I extend into React Native for mobile, .NET for backend services, Docker for deployment, and databases like PostgreSQL and Supabase. Currently studying Software Engineering while shipping real-world products.",
-      skillsTitle: 'Skills & Technologies',
-      favorites: 'My Favorites'
+      hello: 'Hello!',
+      name: "I'm Yewdiel Medina",
+      bio: "I'm a frontend-focused software developer based in Los Mochis, Sinaloa — specializing in React, JavaScript, and TypeScript. I build polished, performant web interfaces and intuitive user experiences.",
+      bio2: 'When the project calls for it, I extend into React Native for mobile, .NET for backend services, Docker for deployment, and databases like PostgreSQL and Supabase. Currently studying Software Engineering while shipping real-world products.',
+    },
+    services: {
+      title1: 'What I do?',
+      title2: '(and love doing)',
+      body: 'I build clear, fast interfaces — sometimes bold, sometimes minimal, always purposeful. I enjoy turning complex workflows into products people understand at a glance, from the first sketch to production.',
+      items: ['Frontend', 'Mobile apps', 'Backend', 'UI/UX', 'APIs', 'Landing pages'],
+    },
+    tools: {
+      title1: 'Tools',
+      title2: "I'm fluent in.",
+      outro: 'and I explore AI tools to bring them into design, development and delivery.',
+    },
+    experience: {
+      title1: 'Experience',
+      title2: 'so far.',
+    },
+    work: {
+      title1: 'Selected',
+      title2: 'work.',
+      archive: 'Archive',
+      drag: 'Drag or use ← →',
+      open: 'Open project',
+      carousel: 'Selected projects',
+    },
+    dialog: {
+      year: 'Year',
+      role: 'Role',
+      features: 'Key features',
+      demo: 'View demo',
+      code: 'View code',
+      video: 'Video demo',
+      close: 'Close',
     },
     contact: {
-      title: "Let's Work Together",
-      subtitle: "Have a project in mind? I'd love to hear from you.",
-      namePlaceholder: 'Your Name',
-      emailPlaceholder: 'Your Email',
-      messagePlaceholder: 'Your Message',
-      sendButton: 'Send Message',
-      sending: 'Sending...',
-      successTitle: '✓ Message sent successfully!',
-      successMessage: "I'll get back to you soon.",
-      errorTitle: '✗ Error sending message',
-      errorMessage: 'Please try again later.'
+      title1: "Let's work",
+      title2: 'together?',
+      name: 'Name',
+      email: 'Email',
+      message: 'Message',
+      send: 'Send message',
+      sending: 'Sending…',
+      success: "Message sent. I'll get back to you soon.",
+      error: 'The message could not be sent. Write to me at yewdiel211@gmail.com.',
     },
-    behind: {
-      unlocked: 'Easter Egg Unlocked!',
-      title: 'Behind the Code',
-      subtitle: 'How this portfolio was crafted',
-      techStack: 'Tech Stack',
-      features: 'Key Features',
-      feature1Title: 'Typewriter Animation',
-      feature1Desc: 'Custom async typewriter effect on hero section with loop and delete animations',
-      feature2Title: 'Auto Slideshow',
-      feature2Desc: 'Integrated TMDB API for movies with random shuffle',
-      feature3Title: 'TypeScript Data Management',
-      feature3Desc: 'All data (skills, movies, photos, projects) managed via TypeScript files',
-      feature4Title: 'Interactive Quiz',
-      feature4Desc: 'Custom quiz system with scoring and multilingual support',
-      feature5Title: 'Hover Detail Modals',
-      feature5Desc: '1.5s hover delay to show detailed project information',
-      feature6Title: 'Scroll Snapping Navigation',
-      feature6Desc: 'Full-page sections with smooth scroll snap and keyboard navigation',
-      apis: 'APIs & Integrations',
-      tmdbDesc: 'The Movie Database for movie posters and information',
-      colorPalette: 'Color Palette',
-      secretFound: 'You found the secret!',
-      pressKey: 'Press',
-      togglePanel: 'anytime to toggle this panel',
-      builtWith: 'Built with passion and precision'
-    }
+    footer: {
+      title: 'Contact',
+      rights: 'All rights reserved',
+    },
+    settings: {
+      open: 'Settings',
+      theme: 'Toggle dark mode',
+      switchLang: 'Cambiar a español',
+      langCode: 'ES',
+    },
   },
   es: {
     nav: {
       home: 'Inicio',
+      about: 'Sobre mí',
+      services: 'Qué hago',
+      tools: 'Herramientas',
       experience: 'Experiencia',
       work: 'Proyectos',
-      about: 'Sobre Mí',
-      contact: 'Contacto'
+      contact: 'Contacto',
+      menu: 'Secciones',
+      close: 'Cerrar',
     },
-    home: {
-      name: 'Yewdiel Medina',
+    cover: {
+      presentedBy: 'Presentado por: Yewdiel Medina',
       role: 'Desarrollador de Software',
-      tagline: 'Transformando ideas en experiencias web y móviles excepcionales',
-      viewWork: 'Ver Proyectos',
-      contactMe: 'Contáctame',
-      status: 'Disponible para trabajar'
-    },
-    experience: {
-      title: 'Experiencia',
-      selectedRoles: 'Roles destacados',
-      roles: 'roles'
-    },
-    work: {
-      title: 'Proyectos',
-      selectedWork: 'Trabajo Destacado',
-      navigate: '← → para navegar',
-      viewProject: 'Ver Proyecto',
-      viewDetails: 'Ver detalles',
-      aboutProject: 'Sobre el Proyecto',
-      keyFeatures: 'Características Clave',
-      back: 'Volver',
-      viewCode: 'Ver Código',
-      viewDemo: 'Ver Demo',
-      viewVideoDemo: 'Ver Demo en Video'
+      location: 'Los Mochis, México',
+      portfolio: 'Portfolio',
     },
     about: {
-      title: 'Sobre Mí',
-      bio: 'Soy un desarrollador de software enfocado en frontend, radicado en Los Mochis, Sinaloa — especializado en React, JavaScript y TypeScript. Construyo interfaces web pulidas, performantes y experiencias de usuario intuitivas. Cuando el proyecto lo requiere, me extiendo a React Native para móvil, .NET para servicios backend, Docker para despliegue y bases de datos como PostgreSQL y Supabase. Actualmente estudio Ingeniería de Software mientras desarrollo productos reales.',
-      skillsTitle: 'Habilidades y Tecnologías',
-      favorites: 'Mis Favoritos'
+      hello: '¡Hola!',
+      name: 'Soy Yewdiel Medina',
+      bio: 'Soy un desarrollador de software enfocado en frontend, radicado en Los Mochis, Sinaloa — especializado en React, JavaScript y TypeScript. Construyo interfaces web pulidas y rápidas, y experiencias de usuario intuitivas.',
+      bio2: 'Cuando el proyecto lo requiere, me extiendo a React Native para móvil, .NET para servicios backend, Docker para despliegue y bases de datos como PostgreSQL y Supabase. Actualmente estudio Ingeniería de Software mientras desarrollo productos reales.',
+    },
+    services: {
+      title1: '¿Qué hago?',
+      title2: '(y me encanta hacer)',
+      body: 'Construyo interfaces claras y rápidas — a veces audaces, a veces mínimas, siempre con propósito. Disfruto convertir flujos complejos en productos que se entienden de un vistazo, del primer boceto a producción.',
+      items: ['Frontend', 'Apps móviles', 'Backend', 'UI/UX', 'APIs', 'Landing pages'],
+    },
+    tools: {
+      title1: 'Herramientas',
+      title2: 'que domino.',
+      outro: 'y exploro herramientas de IA para integrarlas en diseño, desarrollo y entrega.',
+    },
+    experience: {
+      title1: 'Experiencia',
+      title2: 'hasta hoy.',
+    },
+    work: {
+      title1: 'Proyectos',
+      title2: 'seleccionados.',
+      archive: 'Archivo',
+      drag: 'Arrastra o usa ← →',
+      open: 'Abrir proyecto',
+      carousel: 'Proyectos seleccionados',
+    },
+    dialog: {
+      year: 'Año',
+      role: 'Rol',
+      features: 'Características clave',
+      demo: 'Ver demo',
+      code: 'Ver código',
+      video: 'Video demo',
+      close: 'Cerrar',
     },
     contact: {
-      title: 'Trabajemos Juntos',
-      subtitle: '¿Tienes un proyecto en mente? Me encantaría saber de ti.',
-      namePlaceholder: 'Tu Nombre',
-      emailPlaceholder: 'Tu Email',
-      messagePlaceholder: 'Tu Mensaje',
-      sendButton: 'Enviar Mensaje',
-      sending: 'Enviando...',
-      successTitle: '✓ ¡Mensaje enviado con éxito!',
-      successMessage: 'Te responderé pronto.',
-      errorTitle: '✗ Error al enviar mensaje',
-      errorMessage: 'Por favor intenta de nuevo más tarde.'
+      title1: '¿Trabajamos',
+      title2: 'juntos?',
+      name: 'Nombre',
+      email: 'Email',
+      message: 'Mensaje',
+      send: 'Enviar mensaje',
+      sending: 'Enviando…',
+      success: 'Mensaje enviado. Te responderé pronto.',
+      error: 'No se pudo enviar el mensaje. Escríbeme a yewdiel211@gmail.com.',
     },
-    behind: {
-      unlocked: '¡Easter Egg Desbloqueado!',
-      title: 'Detrás del Código',
-      subtitle: 'Cómo se construyó este portafolio',
-      techStack: 'Stack Tecnológico',
-      features: 'Características Clave',
-      feature1Title: 'Animación de Máquina de Escribir',
-      feature1Desc: 'Efecto de escritura asíncrona personalizado en la sección hero con animaciones de bucle y eliminación',
-      feature2Title: 'Slideshow Automático',
-      feature2Desc: 'API de TMDB integrada para películas con reproducción aleatoria',
-      feature3Title: 'Gestión de Datos TypeScript',
-      feature3Desc: 'Todos los datos (habilidades, películas, fotos, proyectos) gestionados mediante archivos TypeScript',
-      feature4Title: 'Quiz Interactivo',
-      feature4Desc: 'Sistema de quiz personalizado con puntuación y soporte multilingüe',
-      feature5Title: 'Modales de Detalle al Hover',
-      feature5Desc: 'Retraso de 1.5s al hacer hover para mostrar información detallada del proyecto',
-      feature6Title: 'Navegación con Scroll Snap',
-      feature6Desc: 'Secciones de página completa con scroll snap suave y navegación por teclado',
-      apis: 'APIs e Integraciones',
-      tmdbDesc: 'The Movie Database para pósters e información de películas',
-      colorPalette: 'Paleta de Colores',
-      secretFound: '¡Encontraste el secreto!',
-      pressKey: 'Presiona',
-      togglePanel: 'en cualquier momento para alternar este panel',
-      builtWith: 'Construido con pasión y precisión'
-    }
-  }
+    footer: {
+      title: 'Contacto',
+      rights: 'Todos los derechos reservados',
+    },
+    settings: {
+      open: 'Ajustes',
+      theme: 'Cambiar modo oscuro',
+      switchLang: 'Switch to English',
+      langCode: 'EN',
+    },
+  },
 };
-
-// Social links
-export const social = {
-  github: 'https://github.com/YewdielMartinez',
-  linkedin: 'https://www.linkedin.com/in/yewdiel-mart%C3%ADnez-medina-0b6752249?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
-  twitter: 'https://x.com/yewdiel211?t=pJcz40-GjgEgHyNtrnKljA&s=09',
-  letterboxd: 'https://boxd.it/47j69',
-  email: 'yewdiel211@gmail.com'
-};
-
-// Avatar
-export const avatar = '/avatar.jpg';

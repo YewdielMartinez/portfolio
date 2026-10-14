@@ -1,0 +1,52 @@
+---
+import SheetTitle from './SheetTitle.astro';
+import { t } from '../lib/t';
+import { translations } from '../data/translations';
+---
+
+<section id="services" class="sheet gutter" data-section-label="nav.services" tabindex="-1">
+  <SheetTitle line1="services.title1" line2="services.title2" muted={false} />
+  <div class="services__intro" data-flow>
+    <p class="t-body" data-i18n="services.body">{t('services.body')}</p>
+  </div>
+  <ul class="services__list">
+    {translations.en.services.items.map((_, i) => (
+      <li style={`--i:${i}`}>
+        <span class="stretch t-lead" data-words data-i18n={`services.items.${i}`}>{t(`services.items.${i}`)}</span>
+      </li>
+    ))}
+  </ul>
+</section>
+
+<style>
+  .services__intro {
+    margin-top: clamp(1.5rem, 3vh, 2.5rem);
+  }
+
+  /* Loose, staggered placement like the reference "What I do" sheet */
+  .services__list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, max-content));
+    gap: clamp(2rem, 6vh, 4rem) clamp(1.5rem, 5vw, 5rem);
+    margin-top: clamp(4rem, 12vh, 8rem);
+  }
+
+  .services__list li:nth-child(3n + 2) {
+    translate: 0 -0.6em;
+  }
+
+  @media (min-width: 768px) {
+    .services__list {
+      grid-template-columns: repeat(3, max-content);
+      padding-left: 18vw;
+    }
+
+    .services__list li:nth-child(n + 4) {
+      translate: 5vw 0;
+    }
+
+    .services__list li:nth-child(5) {
+      translate: 5vw -0.6em;
+    }
+  }
+</style>

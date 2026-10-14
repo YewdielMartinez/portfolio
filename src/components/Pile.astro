@@ -1,0 +1,145 @@
+---
+import ProjectImage from './ProjectImage.astro';
+import { pileLayers } from '../lib/pile-math';
+import type { Project } from '../data/projects';
+
+interface Props {
+  project: Project;
+  index: number;
+}
+
+const { project, index } = Astro.props;
+
+type Layer = { kind: 'image'; src: string } | { kind: 'type' } | { kind: 'plate' };
+
+// Front layer is the cover (or a typographic card); behind it sit extra screenshots or a blank plate.
+const front: Layer = project.image ? { kind: 'image', src: project.image } : { kind: 'type' };
+const extras: Layer[] = (project.images ?? []).slice(0, 2).map((src) => ({ kind: 'image', src }));
+const backs: Layer[] = extras.length ? extras.reverse() : [{ kind: 'plate' }];
+const layers = [...backs, front];
+const transforms = pileLayers(layers.length, index);
+---
+
+<button type="button" class="pile" data-project={index}>
+  <span class="pile__stack">
+    {layers.map((layer, j) => {
+      const isFront = j === layers.length - 1;
+      const tr = transforms[j];
+      const style = isFront ? undefined : `--rot:${tr.rotation.toFixed(2)};--px:${tr.offsetX.toFixed(2)};--py:${tr.offsetY}`;
+      return (
+        <span class="pile__layer" style={style}>
+          <span class="pile__media">
+            <span class="pile__shadow"></span>
+            {layer.kind === 'image' && (
+              <ProjectImage
+                src={layer.src}
+                widths={[320, 480, 720]}
+                sizes="(min-width: 768px) 28vw, 44vw"
+                class="pile__img"
+              />
+            )}
+            {layer.kind === 'plate' && <span class="pile__plate"></span>}
+            {layer.kind === 'type' && (
+              <span class="pile__type">
+                <span class="t-lead" data-i18n={`projects.${index}.title`}>{project.title}</span>
+                <span class="t-small text-muted">{project.tags.join(' · ')}</span>
+              </span>
+            )}
+          </span>
+        </span>
+      );
+    })}
+  </span>
+  <span class="pile__caption t-label">
+    <span data-i18n={`projects.${index}.title`}>{project.title}</span>
+    <span class="text-muted" data-i18n={`projects.${index}.year`}>{project.year}</span>
+  </span>
+</button>
+
+<style>
+  /* Stack recipe from spencergabor.com (GridEntry, data-v-09e57cb3) */
+  .pile {
+    display: grid;
+    gap: 1.25rem;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    text-align: left;
+  }
+
+  .pile__stack {
+    display: grid;
+    aspect-ratio: 4 / 3;
+  }
+
+  .pile__layer {
+    position: relative;
+    grid-area: 1 / 1;
+    border-radius: 1rem;
+    rotate: calc(var(--rot, 0) * 0.6deg);
+    translate: calc(var(--px, 0) * 0.3%) calc(var(--py, 0) * 0.3%);
+  }
+
+  .pile__media {
+    position: absolute;
+    inset: 0;
+    display: block;
+    border-radius: inherit;
+    transition: scale 0.8s var(--ease-out-elastic);
+  }
+
+  .pile__shadow {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: rgb(0 0 0 / 0.05);
+    box-shadow: var(--shadow-soft);
+    transition: opacity 0.8s var(--ease-out-elastic);
+  }
+
+  .pile__media :global(.pile__img),
+  .pile__plate,
+  .pile__type {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+  }
+
+  .pile__media :global(.pile__img) {
+    object-fit: cover;
+    object-position: top center;
+    background: var(--surface);
+  }
+
+  .pile__plate {
+    background: var(--surface);
+  }
+
+  .pile__type {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: clamp(1rem, 2vw, 1.5rem);
+    background: var(--surface);
+  }
+
+  .pile__caption {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  @media (any-hover: hover) {
+    .pile:hover .pile__layer:nth-last-child(1) .pile__media { scale: 1.03; }
+    .pile:hover .pile__layer:nth-last-child(2) .pile__media { scale: 1.02; }
+    .pile:hover .pile__layer:nth-last-child(3) .pile__media { scale: 1.01; }
+  }
+
+  .pile:active .pile__layer:nth-last-child(1) .pile__media { scale: 0.97; }
+  .pile:active .pile__layer:nth-last-child(2) .pile__media { scale: 0.98; }
+  .pile:active .pile__layer:nth-last-child(3) .pile__media { scale: 0.99; }
+</style>

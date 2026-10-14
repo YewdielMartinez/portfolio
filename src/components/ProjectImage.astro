@@ -1,0 +1,35 @@
+---
+import { Image } from 'astro:assets';
+import { loadProjectImage } from '../lib/images';
+
+interface Props {
+  src?: string;
+  alt?: string;
+  widths: number[];
+  sizes: string;
+  class?: string;
+  loading?: 'lazy' | 'eager';
+  fetchpriority?: 'high' | 'low' | 'auto';
+}
+
+const { src, alt = '', widths, sizes, class: className, loading = 'lazy', fetchpriority } = Astro.props;
+const image = await loadProjectImage(src);
+// Never upscale: keep only widths the source can serve, falling back to its own width.
+const usable = image ? widths.filter((w) => w <= image.width) : [];
+const srcWidths = usable.length ? usable : image ? [image.width] : [];
+---
+
+{image && (
+  <Image
+    src={image}
+    alt={alt}
+    widths={srcWidths}
+    sizes={sizes}
+    format="webp"
+    quality={80}
+    class={className}
+    loading={loading}
+    fetchpriority={fetchpriority}
+    draggable="false"
+  />
+)}

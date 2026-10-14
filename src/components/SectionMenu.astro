@@ -1,0 +1,62 @@
+---
+import { t } from '../lib/t';
+import { sections } from '../lib/sections';
+---
+
+<dialog
+  id="section-menu"
+  class="morph morph--menu"
+  data-section-menu
+  aria-label={t('nav.menu')}
+  data-i18n-attr="aria-label:nav.menu"
+>
+  <div class="morph__backdrop" data-close></div>
+  <div class="morph__panel">
+    <div class="morph__content">
+      <div class="menu__head t-label">
+        <span class="text-muted" data-i18n="nav.menu">{t('nav.menu')}</span>
+        <button type="button" class="link" data-close data-i18n="nav.close">{t('nav.close')}</button>
+      </div>
+      <nav>
+        <ol class="menu__list">
+          {sections.map((section, i) => (
+            <li>
+              <a href={`#${section.id}`} class="menu__link" data-menu-link>
+                <span class="menu__num t-small text-muted">{String(i + 1).padStart(2, '0')}</span>
+                <span class="stretch" data-i18n={section.label}>{t(section.label)}</span>
+              </a>
+            </li>
+          ))}
+        </ol>
+      </nav>
+    </div>
+  </div>
+</dialog>
+
+<style>
+  .menu__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 2rem;
+  }
+
+  .menu__list {
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  .menu__link {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    font-size: clamp(2rem, 3.4vw, 3rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+
+  .menu__num {
+    letter-spacing: 0;
+    min-width: 1.6rem;
+  }
+</style>
