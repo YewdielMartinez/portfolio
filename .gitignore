@@ -26,3 +26,5 @@ pnpm-debug.log*
 .agents
 skills-lock.json
 .claude
+# third-party replication kit (local reference only)
+Stepbro - Kit de replicacion/
