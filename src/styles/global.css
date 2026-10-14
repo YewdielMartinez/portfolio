@@ -82,6 +82,11 @@ button {
   cursor: pointer;
 }
 
+/* Sections take focus programmatically after menu navigation */
+section[tabindex='-1']:focus {
+  outline: none;
+}
+
 img {
   user-select: none;
 }
@@ -243,6 +248,10 @@ img {
   border-radius: 2.5rem;
   overflow: hidden;
   box-shadow: var(--shadow);
+}
+
+.dark .morph__panel {
+  background: #141414;
 }
 
 .morph__content {

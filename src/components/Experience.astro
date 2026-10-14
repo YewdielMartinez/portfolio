@@ -8,12 +8,12 @@ import { experience } from '../data/experience';
   <ol class="xp" data-flow>
     {experience.en.map((item, i) => (
       <li class="xp__row">
-        <p class="t-label text-muted" data-i18n={`experience.${i}.year`}>{item.year}</p>
+        <p class="t-label text-muted" data-i18n={`jobs.${i}.year`}>{item.year}</p>
         <div class="xp__role">
-          <p class="t-lead">{item.company}</p>
-          <p class="t-label text-muted" data-i18n={`experience.${i}.position`}>{item.position}</p>
+          <p class="t-lead" data-i18n={`jobs.${i}.company`}>{item.company}</p>
+          <p class="t-label text-muted" data-i18n={`jobs.${i}.position`}>{item.position}</p>
         </div>
-        <p class="t-body" data-i18n={`experience.${i}.description`}>{item.description}</p>
+        <p class="t-body" data-i18n={`jobs.${i}.description`}>{item.description}</p>
       </li>
     ))}
   </ol>

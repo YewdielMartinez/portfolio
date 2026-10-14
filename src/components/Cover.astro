@@ -46,7 +46,7 @@ const buildDate = new Intl.DateTimeFormat('en', { month: 'long', year: 'numeric'
 
   <h1 class="cover__title t-display">
     <span class="sr-only">Yewdiel Medina — Portfolio</span>
-    <span class="cover__word" aria-hidden="true" data-fit data-words="letters" data-i18n="cover.portfolio">{t('cover.portfolio')}</span>
+    <span class="cover__word" aria-hidden="true" data-fit data-words="letters" data-words-load data-i18n="cover.portfolio">{t('cover.portfolio')}</span>
   </h1>
 </section>
 
@@ -89,9 +89,15 @@ const buildDate = new Intl.DateTimeFormat('en', { month: 'long', year: 'numeric'
   /* Card geometry and per-card tilt from spencergabor.com (Hero, data-v-a1f66af5) */
   .hero-card {
     display: grid;
-    width: clamp(5.25rem, 17cqi, 15rem);
+    width: clamp(5.25rem, 25cqi, 15rem);
     aspect-ratio: 1;
     border-radius: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .hero-card {
+      width: clamp(5.25rem, 17cqi, 15rem);
+    }
   }
 
   .hero-card:not(:last-child) {
