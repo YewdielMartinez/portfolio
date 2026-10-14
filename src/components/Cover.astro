@@ -5,10 +5,10 @@ import { personalInfo } from '../data/personal';
 
 // Four screenshots fanned like spencergabor.com's hero images.
 const cards = [
-  '/projects/Home Kayro.png',
-  '/projects/MEDICLIFELANDING.png',
-  '/projects/Watchlt.png',
-  '/projects/TRON.png',
+  '/projects/Kayro.jpeg',
+  '/projects/MedicLife.jpeg',
+  '/projects/WatchLt.jpeg',
+  '/projects/LOON.jpeg',
 ];
 
 const buildDate = new Intl.DateTimeFormat('en', { month: 'long', year: 'numeric' }).format(new Date());
@@ -26,8 +26,8 @@ const buildDate = new Intl.DateTimeFormat('en', { month: 'long', year: 'numeric'
         <div class="hero-card__shadow"></div>
         <ProjectImage
           src={src}
-          widths={[200, 320, 480]}
-          sizes="(min-width: 768px) 16vw, 22vw"
+          widths={[240, 400, 560]}
+          sizes="(min-width: 768px) 19vw, 44vw"
           class="hero-card__img"
           loading="eager"
           fetchpriority={i === 0 ? 'high' : undefined}
@@ -80,28 +80,37 @@ const buildDate = new Intl.DateTimeFormat('en', { month: 'long', year: 'numeric'
 
   .cover__cards {
     display: flex;
+    flex-wrap: wrap;
+    row-gap: 0.75rem;
     justify-content: center;
+    align-content: center;
     align-items: center;
     padding-block: clamp(2rem, 6vh, 4rem);
     pointer-events: none;
   }
 
   /* Card geometry and per-card tilt from spencergabor.com (Hero, data-v-a1f66af5) */
+  /* Landscape (4:3) and a lighter overlap than Spencer's -6% so the project names on the covers stay readable */
+  /* Phones: two rows of two so the covers stay legible */
   .hero-card {
     display: grid;
-    width: clamp(5.25rem, 25cqi, 15rem);
-    aspect-ratio: 1;
+    width: clamp(5.25rem, 44cqi, 17rem);
+    aspect-ratio: 4 / 3;
     border-radius: 1rem;
   }
 
   @media (min-width: 768px) {
+    .cover__cards {
+      flex-wrap: nowrap;
+    }
+
     .hero-card {
-      width: clamp(5.25rem, 17cqi, 15rem);
+      width: clamp(5.25rem, 19cqi, 17rem);
     }
   }
 
   .hero-card:not(:last-child) {
-    margin-right: -6%;
+    margin-right: -1.5%;
   }
 
   .hero-card > :global(*) {
@@ -124,7 +133,7 @@ const buildDate = new Intl.DateTimeFormat('en', { month: 'long', year: 'numeric'
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: top center;
+    object-position: center;
     background: var(--surface);
   }
 

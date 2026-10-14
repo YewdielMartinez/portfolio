@@ -43,6 +43,13 @@ const demo = project.demo ?? (project.link && project.link !== '#' ? project.lin
     {project.detailedDescription ?? project.description}
   </p>
 
+  {project.install && (
+    <div class="pd__install">
+      <code>{project.install}</code>
+      <button type="button" class="pd__copy t-small" data-copy={project.install} data-i18n="dialog.copy">{t('dialog.copy')}</button>
+    </div>
+  )}
+
   {project.features && (
     <section class="pd__features">
       <h3 class="t-label text-muted" data-i18n="dialog.features">{t('dialog.features')}</h3>
@@ -58,16 +65,36 @@ const demo = project.demo ?? (project.link && project.link !== '#' ? project.lin
     {project.tags.map((tag, j) => <li data-i18n={`projects.${i}.tags.${j}`}>{tag}</li>)}
   </ul>
 
+  {project.images && project.images.length > 0 && (
+    <section class="pd__gallery">
+      <h3 class="t-label text-muted" data-i18n="dialog.gallery">{t('dialog.gallery')}</h3>
+      <div class="pd__shots">
+        {project.images.map((src) => (
+          <ProjectImage
+            src={src}
+            alt={`${project.title} — screenshot`}
+            widths={[480, 720, 1000]}
+            sizes="(min-width: 1000px) 440px, 90vw"
+            class="pd__shot"
+          />
+        ))}
+      </div>
+    </section>
+  )}
+
   {project.video && (
     <video class="pd__video" src={project.video} controls preload="none" playsinline></video>
   )}
 
-  {(demo || project.github) && (
+  {(demo || project.github || project.npm) && (
     <div class="pd__links">
       {demo && (
         <a class="pill" href={demo} target="_blank" rel="noopener noreferrer">
           <span data-i18n="dialog.demo">{t('dialog.demo')}</span> ↗
         </a>
+      )}
+      {project.npm && project.npm !== demo && (
+        <a class="pill pill--ghost" href={project.npm} target="_blank" rel="noopener noreferrer">npm ↗</a>
       )}
       {project.github && (
         <a class="pill pill--ghost" href={project.github} target="_blank" rel="noopener noreferrer">

@@ -55,6 +55,9 @@ export interface Translation {
     code: string;
     video: string;
     close: string;
+    copy: string;
+    copied: string;
+    gallery: string;
   };
   contact: {
     title1: string;
@@ -135,6 +138,9 @@ export const translations: Record<Lang, Translation> = {
       code: 'View code',
       video: 'Video demo',
       close: 'Close',
+      copy: 'Copy',
+      copied: 'Copied',
+      gallery: 'Screenshots',
     },
     contact: {
       title1: "Let's work",
@@ -213,6 +219,9 @@ export const translations: Record<Lang, Translation> = {
       code: 'Ver código',
       video: 'Video demo',
       close: 'Cerrar',
+      copy: 'Copiar',
+      copied: 'Copiado',
+      gallery: 'Capturas',
     },
     contact: {
       title1: '¿Trabajamos',

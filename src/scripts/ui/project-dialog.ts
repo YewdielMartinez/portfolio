@@ -1,6 +1,7 @@
 import { createMorphDialog } from '../motion/morph-dialog';
 import { revealWords, trackWords, untrackWords } from '../motion/words';
-import { applyI18n } from '../i18n';
+import { applyI18n, getLang } from '../i18n';
+import { translations } from '../../data/translations';
 
 /** Fill the shared project dialog from its <template> and morph it out of the clicked card. */
 export function initProjectDialog() {
@@ -44,6 +45,19 @@ export function initProjectDialog() {
   document.addEventListener('click', (e) => {
     const trigger = (e.target as Element).closest<HTMLElement>('[data-project]');
     if (trigger) void openProject(trigger);
+  });
+
+  // Install snippets (e.g. `npm i loon-core`)
+  content.addEventListener('click', async (e) => {
+    const button = (e.target as Element).closest<HTMLElement>('[data-copy]');
+    if (!button) return;
+    try {
+      await navigator.clipboard.writeText(button.dataset.copy ?? '');
+      button.textContent = translations[getLang()].dialog.copied;
+      setTimeout(() => applyI18n(button), 1600);
+    } catch {
+      /* clipboard blocked: the command stays visible to copy by hand */
+    }
   });
 
   // Warm the cover image on first hover so it is decoded before the morph ends.

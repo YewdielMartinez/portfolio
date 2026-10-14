@@ -65,7 +65,7 @@ import { projects } from '../data/projects';
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: top center;
+    object-position: center;
   }
 
   .pd__head {
@@ -112,6 +112,53 @@ import { projects } from '../data/projects';
     padding: 0.35rem 0.8rem;
     border: 1px solid var(--line);
     border-radius: 999px;
+  }
+
+  .pd__install {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    max-width: 34rem;
+    padding: 0.85rem 0.85rem 0.85rem 1.25rem;
+    border-radius: 999px;
+    background: var(--surface);
+  }
+
+  .pd__install code {
+    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 0.95rem;
+  }
+
+  .pd__copy {
+    padding: 0.45rem 0.9rem;
+    border-radius: 999px;
+    background: var(--fg);
+    color: var(--bg);
+    transition: scale 0.8s var(--ease-out-elastic);
+  }
+
+  .pd__copy:active {
+    scale: 0.92;
+  }
+
+  .pd__shots {
+    display: grid;
+    gap: 1rem;
+    margin-top: 0.75rem;
+  }
+
+  @media (min-width: 680px) {
+    .pd__shots {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  .pd__shots .pd__shot {
+    width: 100%;
+    height: auto;
+    border-radius: 1.25rem;
+    background: var(--surface);
   }
 
   .pd__video {

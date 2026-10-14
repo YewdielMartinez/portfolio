@@ -14,6 +14,10 @@ export interface Project {
   features?: string[];
   github?: string;
   demo?: string;
+  /** npm package page */
+  npm?: string;
+  /** Install command shown in the project dialog */
+  install?: string;
   year?: string;
   role?: string;
   video?: string;
@@ -31,8 +35,8 @@ export const projects: Projects = {
       title: "Kayro",
       description:
         "An open-source workspace combining Notion and Obsidian. Create notes, markdown, canvas, kanban, and calendar with bidirectional linking for collaborative work. (In Progress)",
-      image: "/projects/Home Kayro.png",
-      images: ["/projects/Sign In Kayro (1).png", "/projects/Register Kayro (2).png"],
+      image: "/projects/Kayro.jpeg",
+      images: ["/projects/Home Kayro.png", "/projects/Sign In Kayro (1).png", "/projects/Register Kayro (2).png"],
       tags: ["Open Source", "Workspace", "Markdown", "In Progress"],
       link: "https://kayro-omega.vercel.app/",
       gridSize: "wide",
@@ -54,7 +58,8 @@ export const projects: Projects = {
       title: "MedicLife Landing",
       description:
         "Marketing landing page for the NewMedicLife clinic system. UI/UX focused with GSAP animations, React, and Tailwind.",
-      image: "/projects/MEDICLIFELANDING.png",
+      image: "/projects/MedicLife.jpeg",
+      images: ["/projects/MEDICLIFELANDING.png"],
       tags: ["React", "Tailwind", "GSAP", "UI/UX"],
       link: "https://mediclife.vercel.app/",
       gridSize: "wide",
@@ -94,33 +99,37 @@ export const projects: Projects = {
       role: "Full-Stack Developer",
       video: "https://res.cloudinary.com/dp8yf8nxi/video/upload/q_auto,f_mp4/v1773789455/2026-03-17_16-04-07_qrui2b.mp4",
     },
-    // 03 — TRON
+    // 03 — LOON (formerly TRON)
     {
-      title: "TRON",
+      title: "LOON",
       description:
-        "Landing page for a new data compression format, featuring a sleek and futuristic design.",
-      image: "/projects/TRON.png",
-      tags: ["HTML", "CSS", "JavaScript", "Vercel"],
-      link: "https://tron-landing-page.vercel.app/",
+        "LLM-Optimized Object Notation: an open-source npm library that serializes JSON, CSV, XML and YAML into a token-efficient format for LLM pipelines.",
+      image: "/projects/LOON.jpeg",
+      tags: ["TypeScript", "Node.js", "npm", "LLM"],
+      link: "https://www.npmjs.com/package/loon-core",
       gridSize: "wide",
       detailedDescription:
-        "TRON is a landing page built to present a new data compression format. It features a futuristic visual design crafted to communicate the technology's speed and efficiency, deployed on Vercel for fast global delivery.",
+        "LOON (LLM-Optimized Object Notation) is a serialization library published on npm as loon-core. It turns structured data — JSON, CSV, XML, YAML and nested trees — into a compact, losslessly reversible format that cuts the tokens spent in LLM prompts and data pipelines. In a real 1,000-row retrieval session it used 64% fewer tokens than JSON and 47% fewer than TOON. It ships with a documentation site and an interactive playground.",
       features: [
-        "Futuristic and immersive UI design",
-        "Responsive layout for all devices",
-        "Fast load times via Vercel CDN",
-        "Clear product value proposition",
+        "Three modes: full for storage and transfer, llm for direct model reading, compact for small objects",
+        "Lossless round-trip back to the original JSON",
+        "Up to ~78% fewer tokens than JSON",
+        "Bridges for JSON, CSV, XML, YAML and nested trees",
+        "Prompt-cache friendly sessions and a CLI with --stats",
       ],
       demo: "https://tron-landing-page.vercel.app/",
-      year: "2025",
-      role: "Frontend Developer",
+      npm: "https://www.npmjs.com/package/loon-core",
+      install: "npm i loon-core",
+      year: "2026",
+      role: "Creator & Maintainer",
     },
     // 04 — Watchlt
     {
       title: "Watchlt",
       description:
         "Movie comparison app inspired by Apple liquid glass design. Built with React, Firebase, Tailwind, and deployed on Vercel.",
-      image: "/projects/Watchlt.png",
+      image: "/projects/WatchLt.jpeg",
+      images: ["/projects/Watchlt.png"],
       tags: ["React", "Firebase", "Tailwind", "Vercel"],
       link: "https://watchlt.vercel.app/dashboard",
       gridSize: "wide",
@@ -182,12 +191,13 @@ export const projects: Projects = {
       year: "2024",
       role: "Full-Stack Developer",
     },
-    // 07 — PuntoZeroweb Mobile App
+    // 07 — Venta en Ruta app
     {
-      title: "PuntoZeroweb App",
+      title: "Venta en Ruta app",
       description:
         "Private React Native app for route-based sales, focused on real-time product distribution.",
-      image: "/projects/Ventaenruta.png",
+      image: "/projects/Venta en Ruta.jpeg",
+      images: ["/projects/Ventaenruta.png"],
       tags: ["React Native", "Tailwind", "Mobile"],
       link: "#",
       gridSize: "medium",
@@ -315,8 +325,8 @@ export const projects: Projects = {
       title: "Kayro",
       description:
         "Un espacio de trabajo open-source que combina Notion y Obsidian. Permite crear notas, markdown, canvas, kanban y calendarios enfocados en el trabajo colaborativo. (En proceso)",
-      image: "/projects/Home Kayro.png",
-      images: ["/projects/Sign In Kayro (1).png", "/projects/Register Kayro (2).png"],
+      image: "/projects/Kayro.jpeg",
+      images: ["/projects/Home Kayro.png", "/projects/Sign In Kayro (1).png", "/projects/Register Kayro (2).png"],
       tags: ["Open Source", "Workspace", "Markdown", "En proceso"],
       link: "https://kayro-omega.vercel.app/",
       gridSize: "wide",
@@ -338,7 +348,8 @@ export const projects: Projects = {
       title: "MedicLife Landing",
       description:
         "Landing page de marketing para el sistema de clínicas NewMedicLife. Enfocada en UI/UX con animaciones GSAP, React y Tailwind.",
-      image: "/projects/MEDICLIFELANDING.png",
+      image: "/projects/MedicLife.jpeg",
+      images: ["/projects/MEDICLIFELANDING.png"],
       tags: ["React", "Tailwind", "GSAP", "UI/UX"],
       link: "https://mediclife.vercel.app/",
       gridSize: "wide",
@@ -378,33 +389,37 @@ export const projects: Projects = {
       role: "Desarrollador Full-Stack",
       video: "https://res.cloudinary.com/dp8yf8nxi/video/upload/q_auto,f_mp4/v1773789455/2026-03-17_16-04-07_qrui2b.mp4",
     },
-    // 03 — TRON
+    // 03 — LOON (antes TRON)
     {
-      title: "TRON",
+      title: "LOON",
       description:
-        "Landing page para un nuevo formato de compresión de datos, con un diseño futurista e inmersivo.",
-      image: "/projects/TRON.png",
-      tags: ["HTML", "CSS", "JavaScript", "Vercel"],
-      link: "https://tron-landing-page.vercel.app/",
+        "LLM-Optimized Object Notation: librería open-source en npm que serializa JSON, CSV, XML y YAML a un formato eficiente en tokens para flujos con LLM.",
+      image: "/projects/LOON.jpeg",
+      tags: ["TypeScript", "Node.js", "npm", "LLM"],
+      link: "https://www.npmjs.com/package/loon-core",
       gridSize: "wide",
       detailedDescription:
-        "TRON es una landing page creada para presentar un nuevo formato de compresión de datos. Su diseño futurista comunica visualmente la velocidad y eficiencia de la tecnología. Está desplegada en Vercel para entrega global ultrarrápida.",
+        "LOON (LLM-Optimized Object Notation) es una librería de serialización publicada en npm como loon-core. Convierte datos estructurados — JSON, CSV, XML, YAML y árboles anidados — en un formato compacto y reversible sin pérdidas que reduce los tokens en prompts y pipelines de datos con LLM. En una sesión real de 1,000 filas usó 64% menos tokens que JSON y 47% menos que TOON. Incluye un sitio de documentación con playground interactivo.",
       features: [
-        "Diseño UI futurista e inmersivo",
-        "Maquetado completamente responsivo",
-        "Carga rápida con Vercel CDN",
-        "Propuesta de valor clara del producto",
+        "Tres modos: full para almacenamiento y transferencia, llm para lectura directa del modelo, compact para objetos pequeños",
+        "Ida y vuelta sin pérdidas al JSON original",
+        "Hasta ~78% menos tokens que JSON",
+        "Puentes para JSON, CSV, XML, YAML y árboles anidados",
+        "Sesiones compatibles con caché de prompts y CLI con --stats",
       ],
       demo: "https://tron-landing-page.vercel.app/",
-      year: "2025",
-      role: "Desarrollador Frontend",
+      npm: "https://www.npmjs.com/package/loon-core",
+      install: "npm i loon-core",
+      year: "2026",
+      role: "Creador y mantenedor",
     },
     // 04 — Watchlt
     {
       title: "Watchlt",
       description:
         'Aplicación de comparación de películas inspirada en el diseño "liquid glass" de Apple. Desarrollada con React, Firebase, Tailwind y desplegada en Vercel.',
-      image: "/projects/Watchlt.png",
+      image: "/projects/WatchLt.jpeg",
+      images: ["/projects/Watchlt.png"],
       tags: ["React", "Firebase", "Tailwind", "Vercel"],
       link: "https://watchlt.vercel.app/dashboard",
       gridSize: "wide",
@@ -466,12 +481,13 @@ export const projects: Projects = {
       year: "2024",
       role: "Desarrollador Full-Stack",
     },
-    // 07 — PuntoZeroweb App
+    // 07 — Venta en Ruta app
     {
-      title: "PuntoZeroweb App",
+      title: "Venta en Ruta app",
       description:
         "App móvil privada para ventas en ruta desarrollada con React Native y Tailwind.",
-      image: "/projects/Ventaenruta.png",
+      image: "/projects/Venta en Ruta.jpeg",
+      images: ["/projects/Ventaenruta.png"],
       tags: ["React Native", "Tailwind", "Mobile"],
       link: "#",
       gridSize: "medium",
