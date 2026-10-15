@@ -81,7 +81,8 @@ export const projects: Projects = {
       title: "NewMedicLife",
       description:
         "Complete redesign of Medic Life — modernized UI and improved user experience for clinic management.",
-      image: "/projects/NewMedicLife.png",
+      image: "/projects/MedicLife.jpeg",
+      images: ["/projects/NewMedicLife.png"],
       tags: ["React", "TypeScript", "Tailwind", "MySQL"],
       link: "#",
       gridSize: "medium",
@@ -151,7 +152,8 @@ export const projects: Projects = {
       title: "EcoSend",
       description:
         "24-hour hackathon project that optimizes package delivery logistics with a focus on sustainability.",
-      image: "/projects/EcoSend.png",
+      image: "/projects/Ecosend.jpeg",
+      images: ["/projects/EcoSend.png"],
       tags: ["React", "Firebase", "Tailwind", "Hackathon"],
       link: "https://ecoflow-losmochis.vercel.app/",
       gridSize: "wide",
@@ -174,7 +176,8 @@ export const projects: Projects = {
       title: "Medic Life",
       description:
         "Clinic management system for doctors, patients, and appointments.",
-      image: "/projects/MedicLife.png",
+      image: "/projects/MedicLife.jpeg",
+      images: ["/projects/MedicLife.png"],
       tags: ["PHP", "MySQL", "HTML", "CSS"],
       link: "#",
       gridSize: "small",
@@ -212,17 +215,18 @@ export const projects: Projects = {
       year: "2025",
       role: "Mobile Developer",
     },
-    // 08 — Foodapp
+    // 08 — Foodero
     {
-      title: "Foodapp",
+      title: "Foodero",
       description:
         "React Native app for restaurants: table management, home delivery, product catalog, reports, cash drawer, Mercado Pago subscriptions, and printer integration.",
-      image: "/projects/FOODAPP.png",
+      image: "/projects/Foodero.jpeg",
+      images: ["/projects/FOODAPP.png"],
       tags: ["React Native", "C#", "PostgreSQL", "Docker", "Tailwind CSS"],
       link: "#",
       gridSize: "wide",
       detailedDescription:
-        "Foodapp is a full-featured restaurant management app built with React Native. I contributed to the UI implementation based on an existing design. The app covers the full operational lifecycle of a restaurant: table management, in-house and delivery sales, product and add-on registration, end-of-day cash drawer closing, subscription billing via Mercado Pago, user role management, and thermal printer integration for receipts.",
+        "Foodero is a full-featured restaurant management app built with React Native. I contributed to the UI implementation based on an existing design. The app covers the full operational lifecycle of a restaurant: table management, in-house and delivery sales, product and add-on registration, end-of-day cash drawer closing, subscription billing via Mercado Pago, user role management, and thermal printer integration for receipts.",
       features: [
         "Table management and order tracking",
         "Home delivery and in-house sales flow",
@@ -240,7 +244,7 @@ export const projects: Projects = {
       title: "PuntoZeroweb POS",
       description:
         "Full-featured web point-of-sale system built at PuntoZeroweb. Handles sales, inventory, and reporting across multiple branches.",
-      image: "",
+      image: "/projects/PuntoZeroWeb.jpeg",
       tags: ["PHP", "MySQL", "Docker", "HTML", "CSS"],
       link: "#",
       gridSize: "wide",
@@ -256,12 +260,12 @@ export const projects: Projects = {
       year: "2024",
       role: "Full-Stack Developer",
     },
-    // 09 — Hotel Tool Tracker
+    // 10 — PuntoZero Web Hotel
     {
-      title: "Hotel Tool Tracker",
+      title: "PuntoZero Web Hotel",
       description:
         "Internal system for hotels to register check-ins and check-outs of tools and equipment across departments.",
-      image: "",
+      image: "/projects/WebHotel.jpeg",
       tags: ["React", "C#", "Tailwind CSS"],
       link: "#",
       gridSize: "medium",
@@ -297,12 +301,12 @@ export const projects: Projects = {
       year: "2024",
       role: "Frontend Developer",
     },
-    // 11 — Online Billing Platform
+    // 12 — PuntoZero Facturación en Línea
     {
-      title: "Online Billing",
+      title: "PuntoZero Online Billing",
       description:
         "Collaborative online invoicing platform — contributed frontend development and UI implementation for digital invoice management.",
-      image: "",
+      image: "/projects/PZWEBFacturacion.jpeg",
       tags: ["React", "TypeScript", "MySQL"],
       link: "#",
       gridSize: "medium",
@@ -371,7 +375,8 @@ export const projects: Projects = {
       title: "NewMedicLife",
       description:
         "Rediseño completo de Medic Life — interfaz modernizada y mejor experiencia de usuario para clínicas.",
-      image: "/projects/NewMedicLife.png",
+      image: "/projects/MedicLife.jpeg",
+      images: ["/projects/NewMedicLife.png"],
       tags: ["React", "TypeScript", "Tailwind", "MySQL"],
       link: "#",
       gridSize: "medium",
@@ -441,7 +446,8 @@ export const projects: Projects = {
       title: "EcoSend",
       description:
         "Proyecto desarrollado en un hackatón de 24 h que optimiza la logística de envíos con enfoque sostenible.",
-      image: "/projects/EcoSend.png",
+      image: "/projects/Ecosend.jpeg",
+      images: ["/projects/EcoSend.png"],
       tags: ["React", "Firebase", "Tailwind", "Hackathon"],
       link: "https://ecoflow-losmochis.vercel.app/",
       gridSize: "wide",
@@ -464,7 +470,8 @@ export const projects: Projects = {
       title: "Medic Life",
       description:
         "Sistema de gestión de consultorios médicos con control de pacientes, citas y médicos.",
-      image: "/projects/MedicLife.png",
+      image: "/projects/MedicLife.jpeg",
+      images: ["/projects/MedicLife.png"],
       tags: ["PHP", "MySQL", "HTML", "CSS"],
       link: "https://github.com/PricedTuna/newMedicLife",
       gridSize: "small",
@@ -502,17 +509,18 @@ export const projects: Projects = {
       year: "2025",
       role: "Desarrollador Móvil",
     },
-    // 08 — Foodapp
+    // 08 — Foodero
     {
-      title: "Foodapp",
+      title: "Foodero",
       description:
         "App de gestión para restaurantes: mesas, domicilios, catálogo de productos, reportes, corte de caja, suscripciones con Mercado Pago e impresora.",
-      image: "/projects/FOODAPP.png",
+      image: "/projects/Foodero.jpeg",
+      images: ["/projects/FOODAPP.png"],
       tags: ["React Native", "C#", "PostgreSQL", "Docker", "Tailwind CSS"],
       link: "#",
       gridSize: "wide",
       detailedDescription:
-        "Foodapp es una app completa de gestión para restaurantes construida con React Native. Contribuí en la implementación del diseño. Cubre el ciclo operativo completo: manejo de mesas, ventas en local y a domicilio, registro de productos, complementos y adicionales, corte de caja, facturación de suscripciones con Mercado Pago, gestión de usuarios por rol e integración con impresora térmica para recibos.",
+        "Foodero es una app completa de gestión para restaurantes construida con React Native. Contribuí en la implementación del diseño. Cubre el ciclo operativo completo: manejo de mesas, ventas en local y a domicilio, registro de productos, complementos y adicionales, corte de caja, facturación de suscripciones con Mercado Pago, gestión de usuarios por rol e integración con impresora térmica para recibos.",
       features: [
         "Manejo de mesas y seguimiento de pedidos",
         "Flujo de ventas en local y a domicilio",
@@ -530,7 +538,7 @@ export const projects: Projects = {
       title: "PuntoZeroweb POS",
       description:
         "Sistema de punto de venta web desarrollado en PuntoZeroweb. Maneja ventas, inventario y reportes en múltiples sucursales.",
-      image: "",
+      image: "/projects/PuntoZeroWeb.jpeg",
       tags: ["PHP", "MySQL", "Docker", "HTML", "CSS"],
       link: "#",
       gridSize: "wide",
@@ -546,12 +554,12 @@ export const projects: Projects = {
       year: "2024",
       role: "Desarrollador Full-Stack",
     },
-    // 09 — Hotel Tool Tracker
+    // 10 — PuntoZero Web Hotel
     {
-      title: "Hotel Tool Tracker",
+      title: "PuntoZero Web Hotel",
       description:
         "Sistema interno para hoteles que registra entradas y salidas de herramientas y equipos por departamento.",
-      image: "",
+      image: "/projects/WebHotel.jpeg",
       tags: ["React", "C#", "Tailwind CSS"],
       link: "#",
       gridSize: "medium",
@@ -587,12 +595,12 @@ export const projects: Projects = {
       year: "2024",
       role: "Desarrollador Frontend",
     },
-    // 11 — Online Billing Platform
+    // 12 — PuntoZero Facturación en Línea
     {
-      title: "Facturación en Línea",
+      title: "PuntoZero Facturación en Línea",
       description:
         "Plataforma colaborativa de facturación online — aporté en el desarrollo frontend e implementación de la interfaz para gestión de facturas digitales.",
-      image: "",
+      image: "/projects/PZWEBFacturacion.jpeg",
       tags: ["React", "TypeScript", "MySQL"],
       link: "#",
       gridSize: "medium",
