@@ -3,25 +3,76 @@ import SheetTitle from './SheetTitle.astro';
 import { t } from '../lib/t';
 import { skills } from '../data/skills';
 
-const names = skills.map((skill) => skill.name).join(', ');
+const core = skills.filter((skill) => skill.core).map((skill) => skill.name);
+const extra = skills.filter((skill) => !skill.core).map((skill) => skill.name).join(', ');
 ---
 
 <section id="tools" class="sheet gutter" data-section-label="nav.tools" tabindex="-1">
   <SheetTitle line1="tools.title1" line2="tools.title2" muted={false} />
-  <div class="tools__copy" data-flow>
-    <p class="tools__text">
-      {names} <span class="text-muted" data-i18n="tools.outro">{t('tools.outro')}</span>
-    </p>
+
+  <div class="tools">
+    <div>
+      <p class="t-label text-muted" data-i18n="tools.core">{t('tools.core')}</p>
+      <ul class="tools__core" data-words>
+        {core.map((name, i) => (
+          <li>
+            <span class="tools__num">{String(i + 1).padStart(2, '0')}</span>
+            <span class="stretch">{name}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="tools__extra" data-flow>
+      <p class="t-label text-muted" data-i18n="tools.extra">{t('tools.extra')}</p>
+      <p class="tools__text">
+        {extra} <span class="text-muted" data-i18n="tools.outro">{t('tools.outro')}</span>
+      </p>
+    </div>
   </div>
 </section>
 
 <style>
-  .tools__copy {
-    margin-top: clamp(1.5rem, 3vh, 2.5rem);
+  .tools {
+    display: grid;
+    gap: clamp(3rem, 7vw, 6rem);
+    margin-top: clamp(2.5rem, 7vh, 5rem);
   }
 
+  @media (min-width: 900px) {
+    .tools {
+      grid-template-columns: 7fr 5fr;
+      align-items: end;
+    }
+  }
+
+  /* Specialization: large, numbered, one per line */
+  .tools__core {
+    display: grid;
+    gap: 0.08em;
+    margin-top: 1rem;
+    font-size: clamp(2.5rem, 6vw, 6rem);
+    line-height: 0.95;
+    letter-spacing: -0.045em;
+  }
+
+  .tools__core li {
+    display: flex;
+    align-items: baseline;
+    gap: 0.2em;
+  }
+
+  .tools__num {
+    min-width: 1.75rem;
+    font-size: 0.8125rem;
+    letter-spacing: 0;
+    color: var(--muted);
+  }
+
+  /* Complements: the reference sheet's justified paragraph */
   .tools__text {
     max-width: 30ch;
+    margin-top: 1rem;
     font-size: clamp(1.25rem, 1.9vw, 2rem);
     line-height: 1.15;
     letter-spacing: -0.02em;

@@ -33,6 +33,8 @@ export interface Translation {
   tools: {
     title1: string;
     title2: string;
+    core: string;
+    extra: string;
     outro: string;
   };
   experience: {
@@ -116,6 +118,8 @@ export const translations: Record<Lang, Translation> = {
     tools: {
       title1: 'Tools',
       title2: "I'm fluent in.",
+      core: 'Specialized in',
+      extra: 'Complemented with',
       outro: 'and I explore AI tools to bring them into design, development and delivery.',
     },
     experience: {
@@ -197,6 +201,8 @@ export const translations: Record<Lang, Translation> = {
     tools: {
       title1: 'Herramientas',
       title2: 'que domino.',
+      core: 'Me especializo en',
+      extra: 'Lo complemento con',
       outro: 'y exploro herramientas de IA para integrarlas en diseño, desarrollo y entrega.',
     },
     experience: {
