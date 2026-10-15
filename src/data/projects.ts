@@ -36,7 +36,7 @@ export const projects: Projects = {
       description:
         "An open-source workspace combining Notion and Obsidian. Create notes, markdown, canvas, kanban, and calendar with bidirectional linking for collaborative work. (In Progress)",
       image: "/projects/Kayro.jpeg",
-      images: ["/projects/Home Kayro.png", "/projects/Sign In Kayro (1).png", "/projects/Register Kayro (2).png"],
+      images: ["/projects/kayrocap.png"],
       tags: ["Open Source", "Workspace", "Markdown", "In Progress"],
       link: "https://kayro-omega.vercel.app/",
       gridSize: "wide",
@@ -59,7 +59,6 @@ export const projects: Projects = {
       description:
         "Marketing landing page for the NewMedicLife clinic system. UI/UX focused with GSAP animations, React, and Tailwind.",
       image: "/projects/MedicLife.jpeg",
-      images: ["/projects/MEDICLIFELANDING.png"],
       tags: ["React", "Tailwind", "GSAP", "UI/UX"],
       link: "https://mediclife.vercel.app/",
       gridSize: "wide",
@@ -82,7 +81,7 @@ export const projects: Projects = {
       description:
         "Complete redesign of Medic Life — modernized UI and improved user experience for clinic management.",
       image: "/projects/MedicLife.jpeg",
-      images: ["/projects/NewMedicLife.png"],
+      images: ["/projects/NewMedicLifecap.png"],
       tags: ["React", "TypeScript", "Tailwind", "MySQL"],
       link: "#",
       gridSize: "medium",
@@ -130,7 +129,7 @@ export const projects: Projects = {
       description:
         "Movie comparison app inspired by Apple liquid glass design. Built with React, Firebase, Tailwind, and deployed on Vercel.",
       image: "/projects/WatchLt.jpeg",
-      images: ["/projects/Watchlt.png"],
+      images: ["/projects/WatchLtCap.png"],
       tags: ["React", "Firebase", "Tailwind", "Vercel"],
       link: "https://watchlt.vercel.app/dashboard",
       gridSize: "wide",
@@ -153,7 +152,6 @@ export const projects: Projects = {
       description:
         "24-hour hackathon project that optimizes package delivery logistics with a focus on sustainability.",
       image: "/projects/Ecosend.jpeg",
-      images: ["/projects/EcoSend.png"],
       tags: ["React", "Firebase", "Tailwind", "Hackathon"],
       link: "https://ecoflow-losmochis.vercel.app/",
       gridSize: "wide",
@@ -177,7 +175,6 @@ export const projects: Projects = {
       description:
         "Clinic management system for doctors, patients, and appointments.",
       image: "/projects/MedicLife.jpeg",
-      images: ["/projects/MedicLife.png"],
       tags: ["PHP", "MySQL", "HTML", "CSS"],
       link: "#",
       gridSize: "small",
@@ -200,7 +197,7 @@ export const projects: Projects = {
       description:
         "Private React Native app for route-based sales, focused on real-time product distribution.",
       image: "/projects/Venta en Ruta.jpeg",
-      images: ["/projects/Ventaenruta.png"],
+      images: ["/projects/AppMovil.png"],
       tags: ["React Native", "Tailwind", "Mobile"],
       link: "#",
       gridSize: "medium",
@@ -221,7 +218,6 @@ export const projects: Projects = {
       description:
         "React Native app for restaurants: table management, home delivery, product catalog, reports, cash drawer, Mercado Pago subscriptions, and printer integration.",
       image: "/projects/Foodero.jpeg",
-      images: ["/projects/FOODAPP.png"],
       tags: ["React Native", "C#", "PostgreSQL", "Docker", "Tailwind CSS"],
       link: "#",
       gridSize: "wide",
@@ -286,7 +282,7 @@ export const projects: Projects = {
       title: "PuntoZeroweb Landing",
       description:
         "Marketing landing page for the PuntoZeroweb POS system, presenting its features to potential clients.",
-      image: "",
+      image: "/projects/Puntozerolandingcap.png",
       tags: ["HTML", "CSS", "JavaScript"],
       link: "#",
       gridSize: "small",
@@ -307,6 +303,7 @@ export const projects: Projects = {
       description:
         "Collaborative online invoicing platform — contributed frontend development and UI implementation for digital invoice management.",
       image: "/projects/PZWEBFacturacion.jpeg",
+      images: ["/projects/Facturacionenlinea1.png", "/projects/Facturacion en linea 2.png"],
       tags: ["React", "TypeScript", "MySQL"],
       link: "#",
       gridSize: "medium",
@@ -330,7 +327,7 @@ export const projects: Projects = {
       description:
         "Un espacio de trabajo open-source que combina Notion y Obsidian. Permite crear notas, markdown, canvas, kanban y calendarios enfocados en el trabajo colaborativo. (En proceso)",
       image: "/projects/Kayro.jpeg",
-      images: ["/projects/Home Kayro.png", "/projects/Sign In Kayro (1).png", "/projects/Register Kayro (2).png"],
+      images: ["/projects/kayrocap.png"],
       tags: ["Open Source", "Workspace", "Markdown", "En proceso"],
       link: "https://kayro-omega.vercel.app/",
       gridSize: "wide",
@@ -353,7 +350,6 @@ export const projects: Projects = {
       description:
         "Landing page de marketing para el sistema de clínicas NewMedicLife. Enfocada en UI/UX con animaciones GSAP, React y Tailwind.",
       image: "/projects/MedicLife.jpeg",
-      images: ["/projects/MEDICLIFELANDING.png"],
       tags: ["React", "Tailwind", "GSAP", "UI/UX"],
       link: "https://mediclife.vercel.app/",
       gridSize: "wide",
@@ -376,7 +372,7 @@ export const projects: Projects = {
       description:
         "Rediseño completo de Medic Life — interfaz modernizada y mejor experiencia de usuario para clínicas.",
       image: "/projects/MedicLife.jpeg",
-      images: ["/projects/NewMedicLife.png"],
+      images: ["/projects/NewMedicLifecap.png"],
       tags: ["React", "TypeScript", "Tailwind", "MySQL"],
       link: "#",
       gridSize: "medium",
@@ -424,7 +420,7 @@ export const projects: Projects = {
       description:
         'Aplicación de comparación de películas inspirada en el diseño "liquid glass" de Apple. Desarrollada con React, Firebase, Tailwind y desplegada en Vercel.',
       image: "/projects/WatchLt.jpeg",
-      images: ["/projects/Watchlt.png"],
+      images: ["/projects/WatchLtCap.png"],
       tags: ["React", "Firebase", "Tailwind", "Vercel"],
       link: "https://watchlt.vercel.app/dashboard",
       gridSize: "wide",
@@ -447,7 +443,6 @@ export const projects: Projects = {
       description:
         "Proyecto desarrollado en un hackatón de 24 h que optimiza la logística de envíos con enfoque sostenible.",
       image: "/projects/Ecosend.jpeg",
-      images: ["/projects/EcoSend.png"],
       tags: ["React", "Firebase", "Tailwind", "Hackathon"],
       link: "https://ecoflow-losmochis.vercel.app/",
       gridSize: "wide",
@@ -471,7 +466,6 @@ export const projects: Projects = {
       description:
         "Sistema de gestión de consultorios médicos con control de pacientes, citas y médicos.",
       image: "/projects/MedicLife.jpeg",
-      images: ["/projects/MedicLife.png"],
       tags: ["PHP", "MySQL", "HTML", "CSS"],
       link: "https://github.com/PricedTuna/newMedicLife",
       gridSize: "small",
@@ -494,7 +488,7 @@ export const projects: Projects = {
       description:
         "App móvil privada para ventas en ruta desarrollada con React Native y Tailwind.",
       image: "/projects/Venta en Ruta.jpeg",
-      images: ["/projects/Ventaenruta.png"],
+      images: ["/projects/AppMovil.png"],
       tags: ["React Native", "Tailwind", "Mobile"],
       link: "#",
       gridSize: "medium",
@@ -515,7 +509,6 @@ export const projects: Projects = {
       description:
         "App de gestión para restaurantes: mesas, domicilios, catálogo de productos, reportes, corte de caja, suscripciones con Mercado Pago e impresora.",
       image: "/projects/Foodero.jpeg",
-      images: ["/projects/FOODAPP.png"],
       tags: ["React Native", "C#", "PostgreSQL", "Docker", "Tailwind CSS"],
       link: "#",
       gridSize: "wide",
@@ -580,7 +573,7 @@ export const projects: Projects = {
       title: "PuntoZeroweb Landing",
       description:
         "Landing page de marketing para el sistema POS de PuntoZeroweb, presentando sus funcionalidades a clientes potenciales.",
-      image: "",
+      image: "/projects/Puntozerolandingcap.png",
       tags: ["HTML", "CSS", "JavaScript"],
       link: "#",
       gridSize: "small",
@@ -601,6 +594,7 @@ export const projects: Projects = {
       description:
         "Plataforma colaborativa de facturación online — aporté en el desarrollo frontend e implementación de la interfaz para gestión de facturas digitales.",
       image: "/projects/PZWEBFacturacion.jpeg",
+      images: ["/projects/Facturacionenlinea1.png", "/projects/Facturacion en linea 2.png"],
       tags: ["React", "TypeScript", "MySQL"],
       link: "#",
       gridSize: "medium",

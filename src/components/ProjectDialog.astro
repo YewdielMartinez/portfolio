@@ -142,23 +142,39 @@ import { projects } from '../data/projects';
     scale: 0.92;
   }
 
+  /* One per row: the captures are device mockups with wide margins */
   .pd__shots {
     display: grid;
     gap: 1rem;
     margin-top: 0.75rem;
   }
 
-  @media (min-width: 680px) {
-    .pd__shots {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
-
-  .pd__shots .pd__shot {
-    width: 100%;
-    height: auto;
+  .pd__shot-frame {
+    overflow: hidden;
     border-radius: 1.25rem;
     background: var(--surface);
+  }
+
+  .pd__shot-frame .pd__shot {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  /* 4:3 mockup → 16:9 frame, zoomed so the device fills it */
+  .pd__shot-frame--wide {
+    aspect-ratio: 16 / 9;
+  }
+
+  .pd__shot-frame--wide .pd__shot {
+    height: 100%;
+    object-fit: cover;
+    scale: 1.22;
+  }
+
+  /* Portrait/square captures (phones) keep their full frame at a readable width */
+  .pd__shot-frame:not(.pd__shot-frame--wide) {
+    max-width: 30rem;
   }
 
   .pd__video {

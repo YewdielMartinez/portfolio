@@ -1,6 +1,7 @@
 ---
 import ProjectImage from './ProjectImage.astro';
 import { t } from '../lib/t';
+import { loadProjectImage } from '../lib/images';
 import type { Project } from '../data/projects';
 
 interface Props {
@@ -10,6 +11,14 @@ interface Props {
 
 const { project, index: i } = Astro.props;
 const demo = project.demo ?? (project.link && project.link !== '#' ? project.link : undefined);
+
+// Landscape captures are device mockups with wide margins: frame them tighter.
+const shots = await Promise.all(
+  (project.images ?? []).map(async (src) => {
+    const meta = await loadProjectImage(src);
+    return { src, wide: !!meta && meta.width / meta.height > 1.2 };
+  }),
+);
 ---
 
 <article class="pd">
@@ -69,14 +78,16 @@ const demo = project.demo ?? (project.link && project.link !== '#' ? project.lin
     <section class="pd__gallery">
       <h3 class="t-label text-muted" data-i18n="dialog.gallery">{t('dialog.gallery')}</h3>
       <div class="pd__shots">
-        {project.images.map((src) => (
-          <ProjectImage
-            src={src}
-            alt={`${project.title} — screenshot`}
-            widths={[480, 720, 1000]}
-            sizes="(min-width: 1000px) 440px, 90vw"
-            class="pd__shot"
-          />
+        {shots.map(({ src, wide }) => (
+          <div class:list={['pd__shot-frame', wide && 'pd__shot-frame--wide']}>
+            <ProjectImage
+              src={src}
+              alt={`${project.title} — screenshot`}
+              widths={[640, 960, 1400]}
+              sizes="(min-width: 1000px) 880px, 100vw"
+              class="pd__shot"
+            />
+          </div>
         ))}
       </div>
     </section>

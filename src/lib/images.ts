@@ -2,7 +2,7 @@ import type { ImageMetadata } from 'astro';
 
 const files = import.meta.glob<{ default: ImageMetadata }>('/src/assets/projects/*.{png,jpg,jpeg,webp}');
 
-/** Resolve a data path like "/projects/TRON.png" to its optimisable asset, or null when missing. */
+/** Resolve a data path like "/projects/Kayro.jpeg" to its optimisable asset, or null when missing. */
 export async function loadProjectImage(path?: string): Promise<ImageMetadata | null> {
   if (!path) return null;
   const name = path.split('/').pop();
