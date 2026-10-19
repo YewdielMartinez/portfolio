@@ -106,8 +106,8 @@ export const translations: Record<Lang, Translation> = {
     about: {
       hello: 'Hello!',
       name: "I'm Yewdiel Medina",
-      bio: "I'm a frontend-focused software developer based in Los Mochis, Sinaloa — specializing in React, JavaScript, and TypeScript. I build polished, performant web interfaces and intuitive user experiences.",
-      bio2: 'When the project calls for it, I extend into React Native for mobile, .NET for backend services, Docker for deployment, and databases like PostgreSQL and Supabase. Currently studying Software Engineering while shipping real-world products.',
+      bio: "I'm a full-stack software developer based in Los Mochis, Sinaloa. I specialize in React, React Native, .NET and PHP: polished web interfaces, mobile apps and the backend services behind them.",
+      bio2: 'Beyond the code, I work on CI/CD pipelines and server administration and support project management, so products make it from idea to production. I am studying Software Engineering while shipping real-world products, and I publish my own tools on npm, like LOON and Motion Kit.',
     },
     services: {
       title1: 'What I do?',
@@ -189,8 +189,8 @@ export const translations: Record<Lang, Translation> = {
     about: {
       hello: '¡Hola!',
       name: 'Soy Yewdiel Medina',
-      bio: 'Soy un desarrollador de software enfocado en frontend, radicado en Los Mochis, Sinaloa — especializado en React, JavaScript y TypeScript. Construyo interfaces web pulidas y rápidas, y experiencias de usuario intuitivas.',
-      bio2: 'Cuando el proyecto lo requiere, me extiendo a React Native para móvil, .NET para servicios backend, Docker para despliegue y bases de datos como PostgreSQL y Supabase. Actualmente estudio Ingeniería de Software mientras desarrollo productos reales.',
+      bio: 'Soy desarrollador de software full-stack, radicado en Los Mochis, Sinaloa. Me especializo en React, React Native, .NET y PHP: interfaces web pulidas, apps móviles y los servicios backend que las sostienen.',
+      bio2: 'Además del código, participo en pipelines de CI/CD y en la administración de servidores, y apoyo en la gestión de proyectos para llevar los productos de la idea a producción. Estudio Ingeniería de Software mientras desarrollo productos reales y publico mis propias herramientas en npm, como LOON y Motion Kit.',
     },
     services: {
       title1: '¿Qué hago?',

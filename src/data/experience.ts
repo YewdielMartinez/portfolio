@@ -25,7 +25,7 @@ export const experience: Experience = {
       company: 'Freelance Projects',
       position: 'Software Developer',
       description:
-        'Analyzed, designed, and implemented custom systems to automate inventory control, sales, and reporting. Built web apps using PHP, React, MySQL, HTML, CSS, JavaScript, and Bootstrap, and automated deployments with Bash and PowerShell scripts.'
+        'Delivered web and mobile products for clients: the MedicLife clinic platform — from the original PHP/MySQL system to its React and TypeScript redesign and landing page — and Foodero, a restaurant app built with React Native, a C#/.NET backend, PostgreSQL and Docker. I gathered requirements with clients, planned and tracked deliveries, and handled CI/CD, automated deployments (Bash, PowerShell) and server administration.'
     }
   ],
   es: [
@@ -41,7 +41,7 @@ export const experience: Experience = {
       company: 'Proyectos Freelance',
       position: 'Desarrollador de Software',
       description:
-        'Analicé, diseñé e implementé sistemas personalizados para automatizar procesos como control de inventario, ventas y reportes. Desarrollé aplicaciones web con PHP, React, MySQL, HTML, CSS, JavaScript y Bootstrap, y automatizaciones con scripts en Bash y PowerShell.'
+        'Desarrollé productos web y móviles para clientes: la plataforma de clínicas MedicLife —desde el sistema original en PHP/MySQL hasta su rediseño en React y TypeScript y su landing— y Foodero, una app para restaurantes con React Native, backend en C#/.NET, PostgreSQL y Docker. Levanté requisitos con los clientes, planeé y di seguimiento a las entregas, y me encargué de CI/CD, despliegues automatizados (Bash, PowerShell) y administración de servidores.'
     }
   ]
 };
