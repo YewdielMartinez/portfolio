@@ -18,7 +18,7 @@ export const experience: Experience = {
       company: 'DICOM',
       position: 'Software Developer',
       description:
-        'Designing and implementing internal systems using PHP, Bootstrap, and MySQL. Currently developing an external mobile application with React Native to extend company services and enhance client interaction.'
+        "Full-stack development of the company's applications: internal systems with PHP, React and MySQL, a client-facing mobile app in React Native, and backend services in .NET. I also contribute to CI/CD pipelines and server administration, and support project management."
     },
     {
       year: '2022 - 2025',
@@ -34,7 +34,7 @@ export const experience: Experience = {
       company: 'DICOM',
       position: 'Desarrollador de Software',
       description:
-        'Diseño e implementación de sistemas internos utilizando PHP, Bootstrap y MySQL. Actualmente desarrollo una aplicación móvil externa con React Native para ampliar los servicios de la empresa y optimizar la interacción con los clientes.'
+        'Desarrollo full-stack de las aplicaciones de la empresa: sistemas internos con PHP, React y MySQL, una app móvil para clientes con React Native y servicios backend en .NET. También participo en pipelines de CI/CD y en la administración de servidores, y apoyo en la gestión de proyectos.'
     },
     {
       year: '2022 - 2025',
