@@ -279,7 +279,7 @@ export const projects: Projects = {
         "Docker-containerized for consistent deployments",
         "Role-based access for cashiers and administrators",
       ],
-      year: "2024",
+      year: "2025",
       role: "Full-Stack Developer",
     },
     // 10 — PuntoZero Web Hotel
@@ -300,7 +300,7 @@ export const projects: Projects = {
         "Search and filter by tool, department, or date",
         "Fast, clean interface optimized for daily use",
       ],
-      year: "2024",
+      year: "2025",
       role: "Full-Stack Developer",
     },
     // 10 — PuntoZeroweb Landing
@@ -320,7 +320,7 @@ export const projects: Projects = {
         "Optimized for fast static delivery",
         "Clear call-to-action flow for lead generation",
       ],
-      year: "2024",
+      year: "2025",
       role: "Frontend Developer",
     },
     // 12 — PuntoZero Facturación en Línea
@@ -341,7 +341,7 @@ export const projects: Projects = {
         "Invoice status tracking and history",
         "Clean and intuitive billing interface",
       ],
-      year: "2024",
+      year: "2025",
       role: "Frontend Developer (Collaborative)",
     },
   ],
@@ -596,7 +596,7 @@ export const projects: Projects = {
         "Contenerizado con Docker para despliegues uniformes",
         "Acceso por roles: cajeros y administradores",
       ],
-      year: "2024",
+      year: "2025",
       role: "Desarrollador Full-Stack",
     },
     // 10 — PuntoZero Web Hotel
@@ -617,7 +617,7 @@ export const projects: Projects = {
         "Búsqueda y filtrado por herramienta, departamento o fecha",
         "Interfaz rápida y clara para uso diario",
       ],
-      year: "2024",
+      year: "2025",
       role: "Desarrollador Full-Stack",
     },
     // 10 — PuntoZeroweb Landing
@@ -637,7 +637,7 @@ export const projects: Projects = {
         "Optimizada para carga rápida",
         "Flujo de llamada a la acción para captación de clientes",
       ],
-      year: "2024",
+      year: "2025",
       role: "Desarrollador Frontend",
     },
     // 12 — PuntoZero Facturación en Línea
@@ -658,7 +658,7 @@ export const projects: Projects = {
         "Seguimiento del estado de facturas e historial",
         "Interfaz de facturación limpia e intuitiva",
       ],
-      year: "2024",
+      year: "2025",
       role: "Desarrollador Frontend (Colaborativo)",
     },
   ],
