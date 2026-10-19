@@ -30,6 +30,32 @@ export interface Projects {
 
 export const projects: Projects = {
   en: [
+    // 00 — Motion Kit
+    {
+      title: "Motion Kit",
+      description:
+        "Motion toolkit published on npm: GSAP recipes, accessible components, 19 themes and optional WebGL effects for vanilla, Astro and React.",
+      image: "/projects/MotionKit.jpeg",
+      tags: ["TypeScript", "GSAP", "React", "Astro", "npm", "WebGL"],
+      link: "https://motion-kit-playground.vercel.app/",
+      gridSize: "wide",
+      detailedDescription:
+        "Motion Kit is the animation toolkit behind this portfolio, published on npm as @yewdiel21/motion-kit. Every piece is a framework-agnostic GSAP factory that behaves the same in plain HTML and Astro (data-mk attributes + autoInit), in React and Next.js (hooks and components) and as custom elements. It ships 40 recipes — spring cards, a curved inertia carousel, elastic words, a stretching footer, sortable lists, parallax, marquees and GPU effects such as particle text and liquid image blends — plus 10 accessible components (morphing dialogs, menus, toasts, chat, navigation, steps), CSS controls, 19 themes with light, dark and system modes, and a palette generator. A CLI copies any piece into a project as editable code, and a Claude Code skill applies them on request. Every piece has vanilla and React demos in the public playground.",
+      features: [
+        "40 motion recipes and 10 accessible components (dialog, menu, toast, chat, navigation…)",
+        "Same behaviour in vanilla/Astro (data-mk + autoInit), React/Next.js hooks and custom elements",
+        "19 themes with 37 colour roles, light/dark/system modes and a palette generator",
+        "Optional WebGL effects with HTML fallback: particle text, liquid blend, matcap, film grain",
+        "CLI that copies recipes into any project as editable code, plus a Claude Code skill",
+        "Respects prefers-reduced-motion; tested with Vitest and screenshot checks at 1440 and 390 px",
+      ],
+      demo: "https://motion-kit-playground.vercel.app/",
+      github: "https://github.com/YewdielMartinez/motion-kit",
+      npm: "https://www.npmjs.com/package/@yewdiel21/motion-kit",
+      install: "npm install @yewdiel21/motion-kit gsap",
+      year: "2026",
+      role: "Creator & Maintainer",
+    },
     // 01 — Kayro
     {
       title: "Kayro",
@@ -321,6 +347,32 @@ export const projects: Projects = {
   ],
 
   es: [
+    // 00 — Motion Kit
+    {
+      title: "Motion Kit",
+      description:
+        "Kit de animación publicado en npm: recetas GSAP, componentes accesibles, 19 temas y efectos WebGL opcionales para vanilla, Astro y React.",
+      image: "/projects/MotionKit.jpeg",
+      tags: ["TypeScript", "GSAP", "React", "Astro", "npm", "WebGL"],
+      link: "https://motion-kit-playground.vercel.app/",
+      gridSize: "wide",
+      detailedDescription:
+        "Motion Kit es el kit de animación detrás de este portfolio, publicado en npm como @yewdiel21/motion-kit. Cada pieza es una factory GSAP independiente del framework que se comporta igual en HTML y Astro (atributos data-mk + autoInit), en React y Next.js (hooks y componentes) y como custom elements. Incluye 40 recetas — tarjetas con resorte, carrusel curvo con inercia, palabras elásticas, footer que se estira, listas reordenables, parallax, marquesinas y efectos en GPU como texto de partículas y mezclas líquidas de imágenes —, 10 componentes accesibles (diálogos que nacen del botón, menús, toasts, chat, navegación, pasos), controles CSS, 19 temas con modos claro, oscuro y sistema, y un generador de paletas. Un CLI copia cualquier pieza a un proyecto como código editable y una skill de Claude Code las aplica a pedido. Cada pieza tiene demos vanilla y React en el playground público.",
+      features: [
+        "40 recetas de movimiento y 10 componentes accesibles (diálogo, menú, toast, chat, navegación…)",
+        "Mismo comportamiento en vanilla/Astro (data-mk + autoInit), hooks de React/Next.js y custom elements",
+        "19 temas con 37 roles de color, modos claro/oscuro/sistema y generador de paletas",
+        "Efectos WebGL opcionales con respaldo HTML: texto de partículas, mezcla líquida, matcap, grano",
+        "CLI que copia recetas a cualquier proyecto como código editable, más una skill de Claude Code",
+        "Respeta prefers-reduced-motion; probado con Vitest y capturas a 1440 y 390 px",
+      ],
+      demo: "https://motion-kit-playground.vercel.app/",
+      github: "https://github.com/YewdielMartinez/motion-kit",
+      npm: "https://www.npmjs.com/package/@yewdiel21/motion-kit",
+      install: "npm install @yewdiel21/motion-kit gsap",
+      year: "2026",
+      role: "Creador y mantenedor",
+    },
     // 01 — Kayro
     {
       title: "Kayro",
