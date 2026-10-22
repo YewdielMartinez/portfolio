@@ -79,6 +79,31 @@ export const projects: Projects = {
       year: "2026",
       role: "Full-Stack Developer",
     },
+    // 02 — ARES
+    {
+      title: "ARES",
+      description:
+        "Intelligent multi-agent system for emergency management: ambulances, fire units and patrols plan routes across a city with BFS, DFS, Dijkstra and A*.",
+      image: "/projects/ARES.png",
+      images: ["/projects/AresDashboard.png"],
+      tags: ["Python", "FastAPI", "React", "TypeScript", "AI", "Motion Kit"],
+      link: "https://ares-emergencias.vercel.app/",
+      gridSize: "wide",
+      detailedDescription:
+        "ARES is an Artificial Intelligence team project that simulates an emergency operations center. Six rational agents — two ambulances, two fire units and two patrols — move across a 30 × 23 urban grid while a coordinator assigns each incident by specialty, priority with aging and route cost. Routes are computed in Python with BFS, DFS, Dijkstra and A* behind a Strategy pattern, and replanned when streets get blocked. The engine runs on FastAPI with a clean layered architecture, and the React + TypeScript interface is built on Motion Kit: dock navigation, menus, multi-step dialogs, toasts, animated counters and selectable themes. The app compares the four algorithms by steps, cost, expanded nodes and compute time, and exports the results to CSV.",
+      features: [
+        "Six agents (ambulances, fire units, patrols) dispatched by specialty, priority and route cost",
+        "BFS, DFS, Dijkstra and A* in Python behind a Strategy pattern, with dynamic replanning around blocked streets",
+        "Live SVG city map with start, pause, step and 1×/2×/4× speeds, plus three reproducible scenarios",
+        "Algorithm comparison by steps, cost, expanded nodes and compute time, exported to CSV",
+        "React + TypeScript interface built on Motion Kit: dock, menus, step dialogs, toasts and themes",
+        "23 Python tests and 14 Playwright browser tests; frontend on Vercel, API on Render with Docker",
+      ],
+      demo: "https://ares-emergencias.vercel.app/",
+      github: "https://github.com/YewdielMartinez/ares-emergencias",
+      year: "2026",
+      role: "Full-Stack Developer (team project)",
+    },
     // 02 — MedicLife Landing
     {
       title: "MedicLife Landing",
@@ -395,6 +420,31 @@ export const projects: Projects = {
       demo: "https://kayro-omega.vercel.app/",
       year: "2026",
       role: "Desarrollador Full-Stack",
+    },
+    // 02 — ARES
+    {
+      title: "ARES",
+      description:
+        "Sistema multiagente inteligente para la gestión de emergencias: ambulancias, bomberos y patrullas calculan rutas en una ciudad con BFS, DFS, Dijkstra y A*.",
+      image: "/projects/ARES.png",
+      images: ["/projects/AresDashboard.png"],
+      tags: ["Python", "FastAPI", "React", "TypeScript", "IA", "Motion Kit"],
+      link: "https://ares-emergencias.vercel.app/",
+      gridSize: "wide",
+      detailedDescription:
+        "ARES es un proyecto en equipo de Inteligencia Artificial que simula un centro de operaciones de emergencias. Seis agentes racionales — dos ambulancias, dos unidades de bomberos y dos patrullas — se desplazan por una cuadrícula urbana de 30 × 23 mientras un coordinador asigna cada incidente por especialidad, prioridad con envejecimiento y costo de ruta. Las rutas se calculan en Python con BFS, DFS, Dijkstra y A* mediante el patrón Strategy, y se replanifican cuando se bloquean calles. El motor corre sobre FastAPI con una arquitectura por capas, y la interfaz en React + TypeScript está construida con Motion Kit: navegación tipo dock, menús, diálogos por pasos, toasts, contadores animados y temas seleccionables. La aplicación compara los cuatro algoritmos por pasos, costo, nodos expandidos y tiempo de cómputo, y exporta los resultados a CSV.",
+      features: [
+        "Seis agentes (ambulancias, bomberos, patrullas) asignados por especialidad, prioridad y costo de ruta",
+        "BFS, DFS, Dijkstra y A* en Python con patrón Strategy y replanificación ante calles bloqueadas",
+        "Mapa urbano SVG en vivo con inicio, pausa, avance por paso y velocidades 1×/2×/4×, más tres escenarios reproducibles",
+        "Comparación de algoritmos por pasos, costo, nodos expandidos y tiempo de cómputo, con exportación CSV",
+        "Interfaz React + TypeScript construida con Motion Kit: dock, menús, diálogos por pasos, toasts y temas",
+        "23 pruebas en Python y 14 pruebas de navegador con Playwright; frontend en Vercel y API en Render con Docker",
+      ],
+      demo: "https://ares-emergencias.vercel.app/",
+      github: "https://github.com/YewdielMartinez/ares-emergencias",
+      year: "2026",
+      role: "Desarrollador Full-Stack (proyecto en equipo)",
     },
     // 02 — MedicLife Landing
     {
