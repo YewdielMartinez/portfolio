@@ -4,22 +4,20 @@ import { t } from '../lib/t';
 import { projects } from '../data/projects';
 ---
 
-<dialog class="morph morph--project" data-project-dialog aria-labelledby="pd-title">
-  <div class="morph__backdrop" data-close></div>
-  <div class="morph__panel">
-    <button
-      type="button"
-      class="pd__close"
-      data-close
-      aria-label={t('dialog.close')}
-      data-i18n-attr="aria-label:dialog.close"
-    >
-      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-        <path d="M5 5l14 14M19 5L5 19" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" />
-      </svg>
-    </button>
-    <div class="morph__content" data-dialog-content></div>
-  </div>
+<!-- Motion Kit dialog: grows out of the clicked card, drags away on touch, folds back on close. -->
+<dialog class="mk-dialog project-dialog" data-project-dialog aria-labelledby="pd-title">
+  <button
+    type="button"
+    class="pd__close"
+    data-mk-part="close"
+    aria-label={t('dialog.close')}
+    data-i18n-attr="aria-label:dialog.close"
+  >
+    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+      <path d="M5 5l14 14M19 5L5 19" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" />
+    </svg>
+  </button>
+  <div class="project-dialog__body" data-mk-part="body" data-dialog-content></div>
 </dialog>
 
 {projects.en.map((project, i) => (
@@ -29,20 +27,49 @@ import { projects } from '../data/projects';
 ))}
 
 <style is:global>
-  .pd__close {
+  .project-dialog {
+    --mk-dialog-width: 960px;
+    --mk-dialog-bg: var(--bg);
+    --mk-dialog-shadow: var(--shadow);
+    width: min(var(--mk-dialog-width), 100vw - 2 * var(--gutter));
+    max-height: calc(100dvh - 2 * var(--gutter));
+    color: var(--fg);
+  }
+
+  .dark .project-dialog {
+    --mk-dialog-bg: #141414;
+  }
+
+  .project-dialog::backdrop {
+    background: rgb(0 0 0 / 0.35);
+    backdrop-filter: none;
+  }
+
+  .dark .project-dialog::backdrop {
+    background: rgb(0 0 0 / 0.7);
+  }
+
+  .mk-dialog [data-mk-part='body'].project-dialog__body {
+    padding: clamp(1.25rem, 3vw, 2.5rem);
+  }
+
+  /* The kit's close part is a muted 40 px circle; this one floats over the cover. */
+  .mk-dialog .pd__close {
     position: absolute;
     top: clamp(0.75rem, 2vw, 1.25rem);
     right: clamp(0.75rem, 2vw, 1.25rem);
     z-index: 2;
-    display: grid;
-    place-items: center;
     width: 2.75rem;
     height: 2.75rem;
-    border-radius: 50%;
     background: var(--bg);
     color: var(--fg);
     box-shadow: var(--shadow-soft);
     transition: scale 0.8s var(--ease-out-elastic);
+  }
+
+  .mk-dialog .pd__close:hover {
+    background: var(--bg);
+    color: var(--fg);
   }
 
   .pd__close:active {
@@ -71,10 +98,6 @@ import { projects } from '../data/projects';
   .pd__head {
     display: grid;
     gap: 1.25rem;
-  }
-
-  .pd__title {
-    outline: none;
   }
 
   .pd__meta {

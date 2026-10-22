@@ -1,45 +1,82 @@
+import { confetti, toast } from '@yewdiel21/motion-kit';
 import { translations } from '../../data/translations';
-import { getLang } from '../i18n';
+import { applyI18n, getLang } from '../i18n';
 
-/** EmailJS contact form with inline, announced status. */
+type Field = HTMLInputElement | HTMLTextAreaElement;
+
+/** EmailJS contact form: Motion Kit fields shake when invalid, the result arrives as a toast. */
 export function initContactForm() {
   const section = document.getElementById('contact');
   const form = document.getElementById('contact-form') as HTMLFormElement | null;
   const button = form?.querySelector<HTMLButtonElement>('[data-send]');
   const label = button?.querySelector<HTMLElement>('[data-i18n]');
-  const status = form?.querySelector<HTMLElement>('[data-form-status]');
-  if (!section || !form || !button || !label || !status) return;
+  const sent = form?.querySelector<HTMLElement>('[data-sent]');
+  if (!section || !form || !button || !label || !sent) return;
 
   const { publicKey = '', templateId = '', serviceId = '' } = section.dataset;
-  let timer = 0;
+  const fields = [...form.querySelectorAll<Field>('input, textarea')];
+  let sentTimer = 0;
 
-  const show = (message: string) => {
-    status.textContent = message;
-    clearTimeout(timer);
-    timer = window.setTimeout(() => (status.textContent = ''), 6000);
+  // The roll label and its copy (data-text) follow the i18n key.
+  const labelAs = (key: string) => {
+    label.dataset.i18n = key;
+    label.dataset.i18nAttr = `data-text:${key}`;
+    applyI18n(button);
+  };
+
+  /** Mark invalid fields; re-marking replays the kit's vibration. */
+  const validate = () => {
+    const invalid = fields.filter((field) => !field.checkValidity());
+    for (const field of fields) field.removeAttribute('aria-invalid');
+    void form.offsetWidth;
+    for (const field of invalid) field.setAttribute('aria-invalid', 'true');
+    return invalid;
+  };
+
+  form.addEventListener('input', (e) => {
+    const field = e.target as Field;
+    if (field.hasAttribute('aria-invalid') && field.checkValidity()) field.removeAttribute('aria-invalid');
+  });
+
+  const celebrate = () => {
+    const style = getComputedStyle(document.documentElement);
+    const colors = ['--fg', '--muted'].map((name) => style.getPropertyValue(name).trim()).filter(Boolean);
+    confetti(button, { colors: [...colors, '#737373'] });
+    sent.hidden = true;
+    void sent.offsetWidth; // replay the mark's spring
+    sent.hidden = false;
+    clearTimeout(sentTimer);
+    sentTimer = window.setTimeout(() => (sent.hidden = true), 5000);
   };
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const copy = translations[getLang()].contact;
+    const invalid = validate();
+    if (invalid.length) {
+      invalid[0].focus();
+      toast(copy.invalid, { tone: 'error', origin: button });
+      return;
+    }
     if (!publicKey || !serviceId || !templateId) {
-      show(copy.error);
+      toast(copy.error, { tone: 'error', duration: 8000 });
       return;
     }
 
     button.disabled = true;
-    label.textContent = copy.sending;
+    labelAs('contact.sending');
     try {
       const { default: emailjs } = await import('@emailjs/browser');
       await emailjs.sendForm(serviceId, templateId, form, { publicKey });
       form.reset();
-      show(copy.success);
+      toast(translations[getLang()].contact.success, { origin: button });
+      celebrate();
     } catch (error) {
       console.error('Contact form failed', error);
-      show(copy.error);
+      toast(translations[getLang()].contact.error, { tone: 'error', duration: 8000 });
     } finally {
       button.disabled = false;
-      label.textContent = translations[getLang()].contact.send;
+      labelAs('contact.send');
     }
   });
 }

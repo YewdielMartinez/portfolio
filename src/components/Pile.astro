@@ -1,5 +1,6 @@
 ---
 import ProjectImage from './ProjectImage.astro';
+import { t } from '../lib/t';
 import { pileLayers } from '../lib/pile-math';
 import type { Project } from '../data/projects';
 
@@ -20,7 +21,14 @@ const layers = [...backs, front];
 const transforms = pileLayers(layers.length, index);
 ---
 
-<button type="button" class="pile" data-project={index}>
+<button
+  type="button"
+  class="pile"
+  data-project={index}
+  data-mk-cursor={t('work.view')}
+  data-mk-cursor-shape="circle"
+  data-i18n-attr="data-mk-cursor:work.view"
+>
   <span class="pile__stack">
     {layers.map((layer, j) => {
       const isFront = j === layers.length - 1;
@@ -51,7 +59,7 @@ const transforms = pileLayers(layers.length, index);
     })}
   </span>
   <span class="pile__caption t-label">
-    <span data-i18n={`projects.${index}.title`}>{project.title}</span>
+    <span data-mk-shared="title" data-i18n={`projects.${index}.title`}>{project.title}</span>
     <span class="text-muted" data-i18n={`projects.${index}.year`}>{project.year}</span>
   </span>
 </button>
@@ -64,9 +72,15 @@ const transforms = pileLayers(layers.length, index);
     width: 100%;
     padding: 0;
     border: 0;
+    /* Rounds the focus ring and the dialog's morph out of the card */
+    border-radius: 1rem;
     background: none;
     color: inherit;
     text-align: left;
+  }
+
+  .pile:focus-visible {
+    outline-offset: 0.75rem;
   }
 
   .pile__stack {

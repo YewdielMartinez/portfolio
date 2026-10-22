@@ -7,6 +7,10 @@ import { projects } from '../data/projects';
 
 const all = projects.en.map((project, index) => ({ project, index }));
 const featured = all.filter(({ project }) => project.image);
+
+// Archive filters: "all" plus every kind used by at least one project.
+const kinds = ['web', 'mobile', 'backend', 'library'] as const;
+const filters = ['all', ...kinds.filter((kind) => all.some(({ project }) => project.kinds?.includes(kind)))];
 ---
 
 <section id="work" class="sheet work" data-section-label="nav.work" tabindex="-1">
@@ -21,7 +25,8 @@ const featured = all.filter(({ project }) => project.image);
     role="region"
     aria-roledescription="carousel"
     aria-label={t('work.carousel')}
-    data-i18n-attr="aria-label:work.carousel"
+    data-mk-cursor={t('work.cursorDrag')}
+    data-i18n-attr="aria-label:work.carousel;data-mk-cursor:work.cursorDrag"
   >
     {featured.map(({ project, index }, k) => (
       <button type="button" class="carousel__slide" data-project={index} style={`--k:${k}`}>
@@ -34,7 +39,7 @@ const featured = all.filter(({ project }) => project.image);
           />
         </span>
         <span class="carousel__title t-label">
-          <span data-i18n={`projects.${index}.title`}>{project.title}</span>
+          <span data-mk-shared="title" data-i18n={`projects.${index}.title`}>{project.title}</span>
           <span class="text-muted" data-i18n={`projects.${index}.year`}>{project.year}</span>
         </span>
       </button>
@@ -42,11 +47,35 @@ const featured = all.filter(({ project }) => project.image);
   </div>
   <p class="gutter carousel__hint t-small text-muted" data-i18n="work.drag">{t('work.drag')}</p>
 
-  <div class="gutter archive">
-    <h3 class="archive__title t-lead" data-words data-i18n="work.archive">{t('work.archive')}</h3>
-    <ul class="archive__grid">
+  <div class="gutter archive" data-archive>
+    <div class="archive__head">
+      <h3 class="archive__title t-lead" data-words data-i18n="work.archive">{t('work.archive')}</h3>
+      <div
+        class="mk-segmented archive__filters"
+        data-archive-filters
+        aria-label={t('work.filters.label')}
+        data-i18n-attr="aria-label:work.filters.label"
+      >
+        {filters.map((filter, i) => (
+          <button
+            type="button"
+            data-mk-tab
+            data-filter={filter}
+            aria-selected={i === 0 ? 'true' : 'false'}
+            aria-controls="archive-grid"
+            data-i18n={`work.filters.${filter}`}
+          >
+            {t(`work.filters.${filter}`)}
+          </button>
+        ))}
+        <span data-mk-indicator></span>
+      </div>
+    </div>
+    <ul id="archive-grid" class="archive__grid" data-archive-grid>
       {all.map(({ project, index }) => (
-        <li><Pile project={project} index={index} /></li>
+        <li data-mk-item data-flip-id={index} data-kinds={(project.kinds ?? []).join(' ')}>
+          <Pile project={project} index={index} />
+        </li>
       ))}
     </ul>
   </div>
@@ -82,6 +111,12 @@ const featured = all.filter(({ project }) => project.image);
     cursor: grabbing;
   }
 
+  /* Motion Kit's dot cursor ("Drag") replaces the hand while it is active. */
+  :global(.js) .carousel[data-mk-cursor-zone],
+  :global(.js) .carousel[data-mk-cursor-zone] .carousel__slide {
+    cursor: none;
+  }
+
   .carousel__slide {
     flex: none;
     display: flex;
@@ -91,6 +126,7 @@ const featured = all.filter(({ project }) => project.image);
     width: var(--slide-w);
     padding: 0;
     border: 0;
+    border-radius: 1rem;
     background: none;
     color: inherit;
     cursor: inherit;
@@ -153,6 +189,36 @@ const featured = all.filter(({ project }) => project.image);
 
   .archive {
     margin-top: clamp(6rem, 16vh, 11rem);
+  }
+
+  .archive__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.25rem 2rem;
+  }
+
+  /* Motion Kit segmented control: black indicator, readable idle labels. */
+  .archive__filters {
+    max-width: 100%;
+  }
+
+  .archive__filters > [data-mk-tab] {
+    height: 2.5rem;
+    padding-inline: 1.1rem;
+    color: var(--fg);
+    font-size: 0.9375rem;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+
+  .archive__filters > [data-mk-tab][aria-selected='true'] {
+    color: var(--bg);
+  }
+
+  .archive__grid > [hidden] {
+    display: none;
   }
 
   .archive__grid {

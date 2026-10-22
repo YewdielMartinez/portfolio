@@ -2,7 +2,7 @@
 import { t } from '../lib/t';
 ---
 
-<header class="site-header" data-header>
+<header class="site-header" data-header data-mk-on="base">
   <a href="#home" class="t-label">Yewdiel Medina <span aria-hidden="true">|</span> Portfolio</a>
   <button
     type="button"
@@ -27,13 +27,32 @@ import { t } from '../lib/t';
     align-items: baseline;
     gap: 1rem;
     padding: 1.1rem var(--gutter);
-    color: #fff;
-    mix-blend-mode: difference;
+    --header-ink: var(--fg);
+    --header-veil: var(--bg);
+    color: var(--header-ink);
     pointer-events: none;
     transition:
       opacity 0.4s,
       translate 0.8s var(--ease-out-elastic),
-      visibility 0.4s;
+      visibility 0.4s,
+      color 0.3s;
+  }
+
+  /* Over the revealed footer (data-mk-on from Motion Kit contrast) the header inverts. */
+  .site-header[data-mk-on='inverse'] {
+    --header-ink: var(--bg);
+    --header-veil: var(--fg);
+  }
+
+  /* A fading veil of the tone underneath keeps the labels legible over cards and images. */
+  .site-header::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 -1.5rem;
+    z-index: -1;
+    background-color: var(--header-veil);
+    mask-image: linear-gradient(to bottom, #000 40%, transparent);
+    transition: background-color 0.3s;
   }
 
   .site-header > * {

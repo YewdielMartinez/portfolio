@@ -1,15 +1,26 @@
+import { createSlotText, type SlotTextInstance } from '@yewdiel21/motion-kit';
 import { gsap, ScrollTrigger, SplitText, ELASTIC, entrances } from './core';
+import { textSetters } from '../i18n';
 
 /*
  * Spencer's headline entrance: every word (or letter) grows from the baseline,
  * `scaleY 0 → 1` + `translateY .25em → 0`, elastic, 100 ms apart.
+ * On a language switch, headlines on screen roll letter by letter into the new
+ * language (Motion Kit slot-text) and are split again once the roll settles.
  */
+
+interface Roll {
+  part: HTMLElement;
+  slot: SlotTextInstance;
+}
 
 interface Entry {
   el: HTMLElement;
   split: SplitText | null;
   revealed: boolean;
   trigger: ScrollTrigger | null;
+  rolls: Roll[];
+  settle: number;
 }
 
 const entries = new Map<HTMLElement, Entry>();
@@ -43,7 +54,7 @@ function release(entry: Entry) {
 export function trackWords(el: HTMLElement, { hidden = true, onScroll = false } = {}) {
   if (entries.has(el)) return;
   const animate = entrances();
-  const entry: Entry = { el, split: null, revealed: !animate || !hidden, trigger: null };
+  const entry: Entry = { el, split: null, revealed: !animate || !hidden, trigger: null, rolls: [], settle: 0 };
   entries.set(el, entry);
   if (animate) {
     prepare(entry, !entry.revealed);
@@ -93,6 +104,7 @@ export function revealWords(el: HTMLElement, delay = 0) {
 export function replaceWords(el: HTMLElement, mutate: () => void) {
   const entry = entries.get(el);
   if (!entry) return mutate();
+  stopRoll(entry);
   release(entry);
   mutate();
   if (entrances()) {
@@ -105,14 +117,56 @@ export function untrackWords(el: HTMLElement) {
   const entry = entries.get(el);
   if (!entry) return;
   entry.trigger?.kill();
+  stopRoll(entry);
   release(entry);
   entries.delete(el);
 }
 
+const onScreen = (el: HTMLElement) => {
+  const r = el.getBoundingClientRect();
+  return r.width > 0 && r.bottom > 0 && r.top < innerHeight;
+};
+
+/** Hand each translated line of a revealed, visible headline to slot-text for the switch. */
+function startRoll(entry: Entry) {
+  const parts = entry.el.matches('[data-i18n]') ? [entry.el] : [...entry.el.querySelectorAll<HTMLElement>('[data-i18n]')];
+  entry.rolls = parts.map((part) => {
+    const slot = createSlotText(part);
+    textSetters.set(part, (text) => slot.set(text));
+    return { part, slot };
+  });
+}
+
+/** Back to plain text (slot-text's destroy keeps the current one). */
+function stopRoll(entry: Entry) {
+  clearTimeout(entry.settle);
+  for (const { part, slot } of entry.rolls) {
+    textSetters.delete(part);
+    slot.destroy();
+  }
+  entry.rolls = [];
+}
+
+// slot-text: ~300 ms a letter, 45 ms apart, with up to ±27 % / ±15 % of variation.
+const rollTime = (entry: Entry) => 600 + 52 * Math.max(...entry.rolls.map(({ slot }) => slot.text.length));
+
 // SplitText.revert() restores the markup captured at split time, so splits are undone
 // before i18n writes the new language and rebuilt afterwards.
-addEventListener('languagewillchange', () => entries.forEach(release));
+addEventListener('languagewillchange', () => {
+  entries.forEach((entry) => {
+    if (entry.rolls.length) return; // still rolling from the last switch
+    release(entry);
+    if (entrances() && entry.revealed && onScreen(entry.el)) startRoll(entry);
+  });
+});
 addEventListener('languagechange', () => {
   if (!entrances()) return;
-  entries.forEach((entry) => prepare(entry, !entry.revealed));
+  entries.forEach((entry) => {
+    if (!entry.rolls.length) return prepare(entry, !entry.revealed);
+    clearTimeout(entry.settle);
+    entry.settle = window.setTimeout(() => {
+      stopRoll(entry);
+      prepare(entry, false);
+    }, rollTime(entry));
+  });
 });

@@ -23,6 +23,11 @@
     opacity: 0;
   }
 
+  /* Motion Kit cascade marks its block data-mk-ready once the start states are set */
+  .js:not(.motion-failed) [data-cascade]:not([data-mk-ready]) [data-mk-cascade] {
+    visibility: hidden;
+  }
+
   .js:not(.motion-failed) [data-hero-card]:not([data-ready]) {
     transform: scale(0);
   }

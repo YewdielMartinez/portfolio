@@ -1,19 +1,26 @@
 ---
 import SheetTitle from './SheetTitle.astro';
 import { experience } from '../data/experience';
+
+const last = experience.en.length - 1;
 ---
 
 <section id="experience" class="sheet gutter" data-section-label="nav.experience" tabindex="-1">
   <SheetTitle line1="experience.title1" line2="experience.title2" />
-  <ol class="xp" data-flow>
+  <!-- Motion Kit cascade: the rules draw from alternating sides, the company rises, the rest fades in. -->
+  <ol class="xp">
     {experience.en.map((item, i) => (
-      <li class="xp__row">
-        <p class="t-label text-muted" data-i18n={`jobs.${i}.year`}>{item.year}</p>
+      <li class="xp__row" data-cascade>
+        <span class="xp__rule" data-mk-cascade="rule" aria-hidden="true"></span>
+        <p class="t-label text-muted" data-mk-cascade="fade" data-i18n={`jobs.${i}.year`}>{item.year}</p>
         <div class="xp__role">
-          <p class="t-lead" data-i18n={`jobs.${i}.company`}>{item.company}</p>
-          <p class="t-label text-muted" data-i18n={`jobs.${i}.position`}>{item.position}</p>
+          <span class="xp__clip">
+            <span class="t-lead xp__company" data-mk-cascade="rise" data-i18n={`jobs.${i}.company`}>{item.company}</span>
+          </span>
+          <p class="t-label text-muted" data-mk-cascade="fade" data-i18n={`jobs.${i}.position`}>{item.position}</p>
         </div>
-        <p class="t-body" data-i18n={`jobs.${i}.description`}>{item.description}</p>
+        <p class="t-body" data-mk-cascade="fade" data-i18n={`jobs.${i}.description`}>{item.description}</p>
+        {i === last && <span class="xp__rule xp__rule--end" data-mk-cascade="rule" aria-hidden="true"></span>}
       </li>
     ))}
   </ol>
@@ -22,19 +29,41 @@ import { experience } from '../data/experience';
 <style>
   .xp {
     margin-top: clamp(3rem, 9vh, 6rem);
-    border-bottom: 1px solid var(--line);
   }
 
   .xp__row {
+    position: relative;
     display: grid;
     gap: 0.75rem 2rem;
     padding-block: clamp(1.5rem, 3.5vh, 2.5rem);
-    border-top: 1px solid var(--line);
+  }
+
+  .xp__rule {
+    position: absolute;
+    inset: 0 0 auto;
+    height: 1px;
+    background: var(--line);
+  }
+
+  .xp__rule--end {
+    inset: auto 0 0;
   }
 
   .xp__role {
     display: grid;
     gap: 0.4rem;
+  }
+
+  /* The company rises from behind this edge; the padding keeps descenders inside. */
+  .xp__clip {
+    display: block;
+    overflow: hidden;
+    padding-bottom: 0.12em;
+    margin-bottom: -0.12em;
+  }
+
+  .xp__company {
+    display: block;
   }
 
   @media (min-width: 768px) {

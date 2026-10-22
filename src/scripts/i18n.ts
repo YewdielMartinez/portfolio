@@ -20,6 +20,9 @@ export function getLang(): Lang {
   }
 }
 
+/** Elements whose text is written by an animation (slot-text) instead of textContent. */
+export const textSetters = new WeakMap<HTMLElement, (text: string) => void>();
+
 const dictionaries = new Map<Lang, unknown>();
 
 function dictionary(lang: Lang) {
@@ -41,7 +44,10 @@ export function applyI18n(root: ParentNode = document, lang: Lang = getLang()) {
 
   for (const el of select(root, '[data-i18n]')) {
     const value = resolvePath(dict, el.dataset.i18n ?? '');
-    if (value !== undefined && el.textContent !== value) el.textContent = value;
+    if (value === undefined) continue;
+    const set = textSetters.get(el);
+    if (set) set(value);
+    else if (el.textContent !== value) el.textContent = value;
   }
 
   for (const el of select(root, '[data-i18n-attr]')) {

@@ -1,0 +1,128 @@
+/*
+ * @yewdiel21/motion-kit on the portfolio's black & white tokens.
+ * The package stylesheets (tokens, controls, effects, dialog, toast, cursor) are
+ * imported one by one in Layout.astro; its full bundle would restyle the page.
+ */
+
+:root {
+  --mk-font: 'NB International', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --mk-font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  /* Material roles the kit reads, resolved from --bg/--fg (they flip with .dark). */
+  --md-sys-color-background: var(--bg);
+  --md-sys-color-on-background: var(--fg);
+  --md-sys-color-surface: var(--bg);
+  --md-sys-color-surface-container-lowest: var(--bg);
+  --md-sys-color-surface-container-low: var(--bg);
+  --md-sys-color-surface-container: var(--surface);
+  --md-sys-color-surface-container-high: var(--surface);
+  --md-sys-color-surface-container-highest: var(--surface);
+  --md-sys-color-on-surface: var(--fg);
+  --md-sys-color-on-surface-variant: var(--muted);
+  --md-sys-color-outline: var(--muted);
+  --md-sys-color-outline-variant: var(--line);
+  --md-sys-color-primary: var(--fg);
+  --md-sys-color-on-primary: var(--bg);
+  --md-sys-color-primary-container: var(--fg);
+  --md-sys-color-on-primary-container: var(--bg);
+  --md-sys-color-secondary: var(--fg);
+  --md-sys-color-secondary-container: var(--surface);
+  --md-sys-color-on-secondary-container: var(--fg);
+  --md-sys-color-tertiary: var(--muted);
+  --md-sys-color-tertiary-container: var(--surface);
+  --md-sys-color-error: #ba1a1a;
+  --md-sys-color-on-error: #ffffff;
+  --md-sys-color-error-container: #ffdad6;
+  --md-sys-color-on-error-container: #410002;
+  --md-sys-color-scrim: #000000;
+  --md-sys-color-shadow: #000000;
+}
+
+.dark {
+  --md-sys-color-error: #ffb4ab;
+  --md-sys-color-on-error: #690005;
+  --md-sys-color-error-container: #5c0b0b;
+  --md-sys-color-on-error-container: #ffdad6;
+}
+
+/* Toasts: an inverted capsule, like the pills. */
+.mk-toast {
+  --mk-toast-bg: var(--fg);
+  --mk-toast-radius: 999px;
+  --mk-text: var(--bg);
+  --mk-muted: var(--muted);
+  --mk-accent: var(--bg);
+}
+
+/*
+ * Cursor chip: the kit's glass vanishes over the light covers, so it becomes a
+ * solid disc like the carousel's "Drag" dot.
+ */
+.mk-cursor__chip.mk-glass,
+.mk-cursor__chip.mk-glass[data-mk-tone] {
+  --mk-glass-fg: var(--bg);
+  background: var(--fg);
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.mk-cursor__chip.mk-glass::before,
+.mk-cursor__chip.mk-glass::after,
+.mk-cursor__chip .mk-glass__shadow {
+  display: none;
+}
+
+.mk-cursor__chip--circle,
+.mk-cursor__text {
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.mk-cursor {
+  --mk-cursor-circle: 88px;
+}
+
+/* recipes/slot-text/slot-text.css (not exported on its own by the package) */
+.mk-slot {
+  display: inline;
+}
+
+.mk-slot__word {
+  display: inline-flex;
+  align-items: baseline;
+  white-space: pre;
+}
+
+.mk-slot__char {
+  position: relative;
+  display: inline-flex;
+  flex: none;
+  justify-content: center;
+  align-items: baseline;
+  overflow-x: visible;
+  overflow-y: clip;
+  overflow-clip-margin: 0.15em;
+  line-height: inherit;
+}
+
+.mk-slot__char.is-resizing {
+  overflow-x: clip;
+}
+
+.mk-slot__sizer {
+  visibility: hidden;
+  white-space: pre;
+}
+
+.mk-slot__face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: pre;
+  will-change: transform;
+}

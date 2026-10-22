@@ -48,6 +48,18 @@ export interface Translation {
     drag: string;
     open: string;
     carousel: string;
+    /** Cursor chip over an archive card */
+    view: string;
+    /** Cursor word inside the carousel */
+    cursorDrag: string;
+    filters: {
+      label: string;
+      all: string;
+      web: string;
+      mobile: string;
+      backend: string;
+      library: string;
+    };
   };
   dialog: {
     year: string;
@@ -71,6 +83,7 @@ export interface Translation {
     sending: string;
     success: string;
     error: string;
+    invalid: string;
   };
   footer: {
     title: string;
@@ -133,6 +146,16 @@ export const translations: Record<Lang, Translation> = {
       drag: 'Drag or use ← →',
       open: 'Open project',
       carousel: 'Selected projects',
+      view: 'View project',
+      cursorDrag: 'Drag',
+      filters: {
+        label: 'Filter projects',
+        all: 'All',
+        web: 'Web',
+        mobile: 'Mobile',
+        backend: 'Backend',
+        library: 'Libraries',
+      },
     },
     dialog: {
       year: 'Year',
@@ -156,6 +179,7 @@ export const translations: Record<Lang, Translation> = {
       sending: 'Sending…',
       success: "Message sent. I'll get back to you soon.",
       error: 'The message could not be sent. Write to me at yewdiel211@gmail.com.',
+      invalid: 'Check the highlighted fields.',
     },
     footer: {
       title: 'Contact',
@@ -216,6 +240,16 @@ export const translations: Record<Lang, Translation> = {
       drag: 'Arrastra o usa ← →',
       open: 'Abrir proyecto',
       carousel: 'Proyectos seleccionados',
+      view: 'Ver proyecto',
+      cursorDrag: 'Arrastra',
+      filters: {
+        label: 'Filtrar proyectos',
+        all: 'Todos',
+        web: 'Web',
+        mobile: 'Móvil',
+        backend: 'Backend',
+        library: 'Librerías',
+      },
     },
     dialog: {
       year: 'Año',
@@ -239,6 +273,7 @@ export const translations: Record<Lang, Translation> = {
       sending: 'Enviando…',
       success: 'Mensaje enviado. Te responderé pronto.',
       error: 'No se pudo enviar el mensaje. Escríbeme a yewdiel211@gmail.com.',
+      invalid: 'Revisa los campos marcados.',
     },
     footer: {
       title: 'Contacto',

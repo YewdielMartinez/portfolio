@@ -8,10 +8,14 @@ import { initCarousel } from './motion/carousel';
 import { initPiles } from './motion/piles';
 import { initFooterStretch } from './motion/footer-stretch';
 import { initSectionLabel } from './motion/section-label';
+import { initCascades } from './motion/cascade';
 import { initProjectDialog } from './ui/project-dialog';
 import { initSectionMenu } from './ui/section-menu';
 import { initSettings } from './ui/settings';
 import { initContactForm } from './ui/contact-form';
+import { initToaster } from './ui/toaster';
+import { initArchiveFilters } from './ui/archive-filters';
+import { initCursors } from './ui/cursor';
 
 const root = document.documentElement;
 
@@ -23,6 +27,7 @@ applyI18n(document, getLang());
 initCore();
 
 // Interactions that do not depend on measured text.
+initToaster();
 initSettings();
 initContactForm();
 initProjectDialog();
@@ -41,6 +46,9 @@ fontsReady.then(() => {
   if (carousel) initCarousel(carousel);
 
   initPiles();
+  initArchiveFilters();
+  initCascades();
+  initCursors();
   initFooterStretch();
   initSectionLabel();
   ScrollTrigger.refresh();

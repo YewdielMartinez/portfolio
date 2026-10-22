@@ -1,12 +1,18 @@
+import { createContrast } from '@yewdiel21/motion-kit';
 import { ScrollTrigger } from './core';
 import { replaceWords } from './words';
 import { applyI18n } from '../i18n';
 
-/** Header appears after the cover's top row and names the section in the middle of the viewport. */
+/**
+ * Header appears after the cover's top row, names the section in the middle of the
+ * viewport and takes the tone of what is under it (Motion Kit contrast: the page
+ * is `base`, the revealed footer `inverse`).
+ */
 export function initSectionLabel() {
   const header = document.querySelector<HTMLElement>('[data-header]');
   const label = document.querySelector<HTMLElement>('[data-section-label-text]');
   if (!header) return;
+  createContrast(header);
 
   const cover = document.getElementById('home');
   if (cover) {

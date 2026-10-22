@@ -1,51 +1,51 @@
-import { createMorphDialog } from '../motion/morph-dialog';
-import { revealWords, trackWords, untrackWords } from '../motion/words';
+import { createDialog, toast } from '@yewdiel21/motion-kit';
 import { applyI18n, getLang } from '../i18n';
 import { translations } from '../../data/translations';
 
-/** Fill the shared project dialog from its <template> and morph it out of the clicked card. */
+/*
+ * Fill the shared project dialog from its <template> and open it with Motion Kit's
+ * dialog: the surface grows out of the clicked card while the card's title
+ * (data-mk-shared="title") flies into the heading, it folds back on close, and on
+ * touch screens it can be dragged down to dismiss.
+ */
 export function initProjectDialog() {
   const dialog = document.querySelector<HTMLDialogElement>('[data-project-dialog]');
   const content = dialog?.querySelector<HTMLElement>('[data-dialog-content]');
   if (!dialog || !content) return;
 
-  let title: HTMLElement | null = null;
-  const morph = createMorphDialog(dialog, {
-    onClosed: () => {
-      if (title) untrackWords(title);
-      title = null;
-      content.replaceChildren(); // also stops any playing video
-    },
-  });
+  const kit = createDialog(dialog, { triggers: false });
+
+  // With a mouse or trackpad, dragging and pulling the wheel past the top would close
+  // a long, scrolling dialog by accident: there it closes with Esc, the backdrop or ✕.
+  const finePointer = matchMedia('(pointer: fine)');
+  const syncDrag = () => content.toggleAttribute('data-mk-no-drag', finePointer.matches);
+  syncDrag();
+  finePointer.addEventListener('change', syncDrag);
 
   const templateFor = (index: string) =>
     document.querySelector<HTMLTemplateElement>(`template[data-project-template="${index}"]`);
 
-  async function openProject(trigger: HTMLElement) {
+  function openProject(trigger: HTMLElement) {
     const template = templateFor(trigger.dataset.project ?? '');
-    if (!template || morph.isOpen) return;
+    if (!template || kit.isOpen) return;
     content!.replaceChildren(template.content.cloneNode(true));
     content!.scrollTop = 0;
     applyI18n(content!);
-    title = content!.querySelector<HTMLElement>('[data-words]');
-
-    const origin = trigger.querySelector<HTMLElement>('.carousel__media, .pile__stack') ?? trigger;
-    await morph.open({
-      origin,
-      returnFocus: trigger,
-      // SplitText needs rendered text (a closed <dialog> is display:none and loses word spaces).
-      onShown: () => title && trackWords(title),
-    });
-    if (title) {
-      revealWords(title);
-      title.focus({ preventScroll: true });
-    }
+    kit.open(trigger);
   }
 
   document.addEventListener('click', (e) => {
     const trigger = (e.target as Element).closest<HTMLElement>('[data-project]');
-    if (trigger) void openProject(trigger);
+    if (trigger && !dialog.contains(trigger)) openProject(trigger);
   });
+
+  // The closing copy is built from the markup, which has no scroll position: carry it over.
+  dialog.addEventListener('mk:close', () => {
+    const y = content.scrollTop;
+    const article = content.firstElementChild as HTMLElement | null;
+    if (y && article) article.style.translate = `0 ${-y}px`;
+  });
+  dialog.addEventListener('mk:closed', () => content.replaceChildren()); // also stops any playing video
 
   // Install snippets (e.g. `npm i loon-core`)
   content.addEventListener('click', async (e) => {
@@ -53,8 +53,7 @@ export function initProjectDialog() {
     if (!button) return;
     try {
       await navigator.clipboard.writeText(button.dataset.copy ?? '');
-      button.textContent = translations[getLang()].dialog.copied;
-      setTimeout(() => applyI18n(button), 1600);
+      toast(translations[getLang()].dialog.copied, { origin: button, duration: 2000 });
     } catch {
       /* clipboard blocked: the command stays visible to copy by hand */
     }

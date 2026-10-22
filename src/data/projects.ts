@@ -1,6 +1,8 @@
 // Configuración de Proyectos
 // Agrega o modifica tus proyectos aquí
 
+export type ProjectKind = "web" | "mobile" | "backend" | "library";
+
 export interface Project {
   title: string;
   description: string;
@@ -8,6 +10,8 @@ export interface Project {
   /** Extra screenshots shown in the archive pile; `image` stays the cover. */
   images?: string[];
   tags: string[];
+  /** Archive filters this project appears under */
+  kinds?: ProjectKind[];
   link: string;
   gridSize: "small" | "medium" | "large" | "wide";
   detailedDescription?: string;
@@ -37,6 +41,7 @@ export const projects: Projects = {
         "Motion toolkit published on npm: GSAP recipes, accessible components, 19 themes and optional WebGL effects for vanilla, Astro and React.",
       image: "/projects/MotionKit.jpeg",
       tags: ["TypeScript", "GSAP", "React", "Astro", "npm", "WebGL"],
+      kinds: ["library"],
       link: "https://motion-kit-playground.vercel.app/",
       gridSize: "wide",
       detailedDescription:
@@ -64,6 +69,7 @@ export const projects: Projects = {
       image: "/projects/Kayro.jpeg",
       images: ["/projects/kayrocap.png"],
       tags: ["Open Source", "Workspace", "Markdown", "In Progress"],
+      kinds: ["web"],
       link: "https://kayro-omega.vercel.app/",
       gridSize: "wide",
       detailedDescription:
@@ -87,6 +93,7 @@ export const projects: Projects = {
       image: "/projects/ARES.png",
       images: ["/projects/AresDashboard.png"],
       tags: ["Python", "FastAPI", "React", "TypeScript", "AI", "Motion Kit"],
+      kinds: ["web", "backend"],
       link: "https://ares-emergencias.vercel.app/",
       gridSize: "wide",
       detailedDescription:
@@ -111,6 +118,7 @@ export const projects: Projects = {
         "Marketing landing page for the NewMedicLife clinic system. UI/UX focused with GSAP animations, React, and Tailwind.",
       image: "/projects/MedicLife.jpeg",
       tags: ["React", "Tailwind", "GSAP", "UI/UX"],
+      kinds: ["web"],
       link: "https://mediclife.vercel.app/",
       gridSize: "wide",
       detailedDescription:
@@ -134,6 +142,7 @@ export const projects: Projects = {
       image: "/projects/MedicLife.jpeg",
       images: ["/projects/NewMedicLifecap.png"],
       tags: ["React", "TypeScript", "Tailwind", "MySQL"],
+      kinds: ["web"],
       link: "#",
       gridSize: "medium",
       detailedDescription:
@@ -157,6 +166,7 @@ export const projects: Projects = {
         "LLM-Optimized Object Notation: an open-source npm library that serializes JSON, CSV, XML and YAML into a token-efficient format for LLM pipelines.",
       image: "/projects/LOON.jpeg",
       tags: ["TypeScript", "Node.js", "npm", "LLM"],
+      kinds: ["library"],
       link: "https://www.npmjs.com/package/loon-core",
       gridSize: "wide",
       detailedDescription:
@@ -182,6 +192,7 @@ export const projects: Projects = {
       image: "/projects/WatchLt.jpeg",
       images: ["/projects/WatchLtCap.png"],
       tags: ["React", "Firebase", "Tailwind", "Vercel"],
+      kinds: ["web"],
       link: "https://watchlt.vercel.app/dashboard",
       gridSize: "wide",
       detailedDescription:
@@ -204,6 +215,7 @@ export const projects: Projects = {
         "24-hour hackathon project that optimizes package delivery logistics with a focus on sustainability.",
       image: "/projects/Ecosend.jpeg",
       tags: ["React", "Firebase", "Tailwind", "Hackathon"],
+      kinds: ["web"],
       link: "https://ecoflow-losmochis.vercel.app/",
       gridSize: "wide",
       detailedDescription:
@@ -227,6 +239,7 @@ export const projects: Projects = {
         "Clinic management system for doctors, patients, and appointments.",
       image: "/projects/MedicLife.jpeg",
       tags: ["PHP", "MySQL", "HTML", "CSS"],
+      kinds: ["web", "backend"],
       link: "#",
       gridSize: "small",
       detailedDescription:
@@ -250,6 +263,7 @@ export const projects: Projects = {
       image: "/projects/Venta en Ruta.jpeg",
       images: ["/projects/AppMovil.png"],
       tags: ["React Native", "Tailwind", "Mobile"],
+      kinds: ["mobile"],
       link: "#",
       gridSize: "medium",
       detailedDescription:
@@ -270,6 +284,7 @@ export const projects: Projects = {
         "React Native app for restaurants: table management, home delivery, product catalog, reports, cash drawer, Mercado Pago subscriptions, and printer integration.",
       image: "/projects/Foodero.jpeg",
       tags: ["React Native", "C#", "PostgreSQL", "Docker", "Tailwind CSS"],
+      kinds: ["mobile", "backend"],
       link: "#",
       gridSize: "wide",
       detailedDescription:
@@ -293,6 +308,7 @@ export const projects: Projects = {
         "Full-featured web point-of-sale system built at PuntoZeroweb. Handles sales, inventory, and reporting across multiple branches.",
       image: "/projects/PuntoZeroWeb.jpeg",
       tags: ["PHP", "MySQL", "Docker", "HTML", "CSS"],
+      kinds: ["web", "backend"],
       link: "#",
       gridSize: "wide",
       detailedDescription:
@@ -314,6 +330,7 @@ export const projects: Projects = {
         "Internal system for hotels to register check-ins and check-outs of tools and equipment across departments.",
       image: "/projects/WebHotel.jpeg",
       tags: ["React", "C#", "Tailwind CSS"],
+      kinds: ["web", "backend"],
       link: "#",
       gridSize: "medium",
       detailedDescription:
@@ -335,6 +352,7 @@ export const projects: Projects = {
         "Marketing landing page for the PuntoZeroweb POS system, presenting its features to potential clients.",
       image: "/projects/Puntozerolandingcap.png",
       tags: ["HTML", "CSS", "JavaScript"],
+      kinds: ["web"],
       link: "#",
       gridSize: "small",
       detailedDescription:
@@ -356,6 +374,7 @@ export const projects: Projects = {
       image: "/projects/PZWEBFacturacion.jpeg",
       images: ["/projects/Facturacionenlinea1.png", "/projects/Facturacion en linea 2.png"],
       tags: ["React", "TypeScript", "MySQL"],
+      kinds: ["web"],
       link: "#",
       gridSize: "medium",
       detailedDescription:
@@ -379,6 +398,7 @@ export const projects: Projects = {
         "Kit de animación publicado en npm: recetas GSAP, componentes accesibles, 19 temas y efectos WebGL opcionales para vanilla, Astro y React.",
       image: "/projects/MotionKit.jpeg",
       tags: ["TypeScript", "GSAP", "React", "Astro", "npm", "WebGL"],
+      kinds: ["library"],
       link: "https://motion-kit-playground.vercel.app/",
       gridSize: "wide",
       detailedDescription:
@@ -406,6 +426,7 @@ export const projects: Projects = {
       image: "/projects/Kayro.jpeg",
       images: ["/projects/kayrocap.png"],
       tags: ["Open Source", "Workspace", "Markdown", "En proceso"],
+      kinds: ["web"],
       link: "https://kayro-omega.vercel.app/",
       gridSize: "wide",
       detailedDescription:
@@ -429,6 +450,7 @@ export const projects: Projects = {
       image: "/projects/ARES.png",
       images: ["/projects/AresDashboard.png"],
       tags: ["Python", "FastAPI", "React", "TypeScript", "IA", "Motion Kit"],
+      kinds: ["web", "backend"],
       link: "https://ares-emergencias.vercel.app/",
       gridSize: "wide",
       detailedDescription:
@@ -453,6 +475,7 @@ export const projects: Projects = {
         "Landing page de marketing para el sistema de clínicas NewMedicLife. Enfocada en UI/UX con animaciones GSAP, React y Tailwind.",
       image: "/projects/MedicLife.jpeg",
       tags: ["React", "Tailwind", "GSAP", "UI/UX"],
+      kinds: ["web"],
       link: "https://mediclife.vercel.app/",
       gridSize: "wide",
       detailedDescription:
@@ -476,6 +499,7 @@ export const projects: Projects = {
       image: "/projects/MedicLife.jpeg",
       images: ["/projects/NewMedicLifecap.png"],
       tags: ["React", "TypeScript", "Tailwind", "MySQL"],
+      kinds: ["web"],
       link: "#",
       gridSize: "medium",
       detailedDescription:
@@ -499,6 +523,7 @@ export const projects: Projects = {
         "LLM-Optimized Object Notation: librería open-source en npm que serializa JSON, CSV, XML y YAML a un formato eficiente en tokens para flujos con LLM.",
       image: "/projects/LOON.jpeg",
       tags: ["TypeScript", "Node.js", "npm", "LLM"],
+      kinds: ["library"],
       link: "https://www.npmjs.com/package/loon-core",
       gridSize: "wide",
       detailedDescription:
@@ -524,6 +549,7 @@ export const projects: Projects = {
       image: "/projects/WatchLt.jpeg",
       images: ["/projects/WatchLtCap.png"],
       tags: ["React", "Firebase", "Tailwind", "Vercel"],
+      kinds: ["web"],
       link: "https://watchlt.vercel.app/dashboard",
       gridSize: "wide",
       detailedDescription:
@@ -546,6 +572,7 @@ export const projects: Projects = {
         "Proyecto desarrollado en un hackatón de 24 h que optimiza la logística de envíos con enfoque sostenible.",
       image: "/projects/Ecosend.jpeg",
       tags: ["React", "Firebase", "Tailwind", "Hackathon"],
+      kinds: ["web"],
       link: "https://ecoflow-losmochis.vercel.app/",
       gridSize: "wide",
       detailedDescription:
@@ -569,6 +596,7 @@ export const projects: Projects = {
         "Sistema de gestión de consultorios médicos con control de pacientes, citas y médicos.",
       image: "/projects/MedicLife.jpeg",
       tags: ["PHP", "MySQL", "HTML", "CSS"],
+      kinds: ["web", "backend"],
       link: "https://github.com/PricedTuna/newMedicLife",
       gridSize: "small",
       detailedDescription:
@@ -592,6 +620,7 @@ export const projects: Projects = {
       image: "/projects/Venta en Ruta.jpeg",
       images: ["/projects/AppMovil.png"],
       tags: ["React Native", "Tailwind", "Mobile"],
+      kinds: ["mobile"],
       link: "#",
       gridSize: "medium",
       detailedDescription:
@@ -612,6 +641,7 @@ export const projects: Projects = {
         "App de gestión para restaurantes: mesas, domicilios, catálogo de productos, reportes, corte de caja, suscripciones con Mercado Pago e impresora.",
       image: "/projects/Foodero.jpeg",
       tags: ["React Native", "C#", "PostgreSQL", "Docker", "Tailwind CSS"],
+      kinds: ["mobile", "backend"],
       link: "#",
       gridSize: "wide",
       detailedDescription:
@@ -635,6 +665,7 @@ export const projects: Projects = {
         "Sistema de punto de venta web desarrollado en PuntoZeroweb. Maneja ventas, inventario y reportes en múltiples sucursales.",
       image: "/projects/PuntoZeroWeb.jpeg",
       tags: ["PHP", "MySQL", "Docker", "HTML", "CSS"],
+      kinds: ["web", "backend"],
       link: "#",
       gridSize: "wide",
       detailedDescription:
@@ -656,6 +687,7 @@ export const projects: Projects = {
         "Sistema interno para hoteles que registra entradas y salidas de herramientas y equipos por departamento.",
       image: "/projects/WebHotel.jpeg",
       tags: ["React", "C#", "Tailwind CSS"],
+      kinds: ["web", "backend"],
       link: "#",
       gridSize: "medium",
       detailedDescription:
@@ -677,6 +709,7 @@ export const projects: Projects = {
         "Landing page de marketing para el sistema POS de PuntoZeroweb, presentando sus funcionalidades a clientes potenciales.",
       image: "/projects/Puntozerolandingcap.png",
       tags: ["HTML", "CSS", "JavaScript"],
+      kinds: ["web"],
       link: "#",
       gridSize: "small",
       detailedDescription:
@@ -698,6 +731,7 @@ export const projects: Projects = {
       image: "/projects/PZWEBFacturacion.jpeg",
       images: ["/projects/Facturacionenlinea1.png", "/projects/Facturacion en linea 2.png"],
       tags: ["React", "TypeScript", "MySQL"],
+      kinds: ["web"],
       link: "#",
       gridSize: "medium",
       detailedDescription:

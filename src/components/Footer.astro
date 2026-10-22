@@ -11,7 +11,8 @@ const year = new Date().getFullYear();
 ---
 
 <!-- Transparent spacer at the end of the flow; scrolling through it reveals the fixed footer behind <main>. -->
-<div class="footer-phantom" data-footer-phantom aria-hidden="true"></div>
+<!-- Its tone reaches the header (Motion Kit contrast) once the footer sits under it. -->
+<div class="footer-phantom" data-footer-phantom data-mk-tone="inverse" aria-hidden="true"></div>
 
 <footer class="site-footer gutter" data-footer>
   <p class="site-footer__title" data-fit data-footer-title data-i18n="footer.title">{t('footer.title')}</p>
