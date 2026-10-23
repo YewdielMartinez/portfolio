@@ -1,0 +1,212 @@
+---
+import { t } from '../lib/t';
+---
+
+<button
+  type="button"
+  class="mk-button mk-button--primary assistant-launcher"
+  data-chat-open
+  aria-haspopup="dialog"
+  aria-controls="assistant-dialog"
+  aria-expanded="false"
+>
+  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" aria-hidden="true">
+    <path d="m12 3 2.4 6.6L21 12l-6.6 2.4L12 21l-2.4-6.6L3 12l6.6-2.4L12 3Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+  </svg>
+  <span data-i18n="chat.launcher">{t('chat.launcher')}</span>
+</button>
+
+<dialog id="assistant-dialog" class="mk-dialog assistant-dialog" data-mk-theme="blue" aria-labelledby="assistant-title" data-assistant-dialog>
+  <div class="mk-chat-background" data-chat-background aria-hidden="true"></div>
+  <header class="assistant__header" data-mk-part="header">
+    <h2 id="assistant-title" class="assistant__title" data-i18n="chat.title">{t('chat.title')}</h2>
+    <button class="mk-button mk-button--icon mk-button--tonal" type="button" data-mk-part="close" aria-label={t('chat.close')} data-i18n-attr="aria-label:chat.close">
+      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+    </button>
+  </header>
+  <div class="mk-chat assistant__chat" data-chat-root data-mk-no-drag>
+    <div data-mk-part="messages" aria-label={t('chat.messages')} data-i18n-attr="aria-label:chat.messages">
+      <div data-mk-message data-mk-role="assistant">
+        <span data-mk-text data-i18n="chat.intro">{t('chat.intro')}</span>
+      </div>
+      <div class="assistant__suggestions" data-chat-suggestions>
+        {['suggestProjects', 'suggestStack', 'suggestContact'].map((key) => (
+          <button class="mk-chip" type="button" data-chat-suggestion data-i18n={`chat.${key}`}>{t(`chat.${key}`)}</button>
+        ))}
+      </div>
+    </div>
+    <form data-mk-part="composer" class="assistant__composer">
+      <textarea
+        data-mk-part="input"
+        rows="1"
+        maxlength="1200"
+        placeholder={t('chat.placeholder')}
+        aria-label={t('chat.placeholder')}
+        data-i18n-attr="placeholder:chat.placeholder;aria-label:chat.placeholder"
+      ></textarea>
+      <button type="submit" class="mk-button mk-button--icon" data-mk-part="send" aria-label={t('chat.send')} data-i18n-attr="aria-label:chat.send">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M12 19V5m-6 6 6-6 6 6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" /></svg>
+      </button>
+      <button type="button" class="mk-button mk-button--icon assistant__stop" data-chat-stop hidden aria-label={t('chat.stop')} data-i18n-attr="aria-label:chat.stop">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2" fill="currentColor" /></svg>
+      </button>
+    </form>
+    <p class="assistant__privacy" data-i18n="chat.privacy">{t('chat.privacy')}</p>
+    <span class="sr-only" role="status" data-chat-status></span>
+  </div>
+</dialog>
+
+<style is:global>
+  .assistant-launcher {
+    --mk-button-bg: var(--fg);
+    --mk-button-fg: var(--bg);
+    --mk-button-height: 48px;
+    position: fixed;
+    bottom: max(var(--gutter), env(safe-area-inset-bottom));
+    left: var(--gutter);
+    z-index: 40;
+    gap: 0.65rem;
+    padding-inline: 1.25rem;
+    box-shadow: var(--shadow-soft);
+    font: inherit;
+    font-size: 0.9375rem;
+  }
+
+  .mk-dialog.assistant-dialog {
+    --mk-dialog-bg: var(--md-sys-color-background);
+    --mk-text: var(--md-sys-color-on-surface);
+    --mk-muted: var(--md-sys-color-on-surface-variant);
+    position: fixed;
+    inset: auto auto var(--gutter) var(--gutter);
+    width: min(460px, 100vw - 2 * var(--gutter));
+    height: min(700px, 100dvh - 2 * var(--gutter));
+    max-height: none;
+    margin: 0;
+    color: var(--mk-text);
+    box-shadow: var(--shadow);
+  }
+
+  .assistant-dialog::backdrop {
+    background: rgb(0 0 0 / 0.25);
+    backdrop-filter: none;
+  }
+
+  .dark .assistant-dialog::backdrop {
+    background: rgb(0 0 0 / 0.6);
+  }
+
+  .assistant-dialog [hidden] {
+    display: none !important;
+  }
+
+  .assistant-dialog .assistant__header {
+    position: relative;
+    z-index: 1;
+    align-items: center;
+    padding: 1.5rem;
+  }
+
+  .assistant__title {
+    font-size: 1.5rem;
+    font-weight: 400;
+    letter-spacing: -0.035em;
+    line-height: 1.1;
+  }
+
+  .assistant-dialog [data-mk-part='close'] {
+    width: 44px;
+    height: 44px;
+    background: color-mix(in srgb, var(--md-sys-color-background) 40%, transparent);
+    color: inherit;
+    backdrop-filter: blur(16px);
+  }
+
+  .assistant__chat.mk-chat {
+    --mk-chat-radius: 0;
+    --mk-chat-bubble-radius: 1.5rem;
+    z-index: 1;
+    flex: 1;
+  }
+
+  .assistant-dialog > [data-chat-background] {
+    z-index: 0;
+  }
+
+  .assistant__chat [data-mk-part='messages'] {
+    gap: 1rem;
+    margin: 0.5rem;
+    padding: 0.75rem 0.5rem 1.5rem;
+    mask-image: none;
+    scrollbar-width: thin;
+    scrollbar-color: var(--muted) transparent;
+    overflow-anchor: none;
+  }
+
+  .assistant__chat [data-mk-message] {
+    max-width: 94%;
+    padding: 1rem 1.15rem;
+    font-weight: 400;
+    line-height: 1.4;
+  }
+
+  .assistant__chat a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .assistant__suggestions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .assistant__suggestions .mk-chip {
+    height: auto;
+    min-height: 44px;
+    padding: 0.6rem 0.9rem;
+    border: 1px solid var(--md-sys-color-outline-variant);
+    background: transparent;
+    color: var(--md-sys-color-on-background);
+    font: inherit;
+    font-size: 0.875rem;
+    white-space: normal;
+    text-align: left;
+  }
+
+  .assistant__chat [data-mk-part='composer'] textarea {
+    max-height: 40dvh;
+  }
+
+  .assistant__chat .assistant__stop {
+    width: 64px;
+    height: 64px;
+    flex: none;
+    border-radius: 32px;
+    background: color-mix(in srgb, var(--md-sys-color-background) 40%, transparent);
+    color: inherit;
+    backdrop-filter: blur(16px);
+  }
+
+  .assistant__privacy {
+    position: relative;
+    z-index: 1;
+    padding: 0.75rem 1.25rem 1.25rem;
+    font-size: 0.6875rem;
+    line-height: 1.3;
+    color: var(--mk-muted);
+    text-align: center;
+  }
+
+  @media (max-width: 679px) {
+    .mk-dialog.assistant-dialog {
+      inset: 0;
+      width: 100vw;
+      height: 100dvh;
+      border-radius: 0;
+    }
+
+    .assistant__privacy {
+      padding-bottom: max(1rem, env(safe-area-inset-bottom));
+    }
+  }
+</style>

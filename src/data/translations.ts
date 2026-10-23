@@ -84,10 +84,32 @@ export interface Translation {
     success: string;
     error: string;
     invalid: string;
+    nameHint: string;
+    emailHint: string;
+    messageHint: string;
+    direct: string;
   };
   footer: {
     title: string;
     rights: string;
+  };
+  chat: {
+    launcher: string;
+    title: string;
+    intro: string;
+    messages: string;
+    placeholder: string;
+    send: string;
+    stop: string;
+    close: string;
+    thinking: string;
+    stopped: string;
+    error: string;
+    rateLimit: string;
+    suggestProjects: string;
+    suggestStack: string;
+    suggestContact: string;
+    privacy: string;
   };
   settings: {
     open: string;
@@ -180,6 +202,28 @@ export const translations: Record<Lang, Translation> = {
       success: "Message sent. I'll get back to you soon.",
       error: 'The message could not be sent. Write to me at yewdiel211@gmail.com.',
       invalid: 'Check the highlighted fields.',
+      nameHint: 'Enter your name (at least 2 characters).',
+      emailHint: 'Enter a valid email so I can reply.',
+      messageHint: 'Tell me a little about your idea (at least 10 characters).',
+      direct: 'Prefer email? ',
+    },
+    chat: {
+      launcher: 'Ask about my work',
+      title: 'Get to know my work.',
+      intro: "Hi! I'm the AI assistant for Yewdiel's portfolio. Ask me about his projects, experience or tools, and I'll help you find your way around.",
+      messages: 'Conversation with the portfolio assistant',
+      placeholder: 'Write a message…',
+      send: 'Send question',
+      stop: 'Stop response',
+      close: 'Close assistant',
+      thinking: 'Looking through the portfolio…',
+      stopped: 'Response stopped.',
+      error: 'I could not complete the response. Try again, or use the contact form to reach Yewdiel.',
+      rateLimit: 'There have been several questions in a short time. Please try again in a minute.',
+      suggestProjects: 'What projects has he built?',
+      suggestStack: 'What technologies does he use?',
+      suggestContact: 'How can I contact him?',
+      privacy: 'AI answers from this portfolio. Questions are processed by Groq.',
     },
     footer: {
       title: 'Contact',
@@ -274,6 +318,28 @@ export const translations: Record<Lang, Translation> = {
       success: 'Mensaje enviado. Te responderé pronto.',
       error: 'No se pudo enviar el mensaje. Escríbeme a yewdiel211@gmail.com.',
       invalid: 'Revisa los campos marcados.',
+      nameHint: 'Escribe tu nombre (al menos 2 caracteres).',
+      emailHint: 'Escribe un email válido para poder responderte.',
+      messageHint: 'Cuéntame un poco de tu idea (al menos 10 caracteres).',
+      direct: '¿Prefieres escribirme? ',
+    },
+    chat: {
+      launcher: 'Pregúntame',
+      title: 'Conoce mi trabajo.',
+      intro: '¡Hola! Soy el asistente de IA del portfolio de Yewdiel. Pregúntame sobre sus proyectos, experiencia o herramientas y te ayudo a explorar su trabajo.',
+      messages: 'Conversación con el asistente del portfolio',
+      placeholder: 'Escribe un mensaje…',
+      send: 'Enviar pregunta',
+      stop: 'Detener respuesta',
+      close: 'Cerrar asistente',
+      thinking: 'Revisando el portfolio…',
+      stopped: 'Respuesta detenida.',
+      error: 'No pude completar la respuesta. Inténtalo de nuevo o usa el formulario para contactar a Yewdiel.',
+      rateLimit: 'Hubo varias preguntas en poco tiempo. Inténtalo de nuevo en un minuto.',
+      suggestProjects: '¿Qué proyectos ha desarrollado?',
+      suggestStack: '¿Qué tecnologías utiliza?',
+      suggestContact: '¿Cómo puedo contactarlo?',
+      privacy: 'Respuestas de IA basadas en este portfolio. Groq procesa las preguntas.',
     },
     footer: {
       title: 'Contacto',

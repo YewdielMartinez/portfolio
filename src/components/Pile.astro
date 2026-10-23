@@ -23,7 +23,7 @@ const transforms = pileLayers(layers.length, index);
 
 <button
   type="button"
-  class="pile"
+  class="pile project-card mk-button--roll"
   data-project={index}
   data-mk-cursor={t('work.view')}
   data-mk-cursor-shape="circle"
@@ -59,7 +59,9 @@ const transforms = pileLayers(layers.length, index);
     })}
   </span>
   <span class="pile__caption t-label">
-    <span data-mk-shared="title" data-i18n={`projects.${index}.title`}>{project.title}</span>
+    <span class="project-card__label">
+      <span class="mk-roll" data-project-title data-text={project.title} data-i18n={`projects.${index}.title`} data-i18n-attr={`data-text:projects.${index}.title`}>{project.title}</span>
+    </span>
     <span class="text-muted" data-i18n={`projects.${index}.year`}>{project.year}</span>
   </span>
 </button>
@@ -68,6 +70,7 @@ const transforms = pileLayers(layers.length, index);
   /* Stack recipe from spencergabor.com (GridEntry, data-v-09e57cb3) */
   .pile {
     display: grid;
+    grid-template-columns: minmax(0, 1fr);
     gap: 2.25rem;
     width: 100%;
     padding: 0;
@@ -143,8 +146,20 @@ const transforms = pileLayers(layers.length, index);
 
   .pile__caption {
     display: flex;
+    min-width: 0;
     justify-content: space-between;
     gap: 1rem;
+  }
+
+  @media (max-width: 479px) {
+    .pile__caption {
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .pile__caption > .project-card__label {
+      flex: 0 0 100%;
+    }
   }
 
   @media (any-hover: hover) {

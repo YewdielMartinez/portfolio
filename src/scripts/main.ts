@@ -16,6 +16,8 @@ import { initContactForm } from './ui/contact-form';
 import { initToaster } from './ui/toaster';
 import { initArchiveFilters } from './ui/archive-filters';
 import { initCursors } from './ui/cursor';
+import { initPortfolioEffects } from './motion/portfolio-effects';
+import { initPortfolioChat } from './ui/portfolio-chat';
 
 const root = document.documentElement;
 
@@ -31,6 +33,7 @@ initToaster();
 initSettings();
 initContactForm();
 initProjectDialog();
+initPortfolioChat();
 initSectionMenu();
 
 const fontsReady = Promise.race([document.fonts.ready, new Promise((resolve) => setTimeout(resolve, 1500))]);
@@ -39,6 +42,7 @@ fontsReady.then(() => {
   initFitText();
   initWords();
   initFlows();
+  initPortfolioEffects();
 
   const hero = document.querySelector<HTMLElement>('[data-hero-cards]');
   if (hero) initHeroCards(hero);

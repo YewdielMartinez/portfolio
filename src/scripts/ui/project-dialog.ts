@@ -1,12 +1,12 @@
 import { createDialog, toast } from '@yewdiel21/motion-kit';
 import { applyI18n, getLang } from '../i18n';
 import { translations } from '../../data/translations';
+import { createProjectTitleTransition } from '../motion/project-title';
 
 /*
  * Fill the shared project dialog from its <template> and open it with Motion Kit's
- * dialog: the surface grows out of the clicked card while the card's title
- * (data-mk-shared="title") flies into the heading, it folds back on close, and on
- * touch screens it can be dragged down to dismiss.
+ * dialog: the surface grows out of the clicked card while its title travels into
+ * the heading. Both return on close; touch screens can drag down to dismiss.
  */
 export function initProjectDialog() {
   const dialog = document.querySelector<HTMLDialogElement>('[data-project-dialog]');
@@ -14,6 +14,7 @@ export function initProjectDialog() {
   if (!dialog || !content) return;
 
   const kit = createDialog(dialog, { triggers: false });
+  const title = createProjectTitleTransition();
 
   // With a mouse or trackpad, dragging and pulling the wheel past the top would close
   // a long, scrolling dialog by accident: there it closes with Esc, the backdrop or ✕.
@@ -31,6 +32,14 @@ export function initProjectDialog() {
     content!.replaceChildren(template.content.cloneNode(true));
     content!.scrollTop = 0;
     applyI18n(content!);
+    // Measure the final heading before Motion Kit transforms the surface and body.
+    title.reset();
+    trigger.setAttribute('data-project-opening', '');
+    dialog!.showModal();
+    const source = trigger.querySelector<HTMLElement>('[data-project-title]');
+    const target = content!.querySelector<HTMLElement>('[data-project-title]');
+    if (source && target) title.open(source, target);
+    trigger.removeAttribute('data-project-opening');
     kit.open(trigger);
   }
 
@@ -41,6 +50,7 @@ export function initProjectDialog() {
 
   // The closing copy is built from the markup, which has no scroll position: carry it over.
   dialog.addEventListener('mk:close', () => {
+    title.close();
     const y = content.scrollTop;
     const article = content.firstElementChild as HTMLElement | null;
     if (y && article) article.style.translate = `0 ${-y}px`;

@@ -2,6 +2,9 @@
   "name": "portfolio",
   "type": "module",
   "version": "0.0.1",
+  "engines": {
+    "node": ">=22.23.4"
+  },
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
@@ -9,13 +12,18 @@
     "astro": "astro",
     "test": "node --test \"src/**/*.test.ts\""
   },
+  "overrides": {
+    "path-to-regexp": "^6.3.0"
+  },
   "dependencies": {
+    "@astrojs/vercel": "^11.0.16",
     "@emailjs/browser": "^4.4.1",
-    "@tailwindcss/vite": "^4.1.16",
-    "@vercel/analytics": "^1.5.0",
+    "@tailwindcss/vite": "^4.3.3",
+    "@vercel/analytics": "^1.6.1",
     "@yewdiel21/motion-kit": "^0.9.1",
-    "astro": "^6.3.3",
+    "astro": "^7.4.2",
+    "groq-sdk": "^1.6.0",
     "gsap": "^3.15.0",
-    "tailwindcss": "^4.1.16"
+    "tailwindcss": "^4.3.3"
   }
 }

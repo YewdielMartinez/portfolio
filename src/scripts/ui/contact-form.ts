@@ -11,6 +11,7 @@ export function initContactForm() {
   const button = form?.querySelector<HTMLButtonElement>('[data-send]');
   const label = button?.querySelector<HTMLElement>('[data-i18n]');
   const sent = form?.querySelector<HTMLElement>('[data-sent]');
+  const status = form?.querySelector<HTMLElement>('[data-contact-status]');
   if (!section || !form || !button || !label || !sent) return;
 
   const { publicKey = '', templateId = '', serviceId = '' } = section.dataset;
@@ -27,15 +28,24 @@ export function initContactForm() {
   /** Mark invalid fields; re-marking replays the kit's vibration. */
   const validate = () => {
     const invalid = fields.filter((field) => !field.checkValidity());
-    for (const field of fields) field.removeAttribute('aria-invalid');
+    for (const field of fields) {
+      field.removeAttribute('aria-invalid');
+      field.closest('label')?.querySelector<HTMLElement>('[data-field-hint]')?.setAttribute('hidden', '');
+    }
     void form.offsetWidth;
-    for (const field of invalid) field.setAttribute('aria-invalid', 'true');
+    for (const field of invalid) {
+      field.setAttribute('aria-invalid', 'true');
+      field.closest('label')?.querySelector<HTMLElement>('[data-field-hint]')?.removeAttribute('hidden');
+    }
     return invalid;
   };
 
   form.addEventListener('input', (e) => {
     const field = e.target as Field;
-    if (field.hasAttribute('aria-invalid') && field.checkValidity()) field.removeAttribute('aria-invalid');
+    if (field.hasAttribute('aria-invalid') && field.checkValidity()) {
+      field.removeAttribute('aria-invalid');
+      field.closest('label')?.querySelector<HTMLElement>('[data-field-hint]')?.setAttribute('hidden', '');
+    }
   });
 
   const celebrate = () => {
@@ -51,6 +61,7 @@ export function initContactForm() {
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
+    if (button.disabled) return;
     const copy = translations[getLang()].contact;
     const invalid = validate();
     if (invalid.length) {
@@ -64,18 +75,25 @@ export function initContactForm() {
     }
 
     button.disabled = true;
+    form.setAttribute('aria-busy', 'true');
+    button.classList.add('mk-loading');
+    if (status) { status.textContent = copy.sending; status.removeAttribute('data-error'); }
     labelAs('contact.sending');
     try {
       const { default: emailjs } = await import('@emailjs/browser');
       await emailjs.sendForm(serviceId, templateId, form, { publicKey });
       form.reset();
       toast(translations[getLang()].contact.success, { origin: button });
+      if (status) status.textContent = translations[getLang()].contact.success;
       celebrate();
     } catch (error) {
       console.error('Contact form failed', error);
       toast(translations[getLang()].contact.error, { tone: 'error', duration: 8000 });
+      if (status) { status.textContent = translations[getLang()].contact.error; status.setAttribute('data-error', ''); }
     } finally {
       button.disabled = false;
+      form.removeAttribute('aria-busy');
+      button.classList.remove('mk-loading');
       labelAs('contact.send');
     }
   });

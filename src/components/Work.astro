@@ -29,7 +29,7 @@ const filters = ['all', ...kinds.filter((kind) => all.some(({ project }) => proj
     data-i18n-attr="aria-label:work.carousel;data-mk-cursor:work.cursorDrag"
   >
     {featured.map(({ project, index }, k) => (
-      <button type="button" class="carousel__slide" data-project={index} style={`--k:${k}`}>
+      <button type="button" class="carousel__slide project-card mk-button--roll" data-project={index} style={`--k:${k}`}>
         <span class="carousel__media">
           <ProjectImage
             src={project.image}
@@ -39,7 +39,9 @@ const filters = ['all', ...kinds.filter((kind) => all.some(({ project }) => proj
           />
         </span>
         <span class="carousel__title t-label">
-          <span data-mk-shared="title" data-i18n={`projects.${index}.title`}>{project.title}</span>
+          <span class="project-card__label">
+            <span class="mk-roll" data-project-title data-text={project.title} data-i18n={`projects.${index}.title`} data-i18n-attr={`data-text:projects.${index}.title`}>{project.title}</span>
+          </span>
           <span class="text-muted" data-i18n={`projects.${index}.year`}>{project.year}</span>
         </span>
       </button>

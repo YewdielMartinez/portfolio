@@ -85,6 +85,39 @@
   --mk-cursor-circle: 88px;
 }
 
+/* Keep the card's surface and shadows; Motion Kit rolls its caption. */
+.project-card.mk-button--roll,
+.project-card.mk-button--roll:hover {
+  overflow: visible;
+  background: none;
+  box-shadow: none;
+  color: inherit;
+}
+
+.project-card__label {
+  display: inline-block;
+  min-width: 0;
+  overflow: hidden;
+  padding-block: 0.1em;
+  margin-block: -0.1em;
+}
+
+.project-card__label .mk-roll {
+  max-width: 100%;
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .project-card:focus-visible .mk-roll {
+    transform: translateY(-150%);
+  }
+}
+
+.project-card[data-project-opening] .mk-roll,
+.project-card .mk-roll[data-project-title-hidden] {
+  transform: none;
+  transition: none;
+}
+
 /* recipes/slot-text/slot-text.css (not exported on its own by the package) */
 .mk-slot {
   display: inline;

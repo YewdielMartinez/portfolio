@@ -7,7 +7,7 @@ import { t } from '../lib/t';
 
 <section id="about" class="sheet gutter" data-section-label="nav.about" tabindex="-1">
   <div class="about">
-    <div class="about__photo-wrap" data-pop>
+    <div class="about__photo-wrap" data-mk="parallax">
       <Image
         src={avatar}
         alt="Yewdiel Medina"
@@ -15,13 +15,14 @@ import { t } from '../lib/t';
         sizes="(min-width: 768px) 36vw, 100vw"
         format="webp"
         class="about__photo"
+        data-mk-parallax-target
       />
     </div>
     <div class="about__text">
       <SheetTitle line1="about.hello" line2="about.name" muted={false} />
-      <div class="about__copy" data-flow>
-        <p class="t-body" data-i18n="about.bio">{t('about.bio')}</p>
-        <p class="t-body" data-i18n="about.bio2">{t('about.bio2')}</p>
+      <div class="about__copy">
+        <p class="t-body" data-mk="fill-text" data-i18n="about.bio">{t('about.bio')}</p>
+        <p class="t-body" data-mk="fill-text" data-i18n="about.bio2">{t('about.bio2')}</p>
       </div>
     </div>
   </div>
@@ -59,4 +60,5 @@ import { t } from '../lib/t';
     gap: 1.25em;
     margin-top: clamp(2.5rem, 7vh, 5.5rem);
   }
+
 </style>

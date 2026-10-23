@@ -1,6 +1,7 @@
 ---
 import SheetTitle from './SheetTitle.astro';
 import { t } from '../lib/t';
+import { personalInfo } from '../data/personal';
 
 // Non-PUBLIC_ vars are read at build time and handed to the client through data attributes.
 const PUBLIC_KEY = import.meta.env.PUBLIC_KEY;
@@ -23,15 +24,18 @@ const SERVICE_ID = import.meta.env.SERVICE_ID;
     <form id="contact-form" class="contact__form" data-flow novalidate>
       <label class="mk-field">
         <span class="mk-field__label" data-i18n="contact.name">{t('contact.name')}</span>
-        <input name="name" type="text" required autocomplete="name" />
+        <input name="name" type="text" required minlength="2" maxlength="100" autocomplete="name" aria-describedby="contact-name-hint" />
+        <span id="contact-name-hint" class="mk-field__hint" data-field-hint hidden data-i18n="contact.nameHint">{t('contact.nameHint')}</span>
       </label>
       <label class="mk-field">
         <span class="mk-field__label" data-i18n="contact.email">{t('contact.email')}</span>
-        <input name="email" type="email" required autocomplete="email" />
+        <input name="email" type="email" required maxlength="254" autocomplete="email" aria-describedby="contact-email-hint" />
+        <span id="contact-email-hint" class="mk-field__hint" data-field-hint hidden data-i18n="contact.emailHint">{t('contact.emailHint')}</span>
       </label>
       <label class="mk-field field--wide">
         <span class="mk-field__label" data-i18n="contact.message">{t('contact.message')}</span>
-        <textarea name="message" rows="4" required></textarea>
+        <textarea name="message" rows="4" required minlength="10" maxlength="5000" aria-describedby="contact-message-hint"></textarea>
+        <span id="contact-message-hint" class="mk-field__hint" data-field-hint hidden data-i18n="contact.messageHint">{t('contact.messageHint')}</span>
       </label>
       <div class="contact__actions field--wide">
         <button type="submit" class="mk-button mk-button--roll contact__send" data-send>
@@ -49,6 +53,11 @@ const SERVICE_ID = import.meta.env.SERVICE_ID;
           </svg>
         </span>
       </div>
+      <p class="contact__status t-small field--wide" role="status" aria-live="polite" data-contact-status></p>
+      <p class="t-small text-muted field--wide">
+        <span data-i18n="contact.direct">{t('contact.direct')}</span>
+        <a class="link" href={`mailto:${personalInfo.email}`}>{personalInfo.email}</a>
+      </p>
     </form>
   </div>
 </section>
@@ -107,6 +116,14 @@ const SERVICE_ID = import.meta.env.SERVICE_ID;
     gap: 1rem 1.5rem;
   }
 
+  .contact__status:empty {
+    display: none;
+  }
+
+  .contact__status[data-error] {
+    color: var(--mk-error);
+  }
+
   .contact__send {
     --mk-button-height: 3.25rem;
     --mk-button-padding: 1.75rem;
@@ -114,6 +131,10 @@ const SERVICE_ID = import.meta.env.SERVICE_ID;
     font-size: 1rem;
     font-weight: 400;
     letter-spacing: 0;
+  }
+
+  .contact__send.mk-loading::before {
+    display: block;
   }
 
   /* The kit's roll travel (150 %) fits a 40 px button; this one is taller. */

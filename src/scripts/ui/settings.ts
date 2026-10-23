@@ -27,6 +27,7 @@ export function initSettings() {
   root.querySelector('[data-theme-toggle]')?.addEventListener('click', () => {
     const apply = () => {
       const dark = document.documentElement.classList.toggle('dark');
+      document.documentElement.dataset.mkMode = dark ? 'dark' : 'light';
       try {
         localStorage.setItem('theme', dark ? 'dark' : 'light');
       } catch {
