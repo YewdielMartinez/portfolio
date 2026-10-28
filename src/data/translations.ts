@@ -59,6 +59,7 @@ export interface Translation {
       mobile: string;
       backend: string;
       library: string;
+      ai: string;
     };
   };
   dialog: {
@@ -134,28 +135,28 @@ export const translations: Record<Lang, Translation> = {
     },
     cover: {
       presentedBy: 'Presented by: Yewdiel Medina',
-      role: 'Software Developer',
+      role: 'Full-Stack .NET & AI Developer',
       location: 'Los Mochis, Mexico',
       portfolio: 'Portfolio',
     },
     about: {
       hello: 'Hello!',
       name: "I'm Yewdiel Medina",
-      bio: "I'm a full-stack software developer based in Los Mochis, Sinaloa. I specialize in React, React Native, .NET and PHP: polished web interfaces, mobile apps and the backend services behind them.",
-      bio2: 'Beyond the code, I work on CI/CD pipelines and server administration and support project management, so products make it from idea to production. I am studying Software Engineering while shipping real-world products, and I publish my own tools on npm, like LOON and Motion Kit.',
+      bio: "I'm a full-stack software developer based in Los Mochis, Sinaloa. I specialize in C# and .NET with React and Angular, and I bring generative AI into business applications: LLM integrations, RAG pipelines with embeddings and semantic search, and Python services orchestrated with LangChain and LlamaIndex.",
+      bio2: 'I design REST APIs with ASP.NET Core and SQL Server databases with stored procedures, work with vector stores such as pgvector, Qdrant and Chroma, and ship through Azure DevOps repositories and CI/CD pipelines. I work with clients and business teams from requirements to production, I am studying Software Engineering, and I publish my own tools on npm, like LOON and Motion Kit.',
     },
     services: {
       title1: 'What I do?',
       title2: '(and love doing)',
-      body: 'I build clear, fast interfaces — sometimes bold, sometimes minimal, always purposeful. I enjoy turning complex workflows into products people understand at a glance, from the first sketch to production.',
-      items: ['Frontend', 'Mobile apps', 'Backend', 'UI/UX', 'APIs', 'Landing pages'],
+      body: 'I build business applications end to end — .NET APIs, React and Angular interfaces, SQL Server data — and add generative AI where it pays off: assistants that answer from company information, semantic search and automated processes.',
+      items: ['.NET backend', 'REST APIs', 'Generative AI', 'Semantic search', 'Frontend', 'Mobile apps'],
     },
     tools: {
       title1: 'Tools',
       title2: "I'm fluent in.",
       core: 'Specialized in',
       extra: 'Complemented with',
-      outro: 'and I explore AI tools to bring them into design, development and delivery.',
+      outro: 'plus AI-assisted workflows across design, development and delivery.',
     },
     experience: {
       title1: 'Experience',
@@ -177,6 +178,7 @@ export const translations: Record<Lang, Translation> = {
         mobile: 'Mobile',
         backend: 'Backend',
         library: 'Libraries',
+        ai: 'AI',
       },
     },
     dialog: {
@@ -250,28 +252,28 @@ export const translations: Record<Lang, Translation> = {
     },
     cover: {
       presentedBy: 'Presentado por: Yewdiel Medina',
-      role: 'Desarrollador de Software',
+      role: 'Desarrollador Full-Stack .NET e IA',
       location: 'Los Mochis, México',
       portfolio: 'Portfolio',
     },
     about: {
       hello: '¡Hola!',
       name: 'Soy Yewdiel Medina',
-      bio: 'Soy desarrollador de software full-stack, radicado en Los Mochis, Sinaloa. Me especializo en React, React Native, .NET y PHP: interfaces web pulidas, apps móviles y los servicios backend que las sostienen.',
-      bio2: 'Además del código, participo en pipelines de CI/CD y en la administración de servidores, y apoyo en la gestión de proyectos para llevar los productos de la idea a producción. Estudio Ingeniería de Software mientras desarrollo productos reales y publico mis propias herramientas en npm, como LOON y Motion Kit.',
+      bio: 'Soy desarrollador de software full-stack, radicado en Los Mochis, Sinaloa. Me especializo en C# y .NET con React y Angular, y llevo la IA generativa a aplicaciones empresariales: integración de LLMs, arquitecturas RAG con embeddings y búsqueda semántica, y servicios en Python orquestados con LangChain y LlamaIndex.',
+      bio2: 'Diseño APIs REST con ASP.NET Core y bases de datos SQL Server con procedimientos almacenados, trabajo con bases vectoriales como pgvector, Qdrant y Chroma, y entrego mediante repositorios y pipelines de CI/CD en Azure DevOps. Trabajo con clientes y equipos de negocio desde los requisitos hasta producción, estudio Ingeniería de Software y publico mis propias herramientas en npm, como LOON y Motion Kit.',
     },
     services: {
       title1: '¿Qué hago?',
       title2: '(y me encanta hacer)',
-      body: 'Construyo interfaces claras y rápidas — a veces audaces, a veces mínimas, siempre con propósito. Disfruto convertir flujos complejos en productos que se entienden de un vistazo, del primer boceto a producción.',
-      items: ['Frontend', 'Apps móviles', 'Backend', 'UI/UX', 'APIs', 'Landing pages'],
+      body: 'Construyo aplicaciones empresariales de punta a punta — APIs en .NET, interfaces en React y Angular, datos en SQL Server — y sumo IA generativa donde aporta: asistentes que responden con la información de la empresa, búsqueda semántica y procesos automatizados.',
+      items: ['Backend .NET', 'APIs REST', 'IA generativa', 'Búsqueda semántica', 'Frontend', 'Apps móviles'],
     },
     tools: {
       title1: 'Herramientas',
       title2: 'que domino.',
       core: 'Me especializo en',
       extra: 'Lo complemento con',
-      outro: 'y exploro herramientas de IA para integrarlas en diseño, desarrollo y entrega.',
+      outro: 'además de flujos asistidos por IA en diseño, desarrollo y entrega.',
     },
     experience: {
       title1: 'Experiencia',
@@ -293,6 +295,7 @@ export const translations: Record<Lang, Translation> = {
         mobile: 'Móvil',
         backend: 'Backend',
         library: 'Librerías',
+        ai: 'IA',
       },
     },
     dialog: {

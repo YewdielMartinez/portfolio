@@ -12,8 +12,8 @@ import '@yewdiel21/motion-kit/css/themes/blue';
 import Analytics from '@vercel/analytics/astro';
 import '../styles/global.css';
 
-const TITLE       = 'Yewdiel Medina | Software Developer';
-const DESCRIPTION = 'Full-stack software developer specializing in React, React Native, .NET and PHP. Explore web, mobile and backend projects, plus open tools like LOON and Motion Kit.';
+const TITLE       = 'Yewdiel Medina | Full-Stack .NET & AI Developer';
+const DESCRIPTION = 'Full-stack developer specializing in C#, .NET, React, Angular and SQL Server, and in generative AI: LLM integrations, RAG and semantic search with Python, LangChain and vector databases. Explore projects like ARES, LOON and Motion Kit.';
 const SITE_URL    = Astro.site?.href.replace(/\/$/, '') ?? 'https://yewdielmedina.dev';
 const OG_IMAGE    = `${SITE_URL}/avatar.jpg`;
 
@@ -22,7 +22,7 @@ const jsonLd = JSON.stringify([
     '@context': 'https://schema.org',
     '@type': 'Person',
     name: 'Yewdiel Medina',
-    jobTitle: 'Software Developer',
+    jobTitle: 'Full-Stack .NET & AI Developer',
     description: DESCRIPTION,
     url: SITE_URL,
     email: 'yewdiel211@gmail.com',
@@ -62,7 +62,7 @@ const jsonLd = JSON.stringify([
 		<meta property="og:title"       content={TITLE} />
 		<meta property="og:description" content={DESCRIPTION} />
 		<meta property="og:image"       content={OG_IMAGE} />
-		<meta property="og:image:alt"   content="Yewdiel Medina — Software Developer" />
+		<meta property="og:image:alt"   content="Yewdiel Medina — Full-Stack .NET &amp; AI Developer" />
 		<meta property="og:site_name"   content="Yewdiel Medina" />
 		<meta property="og:locale"      content="en_US" />
 
@@ -72,7 +72,7 @@ const jsonLd = JSON.stringify([
 		<meta name="twitter:title"       content={TITLE} />
 		<meta name="twitter:description" content={DESCRIPTION} />
 		<meta name="twitter:image"       content={OG_IMAGE} />
-		<meta name="twitter:image:alt"   content="Yewdiel Medina — Software Developer" />
+		<meta name="twitter:image:alt"   content="Yewdiel Medina — Full-Stack .NET &amp; AI Developer" />
 
 		<meta name="theme-color" content="#ffffff" />
 

@@ -9,7 +9,7 @@ const all = projects.en.map((project, index) => ({ project, index }));
 const featured = all.filter(({ project }) => project.image);
 
 // Archive filters: "all" plus every kind used by at least one project.
-const kinds = ['web', 'mobile', 'backend', 'library'] as const;
+const kinds = ['web', 'backend', 'ai', 'mobile', 'library'] as const;
 const filters = ['all', ...kinds.filter((kind) => all.some(({ project }) => project.kinds?.includes(kind)))];
 ---
 

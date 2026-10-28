@@ -1,7 +1,7 @@
 // Configuración de Proyectos
 // Agrega o modifica tus proyectos aquí
 
-export type ProjectKind = "web" | "mobile" | "backend" | "library";
+export type ProjectKind = "web" | "mobile" | "backend" | "library" | "ai";
 
 export interface Project {
   title: string;
@@ -34,7 +34,104 @@ export interface Projects {
 
 export const projects: Projects = {
   en: [
-    // 00 — Motion Kit
+    // 00 — ARES
+    {
+      title: "ARES",
+      description:
+        "Intelligent multi-agent system for emergency management: ambulances, fire units and patrols plan routes across a city with BFS, DFS, Dijkstra and A*.",
+      image: "/projects/ARES.png",
+      images: ["/projects/AresDashboard.png"],
+      tags: ["Python", "FastAPI", "React", "TypeScript", "AI", "Motion Kit"],
+      kinds: ["web", "backend", "ai"],
+      link: "https://ares-emergencias.vercel.app/",
+      gridSize: "wide",
+      detailedDescription:
+        "ARES is an Artificial Intelligence team project that simulates an emergency operations center. Six rational agents — two ambulances, two fire units and two patrols — move across a 30 × 23 urban grid while a coordinator assigns each incident by specialty, priority with aging and route cost. Routes are computed in Python with BFS, DFS, Dijkstra and A* behind a Strategy pattern, and replanned when streets get blocked. The engine runs on FastAPI with a clean layered architecture, and the React + TypeScript interface is built on Motion Kit: dock navigation, menus, multi-step dialogs, toasts, animated counters and selectable themes. The app compares the four algorithms by steps, cost, expanded nodes and compute time, and exports the results to CSV.",
+      features: [
+        "Six agents (ambulances, fire units, patrols) dispatched by specialty, priority and route cost",
+        "BFS, DFS, Dijkstra and A* in Python behind a Strategy pattern, with dynamic replanning around blocked streets",
+        "Live SVG city map with start, pause, step and 1×/2×/4× speeds, plus three reproducible scenarios",
+        "Algorithm comparison by steps, cost, expanded nodes and compute time, exported to CSV",
+        "React + TypeScript interface built on Motion Kit: dock, menus, step dialogs, toasts and themes",
+        "23 Python tests and 14 Playwright browser tests; frontend on Vercel, API on Render with Docker",
+      ],
+      demo: "https://ares-emergencias.vercel.app/",
+      github: "https://github.com/YewdielMartinez/ares-emergencias",
+      year: "2026",
+      role: "Full-Stack Developer (team project)",
+    },
+    // 01 — Foodero
+    {
+      title: "Foodero",
+      description:
+        "React Native app for restaurants: table management, home delivery, product catalog, reports, cash drawer, Mercado Pago subscriptions, and printer integration.",
+      image: "/projects/Foodero.jpeg",
+      tags: ["React Native", "C#", "PostgreSQL", "Docker", "Tailwind CSS"],
+      kinds: ["mobile", "backend"],
+      link: "#",
+      gridSize: "wide",
+      detailedDescription:
+        "Foodero is a full-featured restaurant management app built with React Native. I contributed to the UI implementation based on an existing design. The app covers the full operational lifecycle of a restaurant: table management, in-house and delivery sales, product and add-on registration, end-of-day cash drawer closing, subscription billing via Mercado Pago, user role management, and thermal printer integration for receipts.",
+      features: [
+        "Table management and order tracking",
+        "Home delivery and in-house sales flow",
+        "Product, complement, and add-on registration",
+        "Sales reports and cash drawer closing",
+        "Subscription sales with Mercado Pago integration",
+        "User management with role-based access",
+        "Thermal printer integration for receipts",
+      ],
+      year: "2024",
+      role: "Mobile Developer (UI Implementation)",
+    },
+    // 02 — PuntoZero Web Hotel
+    {
+      title: "PuntoZero Web Hotel",
+      description:
+        "Internal system for hotels to register check-ins and check-outs of tools and equipment across departments.",
+      image: "/projects/WebHotel.jpeg",
+      tags: ["React", "C#", "Tailwind CSS"],
+      kinds: ["web", "backend"],
+      link: "#",
+      gridSize: "medium",
+      detailedDescription:
+        "An internal management system developed for hotel operations, tracking the check-in and check-out of tools and equipment across departments. Built with a React frontend, a C# backend, and a clean Tailwind CSS interface designed for daily use by hotel staff.",
+      features: [
+        "Tool and equipment check-in / check-out tracking",
+        "Department-level inventory overview",
+        "Staff assignment and activity log",
+        "Search and filter by tool, department, or date",
+        "Fast, clean interface optimized for daily use",
+      ],
+      year: "2025",
+      role: "Full-Stack Developer",
+    },
+    // 03 — LOON (formerly TRON)
+    {
+      title: "LOON",
+      description:
+        "LLM-Optimized Object Notation: an open-source npm library that serializes JSON, CSV, XML and YAML into a token-efficient format for LLM pipelines.",
+      image: "/projects/LOON.jpeg",
+      tags: ["TypeScript", "Node.js", "npm", "LLM"],
+      kinds: ["library", "ai"],
+      link: "https://www.npmjs.com/package/loon-core",
+      gridSize: "wide",
+      detailedDescription:
+        "LOON (LLM-Optimized Object Notation) is a serialization library published on npm as loon-core. It turns structured data — JSON, CSV, XML, YAML and nested trees — into a compact, losslessly reversible format that cuts the tokens spent in LLM prompts and data pipelines. In a real 1,000-row retrieval session it used 64% fewer tokens than JSON and 47% fewer than TOON. It ships with a documentation site and an interactive playground.",
+      features: [
+        "Three modes: full for storage and transfer, llm for direct model reading, compact for small objects",
+        "Lossless round-trip back to the original JSON",
+        "Up to ~78% fewer tokens than JSON",
+        "Bridges for JSON, CSV, XML, YAML and nested trees",
+        "Prompt-cache friendly sessions and a CLI with --stats",
+      ],
+      demo: "https://tron-landing-page.vercel.app/",
+      npm: "https://www.npmjs.com/package/loon-core",
+      install: "npm i loon-core",
+      year: "2026",
+      role: "Creator & Maintainer",
+    },
+    // 04 — Motion Kit
     {
       title: "Motion Kit",
       description:
@@ -61,7 +158,7 @@ export const projects: Projects = {
       year: "2026",
       role: "Creator & Maintainer",
     },
-    // 01 — Kayro
+    // 05 — Kayro
     {
       title: "Kayro",
       description:
@@ -85,33 +182,7 @@ export const projects: Projects = {
       year: "2026",
       role: "Full-Stack Developer",
     },
-    // 02 — ARES
-    {
-      title: "ARES",
-      description:
-        "Intelligent multi-agent system for emergency management: ambulances, fire units and patrols plan routes across a city with BFS, DFS, Dijkstra and A*.",
-      image: "/projects/ARES.png",
-      images: ["/projects/AresDashboard.png"],
-      tags: ["Python", "FastAPI", "React", "TypeScript", "AI", "Motion Kit"],
-      kinds: ["web", "backend"],
-      link: "https://ares-emergencias.vercel.app/",
-      gridSize: "wide",
-      detailedDescription:
-        "ARES is an Artificial Intelligence team project that simulates an emergency operations center. Six rational agents — two ambulances, two fire units and two patrols — move across a 30 × 23 urban grid while a coordinator assigns each incident by specialty, priority with aging and route cost. Routes are computed in Python with BFS, DFS, Dijkstra and A* behind a Strategy pattern, and replanned when streets get blocked. The engine runs on FastAPI with a clean layered architecture, and the React + TypeScript interface is built on Motion Kit: dock navigation, menus, multi-step dialogs, toasts, animated counters and selectable themes. The app compares the four algorithms by steps, cost, expanded nodes and compute time, and exports the results to CSV.",
-      features: [
-        "Six agents (ambulances, fire units, patrols) dispatched by specialty, priority and route cost",
-        "BFS, DFS, Dijkstra and A* in Python behind a Strategy pattern, with dynamic replanning around blocked streets",
-        "Live SVG city map with start, pause, step and 1×/2×/4× speeds, plus three reproducible scenarios",
-        "Algorithm comparison by steps, cost, expanded nodes and compute time, exported to CSV",
-        "React + TypeScript interface built on Motion Kit: dock, menus, step dialogs, toasts and themes",
-        "23 Python tests and 14 Playwright browser tests; frontend on Vercel, API on Render with Docker",
-      ],
-      demo: "https://ares-emergencias.vercel.app/",
-      github: "https://github.com/YewdielMartinez/ares-emergencias",
-      year: "2026",
-      role: "Full-Stack Developer (team project)",
-    },
-    // 02 — MedicLife Landing
+    // 06 — MedicLife Landing
     {
       title: "MedicLife Landing",
       description:
@@ -134,7 +205,7 @@ export const projects: Projects = {
       year: "2025",
       role: "Frontend Developer",
     },
-    // 02 — NewMedicLife
+    // 07 — NewMedicLife
     {
       title: "NewMedicLife",
       description:
@@ -159,32 +230,7 @@ export const projects: Projects = {
       role: "Full-Stack Developer",
       video: "https://res.cloudinary.com/dp8yf8nxi/video/upload/q_auto,f_mp4/v1773789455/2026-03-17_16-04-07_qrui2b.mp4",
     },
-    // 03 — LOON (formerly TRON)
-    {
-      title: "LOON",
-      description:
-        "LLM-Optimized Object Notation: an open-source npm library that serializes JSON, CSV, XML and YAML into a token-efficient format for LLM pipelines.",
-      image: "/projects/LOON.jpeg",
-      tags: ["TypeScript", "Node.js", "npm", "LLM"],
-      kinds: ["library"],
-      link: "https://www.npmjs.com/package/loon-core",
-      gridSize: "wide",
-      detailedDescription:
-        "LOON (LLM-Optimized Object Notation) is a serialization library published on npm as loon-core. It turns structured data — JSON, CSV, XML, YAML and nested trees — into a compact, losslessly reversible format that cuts the tokens spent in LLM prompts and data pipelines. In a real 1,000-row retrieval session it used 64% fewer tokens than JSON and 47% fewer than TOON. It ships with a documentation site and an interactive playground.",
-      features: [
-        "Three modes: full for storage and transfer, llm for direct model reading, compact for small objects",
-        "Lossless round-trip back to the original JSON",
-        "Up to ~78% fewer tokens than JSON",
-        "Bridges for JSON, CSV, XML, YAML and nested trees",
-        "Prompt-cache friendly sessions and a CLI with --stats",
-      ],
-      demo: "https://tron-landing-page.vercel.app/",
-      npm: "https://www.npmjs.com/package/loon-core",
-      install: "npm i loon-core",
-      year: "2026",
-      role: "Creator & Maintainer",
-    },
-    // 04 — Watchlt
+    // 08 — Watchlt
     {
       title: "Watchlt",
       description:
@@ -208,7 +254,7 @@ export const projects: Projects = {
       year: "2025",
       role: "Frontend Developer",
     },
-    // 05 — EcoSend
+    // 09 — EcoSend
     {
       title: "EcoSend",
       description:
@@ -232,7 +278,7 @@ export const projects: Projects = {
       year: "2025",
       role: "Frontend Developer",
     },
-    // 06 — Medic Life
+    // 10 — Medic Life
     {
       title: "Medic Life",
       description:
@@ -255,7 +301,7 @@ export const projects: Projects = {
       year: "2024",
       role: "Full-Stack Developer",
     },
-    // 07 — Venta en Ruta app
+    // 11 — Venta en Ruta app
     {
       title: "Venta en Ruta app",
       description:
@@ -277,31 +323,7 @@ export const projects: Projects = {
       year: "2025",
       role: "Mobile Developer",
     },
-    // 08 — Foodero
-    {
-      title: "Foodero",
-      description:
-        "React Native app for restaurants: table management, home delivery, product catalog, reports, cash drawer, Mercado Pago subscriptions, and printer integration.",
-      image: "/projects/Foodero.jpeg",
-      tags: ["React Native", "C#", "PostgreSQL", "Docker", "Tailwind CSS"],
-      kinds: ["mobile", "backend"],
-      link: "#",
-      gridSize: "wide",
-      detailedDescription:
-        "Foodero is a full-featured restaurant management app built with React Native. I contributed to the UI implementation based on an existing design. The app covers the full operational lifecycle of a restaurant: table management, in-house and delivery sales, product and add-on registration, end-of-day cash drawer closing, subscription billing via Mercado Pago, user role management, and thermal printer integration for receipts.",
-      features: [
-        "Table management and order tracking",
-        "Home delivery and in-house sales flow",
-        "Product, complement, and add-on registration",
-        "Sales reports and cash drawer closing",
-        "Subscription sales with Mercado Pago integration",
-        "User management with role-based access",
-        "Thermal printer integration for receipts",
-      ],
-      year: "2024",
-      role: "Mobile Developer (UI Implementation)",
-    },
-    // 09 — PuntoZeroweb POS
+    // 12 — PuntoZeroweb POS
     {
       title: "PuntoZeroweb POS",
       description:
@@ -323,29 +345,7 @@ export const projects: Projects = {
       year: "2025",
       role: "Full-Stack Developer",
     },
-    // 10 — PuntoZero Web Hotel
-    {
-      title: "PuntoZero Web Hotel",
-      description:
-        "Internal system for hotels to register check-ins and check-outs of tools and equipment across departments.",
-      image: "/projects/WebHotel.jpeg",
-      tags: ["React", "C#", "Tailwind CSS"],
-      kinds: ["web", "backend"],
-      link: "#",
-      gridSize: "medium",
-      detailedDescription:
-        "An internal management system developed for hotel operations, tracking the check-in and check-out of tools and equipment across departments. Built with a React frontend, a C# backend, and a clean Tailwind CSS interface designed for daily use by hotel staff.",
-      features: [
-        "Tool and equipment check-in / check-out tracking",
-        "Department-level inventory overview",
-        "Staff assignment and activity log",
-        "Search and filter by tool, department, or date",
-        "Fast, clean interface optimized for daily use",
-      ],
-      year: "2025",
-      role: "Full-Stack Developer",
-    },
-    // 10 — PuntoZeroweb Landing
+    // 13 — PuntoZeroweb Landing
     {
       title: "PuntoZeroweb Landing",
       description:
@@ -366,7 +366,7 @@ export const projects: Projects = {
       year: "2025",
       role: "Frontend Developer",
     },
-    // 12 — PuntoZero Facturación en Línea
+    // 14 — PuntoZero Facturación en Línea
     {
       title: "PuntoZero Online Billing",
       description:
@@ -391,7 +391,104 @@ export const projects: Projects = {
   ],
 
   es: [
-    // 00 — Motion Kit
+    // 00 — ARES
+    {
+      title: "ARES",
+      description:
+        "Sistema multiagente inteligente para la gestión de emergencias: ambulancias, bomberos y patrullas calculan rutas en una ciudad con BFS, DFS, Dijkstra y A*.",
+      image: "/projects/ARES.png",
+      images: ["/projects/AresDashboard.png"],
+      tags: ["Python", "FastAPI", "React", "TypeScript", "IA", "Motion Kit"],
+      kinds: ["web", "backend", "ai"],
+      link: "https://ares-emergencias.vercel.app/",
+      gridSize: "wide",
+      detailedDescription:
+        "ARES es un proyecto en equipo de Inteligencia Artificial que simula un centro de operaciones de emergencias. Seis agentes racionales — dos ambulancias, dos unidades de bomberos y dos patrullas — se desplazan por una cuadrícula urbana de 30 × 23 mientras un coordinador asigna cada incidente por especialidad, prioridad con envejecimiento y costo de ruta. Las rutas se calculan en Python con BFS, DFS, Dijkstra y A* mediante el patrón Strategy, y se replanifican cuando se bloquean calles. El motor corre sobre FastAPI con una arquitectura por capas, y la interfaz en React + TypeScript está construida con Motion Kit: navegación tipo dock, menús, diálogos por pasos, toasts, contadores animados y temas seleccionables. La aplicación compara los cuatro algoritmos por pasos, costo, nodos expandidos y tiempo de cómputo, y exporta los resultados a CSV.",
+      features: [
+        "Seis agentes (ambulancias, bomberos, patrullas) asignados por especialidad, prioridad y costo de ruta",
+        "BFS, DFS, Dijkstra y A* en Python con patrón Strategy y replanificación ante calles bloqueadas",
+        "Mapa urbano SVG en vivo con inicio, pausa, avance por paso y velocidades 1×/2×/4×, más tres escenarios reproducibles",
+        "Comparación de algoritmos por pasos, costo, nodos expandidos y tiempo de cómputo, con exportación CSV",
+        "Interfaz React + TypeScript construida con Motion Kit: dock, menús, diálogos por pasos, toasts y temas",
+        "23 pruebas en Python y 14 pruebas de navegador con Playwright; frontend en Vercel y API en Render con Docker",
+      ],
+      demo: "https://ares-emergencias.vercel.app/",
+      github: "https://github.com/YewdielMartinez/ares-emergencias",
+      year: "2026",
+      role: "Desarrollador Full-Stack (proyecto en equipo)",
+    },
+    // 01 — Foodero
+    {
+      title: "Foodero",
+      description:
+        "App de gestión para restaurantes: mesas, domicilios, catálogo de productos, reportes, corte de caja, suscripciones con Mercado Pago e impresora.",
+      image: "/projects/Foodero.jpeg",
+      tags: ["React Native", "C#", "PostgreSQL", "Docker", "Tailwind CSS"],
+      kinds: ["mobile", "backend"],
+      link: "#",
+      gridSize: "wide",
+      detailedDescription:
+        "Foodero es una app completa de gestión para restaurantes construida con React Native. Contribuí en la implementación del diseño. Cubre el ciclo operativo completo: manejo de mesas, ventas en local y a domicilio, registro de productos, complementos y adicionales, corte de caja, facturación de suscripciones con Mercado Pago, gestión de usuarios por rol e integración con impresora térmica para recibos.",
+      features: [
+        "Manejo de mesas y seguimiento de pedidos",
+        "Flujo de ventas en local y a domicilio",
+        "Registro de productos, complementos y adicionales",
+        "Reportes de ventas y corte de caja",
+        "Venta de suscripciones con Mercado Pago",
+        "Gestión de usuarios con control de acceso por rol",
+        "Integración con impresora térmica para recibos",
+      ],
+      year: "2024",
+      role: "Desarrollador Móvil (Implementación UI)",
+    },
+    // 02 — PuntoZero Web Hotel
+    {
+      title: "PuntoZero Web Hotel",
+      description:
+        "Sistema interno para hoteles que registra entradas y salidas de herramientas y equipos por departamento.",
+      image: "/projects/WebHotel.jpeg",
+      tags: ["React", "C#", "Tailwind CSS"],
+      kinds: ["web", "backend"],
+      link: "#",
+      gridSize: "medium",
+      detailedDescription:
+        "Sistema de gestión interna desarrollado para operaciones hoteleras, que permite registrar la entrada y salida de herramientas y equipos entre departamentos. Construido con React en el frontend, C# en el backend y una interfaz limpia en Tailwind CSS optimizada para el uso diario del personal.",
+      features: [
+        "Registro de entrada y salida de herramientas por departamento",
+        "Vista general del inventario por área",
+        "Bitácora de asignaciones y actividad del personal",
+        "Búsqueda y filtrado por herramienta, departamento o fecha",
+        "Interfaz rápida y clara para uso diario",
+      ],
+      year: "2025",
+      role: "Desarrollador Full-Stack",
+    },
+    // 03 — LOON (antes TRON)
+    {
+      title: "LOON",
+      description:
+        "LLM-Optimized Object Notation: librería open-source en npm que serializa JSON, CSV, XML y YAML a un formato eficiente en tokens para flujos con LLM.",
+      image: "/projects/LOON.jpeg",
+      tags: ["TypeScript", "Node.js", "npm", "LLM"],
+      kinds: ["library", "ai"],
+      link: "https://www.npmjs.com/package/loon-core",
+      gridSize: "wide",
+      detailedDescription:
+        "LOON (LLM-Optimized Object Notation) es una librería de serialización publicada en npm como loon-core. Convierte datos estructurados — JSON, CSV, XML, YAML y árboles anidados — en un formato compacto y reversible sin pérdidas que reduce los tokens en prompts y pipelines de datos con LLM. En una sesión real de 1,000 filas usó 64% menos tokens que JSON y 47% menos que TOON. Incluye un sitio de documentación con playground interactivo.",
+      features: [
+        "Tres modos: full para almacenamiento y transferencia, llm para lectura directa del modelo, compact para objetos pequeños",
+        "Ida y vuelta sin pérdidas al JSON original",
+        "Hasta ~78% menos tokens que JSON",
+        "Puentes para JSON, CSV, XML, YAML y árboles anidados",
+        "Sesiones compatibles con caché de prompts y CLI con --stats",
+      ],
+      demo: "https://tron-landing-page.vercel.app/",
+      npm: "https://www.npmjs.com/package/loon-core",
+      install: "npm i loon-core",
+      year: "2026",
+      role: "Creador y mantenedor",
+    },
+    // 04 — Motion Kit
     {
       title: "Motion Kit",
       description:
@@ -418,7 +515,7 @@ export const projects: Projects = {
       year: "2026",
       role: "Creador y mantenedor",
     },
-    // 01 — Kayro
+    // 05 — Kayro
     {
       title: "Kayro",
       description:
@@ -442,33 +539,7 @@ export const projects: Projects = {
       year: "2026",
       role: "Desarrollador Full-Stack",
     },
-    // 02 — ARES
-    {
-      title: "ARES",
-      description:
-        "Sistema multiagente inteligente para la gestión de emergencias: ambulancias, bomberos y patrullas calculan rutas en una ciudad con BFS, DFS, Dijkstra y A*.",
-      image: "/projects/ARES.png",
-      images: ["/projects/AresDashboard.png"],
-      tags: ["Python", "FastAPI", "React", "TypeScript", "IA", "Motion Kit"],
-      kinds: ["web", "backend"],
-      link: "https://ares-emergencias.vercel.app/",
-      gridSize: "wide",
-      detailedDescription:
-        "ARES es un proyecto en equipo de Inteligencia Artificial que simula un centro de operaciones de emergencias. Seis agentes racionales — dos ambulancias, dos unidades de bomberos y dos patrullas — se desplazan por una cuadrícula urbana de 30 × 23 mientras un coordinador asigna cada incidente por especialidad, prioridad con envejecimiento y costo de ruta. Las rutas se calculan en Python con BFS, DFS, Dijkstra y A* mediante el patrón Strategy, y se replanifican cuando se bloquean calles. El motor corre sobre FastAPI con una arquitectura por capas, y la interfaz en React + TypeScript está construida con Motion Kit: navegación tipo dock, menús, diálogos por pasos, toasts, contadores animados y temas seleccionables. La aplicación compara los cuatro algoritmos por pasos, costo, nodos expandidos y tiempo de cómputo, y exporta los resultados a CSV.",
-      features: [
-        "Seis agentes (ambulancias, bomberos, patrullas) asignados por especialidad, prioridad y costo de ruta",
-        "BFS, DFS, Dijkstra y A* en Python con patrón Strategy y replanificación ante calles bloqueadas",
-        "Mapa urbano SVG en vivo con inicio, pausa, avance por paso y velocidades 1×/2×/4×, más tres escenarios reproducibles",
-        "Comparación de algoritmos por pasos, costo, nodos expandidos y tiempo de cómputo, con exportación CSV",
-        "Interfaz React + TypeScript construida con Motion Kit: dock, menús, diálogos por pasos, toasts y temas",
-        "23 pruebas en Python y 14 pruebas de navegador con Playwright; frontend en Vercel y API en Render con Docker",
-      ],
-      demo: "https://ares-emergencias.vercel.app/",
-      github: "https://github.com/YewdielMartinez/ares-emergencias",
-      year: "2026",
-      role: "Desarrollador Full-Stack (proyecto en equipo)",
-    },
-    // 02 — MedicLife Landing
+    // 06 — MedicLife Landing
     {
       title: "MedicLife Landing",
       description:
@@ -491,7 +562,7 @@ export const projects: Projects = {
       year: "2025",
       role: "Desarrollador Frontend",
     },
-    // 02 — NewMedicLife
+    // 07 — NewMedicLife
     {
       title: "NewMedicLife",
       description:
@@ -516,32 +587,7 @@ export const projects: Projects = {
       role: "Desarrollador Full-Stack",
       video: "https://res.cloudinary.com/dp8yf8nxi/video/upload/q_auto,f_mp4/v1773789455/2026-03-17_16-04-07_qrui2b.mp4",
     },
-    // 03 — LOON (antes TRON)
-    {
-      title: "LOON",
-      description:
-        "LLM-Optimized Object Notation: librería open-source en npm que serializa JSON, CSV, XML y YAML a un formato eficiente en tokens para flujos con LLM.",
-      image: "/projects/LOON.jpeg",
-      tags: ["TypeScript", "Node.js", "npm", "LLM"],
-      kinds: ["library"],
-      link: "https://www.npmjs.com/package/loon-core",
-      gridSize: "wide",
-      detailedDescription:
-        "LOON (LLM-Optimized Object Notation) es una librería de serialización publicada en npm como loon-core. Convierte datos estructurados — JSON, CSV, XML, YAML y árboles anidados — en un formato compacto y reversible sin pérdidas que reduce los tokens en prompts y pipelines de datos con LLM. En una sesión real de 1,000 filas usó 64% menos tokens que JSON y 47% menos que TOON. Incluye un sitio de documentación con playground interactivo.",
-      features: [
-        "Tres modos: full para almacenamiento y transferencia, llm para lectura directa del modelo, compact para objetos pequeños",
-        "Ida y vuelta sin pérdidas al JSON original",
-        "Hasta ~78% menos tokens que JSON",
-        "Puentes para JSON, CSV, XML, YAML y árboles anidados",
-        "Sesiones compatibles con caché de prompts y CLI con --stats",
-      ],
-      demo: "https://tron-landing-page.vercel.app/",
-      npm: "https://www.npmjs.com/package/loon-core",
-      install: "npm i loon-core",
-      year: "2026",
-      role: "Creador y mantenedor",
-    },
-    // 04 — Watchlt
+    // 08 — Watchlt
     {
       title: "Watchlt",
       description:
@@ -565,7 +611,7 @@ export const projects: Projects = {
       year: "2024",
       role: "Desarrollador Frontend",
     },
-    // 05 — EcoSend
+    // 09 — EcoSend
     {
       title: "EcoSend",
       description:
@@ -589,7 +635,7 @@ export const projects: Projects = {
       year: "2024",
       role: "Desarrollador Frontend",
     },
-    // 06 — Medic Life
+    // 10 — Medic Life
     {
       title: "Medic Life",
       description:
@@ -612,7 +658,7 @@ export const projects: Projects = {
       year: "2024",
       role: "Desarrollador Full-Stack",
     },
-    // 07 — Venta en Ruta app
+    // 11 — Venta en Ruta app
     {
       title: "Venta en Ruta app",
       description:
@@ -634,31 +680,7 @@ export const projects: Projects = {
       year: "2025",
       role: "Desarrollador Móvil",
     },
-    // 08 — Foodero
-    {
-      title: "Foodero",
-      description:
-        "App de gestión para restaurantes: mesas, domicilios, catálogo de productos, reportes, corte de caja, suscripciones con Mercado Pago e impresora.",
-      image: "/projects/Foodero.jpeg",
-      tags: ["React Native", "C#", "PostgreSQL", "Docker", "Tailwind CSS"],
-      kinds: ["mobile", "backend"],
-      link: "#",
-      gridSize: "wide",
-      detailedDescription:
-        "Foodero es una app completa de gestión para restaurantes construida con React Native. Contribuí en la implementación del diseño. Cubre el ciclo operativo completo: manejo de mesas, ventas en local y a domicilio, registro de productos, complementos y adicionales, corte de caja, facturación de suscripciones con Mercado Pago, gestión de usuarios por rol e integración con impresora térmica para recibos.",
-      features: [
-        "Manejo de mesas y seguimiento de pedidos",
-        "Flujo de ventas en local y a domicilio",
-        "Registro de productos, complementos y adicionales",
-        "Reportes de ventas y corte de caja",
-        "Venta de suscripciones con Mercado Pago",
-        "Gestión de usuarios con control de acceso por rol",
-        "Integración con impresora térmica para recibos",
-      ],
-      year: "2024",
-      role: "Desarrollador Móvil (Implementación UI)",
-    },
-    // 09 — PuntoZeroweb POS
+    // 12 — PuntoZeroweb POS
     {
       title: "PuntoZeroweb POS",
       description:
@@ -680,29 +702,7 @@ export const projects: Projects = {
       year: "2025",
       role: "Desarrollador Full-Stack",
     },
-    // 10 — PuntoZero Web Hotel
-    {
-      title: "PuntoZero Web Hotel",
-      description:
-        "Sistema interno para hoteles que registra entradas y salidas de herramientas y equipos por departamento.",
-      image: "/projects/WebHotel.jpeg",
-      tags: ["React", "C#", "Tailwind CSS"],
-      kinds: ["web", "backend"],
-      link: "#",
-      gridSize: "medium",
-      detailedDescription:
-        "Sistema de gestión interna desarrollado para operaciones hoteleras, que permite registrar la entrada y salida de herramientas y equipos entre departamentos. Construido con React en el frontend, C# en el backend y una interfaz limpia en Tailwind CSS optimizada para el uso diario del personal.",
-      features: [
-        "Registro de entrada y salida de herramientas por departamento",
-        "Vista general del inventario por área",
-        "Bitácora de asignaciones y actividad del personal",
-        "Búsqueda y filtrado por herramienta, departamento o fecha",
-        "Interfaz rápida y clara para uso diario",
-      ],
-      year: "2025",
-      role: "Desarrollador Full-Stack",
-    },
-    // 10 — PuntoZeroweb Landing
+    // 13 — PuntoZeroweb Landing
     {
       title: "PuntoZeroweb Landing",
       description:
@@ -723,7 +723,7 @@ export const projects: Projects = {
       year: "2025",
       role: "Desarrollador Frontend",
     },
-    // 12 — PuntoZero Facturación en Línea
+    // 14 — PuntoZero Facturación en Línea
     {
       title: "PuntoZero Facturación en Línea",
       description:
