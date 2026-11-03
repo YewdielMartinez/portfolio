@@ -22,6 +22,7 @@ const year = new Date().getFullYear();
       {links.map((link) => (
         <li><a class="stretch" href={link.href} target="_blank" rel="noopener noreferrer">{link.label}</a></li>
       ))}
+      <li><a class="stretch" href={t('cv.file')} data-cv-open data-i18n-attr="href:cv.file">CV</a></li>
     </ul>
     <small class="t-small">© {year} Yewdiel Medina · <span data-i18n="footer.rights">{t('footer.rights')}</span></small>
   </div>

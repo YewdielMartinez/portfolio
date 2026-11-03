@@ -10,6 +10,7 @@ import { initFooterStretch } from './motion/footer-stretch';
 import { initSectionLabel } from './motion/section-label';
 import { initCascades } from './motion/cascade';
 import { initProjectDialog } from './ui/project-dialog';
+import { initCvViewer } from './ui/cv-viewer';
 import { initSectionMenu } from './ui/section-menu';
 import { initSettings } from './ui/settings';
 import { initContactForm } from './ui/contact-form';
@@ -33,6 +34,7 @@ initToaster();
 initSettings();
 initContactForm();
 initProjectDialog();
+initCvViewer();
 initPortfolioChat();
 initSectionMenu();
 

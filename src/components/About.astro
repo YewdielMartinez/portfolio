@@ -24,6 +24,15 @@ import { t } from '../lib/t';
         <p class="t-body" data-mk="fill-text" data-i18n="about.bio">{t('about.bio')}</p>
         <p class="t-body" data-mk="fill-text" data-i18n="about.bio2">{t('about.bio2')}</p>
       </div>
+      <!-- Without JS "View CV" is a plain link to the PDF; with JS it opens the viewer (CvDialog). -->
+      <div class="about__cv" data-flow>
+        <a class="pill" href={t('cv.file')} data-cv-open data-i18n-attr="href:cv.file">
+          <span data-i18n="cv.view">{t('cv.view')}</span>
+        </a>
+        <a class="pill pill--ghost" href={t('cv.file')} download={t('cv.filename')} data-i18n-attr="href:cv.file;download:cv.filename">
+          <span data-i18n="cv.download">{t('cv.download')}</span> ↓
+        </a>
+      </div>
     </div>
   </div>
 </section>
@@ -59,6 +68,13 @@ import { t } from '../lib/t';
     display: grid;
     gap: 1.25em;
     margin-top: clamp(2.5rem, 7vh, 5.5rem);
+  }
+
+  .about__cv {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: clamp(2rem, 5vh, 3rem);
   }
 
 </style>

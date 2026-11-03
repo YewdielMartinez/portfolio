@@ -41,7 +41,7 @@ export const POST: APIRoute = async ({ request, url, clientAddress }) => {
     const groq = new Groq({ apiKey, maxRetries: 0, timeout: 25000 });
     const completion = await groq.chat.completions.create({
       model: 'openai/gpt-oss-120b',
-      messages: [{ role: 'system', content: portfolioContext(body.lang) }, ...body.messages],
+      messages: [{ role: 'system', content: portfolioContext(body.lang, url.origin) }, ...body.messages],
       temperature: 1,
       max_completion_tokens: 2048,
       top_p: 1,

@@ -94,6 +94,20 @@ export interface Translation {
     title: string;
     rights: string;
   };
+  cv: {
+    /** Localized PDF in public/cv and its download name */
+    file: string;
+    filename: string;
+    view: string;
+    download: string;
+    title: string;
+    language: string;
+    open: string;
+    loading: string;
+    error: string;
+    /** "{n}" and "{total}" are replaced */
+    page: string;
+  };
   chat: {
     launcher: string;
     title: string;
@@ -231,6 +245,18 @@ export const translations: Record<Lang, Translation> = {
       title: 'Contact',
       rights: 'All rights reserved',
     },
+    cv: {
+      file: '/cv/yewdiel-medina-cv-en.pdf',
+      filename: 'CV Yewdiel Medina EN.pdf',
+      view: 'View CV',
+      download: 'Download CV',
+      title: 'Curriculum vitae',
+      language: 'CV language',
+      open: 'Open PDF',
+      loading: 'Loading CV…',
+      error: 'The CV could not be shown here. Open or download the PDF instead.',
+      page: 'Page {n} of {total}',
+    },
     settings: {
       open: 'Settings',
       theme: 'Toggle dark mode',
@@ -347,6 +373,18 @@ export const translations: Record<Lang, Translation> = {
     footer: {
       title: 'Contacto',
       rights: 'Todos los derechos reservados',
+    },
+    cv: {
+      file: '/cv/yewdiel-medina-cv-es.pdf',
+      filename: 'CV Yewdiel Medina.pdf',
+      view: 'Ver CV',
+      download: 'Descargar CV',
+      title: 'Currículum',
+      language: 'Idioma del CV',
+      open: 'Abrir PDF',
+      loading: 'Cargando CV…',
+      error: 'No se pudo mostrar el CV aquí. Ábrelo o descarga el PDF.',
+      page: 'Página {n} de {total}',
     },
     settings: {
       open: 'Ajustes',

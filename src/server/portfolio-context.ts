@@ -5,7 +5,8 @@ import { skills } from '../data/skills';
 import { translations, type Lang } from '../data/translations';
 
 /** Only information already published in the portfolio is sent as context. */
-export function portfolioContext(lang: Lang) {
+/** `origin` turns the CV paths into links the assistant can share. */
+export function portfolioContext(lang: Lang, origin: string) {
   const copy = translations[lang];
   const facts = {
     name: personalInfo.name,
@@ -13,6 +14,7 @@ export function portfolioContext(lang: Lang) {
     location: copy.cover.location,
     about: [copy.about.bio, copy.about.bio2],
     contact: { email: personalInfo.email, ...personalInfo.social },
+    cv: { en: origin + translations.en.cv.file, es: origin + translations.es.cv.file },
     skills: skills.map(({ name }) => name),
     experience: experience[lang],
     projects: projects[lang].map((project) => ({
