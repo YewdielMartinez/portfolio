@@ -219,7 +219,6 @@ import { projects } from '../data/projects';
     height: auto;
   }
 
-  /* 4:3 mockup → 16:9 frame, zoomed so the device fills it */
   .pd__shot-frame--wide {
     aspect-ratio: 16 / 9;
   }
@@ -227,6 +226,10 @@ import { projects } from '../data/projects';
   .pd__shot-frame--wide .pd__shot {
     height: 100%;
     object-fit: cover;
+  }
+
+  /* 4:3 mockup in the 16:9 frame, zoomed so the device fills it */
+  .pd__shot-frame--mockup .pd__shot {
     scale: 1.22;
   }
 

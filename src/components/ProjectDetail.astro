@@ -12,11 +12,12 @@ interface Props {
 const { project, index: i } = Astro.props;
 const demo = project.demo ?? (project.link && project.link !== '#' ? project.link : undefined);
 
-// Landscape captures are device mockups with wide margins: frame them tighter.
+// Landscape captures fill a 16:9 frame. 4:3 ones are device mockups with wide margins, so they zoom in.
 const shots = await Promise.all(
   (project.images ?? []).map(async (src) => {
     const meta = await loadProjectImage(src);
-    return { src, wide: !!meta && meta.width / meta.height > 1.2 };
+    const ratio = meta ? meta.width / meta.height : 0;
+    return { src, wide: ratio > 1.2, mockup: ratio > 1.2 && ratio < 1.6 };
   }),
 );
 ---
@@ -78,8 +79,8 @@ const shots = await Promise.all(
     <section class="pd__gallery">
       <h3 class="t-label text-muted" data-i18n="dialog.gallery">{t('dialog.gallery')}</h3>
       <div class="pd__shots">
-        {shots.map(({ src, wide }) => (
-          <div class:list={['pd__shot-frame', wide && 'pd__shot-frame--wide']}>
+        {shots.map(({ src, wide, mockup }) => (
+          <div class:list={['pd__shot-frame', wide && 'pd__shot-frame--wide', mockup && 'pd__shot-frame--mockup']}>
             <ProjectImage
               src={src}
               alt={`${project.title} — screenshot`}

@@ -34,7 +34,57 @@ export interface Projects {
 
 export const projects: Projects = {
   en: [
-    // 00 — ARES
+    // 00 — Cogniflow
+    {
+      title: "Cogniflow",
+      description:
+        "Personal RAG platform: bring in PDFs, contracts and manuals, ask in plain language and get answers cited down to the file and page.",
+      image: "/projects/Cogniflow.png",
+      images: ["/projects/CogniflowInicio.png", "/projects/CogniflowCitas.png"],
+      tags: ["C#", ".NET", "Python", "LangChain", "LangGraph", "SQL Server", "React"],
+      kinds: ["web", "backend", "ai"],
+      link: "https://cogniflow-landing-sepia.vercel.app/#como-funciona",
+      gridSize: "wide",
+      detailedDescription:
+        "Cogniflow is the RAG platform I built for my own documents. It gathers PDFs, Word files, contracts, policies and manuals into collections, and answers questions with citations that lead back to the exact file, page and passage. A React and Motion Kit app talks to an ASP.NET Core 9 gateway with SQL Server, which handles JWT authentication, organizations, roles, originals and metadata. A Python service with LangChain and LangGraph runs ingestion and routes each question to retrieval, a structured query, a comparison or a summary, using hybrid search over Chroma and BM25 and streaming the answer with its sources. It works with OpenAI, Azure OpenAI, Groq or Ollama and runs on a single PC for personal use, while keeping each organization's data isolated. Azure Pipelines runs the test suites and a retrieval-quality gate before building and testing the full stack.",
+      features: [
+        "Streamed answers with citations back to the file, page and source passage",
+        "LangGraph router: retrieval, structured query, comparison or summary for each question",
+        "Hybrid search with Chroma and BM25, with extracted metadata you can correct and keep across reindexing",
+        "ASP.NET Core 9 gateway with SQL Server, JWT, roles and isolated organizations",
+        "Works with OpenAI, Azure OpenAI, Groq or Ollama, and runs on your own PC",
+        "Azure Pipelines with test suites and an 85 % retrieval-quality gate",
+      ],
+      demo: "https://cogniflow-landing-sepia.vercel.app/#como-funciona",
+      year: "2026",
+      role: "Creator & Full-Stack Developer",
+    },
+    // 01 — MiniPOS
+    {
+      title: "MiniPOS",
+      description:
+        "A small but complete point of sale built to teach Domain-Driven Design and Clean Architecture, with a real .NET API and a React frontend.",
+      image: "/projects/MiniPOS.png",
+      images: ["/projects/MiniPOSCatalogo.png", "/projects/MiniPOSDominio.png"],
+      tags: ["C#", ".NET", "DDD", "Clean Architecture", "React", "TypeScript", "EF Core"],
+      kinds: ["web", "backend"],
+      link: "https://minipos-ddd.vercel.app/#/dashboard",
+      gridSize: "wide",
+      detailedDescription:
+        "MiniPOS is a teaching project: a café point of sale small enough to read end to end and complete enough to show Domain-Driven Design and Clean Architecture working for real. The .NET 9 backend is split into Domain, Application, Infrastructure and Api projects whose dependencies point inward, so the compiler enforces the rule. Aggregates, value objects and domain events hold the business rules, while commands and queries orchestrate them over EF Core and SQLite. In the React 19 frontend you build orders, charge them and cancel them while domain events arrive live, and a rules lab fires nine business rules at the real API to show the status, code and message of each response. The app also includes a 15–20 minute talk on DDD as a built-in slide deck with speaker notes.",
+      features: [
+        "Domain project with aggregates, value objects, domain services and events, free of external packages",
+        "Commands and queries with pipeline behaviors, FluentValidation and ProblemDetails with stable error codes",
+        "Rules lab that runs 9 business rules against the live API, concurrent writes included",
+        "Live view of the domain events dispatched after each transaction",
+        "61 automated tests: 41 unit and 20 integration, covering concurrency and migrations",
+        "Built-in DDD talk: 22 slides with speaker notes, printable to PDF",
+      ],
+      demo: "https://minipos-ddd.vercel.app/#/dashboard",
+      year: "2026",
+      role: "Creator & Full-Stack Developer",
+    },
+    // 02 — ARES
     {
       title: "ARES",
       description:
@@ -60,7 +110,7 @@ export const projects: Projects = {
       year: "2026",
       role: "Full-Stack Developer (team project)",
     },
-    // 01 — Foodero
+    // 03 — Foodero
     {
       title: "Foodero",
       description:
@@ -84,7 +134,7 @@ export const projects: Projects = {
       year: "2024",
       role: "Mobile Developer (UI Implementation)",
     },
-    // 02 — PuntoZero Web Hotel
+    // 04 — PuntoZero Web Hotel
     {
       title: "PuntoZero Web Hotel",
       description:
@@ -106,7 +156,7 @@ export const projects: Projects = {
       year: "2025",
       role: "Full-Stack Developer",
     },
-    // 03 — LOON (formerly TRON)
+    // 05 — LOON (formerly TRON)
     {
       title: "LOON",
       description:
@@ -131,7 +181,7 @@ export const projects: Projects = {
       year: "2026",
       role: "Creator & Maintainer",
     },
-    // 04 — Motion Kit
+    // 06 — Motion Kit
     {
       title: "Motion Kit",
       description:
@@ -158,7 +208,7 @@ export const projects: Projects = {
       year: "2026",
       role: "Creator & Maintainer",
     },
-    // 05 — Kayro
+    // 07 — Kayro
     {
       title: "Kayro",
       description:
@@ -182,7 +232,7 @@ export const projects: Projects = {
       year: "2026",
       role: "Full-Stack Developer",
     },
-    // 06 — MedicLife Landing
+    // 08 — MedicLife Landing
     {
       title: "MedicLife Landing",
       description:
@@ -205,7 +255,7 @@ export const projects: Projects = {
       year: "2025",
       role: "Frontend Developer",
     },
-    // 07 — NewMedicLife
+    // 09 — NewMedicLife
     {
       title: "NewMedicLife",
       description:
@@ -230,7 +280,7 @@ export const projects: Projects = {
       role: "Full-Stack Developer",
       video: "https://res.cloudinary.com/dp8yf8nxi/video/upload/q_auto,f_mp4/v1773789455/2026-03-17_16-04-07_qrui2b.mp4",
     },
-    // 08 — Watchlt
+    // 10 — Watchlt
     {
       title: "Watchlt",
       description:
@@ -254,7 +304,7 @@ export const projects: Projects = {
       year: "2025",
       role: "Frontend Developer",
     },
-    // 09 — EcoSend
+    // 11 — EcoSend
     {
       title: "EcoSend",
       description:
@@ -278,7 +328,7 @@ export const projects: Projects = {
       year: "2025",
       role: "Frontend Developer",
     },
-    // 10 — Medic Life
+    // 12 — Medic Life
     {
       title: "Medic Life",
       description:
@@ -301,7 +351,7 @@ export const projects: Projects = {
       year: "2024",
       role: "Full-Stack Developer",
     },
-    // 11 — Venta en Ruta app
+    // 13 — Venta en Ruta app
     {
       title: "Venta en Ruta app",
       description:
@@ -323,7 +373,7 @@ export const projects: Projects = {
       year: "2025",
       role: "Mobile Developer",
     },
-    // 12 — PuntoZeroweb POS
+    // 14 — PuntoZeroweb POS
     {
       title: "PuntoZeroweb POS",
       description:
@@ -345,7 +395,7 @@ export const projects: Projects = {
       year: "2025",
       role: "Full-Stack Developer",
     },
-    // 13 — PuntoZeroweb Landing
+    // 15 — PuntoZeroweb Landing
     {
       title: "PuntoZeroweb Landing",
       description:
@@ -366,7 +416,7 @@ export const projects: Projects = {
       year: "2025",
       role: "Frontend Developer",
     },
-    // 14 — PuntoZero Facturación en Línea
+    // 16 — PuntoZero Facturación en Línea
     {
       title: "PuntoZero Online Billing",
       description:
@@ -391,7 +441,57 @@ export const projects: Projects = {
   ],
 
   es: [
-    // 00 — ARES
+    // 00 — Cogniflow
+    {
+      title: "Cogniflow",
+      description:
+        "Plataforma RAG personal: reúne PDFs, contratos y manuales, pregunta en lenguaje natural y recibe respuestas citadas con archivo y página.",
+      image: "/projects/Cogniflow.png",
+      images: ["/projects/CogniflowInicio.png", "/projects/CogniflowCitas.png"],
+      tags: ["C#", ".NET", "Python", "LangChain", "LangGraph", "SQL Server", "React"],
+      kinds: ["web", "backend", "ai"],
+      link: "https://cogniflow-landing-sepia.vercel.app/#como-funciona",
+      gridSize: "wide",
+      detailedDescription:
+        "Cogniflow es la plataforma RAG que construí para mis propios documentos. Reúne PDFs, archivos Word, contratos, políticas y manuales en colecciones, y responde preguntas con citas que llevan al archivo, la página y el pasaje exactos. Una app en React y Motion Kit se comunica con un gateway en ASP.NET Core 9 con SQL Server, que gestiona la autenticación con JWT, organizaciones, roles, originales y metadatos. Un servicio en Python con LangChain y LangGraph ejecuta la ingesta y dirige cada pregunta a recuperación, consulta estructurada, comparación o resumen, con búsqueda híbrida sobre Chroma y BM25 y respuestas en streaming junto con sus fuentes. Funciona con OpenAI, Azure OpenAI, Groq u Ollama y corre en una sola PC para uso personal, manteniendo aislados los datos de cada organización. Azure Pipelines ejecuta las suites de pruebas y un umbral de calidad de recuperación antes de construir y probar el stack completo.",
+      features: [
+        "Respuestas en streaming con citas al archivo, la página y el pasaje de origen",
+        "Router con LangGraph: recuperación, consulta estructurada, comparación o resumen según la pregunta",
+        "Búsqueda híbrida con Chroma y BM25, con metadatos extraídos que puedes corregir y conservar al reindexar",
+        "Gateway en ASP.NET Core 9 con SQL Server, JWT, roles y organizaciones aisladas",
+        "Funciona con OpenAI, Azure OpenAI, Groq u Ollama, y corre en tu propia PC",
+        "Azure Pipelines con suites de pruebas y un umbral de calidad de recuperación del 85 %",
+      ],
+      demo: "https://cogniflow-landing-sepia.vercel.app/#como-funciona",
+      year: "2026",
+      role: "Creador y desarrollador full-stack",
+    },
+    // 01 — MiniPOS
+    {
+      title: "MiniPOS",
+      description:
+        "Punto de venta pequeño pero completo, hecho para enseñar Domain-Driven Design y Clean Architecture con una API .NET real y un frontend en React.",
+      image: "/projects/MiniPOS.png",
+      images: ["/projects/MiniPOSCatalogo.png", "/projects/MiniPOSDominio.png"],
+      tags: ["C#", ".NET", "DDD", "Clean Architecture", "React", "TypeScript", "EF Core"],
+      kinds: ["web", "backend"],
+      link: "https://minipos-ddd.vercel.app/#/dashboard",
+      gridSize: "wide",
+      detailedDescription:
+        "MiniPOS es un proyecto para enseñar: un punto de venta de cafetería lo bastante pequeño para leerlo de punta a punta y lo bastante completo para ver Domain-Driven Design y Clean Architecture funcionando de verdad. El backend en .NET 9 se divide en los proyectos Domain, Application, Infrastructure y Api, con dependencias que apuntan hacia adentro, así que el compilador hace cumplir la regla. Los aggregates, value objects y domain events contienen las reglas de negocio, y los commands y queries las orquestan sobre EF Core y SQLite. En el frontend con React 19 armas pedidos, los cobras y los cancelas mientras los domain events llegan en vivo, y un laboratorio lanza nueve reglas de negocio contra la API real para mostrar el status, el código y el mensaje de cada respuesta. La app incluye además una charla de 15 a 20 minutos sobre DDD, como presentación integrada con notas del orador.",
+      features: [
+        "Proyecto Domain con aggregates, value objects, domain services y eventos, sin paquetes externos",
+        "Commands y queries con behaviors de pipeline, FluentValidation y ProblemDetails con códigos de error estables",
+        "Laboratorio que ejecuta 9 reglas de negocio contra la API real, incluidas escrituras concurrentes",
+        "Vista en vivo de los domain events despachados tras cada transacción",
+        "61 pruebas automatizadas: 41 unitarias y 20 de integración, con concurrencia y migraciones",
+        "Charla de DDD integrada: 22 diapositivas con notas del orador, imprimible a PDF",
+      ],
+      demo: "https://minipos-ddd.vercel.app/#/dashboard",
+      year: "2026",
+      role: "Creador y desarrollador full-stack",
+    },
+    // 02 — ARES
     {
       title: "ARES",
       description:
@@ -417,7 +517,7 @@ export const projects: Projects = {
       year: "2026",
       role: "Desarrollador Full-Stack (proyecto en equipo)",
     },
-    // 01 — Foodero
+    // 03 — Foodero
     {
       title: "Foodero",
       description:
@@ -441,7 +541,7 @@ export const projects: Projects = {
       year: "2024",
       role: "Desarrollador Móvil (Implementación UI)",
     },
-    // 02 — PuntoZero Web Hotel
+    // 04 — PuntoZero Web Hotel
     {
       title: "PuntoZero Web Hotel",
       description:
@@ -463,7 +563,7 @@ export const projects: Projects = {
       year: "2025",
       role: "Desarrollador Full-Stack",
     },
-    // 03 — LOON (antes TRON)
+    // 05 — LOON (antes TRON)
     {
       title: "LOON",
       description:
@@ -488,7 +588,7 @@ export const projects: Projects = {
       year: "2026",
       role: "Creador y mantenedor",
     },
-    // 04 — Motion Kit
+    // 06 — Motion Kit
     {
       title: "Motion Kit",
       description:
@@ -515,7 +615,7 @@ export const projects: Projects = {
       year: "2026",
       role: "Creador y mantenedor",
     },
-    // 05 — Kayro
+    // 07 — Kayro
     {
       title: "Kayro",
       description:
@@ -539,7 +639,7 @@ export const projects: Projects = {
       year: "2026",
       role: "Desarrollador Full-Stack",
     },
-    // 06 — MedicLife Landing
+    // 08 — MedicLife Landing
     {
       title: "MedicLife Landing",
       description:
@@ -562,7 +662,7 @@ export const projects: Projects = {
       year: "2025",
       role: "Desarrollador Frontend",
     },
-    // 07 — NewMedicLife
+    // 09 — NewMedicLife
     {
       title: "NewMedicLife",
       description:
@@ -587,7 +687,7 @@ export const projects: Projects = {
       role: "Desarrollador Full-Stack",
       video: "https://res.cloudinary.com/dp8yf8nxi/video/upload/q_auto,f_mp4/v1773789455/2026-03-17_16-04-07_qrui2b.mp4",
     },
-    // 08 — Watchlt
+    // 10 — Watchlt
     {
       title: "Watchlt",
       description:
@@ -611,7 +711,7 @@ export const projects: Projects = {
       year: "2024",
       role: "Desarrollador Frontend",
     },
-    // 09 — EcoSend
+    // 11 — EcoSend
     {
       title: "EcoSend",
       description:
@@ -635,7 +735,7 @@ export const projects: Projects = {
       year: "2024",
       role: "Desarrollador Frontend",
     },
-    // 10 — Medic Life
+    // 12 — Medic Life
     {
       title: "Medic Life",
       description:
@@ -658,7 +758,7 @@ export const projects: Projects = {
       year: "2024",
       role: "Desarrollador Full-Stack",
     },
-    // 11 — Venta en Ruta app
+    // 13 — Venta en Ruta app
     {
       title: "Venta en Ruta app",
       description:
@@ -680,7 +780,7 @@ export const projects: Projects = {
       year: "2025",
       role: "Desarrollador Móvil",
     },
-    // 12 — PuntoZeroweb POS
+    // 14 — PuntoZeroweb POS
     {
       title: "PuntoZeroweb POS",
       description:
@@ -702,7 +802,7 @@ export const projects: Projects = {
       year: "2025",
       role: "Desarrollador Full-Stack",
     },
-    // 13 — PuntoZeroweb Landing
+    // 15 — PuntoZeroweb Landing
     {
       title: "PuntoZeroweb Landing",
       description:
@@ -723,7 +823,7 @@ export const projects: Projects = {
       year: "2025",
       role: "Desarrollador Frontend",
     },
-    // 14 — PuntoZero Facturación en Línea
+    // 16 — PuntoZero Facturación en Línea
     {
       title: "PuntoZero Facturación en Línea",
       description:
