@@ -39,7 +39,7 @@ export const projects: Projects = {
       title: "Cogniflow",
       description:
         "Personal RAG platform: bring in PDFs, contracts and manuals, ask in plain language and get answers cited down to the file and page.",
-      image: "/projects/Cogniflow.png",
+      image: "/projects/Cogniflow.jpeg",
       images: ["/projects/CogniflowInicio.png", "/projects/CogniflowCitas.png"],
       tags: ["C#", ".NET", "Python", "LangChain", "LangGraph", "SQL Server", "React"],
       kinds: ["web", "backend", "ai"],
@@ -64,7 +64,7 @@ export const projects: Projects = {
       title: "MiniPOS",
       description:
         "A small but complete point of sale built to teach Domain-Driven Design and Clean Architecture, with a real .NET API and a React frontend.",
-      image: "/projects/MiniPOS.png",
+      image: "/projects/MiniPOS.jpeg",
       images: ["/projects/MiniPOSCatalogo.png", "/projects/MiniPOSDominio.png"],
       tags: ["C#", ".NET", "DDD", "Clean Architecture", "React", "TypeScript", "EF Core"],
       kinds: ["web", "backend"],
@@ -446,7 +446,7 @@ export const projects: Projects = {
       title: "Cogniflow",
       description:
         "Plataforma RAG personal: reúne PDFs, contratos y manuales, pregunta en lenguaje natural y recibe respuestas citadas con archivo y página.",
-      image: "/projects/Cogniflow.png",
+      image: "/projects/Cogniflow.jpeg",
       images: ["/projects/CogniflowInicio.png", "/projects/CogniflowCitas.png"],
       tags: ["C#", ".NET", "Python", "LangChain", "LangGraph", "SQL Server", "React"],
       kinds: ["web", "backend", "ai"],
@@ -471,7 +471,7 @@ export const projects: Projects = {
       title: "MiniPOS",
       description:
         "Punto de venta pequeño pero completo, hecho para enseñar Domain-Driven Design y Clean Architecture con una API .NET real y un frontend en React.",
-      image: "/projects/MiniPOS.png",
+      image: "/projects/MiniPOS.jpeg",
       images: ["/projects/MiniPOSCatalogo.png", "/projects/MiniPOSDominio.png"],
       tags: ["C#", ".NET", "DDD", "Clean Architecture", "React", "TypeScript", "EF Core"],
       kinds: ["web", "backend"],
