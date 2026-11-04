@@ -81,8 +81,11 @@
   text-transform: uppercase;
 }
 
-.mk-cursor {
-  --mk-cursor-circle: 88px;
+/* Wide enough for "ARRASTRA" between the arrows */
+.mk-cursor,
+.mk-cursor--dot {
+  --mk-cursor-circle: 96px;
+  --mk-cursor-size: 96px;
 }
 
 /* Keep the card's surface and shadows; Motion Kit rolls its caption. */
