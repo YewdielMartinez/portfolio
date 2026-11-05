@@ -18,8 +18,8 @@ function wordsOf(element: HTMLElement) {
   return words;
 }
 
-/** Keep the title independent of the surface's scaling, clipping and content blur. */
-export function createProjectTitleTransition() {
+/** Keep the title independent of the surface's scaling and content blur; it lands clipped like the heading. */
+export function createProjectTitleTransition(scrollport: HTMLElement) {
   let origin: HTMLElement | null = null;
   let heading: HTMLElement | null = null;
   let flight: HTMLElement | null = null;
@@ -41,6 +41,7 @@ export function createProjectTitleTransition() {
 
   function fly(from: HTMLElement, to: HTMLElement, duration: number, closing: boolean) {
     // Closing during the entrance continues from the words currently on screen.
+    const midway = flight !== null;
     const start = wordsOf(flight ?? from);
     const end = wordsOf(to);
     stopFlight();
@@ -90,6 +91,19 @@ export function createProjectTitleTransition() {
         else to.removeAttribute(HIDDEN);
       },
     });
+
+    // On the words' own curve the clip never catches them: it only cuts what the scrollport hides.
+    const frame = layer.getBoundingClientRect();
+    const port = scrollport.getBoundingClientRect();
+    const whole = 'inset(0px 0px 0px 0px)';
+    const inside = `inset(${port.top - frame.top}px ${frame.right - port.right}px ${frame.bottom - port.bottom}px ${port.left - frame.left}px)`;
+    timeline.fromTo(
+      layer,
+      { clipPath: closing && !midway ? inside : whole },
+      { clipPath: closing ? whole : inside, duration, ease: 'signature' },
+      0,
+    );
+
     elements.forEach((word, i) => {
       const box = natural[i];
       const scaleX = start[i].box.width / box.width;

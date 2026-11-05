@@ -14,7 +14,7 @@ export function initProjectDialog() {
   if (!dialog || !content) return;
 
   const kit = createDialog(dialog, { triggers: false });
-  const title = createProjectTitleTransition();
+  const title = createProjectTitleTransition(content);
 
   // With a mouse or trackpad, dragging and pulling the wheel past the top would close
   // a long, scrolling dialog by accident: there it closes with Esc, the backdrop or ✕.
@@ -30,12 +30,13 @@ export function initProjectDialog() {
     const template = templateFor(trigger.dataset.project ?? '');
     if (!template || kit.isOpen) return;
     content!.replaceChildren(template.content.cloneNode(true));
-    content!.scrollTop = 0;
     applyI18n(content!);
     // Measure the final heading before Motion Kit transforms the surface and body.
     title.reset();
     trigger.setAttribute('data-project-opening', '');
     dialog!.showModal();
+    // A closed dialog has no box to scroll, and Chromium restores the last offset on showing it.
+    content!.scrollTop = 0;
     const source = trigger.querySelector<HTMLElement>('[data-project-title]');
     const target = content!.querySelector<HTMLElement>('[data-project-title]');
     if (source && target) title.open(source, target);
