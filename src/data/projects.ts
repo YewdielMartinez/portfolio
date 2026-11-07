@@ -84,7 +84,38 @@ export const projects: Projects = {
       year: "2026",
       role: "Creator & Full-Stack Developer",
     },
-    // 02 — ARES
+    // 02 — Yeed
+    {
+      title: "Yeed",
+      description:
+        "A collaborative library where Software Engineering students share and rate learning resources, and get recommendations on what to study next.",
+      image: "/projects/Yeed.png",
+      images: [
+        "/projects/YeedLanding.png",
+        "/projects/YeedBiblioteca.png",
+        "/projects/YeedParaTi.png",
+        "/projects/YeedArquitectura.png",
+      ],
+      tags: ["React", "TypeScript", "Motion Kit", "Express", "Node.js", "AWS", "PostgreSQL"],
+      kinds: ["web", "backend"],
+      link: "https://d31wijlhugjzy2.cloudfront.net/",
+      gridSize: "wide",
+      detailedDescription:
+        "Software Engineering students also learn on their own, but the resources are scattered and not all of them help. Yeed gathers documents, videos, audio, images and Markdown in one library, lets students rate them from 1 to 5 and recommends what to study next from their topics of interest and their ratings. The topics they follow weigh the most, and every rating adds to or takes away from the topics of that resource, so the list changes as they rate and each suggestion says why it was made. The frontend is built with React 19, TypeScript and Motion Kit, in English and Spanish with light and dark themes; until the API is connected, accounts, ratings and resources are kept in the browser as test data. The Express API runs in a container on EC2 instances in an Auto Scaling group across two availability zones, behind an Application Load Balancer, while CloudFront serves the site from a private S3 bucket and RDS PostgreSQL sits in private subnets, all defined in CloudFormation. Built by a team of two for the Cloud Computing course.",
+      features: [
+        "Recommendations from topics of interest and ratings, each with the reason it was suggested",
+        "Library of documents, videos, audio, images and Markdown with search, filters and sorting by rating or comments",
+        "1 to 5 ratings, comments, saved resources, public profiles and resource sharing",
+        "AWS in CloudFormation: CloudFront with private S3, ALB, EC2 Auto Scaling across two zones and RDS PostgreSQL in private subnets",
+        "Express API as a container image in ECR, with its logs in CloudWatch",
+        "14-table PostgreSQL model with foreign keys and CHECK constraints that reject invalid data",
+      ],
+      github: "https://github.com/PricedTuna/yeed",
+      demo: "https://d31wijlhugjzy2.cloudfront.net/",
+      year: "2026",
+      role: "Co-creator & Full-Stack Developer",
+    },
+    // 03 — ARES
     {
       title: "ARES",
       description:
@@ -110,7 +141,7 @@ export const projects: Projects = {
       year: "2026",
       role: "Full-Stack Developer (team project)",
     },
-    // 03 — Foodero
+    // 04 — Foodero
     {
       title: "Foodero",
       description:
@@ -134,7 +165,7 @@ export const projects: Projects = {
       year: "2024",
       role: "Mobile Developer (UI Implementation)",
     },
-    // 04 — PuntoZero Web Hotel
+    // 05 — PuntoZero Web Hotel
     {
       title: "PuntoZero Web Hotel",
       description:
@@ -156,7 +187,7 @@ export const projects: Projects = {
       year: "2025",
       role: "Full-Stack Developer",
     },
-    // 05 — LOON (formerly TRON)
+    // 06 — LOON (formerly TRON)
     {
       title: "LOON",
       description:
@@ -181,7 +212,7 @@ export const projects: Projects = {
       year: "2026",
       role: "Creator & Maintainer",
     },
-    // 06 — Motion Kit
+    // 07 — Motion Kit
     {
       title: "Motion Kit",
       description:
@@ -208,7 +239,7 @@ export const projects: Projects = {
       year: "2026",
       role: "Creator & Maintainer",
     },
-    // 07 — Kayro
+    // 08 — Kayro
     {
       title: "Kayro",
       description:
@@ -232,7 +263,7 @@ export const projects: Projects = {
       year: "2026",
       role: "Full-Stack Developer",
     },
-    // 08 — MedicLife Landing
+    // 09 — MedicLife Landing
     {
       title: "MedicLife Landing",
       description:
@@ -255,7 +286,7 @@ export const projects: Projects = {
       year: "2025",
       role: "Frontend Developer",
     },
-    // 09 — NewMedicLife
+    // 10 — NewMedicLife
     {
       title: "NewMedicLife",
       description:
@@ -280,7 +311,7 @@ export const projects: Projects = {
       role: "Full-Stack Developer",
       video: "https://res.cloudinary.com/dp8yf8nxi/video/upload/q_auto,f_mp4/v1773789455/2026-03-17_16-04-07_qrui2b.mp4",
     },
-    // 10 — Watchlt
+    // 11 — Watchlt
     {
       title: "Watchlt",
       description:
@@ -304,7 +335,7 @@ export const projects: Projects = {
       year: "2025",
       role: "Frontend Developer",
     },
-    // 11 — EcoSend
+    // 12 — EcoSend
     {
       title: "EcoSend",
       description:
@@ -328,7 +359,7 @@ export const projects: Projects = {
       year: "2025",
       role: "Frontend Developer",
     },
-    // 12 — Medic Life
+    // 13 — Medic Life
     {
       title: "Medic Life",
       description:
@@ -351,7 +382,7 @@ export const projects: Projects = {
       year: "2024",
       role: "Full-Stack Developer",
     },
-    // 13 — Venta en Ruta app
+    // 14 — Venta en Ruta app
     {
       title: "Venta en Ruta app",
       description:
@@ -373,7 +404,7 @@ export const projects: Projects = {
       year: "2025",
       role: "Mobile Developer",
     },
-    // 14 — PuntoZeroweb POS
+    // 15 — PuntoZeroweb POS
     {
       title: "PuntoZeroweb POS",
       description:
@@ -395,7 +426,7 @@ export const projects: Projects = {
       year: "2025",
       role: "Full-Stack Developer",
     },
-    // 15 — PuntoZeroweb Landing
+    // 16 — PuntoZeroweb Landing
     {
       title: "PuntoZeroweb Landing",
       description:
@@ -416,7 +447,7 @@ export const projects: Projects = {
       year: "2025",
       role: "Frontend Developer",
     },
-    // 16 — PuntoZero Facturación en Línea
+    // 17 — PuntoZero Facturación en Línea
     {
       title: "PuntoZero Online Billing",
       description:
@@ -491,7 +522,38 @@ export const projects: Projects = {
       year: "2026",
       role: "Creador y desarrollador full-stack",
     },
-    // 02 — ARES
+    // 02 — Yeed
+    {
+      title: "Yeed",
+      description:
+        "Biblioteca colaborativa donde estudiantes de Ingeniería de Software comparten y califican recursos, y reciben recomendaciones de qué estudiar después.",
+      image: "/projects/Yeed.png",
+      images: [
+        "/projects/YeedLanding.png",
+        "/projects/YeedBiblioteca.png",
+        "/projects/YeedParaTi.png",
+        "/projects/YeedArquitectura.png",
+      ],
+      tags: ["React", "TypeScript", "Motion Kit", "Express", "Node.js", "AWS", "PostgreSQL"],
+      kinds: ["web", "backend"],
+      link: "https://d31wijlhugjzy2.cloudfront.net/",
+      gridSize: "wide",
+      detailedDescription:
+        "Quienes estudian Ingeniería de Software aprenden también por su cuenta, pero los recursos están dispersos y no siempre les sirven. Yeed reúne documentos, videos, audio, imágenes y Markdown en una sola biblioteca, deja que los estudiantes los califiquen del 1 al 5 y recomienda qué estudiar según sus temas de interés y sus calificaciones. Los temas que siguen pesan más, y cada calificación suma o resta a los temas de ese recurso, así que la lista cambia a medida que califican y cada sugerencia dice por qué aparece. El frontend está hecho con React 19, TypeScript y Motion Kit, en español e inglés y con tema claro y oscuro; mientras se conecta la API, las cuentas, calificaciones y recursos se guardan en el navegador como datos de prueba. La API en Express corre en un contenedor sobre instancias EC2 de un grupo de escalamiento en dos zonas de disponibilidad, detrás de un Application Load Balancer; CloudFront sirve el sitio desde un bucket S3 privado y RDS PostgreSQL vive en subredes privadas, todo definido en CloudFormation. Lo construimos en un equipo de dos para la materia de Cómputo en la Nube.",
+      features: [
+        "Recomendaciones según temas de interés y calificaciones, cada una con el motivo por el que aparece",
+        "Biblioteca de documentos, videos, audio, imágenes y Markdown con búsqueda, filtros y orden por calificación o comentarios",
+        "Calificaciones del 1 al 5, comentarios, guardados, perfiles públicos y recursos compartidos",
+        "AWS en CloudFormation: CloudFront con S3 privado, ALB, EC2 Auto Scaling en dos zonas y RDS PostgreSQL en subredes privadas",
+        "API en Express como imagen de contenedor en ECR, con sus registros en CloudWatch",
+        "Modelo de 14 tablas en PostgreSQL con llaves foráneas y restricciones CHECK que rechazan datos inválidos",
+      ],
+      github: "https://github.com/PricedTuna/yeed",
+      demo: "https://d31wijlhugjzy2.cloudfront.net/",
+      year: "2026",
+      role: "Cocreador y desarrollador full-stack",
+    },
+    // 03 — ARES
     {
       title: "ARES",
       description:
@@ -517,7 +579,7 @@ export const projects: Projects = {
       year: "2026",
       role: "Desarrollador Full-Stack (proyecto en equipo)",
     },
-    // 03 — Foodero
+    // 04 — Foodero
     {
       title: "Foodero",
       description:
@@ -541,7 +603,7 @@ export const projects: Projects = {
       year: "2024",
       role: "Desarrollador Móvil (Implementación UI)",
     },
-    // 04 — PuntoZero Web Hotel
+    // 05 — PuntoZero Web Hotel
     {
       title: "PuntoZero Web Hotel",
       description:
@@ -563,7 +625,7 @@ export const projects: Projects = {
       year: "2025",
       role: "Desarrollador Full-Stack",
     },
-    // 05 — LOON (antes TRON)
+    // 06 — LOON (antes TRON)
     {
       title: "LOON",
       description:
@@ -588,7 +650,7 @@ export const projects: Projects = {
       year: "2026",
       role: "Creador y mantenedor",
     },
-    // 06 — Motion Kit
+    // 07 — Motion Kit
     {
       title: "Motion Kit",
       description:
@@ -615,7 +677,7 @@ export const projects: Projects = {
       year: "2026",
       role: "Creador y mantenedor",
     },
-    // 07 — Kayro
+    // 08 — Kayro
     {
       title: "Kayro",
       description:
@@ -639,7 +701,7 @@ export const projects: Projects = {
       year: "2026",
       role: "Desarrollador Full-Stack",
     },
-    // 08 — MedicLife Landing
+    // 09 — MedicLife Landing
     {
       title: "MedicLife Landing",
       description:
@@ -662,7 +724,7 @@ export const projects: Projects = {
       year: "2025",
       role: "Desarrollador Frontend",
     },
-    // 09 — NewMedicLife
+    // 10 — NewMedicLife
     {
       title: "NewMedicLife",
       description:
@@ -687,7 +749,7 @@ export const projects: Projects = {
       role: "Desarrollador Full-Stack",
       video: "https://res.cloudinary.com/dp8yf8nxi/video/upload/q_auto,f_mp4/v1773789455/2026-03-17_16-04-07_qrui2b.mp4",
     },
-    // 10 — Watchlt
+    // 11 — Watchlt
     {
       title: "Watchlt",
       description:
@@ -711,7 +773,7 @@ export const projects: Projects = {
       year: "2024",
       role: "Desarrollador Frontend",
     },
-    // 11 — EcoSend
+    // 12 — EcoSend
     {
       title: "EcoSend",
       description:
@@ -735,7 +797,7 @@ export const projects: Projects = {
       year: "2024",
       role: "Desarrollador Frontend",
     },
-    // 12 — Medic Life
+    // 13 — Medic Life
     {
       title: "Medic Life",
       description:
@@ -758,7 +820,7 @@ export const projects: Projects = {
       year: "2024",
       role: "Desarrollador Full-Stack",
     },
-    // 13 — Venta en Ruta app
+    // 14 — Venta en Ruta app
     {
       title: "Venta en Ruta app",
       description:
@@ -780,7 +842,7 @@ export const projects: Projects = {
       year: "2025",
       role: "Desarrollador Móvil",
     },
-    // 14 — PuntoZeroweb POS
+    // 15 — PuntoZeroweb POS
     {
       title: "PuntoZeroweb POS",
       description:
@@ -802,7 +864,7 @@ export const projects: Projects = {
       year: "2025",
       role: "Desarrollador Full-Stack",
     },
-    // 15 — PuntoZeroweb Landing
+    // 16 — PuntoZeroweb Landing
     {
       title: "PuntoZeroweb Landing",
       description:
@@ -823,7 +885,7 @@ export const projects: Projects = {
       year: "2025",
       role: "Desarrollador Frontend",
     },
-    // 16 — PuntoZero Facturación en Línea
+    // 17 — PuntoZero Facturación en Línea
     {
       title: "PuntoZero Facturación en Línea",
       description:
